@@ -1,0 +1,27 @@
+# Is the 0.8B's failure on Brady a resolution limit rather than a memory one?
+# It scores 0.90 on THINGS at n=1 (512 px, ~256 tokens/image) but is at chance on Brady
+# (native 256 px, ~68 tokens/image), and the perception test it failed used THINGS shrunk to 256 px.
+# Same model twice, differing only in max_image_size. THINGS is the test: 512 -> 256 should collapse
+# toward chance if resolution is the cause. Brady is the control: it is already 256 px, so the two
+# entries see identical images and should score the same.
+run_name: img_resolution
+output_dir: results
+seeds: [0, 1]
+
+models:
+  - name: qwen3.5-0.8b-img512
+    model_id: Qwen/Qwen3.5-0.8B
+    max_image_size: 512
+    max_new_tokens: 100
+  - name: qwen3.5-0.8b-img256
+    model_id: Qwen/Qwen3.5-0.8B
+    max_image_size: 256
+    max_new_tokens: 100
+
+tasks:
+  - task: afc_recognition
+    datasets: [things, Brady2008]
+    foil_types: [novel]
+    n_images: [1, 5]
+    prompts: [original]
+    n_trials: 50

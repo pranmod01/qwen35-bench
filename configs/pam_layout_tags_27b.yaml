@@ -1,0 +1,36 @@
+# The 27B arm of the pair_both / tagged comparison (see configs/pam_layout_tags.yaml for the design and
+# the decision rule). Same `run_name`, so all arms pool into results/pam_layout_ab/.
+#
+# Reduced cells, for cost: Brady n=500 is the 27B's only cell still flagged under `pair_numbered`
+# (18% previous-pair swaps), and THINGS n=100 is the cheap control where `pair_numbered` is already
+# clean (1%) -- if an arm breaks that, it is disqualified. THINGS n=500 is deliberately left out at
+# ~7-8 h per arm; run it once for whichever layout wins.
+#
+#     sbatch --gres=gpu:h100:2 --partition=burst --time=24:00:00 scripts/bench.sbatch \
+#            configs/pam_layout_tags_27b.yaml
+
+run_name: pam_layout_ab
+
+output_dir: results
+
+seeds: [0, 1]
+
+models:
+  - name: qwen3.5-27b
+    model_id: Qwen/Qwen3.5-27B
+    max_image_size: 512
+    max_new_tokens: 100
+    device_map: auto
+
+tasks:
+  - task: paired_associates
+    prompts: [pair_both, tagged]
+    datasets: [Brady2008]
+    n_images: [500]
+    n_trials: 50
+
+  - task: paired_associates
+    prompts: [pair_both, tagged]
+    datasets: [things]
+    n_images: [100]
+    n_trials: 50

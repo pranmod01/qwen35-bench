@@ -1,0 +1,39 @@
+# Associative-inference layout A/B after the 2026-10-05 re-port. SET UP, NOT RUN: needs user approval.
+#
+# What changed since the first A/B (job 12938460, LIMITATIONS "Associative inference has no working test format"; all
+# layouts rejected): study pairs now carry vision-memory's "(AB pair)"/"(BC pair)" labels instead of a
+# bare "Pair:", each episode probes a random chain instead of always the first, and the image->word
+# variant (`word`) is included -- the binding paired associates shows these models can do.
+#
+# Gate, fixed before running. A (layout, pair_type) is usable only if, for BOTH the 2B and 4B, at
+# n_chains 2 and 5:
+#   - direct_ab and direct_bc are above chance (95% Wilson CI lower bound > 0.5), and
+#   - neither is flagged BIAS by bench.summarize (one answer on > 80% of trials).
+# Only then is its `inference` curve read as memory, and only then is a full sweep proposed.
+# Prediction written before running: if image->image binding is the failure, direct_ab fails for both
+# pair types while direct_bc passes for `word`; inference then fails everywhere (it needs A-B).
+
+run_name: assoc_inf_ab
+
+output_dir: results
+
+seeds: [0]
+
+models:
+  - name: qwen3.5-2b
+    model_id: Qwen/Qwen3.5-2B
+    max_image_size: 512
+    max_new_tokens: 100
+  - name: qwen3.5-4b
+    model_id: Qwen/Qwen3.5-4B
+    max_image_size: 512
+    max_new_tokens: 100
+
+tasks:
+  - task: associative_inference
+    datasets: [Brady2008]
+    pair_types: [image, word]
+    probe_types: [inference, direct_ab, direct_bc]
+    n_chains: [2, 5, 25]
+    prompts: [original, cue_turn, labeled]
+    n_trials: 50

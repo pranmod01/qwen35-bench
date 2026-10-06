@@ -1,0 +1,33 @@
+# Is the 9B's serial-order "1" bias caused by the prompt layout?
+#
+# The 9B answers "1" on 76-97% of serial-order trials at every size. Decomposed: hit rate is 1.00 when
+# the answer is "1" and 0.04-0.48 when it is "2", i.e. it asserts that the first image shown in the
+# test pair is the earlier one. The 4B has the same asymmetry but only from n=25 up; at n=2-5 it is
+# balanced (hit2 = 1.00, 0.92).
+#
+# That first->1 pairing is what the 2026-09-22 prompt A/B (configs/prompt_ab.yaml) found under the
+# `labeled` layout and rejected in favour of `original`. The 9B shows it under `original`, so this run
+# asks whether either layout avoids it for this model.
+#
+# Decision rule, fixed before the run: read hit1/hit2 separately, not accuracy. A layout is better only
+# if hit2 rises materially at small n without hit1 collapsing (a layout that merely flips the bias to
+# "2" is no improvement). If neither layout balances the 9B, the bias is the model's own order prior
+# and belongs in LIMITATIONS.md as a per-model prompt-sensitivity result, not a prompt change -- the
+# configs pin one prompt for all models so the numbers stay comparable.
+
+run_name: serial_order_ab_9b
+output_dir: results
+seeds: [0]
+
+models:
+  - name: qwen3.5-9b
+    model_id: Qwen/Qwen3.5-9B
+    max_image_size: 512
+    max_new_tokens: 100
+
+tasks:
+  - task: serial_order
+    datasets: [Brady2008, things]
+    n_images: [2, 5, 25, 100]
+    prompts: [original, labeled]
+    n_trials: 50

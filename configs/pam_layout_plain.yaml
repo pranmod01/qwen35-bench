@@ -1,0 +1,55 @@
+# Paired-associates layout, third arm (2026-09-30): is it the pair boundary that helps, or the
+# running index that hurts?
+#
+# `pair_numbered` ("Pair k:" before each image) removed the off-by-one binding error for the 27B and
+# caused it for the 9B. At THINGS n=500, previous-pair swaps went 54 -> 2 for the 27B and 6 -> 35 for
+# the 9B, whose accuracy fell 0.74 -> 0.26. The marker changes two things at once: it inserts a
+# boundary, and it inserts a number that climbs to 500.
+#
+# `pair_plain` ("Pair:" before each image, no index) holds the boundary and drops the number, so the
+# difference between the two arms isolates which one is responsible.
+#
+# Only the new arm runs here. `run_name` is shared with configs/pam_layout_ab.yaml so the three arms
+# pool into one directory, and the seeds match, so episodes are identical trial for trial:
+#   - `pair_numbered`: results/pam_layout_ab/ (already run)
+#   - `original`:      results/qwen35_{9b,27b}/ (already run; no `swap_offset` recorded, but the
+#                      previous-pair counts for n=500 are known from the 2026-09-28 list regeneration)
+#
+# Cells are limited to n=100 and n=500, the sizes where the off-by-one appears; the small sizes are
+# already clean under `pair_numbered` (0-4 swaps) and would not discriminate.
+#
+# Decision rule, fixed before the run: prefer the layout with the lower previous-pair swap rate, and
+# require it to be low for **both** models. A layout that merely moves the artefact from one model to
+# the other is not an improvement, however good its accuracy looks -- that is how the original
+# "9B beats 27B" result went wrong. Accuracy is secondary.
+#
+#     sbatch --gres=gpu:1 --partition=burst --time=12:00:00 scripts/bench.sbatch \
+#            configs/pam_layout_plain.yaml --model qwen3.5-9b
+#     sbatch --gres=gpu:h100:2 --partition=burst --time=24:00:00 scripts/bench.sbatch \
+#            configs/pam_layout_plain.yaml --model qwen3.5-27b
+#
+# Cost note: the 27B's THINGS n=500 cell is the expensive one (~7-8 h at ~4-5 min per trial).
+
+run_name: pam_layout_ab
+
+output_dir: results
+
+seeds: [0, 1]
+
+models:
+  - name: qwen3.5-9b
+    model_id: Qwen/Qwen3.5-9B
+    max_image_size: 512
+    max_new_tokens: 100
+  - name: qwen3.5-27b
+    model_id: Qwen/Qwen3.5-27B
+    max_image_size: 512
+    max_new_tokens: 100
+    device_map: auto
+
+tasks:
+  - task: paired_associates
+    prompts: [pair_plain]
+    datasets: [Brady2008, things]
+    n_images: [100, 500]
+    n_trials: 50

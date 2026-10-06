@@ -1,0 +1,49 @@
+# Serial order, final runs: counterbalanced scoring, THINGS at 256 px, every model, n=2 to the dataset
+# limit (2026-10-04). Design and rationale in configs/serial_order_final_brady.yaml; same run_name.
+#
+# 256 px, matching the final recognition condition: at 512 px THINGS serial order is context-bound at
+# ~1,017 images, at 256 px the dataset binds (1,854, ~123k tokens). The `-img256` names keep these from
+# pooling with 512 px results. One photo per concept (the `exemplars_per_concept: 2` mode reaching
+# 3,500 is a different condition and is not part of the final set).
+#
+#     X="--partition=burst --exclude=ins048,ins082,ins091 --time=48:00:00"
+#     sbatch $X --gres=gpu:1 scripts/bench.sbatch configs/serial_order_final_things256.yaml --model qwen3.5-0.8b-img256  (also 2b, 4b)
+#     sbatch $X --gres=gpu:R6000:1 scripts/bench.sbatch configs/serial_order_final_things256.yaml --model qwen3.5-9b-img256
+#     sbatch $X --gres=gpu:h100:2 --mem=128G scripts/bench.sbatch configs/serial_order_final_things256.yaml --model qwen3.5-27b-img256
+
+run_name: serial_order_final
+
+output_dir: results
+
+seeds: [0, 1]
+
+models:
+  - name: qwen3.5-0.8b-img256
+    model_id: Qwen/Qwen3.5-0.8B
+    max_image_size: 256
+    max_new_tokens: 100
+  - name: qwen3.5-2b-img256
+    model_id: Qwen/Qwen3.5-2B
+    max_image_size: 256
+    max_new_tokens: 100
+  - name: qwen3.5-4b-img256
+    model_id: Qwen/Qwen3.5-4B
+    max_image_size: 256
+    max_new_tokens: 100
+  - name: qwen3.5-9b-img256
+    model_id: Qwen/Qwen3.5-9B
+    max_image_size: 256
+    max_new_tokens: 100
+  - name: qwen3.5-27b-img256
+    model_id: Qwen/Qwen3.5-27B
+    max_image_size: 256
+    max_new_tokens: 100
+    device_map: auto
+
+tasks:
+  - task: serial_order
+    prompts: [original]
+    counterbalance: true
+    datasets: [things]
+    n_images: [2, 5, 25, 100, 250, 500, 1000, 1500, 1854]
+    n_trials: 50

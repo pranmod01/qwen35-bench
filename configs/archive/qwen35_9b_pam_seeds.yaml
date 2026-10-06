@@ -1,0 +1,28 @@
+# Extra seeds for the 9B's paired-associates THINGS cells at n=25 and n=500 (2026-09-28).
+#
+# The 9B's THINGS accuracy rises with list length (0.53 at n=25 -> 0.74 at n=500, seeds 0-1), the
+# opposite of the 27B. Seeds 2-5 add 200 episodes per cell to test whether the rise is real or a noisy
+# low point at n=25. Seeds 0-1 stay in results/qwen35_9b/; this separate run_name keeps the main sweep
+# at a uniform two seeds per cell, so pool the two dirs when reading these cells.
+#
+# THINGS n=500 needs ~48 GB+ for the 9B (OOMs an A6000), so the whole job goes on an H100:
+#
+#     sbatch --gres=gpu:h100:1 --partition=burst scripts/bench.sbatch configs/qwen35_9b_pam_seeds.yaml
+
+run_name: qwen35_9b_pam_seeds
+
+output_dir: results
+
+seeds: [2, 3, 4, 5]
+
+models:
+  - name: qwen3.5-9b
+    model_id: Qwen/Qwen3.5-9B
+    max_image_size: 512
+    max_new_tokens: 100
+
+tasks:
+  - task: paired_associates
+    datasets: [things]
+    n_images: [25, 500]
+    n_trials: 50

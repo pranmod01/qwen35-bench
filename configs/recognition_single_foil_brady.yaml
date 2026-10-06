@@ -1,0 +1,60 @@
+# Recognition to the dataset limit with `single_foil`, Brady (2026-10-03). THINGS-256 is in
+# configs/recognition_single_foil_things256.yaml, same run_name (it needs the `-img256` model names).
+#
+# The standard episode draws a foil per studied item, so Brady recognition stops at 1,200 (2,400 objects)
+# although only one foil is ever tested. `single_foil` draws n studied + 1 foil, lifting the ceiling to
+# 2,399 with the same trial: one studied object vs one never-seen object. 4B/9B/27B are 0.98-1.00 at
+# n=1,200, so this is the only way left to find where recognition fails for them.
+#
+# **This is the final recognition condition** (2026-10-04). The standard mode always tested the *first*
+# studied image (test_phase was built in study order and only test_phase[0] is scored), so every
+# standard-mode recognition result measures the first list position only. `single_foil` tests one item
+# at a random position. The bridge cells (n=500, 1,000) showed it: 4B 0.93 / 0.78 here vs 1.00 / 0.99
+# standard. The short lists (5-250) were added the same day so each model has a full random-position curve.
+
+# Preflight passed at 2,399 for 0.8B-9B (configs/preflight_single_foil_brady.yaml; peak 26 / 35 / 42 /
+# 54 GB). ~159k tokens at 2,399: H100 for the 9B and 27B; the 27B waits on its preflight (afterok).
+#
+#     X="--partition=burst --exclude=ins048,ins082,ins091 --time=48:00:00"
+#     sbatch $X --gres=gpu:1 scripts/bench.sbatch configs/recognition_single_foil_brady.yaml --model qwen3.5-0.8b  (also 2b, 4b)
+#     sbatch $X --gres=gpu:h100:1 scripts/bench.sbatch configs/recognition_single_foil_brady.yaml --model qwen3.5-9b
+#     sbatch $X --gres=gpu:h100:2 --mem=128G --dependency=afterok:<psf_27b> scripts/bench.sbatch \
+#            configs/recognition_single_foil_brady.yaml --model qwen3.5-27b
+
+run_name: recognition_single_foil
+
+output_dir: results
+
+seeds: [0, 1]
+
+models:
+  - name: qwen3.5-0.8b
+    model_id: Qwen/Qwen3.5-0.8B
+    max_image_size: 512
+    max_new_tokens: 100
+  - name: qwen3.5-2b
+    model_id: Qwen/Qwen3.5-2B
+    max_image_size: 512
+    max_new_tokens: 100
+  - name: qwen3.5-4b
+    model_id: Qwen/Qwen3.5-4B
+    max_image_size: 512
+    max_new_tokens: 100
+  - name: qwen3.5-9b
+    model_id: Qwen/Qwen3.5-9B
+    max_image_size: 512
+    max_new_tokens: 100
+  - name: qwen3.5-27b
+    model_id: Qwen/Qwen3.5-27B
+    max_image_size: 512
+    max_new_tokens: 100
+    device_map: auto
+
+tasks:
+  - task: afc_recognition
+    prompts: [original]
+    datasets: [Brady2008]
+    foil_types: [novel]
+    single_foil: true
+    n_images: [5, 25, 100, 250, 500, 1000, 1500, 2000, 2399]
+    n_trials: 50

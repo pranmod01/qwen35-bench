@@ -1,0 +1,69 @@
+# Qwen3.5-27B: the same three tasks as the 9B, for the fifth point on the scaling line
+# (0.8B -> 2B -> 4B -> 9B -> 27B).
+#
+# Needs more than one GPU: the weights alone are 54.71 GB (measured, `$ZROOT/tmp/capacity_probe_2afc.py`,
+# job 12938735), so `device_map: auto` shards across whatever GPUs the job is given. Measured peaks on
+# 2 x A6000 (101.8 GB total):
+#
+#   Brady n=500 (33k tokens)   72.0 GB   OK
+#   THINGS n=250 (65k tokens)  88.3 GB   OK
+#   THINGS n=500 (129k tokens) OOM       -- needs ~110 GB, so 3 GPUs
+#
+# Sharding is uneven (accelerate fills the first card first), which is why 88 GB of a 101.8 GB budget
+# still OOMs on the next rung.
+#
+# This config therefore stops **both** datasets at n=100, and every larger cell lives in
+# configs/qwen35_27b_large.yaml. Both share `run_name: qwen35_27b`, so their results pool.
+#
+# The cut is at n=100 because what binds is the *first card*, not the total. With 54.71 GB of weights
+# sharded over two cards, card 0 holds ~27 GB before any activations, so Brady n=250 and n=500 -- only
+# 72 GB in total, which fit 2 x A6000 in the probe -- were rejected outright on 2 x L40S (48 GB each).
+# A first attempt at this config kept Brady up to n=500 and lost 12 runs that way.
+#
+# Do not pin a GPU model. A `--gres=gpu:A6000:2` request sat unschedulable: every A6000 node was fully
+# allocated and one (ins089) was DOWN, while idle L40S pairs went unused. A generic request is placed
+# on whatever is free.
+#
+#   sbatch --gres=gpu:2 --partition=burst --time=12:00:00 scripts/bench.sbatch \
+#          configs/qwen35_27b.yaml --task <task>
+#
+# `burst` rather than `short`: at THINGS n=250 a single trial takes 111 s, so that cell alone is ~3 h
+# and a whole task is ~7 h. burst allows 14 days, but note PreemptMode=REQUEUE means a job can be
+# interrupted; results are written per run, so a resubmit resumes.
+#
+# Recognition is saturated from the 4B up (the 9B is 1.00 at every size), so it is kept only as a
+# ceiling datapoint. Paired associates is the informative task here -- the 9B jumped to 0.69-0.74 at
+# n=500 where the 4B collapses to 0.05.
+
+run_name: qwen35_27b
+
+output_dir: results
+
+seeds: [0, 1]
+
+models:
+  - name: qwen3.5-27b
+    model_id: Qwen/Qwen3.5-27B
+    max_image_size: 512
+    max_new_tokens: 100
+    device_map: auto           # 54.71 GB of weights does not fit one 48 GB card
+
+tasks:
+  # Measured on 2 x L40S: 33.2 GB summed at n=100 on both datasets, so these fit any pair of cards.
+  - task: afc_recognition
+    prompts: [original]            # chosen via configs/prompt_ab.yaml (2026-09-22)
+    datasets: [Brady2008, things]
+    foil_types: [novel]
+    n_images: [1, 5, 25, 100]
+    n_trials: 50
+
+  - task: paired_associates
+    datasets: [Brady2008, things]
+    n_images: [1, 5, 25, 100]
+    n_trials: 50
+
+  - task: serial_order
+    prompts: [original]            # chosen via configs/prompt_ab.yaml (2026-09-22)
+    datasets: [Brady2008, things]
+    n_images: [2, 5, 25, 100]      # needs at least 2 studied images
+    n_trials: 50

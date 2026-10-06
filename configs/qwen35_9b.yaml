@@ -1,0 +1,49 @@
+# Qwen3.5-9B: the first three tasks only, matching the 2B and 4B runs for a like-for-like scaling
+# comparison (0.8B -> 2B -> 4B -> 9B). MST, color memory and the exemplar/state foils are deliberately
+# not here yet; add them once these three are read.
+#
+# 2 seeds x 50 = 100 episodes per condition at every size (about +/-5 points on accuracy).
+# Episodes resample independently, so seeds mainly split each condition into resumable files.
+#
+# Memory, measured (`$ZROOT/tmp/capacity_probe_2afc.py`, job 12938524): weights 18.82 GB, and peaks of
+# 26.2 GB at Brady n=500 (33k tokens) and 33.3 GB at THINGS n=250 (65k tokens). **THINGS n=500 OOMs a
+# 48 GB A6000**, so this config must run on the 96 GB R6000 nodes:
+#
+#     sbatch --gres=gpu:R6000:1 scripts/bench.sbatch configs/qwen35_9b.yaml --task <task>
+#
+# Every other condition fits an A6000; only the three THINGS n=500 cells force the bigger card, and
+# the ladder is kept identical to the 2B/4B rather than truncated, so the curves stay comparable.
+#
+# Recognition is already at ceiling for the 4B on every foil type, so the informative tasks here are
+# serial order and paired associates, where the 4B declines.
+
+run_name: qwen35_9b
+
+output_dir: results
+
+seeds: [0, 1]
+
+models:
+  - name: qwen3.5-9b
+    model_id: Qwen/Qwen3.5-9B
+    max_image_size: 512
+    max_new_tokens: 100
+
+tasks:
+  - task: afc_recognition
+    prompts: [original]            # chosen via configs/prompt_ab.yaml (2026-09-22)
+    datasets: [Brady2008, things]
+    foil_types: [novel]
+    n_images: [1, 5, 25, 100, 250, 500]
+    n_trials: 50
+
+  - task: paired_associates
+    datasets: [Brady2008, things]
+    n_images: [1, 5, 25, 100, 250, 500]
+    n_trials: 50
+
+  - task: serial_order
+    prompts: [original]            # chosen via configs/prompt_ab.yaml (2026-09-22)
+    datasets: [Brady2008, things]
+    n_images: [2, 5, 25, 100, 250, 500]    # needs at least 2 studied images
+    n_trials: 50

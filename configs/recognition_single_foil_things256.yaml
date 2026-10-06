@@ -1,0 +1,54 @@
+# Recognition to the dataset limit with `single_foil`, THINGS at 256 px (2026-10-03). Design and reading
+# rule are in configs/recognition_single_foil_brady.yaml; same run_name.
+#
+# Standard-mode THINGS-256 stops at 927 (half the 1,854 concepts are foils); `single_foil` reaches 1,853.
+# 927 was the bridge to the standard mode (results kept on disk; replaced by 1,000 on 2026-10-04), which turned out to
+# test the first studied image only; see the Brady config). The `-img256` names keep these from pooling
+# with any 512 px result.
+#
+# Preflight passed at 1,853 for 0.8B-9B (configs/preflight_things256_max.yaml; peak 20 / 28 / 34 / 46 GB),
+# ~123k tokens: under the ~238k at which RTX PRO 6000 nodes crashed, so the 9B may use one.
+#
+#     X="--partition=burst --exclude=ins048,ins082,ins091 --time=48:00:00"
+#     sbatch $X --gres=gpu:1 scripts/bench.sbatch configs/recognition_single_foil_things256.yaml --model qwen3.5-0.8b-img256  (also 2b, 4b)
+#     sbatch $X --gres=gpu:R6000:1 scripts/bench.sbatch configs/recognition_single_foil_things256.yaml --model qwen3.5-9b-img256
+#     sbatch $X --gres=gpu:h100:2 --mem=128G --dependency=afterok:<pt2_27b> scripts/bench.sbatch \
+#            configs/recognition_single_foil_things256.yaml --model qwen3.5-27b-img256
+
+run_name: recognition_single_foil
+
+output_dir: results
+
+seeds: [0, 1]
+
+models:
+  - name: qwen3.5-0.8b-img256
+    model_id: Qwen/Qwen3.5-0.8B
+    max_image_size: 256
+    max_new_tokens: 100
+  - name: qwen3.5-2b-img256
+    model_id: Qwen/Qwen3.5-2B
+    max_image_size: 256
+    max_new_tokens: 100
+  - name: qwen3.5-4b-img256
+    model_id: Qwen/Qwen3.5-4B
+    max_image_size: 256
+    max_new_tokens: 100
+  - name: qwen3.5-9b-img256
+    model_id: Qwen/Qwen3.5-9B
+    max_image_size: 256
+    max_new_tokens: 100
+  - name: qwen3.5-27b-img256
+    model_id: Qwen/Qwen3.5-27B
+    max_image_size: 256
+    max_new_tokens: 100
+    device_map: auto
+
+tasks:
+  - task: afc_recognition
+    prompts: [original]
+    datasets: [things]
+    foil_types: [novel]
+    single_foil: true
+    n_images: [5, 25, 100, 250, 500, 1000, 1500, 1853]
+    n_trials: 50

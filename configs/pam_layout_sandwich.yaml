@@ -1,0 +1,34 @@
+# Paired-associates layout, sixth arm (2026-10-05): `sandwich`, the image's own word on both sides.
+#
+#   sandwich   Word: SWORD [img] Word: SWORD
+#
+# `pair_both` / `tagged` took the 9B to 0 previous-pair swaps but the 27B to 51 / 42 of 100 at Brady
+# n=500; `pair_numbered` is the reverse. Both models' errors are (almost) only ever the word *before*
+# the image (27B pair_both Brady 500: offset -1 on 51 trials, +1 on 2). `sandwich` makes the word before
+# each image its own word, so neither model's binding direction should matter.
+#
+# Same cells as the earlier arms, same seeds (identical episodes); 27B in pam_layout_sandwich_27b.yaml.
+# Decision rule unchanged and fixed before the run: lowest previous-pair swap rate, low for **both**
+# models; accuracy secondary.
+#
+#     sbatch --gres=gpu:R6000:1 --partition=burst --exclude=ins082,ins091 --time=12:00:00 \
+#            scripts/bench.sbatch configs/pam_layout_sandwich.yaml
+
+run_name: pam_layout_ab
+
+output_dir: results
+
+seeds: [0, 1]
+
+models:
+  - name: qwen3.5-9b
+    model_id: Qwen/Qwen3.5-9B
+    max_image_size: 512
+    max_new_tokens: 100
+
+tasks:
+  - task: paired_associates
+    prompts: [sandwich]
+    datasets: [Brady2008, things]
+    n_images: [100, 500]
+    n_trials: 50

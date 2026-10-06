@@ -1,0 +1,36 @@
+# Side-by-side test of the two 2-AFC test-turn layouts, both scored by forced choice.
+# original: vision-memory's question-first prompt with unlabeled images.
+# labeled:  "Image 1:"/"Image 2:" labels with the question last; used in the 2026-09-21 full runs,
+#           where it pushed small-n answers toward "1" (2B serial order n=2: 0.90 -> 0.50).
+# Pick the layout with balanced answers and better small-n accuracy, then set it in the model configs.
+run_name: prompt_ab
+output_dir: results
+seeds: [0]
+
+models:
+  - name: qwen3.5-0.8b
+    model_id: Qwen/Qwen3.5-0.8B
+    max_image_size: 512
+    max_new_tokens: 100
+  - name: qwen3.5-2b
+    model_id: Qwen/Qwen3.5-2B
+    max_image_size: 512
+    max_new_tokens: 100
+  - name: qwen3.5-4b
+    model_id: Qwen/Qwen3.5-4B
+    max_image_size: 512
+    max_new_tokens: 100
+
+tasks:
+  - task: afc_recognition
+    datasets: [Brady2008, things]
+    foil_types: [novel]
+    n_images: [1, 5, 25, 100]
+    prompts: [original, labeled]
+    n_trials: 50
+
+  - task: serial_order
+    datasets: [Brady2008, things]
+    n_images: [2, 5, 25, 100]
+    prompts: [original, labeled]
+    n_trials: 50

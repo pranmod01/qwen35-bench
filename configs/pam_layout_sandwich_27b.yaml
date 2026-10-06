@@ -1,0 +1,32 @@
+# The 27B arm of the `sandwich` layout test (design and decision rule in configs/pam_layout_sandwich.yaml).
+# Same reduced cells as configs/pam_layout_tags_27b.yaml: Brady n=500 (where pair_both/tagged failed) and
+# THINGS n=100 (the cheap control). Keep the 27B on H100s (8 x A6000 produced gibberish, 2026-10-02).
+#
+#     sbatch --gres=gpu:h100:2 --mem=128G --partition=burst --exclude=ins082,ins091 --time=12:00:00 \
+#            scripts/bench.sbatch configs/pam_layout_sandwich_27b.yaml
+
+run_name: pam_layout_ab
+
+output_dir: results
+
+seeds: [0, 1]
+
+models:
+  - name: qwen3.5-27b
+    model_id: Qwen/Qwen3.5-27B
+    max_image_size: 512
+    max_new_tokens: 100
+    device_map: auto
+
+tasks:
+  - task: paired_associates
+    prompts: [sandwich]
+    datasets: [Brady2008]
+    n_images: [500]
+    n_trials: 50
+
+  - task: paired_associates
+    prompts: [sandwich]
+    datasets: [things]
+    n_images: [100]
+    n_trials: 50

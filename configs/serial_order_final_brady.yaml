@@ -1,0 +1,57 @@
+# Serial order, final runs: counterbalanced scoring, Brady, every model, n=2 to the dataset limit
+# (2026-10-04). THINGS at 256 px is in configs/serial_order_final_things256.yaml, same run_name.
+#
+# Why counterbalanced: under single-order scoring the models fall back on a test-position answer
+# ("1", or the image shown first) when unsure, and the 9B does so even at n=2, which put it below the 4B.
+# Scoring each trial in both test orders and summing the log-odds for the same image cancels that.
+# configs/serial_order_counterbalance_ab.yaml met its decision rule: 9B n=2 0.76 -> 1.00 (Brady) and
+# 0.62 -> 1.00 (THINGS), says "1" back to ~50%; the 4B barely moves where it was already balanced.
+#
+# 2 seeds x 50 for every model, including the 0.8B (its main sweep used 5 x 20). Episodes match the
+# main sweeps at n<=500 for 2B-27B (same seeds), so the per-order fields can be checked against them.
+#
+# Cost: two scoring passes per trial instead of one (peak memory per pass unchanged, so the
+# configs/xl_preflight.yaml peaks still hold: 26 / 35 / 42 / 54 / 137 GB at n=2,400, ~159k tokens).
+# Keep the 9B on H100 or RTX PRO 6000 (fine at <=159k); the 27B on 2 x H100.
+#
+#     X="--partition=burst --exclude=ins048,ins082,ins091 --time=48:00:00"
+#     sbatch $X --gres=gpu:1 scripts/bench.sbatch configs/serial_order_final_brady.yaml --model qwen3.5-0.8b  (also 2b, 4b)
+#     sbatch $X --gres=gpu:R6000:1 scripts/bench.sbatch configs/serial_order_final_brady.yaml --model qwen3.5-9b
+#     sbatch $X --gres=gpu:h100:2 --mem=128G scripts/bench.sbatch configs/serial_order_final_brady.yaml --model qwen3.5-27b
+
+run_name: serial_order_final
+
+output_dir: results
+
+seeds: [0, 1]
+
+models:
+  - name: qwen3.5-0.8b
+    model_id: Qwen/Qwen3.5-0.8B
+    max_image_size: 512
+    max_new_tokens: 100
+  - name: qwen3.5-2b
+    model_id: Qwen/Qwen3.5-2B
+    max_image_size: 512
+    max_new_tokens: 100
+  - name: qwen3.5-4b
+    model_id: Qwen/Qwen3.5-4B
+    max_image_size: 512
+    max_new_tokens: 100
+  - name: qwen3.5-9b
+    model_id: Qwen/Qwen3.5-9B
+    max_image_size: 512
+    max_new_tokens: 100
+  - name: qwen3.5-27b
+    model_id: Qwen/Qwen3.5-27B
+    max_image_size: 512
+    max_new_tokens: 100
+    device_map: auto
+
+tasks:
+  - task: serial_order
+    prompts: [original]
+    counterbalance: true
+    datasets: [Brady2008]
+    n_images: [2, 5, 25, 100, 250, 500, 1000, 1500, 2000, 2400]
+    n_trials: 50

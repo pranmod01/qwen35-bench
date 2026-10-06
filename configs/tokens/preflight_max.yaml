@@ -1,0 +1,61 @@
+# Preflight for the token-item runs (2026-10-06): one trial per cell at the largest list for each item
+# length, before any full run. Pool `clean` (245,450 tokens, none reused within an episode).
+#
+# n is set so every length fills the same ~244k of the 262,144-token context, so the length comparison
+# holds total tokens fixed: few long items vs many short ones. Each item costs L + 1 tokens (separator).
+#   L=8   n=27,000   (pool allows 30,681; context binds first)
+#   L=64  n=3,750    (pool allows 3,834 with a novel foil)
+#   L=256 n=950      (pool allows 957 with a novel foil)
+# Read error, peak_gpu_gb, elapsed_s and choice_mass only; one trial says nothing about accuracy.
+#
+# Hardware. Every job names its GPU type: R6000 nodes crash on ~238k-token prompts (LIMITATIONS.md), and a
+# bare gpu:1 can land there. Image-run estimates near full context were 0.8B 42 GB, 2B 55, 4B 62, 9B ~78,
+# 27B ~190 summed; text has no vision encoder and may need less, which is what this measures. peak_gpu_gb
+# is summed over cards, so the 27B's request can be sized from the 0.8B-9B peaks before it is submitted.
+#
+#     X="--partition=burst --exclude=ins082,ins091 --time=12:00:00"
+#     sbatch $X --gres=gpu:A6000:1 scripts/bench.sbatch configs/tokens/preflight_max.yaml --model qwen3.5-0.8b
+#     sbatch $X --gres=gpu:A6000:2 --mem=96G scripts/bench.sbatch configs/tokens/preflight_max.yaml --model qwen3.5-2b  (also 4b)
+#     sbatch $X --gres=gpu:A6000:3 --mem=128G scripts/bench.sbatch configs/tokens/preflight_max.yaml --model qwen3.5-9b
+#     27B: after the others report, on gpu:h100:2 if the trend allows (160 GB), else gpu:A6000:6.
+
+run_name: tokens_preflight
+
+output_dir: results
+
+seeds: [0]
+
+models:
+  - name: qwen3.5-0.8b
+    model_id: Qwen/Qwen3.5-0.8B
+    max_new_tokens: 100
+  - name: qwen3.5-2b
+    model_id: Qwen/Qwen3.5-2B
+    max_new_tokens: 100
+    device_map: auto        # split across cards; see the hardware note above
+  - name: qwen3.5-4b
+    model_id: Qwen/Qwen3.5-4B
+    max_new_tokens: 100
+    device_map: auto        # split across cards; see the hardware note above
+  - name: qwen3.5-9b
+    model_id: Qwen/Qwen3.5-9B
+    max_new_tokens: 100
+    device_map: auto        # split across cards; see the hardware note above
+  - name: qwen3.5-27b
+    model_id: Qwen/Qwen3.5-27B
+    max_new_tokens: 100
+    device_map: auto
+
+tasks:
+  - {task: afc_recognition, prompts: [original], datasets: [tokens], foil_types: [novel, recombined],
+     single_foil: true, token_pools: [clean], item_lengths: [8], n_images: [27000], n_trials: 1}
+  - {task: afc_recognition, prompts: [original], datasets: [tokens], foil_types: [novel, recombined],
+     single_foil: true, token_pools: [clean], item_lengths: [64], n_images: [3750], n_trials: 1}
+  - {task: afc_recognition, prompts: [original], datasets: [tokens], foil_types: [novel, recombined],
+     single_foil: true, token_pools: [clean], item_lengths: [256], n_images: [950], n_trials: 1}
+  - {task: serial_order, prompts: [original], datasets: [tokens], counterbalance: true,
+     token_pools: [clean], item_lengths: [8], n_images: [27000], n_trials: 1}
+  - {task: serial_order, prompts: [original], datasets: [tokens], counterbalance: true,
+     token_pools: [clean], item_lengths: [64], n_images: [3750], n_trials: 1}
+  - {task: serial_order, prompts: [original], datasets: [tokens], counterbalance: true,
+     token_pools: [clean], item_lengths: [256], n_images: [950], n_trials: 1}

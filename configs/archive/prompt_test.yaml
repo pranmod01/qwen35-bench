@@ -1,0 +1,32 @@
+# Quick check of the post-image test prompts on the conditions where 2B/4B answered with paragraphs
+# (2-AFC, serial order) or named the object (PAM) in the 2026-09-21 runs.
+run_name: prompt_test
+output_dir: results
+seeds: [0]
+
+models:
+  - name: qwen3.5-2b
+    model_id: Qwen/Qwen3.5-2B
+    max_image_size: 512
+    max_new_tokens: 100
+  - name: qwen3.5-4b
+    model_id: Qwen/Qwen3.5-4B
+    max_image_size: 512
+    max_new_tokens: 100
+
+tasks:
+  - task: afc_recognition
+    datasets: [Brady2008, things]
+    foil_types: [novel]
+    n_images: [5, 25, 100]
+    n_trials: 10
+
+  - task: serial_order
+    datasets: [Brady2008, things]
+    n_images: [5, 25]
+    n_trials: 10
+
+  - task: paired_associates
+    datasets: [Brady2008, things]
+    n_images: [1, 5]
+    n_trials: 10

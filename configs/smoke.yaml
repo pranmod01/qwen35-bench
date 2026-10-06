@@ -1,0 +1,47 @@
+# Tiny config for checking the pipeline end to end on one GPU.
+run_name: smoke
+output_dir: results
+seeds: [0]
+
+models:
+  - name: qwen3.5-0.8b
+    model_id: Qwen/Qwen3.5-0.8B
+    max_image_size: 512
+    max_new_tokens: 100
+
+tasks:
+  - task: afc_recognition
+    datasets: [Brady2008, things]
+    n_images: [5]
+    foil_types: [novel]
+    prompts: [original]
+    n_trials: 3
+
+  - task: paired_associates
+    datasets: [Brady2008, things]
+    n_images: [5]
+    n_trials: 3
+
+  - task: serial_order
+    datasets: [Brady2008, things]
+    n_images: [5]
+    prompts: [original]
+    n_trials: 3
+
+  - task: mst
+    n_images: [5]
+    prompts: [words, numbered]
+    n_trials: 3
+
+  - task: color_memory
+    modes: [named, continuous]
+    n_images: [5]
+    prompts: [words, numbered]
+    n_trials: 3
+
+  - task: associative_inference
+    datasets: [Brady2008, things]
+    pair_types: [image, word]
+    n_chains: [5]
+    prompts: [original]
+    n_trials: 3

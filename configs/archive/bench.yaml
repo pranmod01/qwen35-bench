@@ -1,0 +1,31 @@
+# Benchmark configuration. This is the only file that should change between runs.
+# Everything here is embedded in each result file.
+
+run_name: pilot_0.8b
+
+output_dir: results
+
+# Repeats of every (model, task, condition). Each seed reseeds stimulus sampling.
+seeds: [0, 1, 2]
+
+models:
+  - name: qwen3.5-0.8b
+    model_id: Qwen/Qwen3.5-0.8B
+    max_image_size: 512      # longest image edge in px before the processor sees it
+    max_new_tokens: 100
+    # layer_variant: null    # stock architecture; see docs/layer_variants below
+
+  # Example architecture variant. NOTE: overriding layer types on a pretrained
+  # checkpoint leaves the converted layers randomly initialised (see README).
+  # - name: qwen3.5-0.8b-allfull
+  #   model_id: Qwen/Qwen3.5-0.8B
+  #   layer_variant:
+  #     full_attention_interval: 1
+
+tasks:
+  - task: afc_recognition
+    datasets: [Brady2008, things]
+    n_images: [1, 2, 5, 10, 50]
+    foil_types: [novel, exemplar, state]
+    n_trials: 10
+

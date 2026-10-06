@@ -1,0 +1,54 @@
+# Paired associates, final runs: `sandwich` layout, Brady, every model, n=1 to the word-pool limit
+# (2026-10-06). THINGS at 256 px is in configs/pam_final_things256.yaml, same run_name.
+#
+# Why `sandwich` (Word: W [img] Word: W): every earlier layout left one of the 9B / 27B binding images to
+# the previous pair's word (configs/pam_layout_*.yaml). `sandwich` was the first with 0 previous-pair swaps
+# in all six test cells for both models (27B Brady 500: 0.99, vs 0.22-0.69 under every other layout).
+# Chosen by the rule fixed before the A/B: lowest previous-pair swap rate, low for both models.
+#
+# The 0.8B-4B were not in the layout A/B; under `original` the 2B/4B swapped on up to 64% / 37% of
+# trials. Check their PREV_SWAP flags and swap_offset counts here before reading their accuracy.
+#
+# 2 seeds x 50 = 100 trials per cell, as for recognition and serial order. ~8k more tokens than
+# `original` at 1,637 pairs; the 9B and 27B run only after configs/pam_final_preflight.yaml passes.
+#
+#     X="--partition=burst --exclude=ins082,ins091 --time=48:00:00"
+#     sbatch $X --gres=gpu:1 scripts/bench.sbatch configs/pam_final_brady.yaml --model qwen3.5-0.8b  (also 2b, 4b)
+#     sbatch $X --gres=gpu:R6000:1 --dependency=afterok:<pre_9b> scripts/bench.sbatch configs/pam_final_brady.yaml --model qwen3.5-9b
+#     sbatch $X --gres=gpu:h100:2 --mem=128G --dependency=afterok:<pre_27b> scripts/bench.sbatch configs/pam_final_brady.yaml --model qwen3.5-27b
+
+run_name: pam_final
+
+output_dir: results
+
+seeds: [0, 1]
+
+models:
+  - name: qwen3.5-0.8b
+    model_id: Qwen/Qwen3.5-0.8B
+    max_image_size: 512
+    max_new_tokens: 100
+  - name: qwen3.5-2b
+    model_id: Qwen/Qwen3.5-2B
+    max_image_size: 512
+    max_new_tokens: 100
+  - name: qwen3.5-4b
+    model_id: Qwen/Qwen3.5-4B
+    max_image_size: 512
+    max_new_tokens: 100
+  - name: qwen3.5-9b
+    model_id: Qwen/Qwen3.5-9B
+    max_image_size: 512
+    max_new_tokens: 100
+  - name: qwen3.5-27b
+    model_id: Qwen/Qwen3.5-27B
+    max_image_size: 512
+    max_new_tokens: 100
+    device_map: auto
+
+tasks:
+  - task: paired_associates
+    prompts: [sandwich]
+    datasets: [Brady2008]
+    n_images: [1, 5, 25, 100, 250, 500, 1000, 1500, 1637]
+    n_trials: 50

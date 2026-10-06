@@ -1,0 +1,33 @@
+# One-trial preflight for configs/pam_final_{brady,things256}.yaml at the largest cell (1,637 pairs,
+# `sandwich`), 9B and 27B only (2026-10-06). Read error, peak_gpu_gb and raw_response only.
+# Uses the `-img256` names for both datasets: Brady objects are natively 256 px, so the prompt is the same
+# as the 512 px Brady run, and this keeps the preflight to one model entry per size.
+#
+#     sbatch --partition=burst --exclude=ins082,ins091 --time=4:00:00 --gres=gpu:R6000:1 \
+#            scripts/bench.sbatch configs/pam_final_preflight.yaml --model qwen3.5-9b-img256
+#     sbatch --partition=burst --exclude=ins082,ins091 --time=4:00:00 --gres=gpu:h100:2 --mem=128G \
+#            scripts/bench.sbatch configs/pam_final_preflight.yaml --model qwen3.5-27b-img256
+
+run_name: xl_preflight
+
+output_dir: results
+
+seeds: [0]
+
+models:
+  - name: qwen3.5-9b-img256
+    model_id: Qwen/Qwen3.5-9B
+    max_image_size: 256
+    max_new_tokens: 100
+  - name: qwen3.5-27b-img256
+    model_id: Qwen/Qwen3.5-27B
+    max_image_size: 256
+    max_new_tokens: 100
+    device_map: auto
+
+tasks:
+  - task: paired_associates
+    prompts: [sandwich]
+    datasets: [Brady2008, things]
+    n_images: [1637]
+    n_trials: 1

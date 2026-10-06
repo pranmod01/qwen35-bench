@@ -1,0 +1,25 @@
+# The 0.8B arm of the serial-order `later` A/B. See configs/serial_order_later_ab.yaml for the question
+# and the decision rule.
+#
+# Separate file only because the 0.8B's main sweep (configs/qwen35_0.8b.yaml) uses 5 seeds x 20 trials
+# where the other models use 2 x 50, and the `original` arm has to be the same episodes. Same
+# run_name, so the results pool with the other models'.
+#
+#     sbatch --gres=gpu:1 scripts/bench.sbatch configs/serial_order_later_ab_0.8b.yaml
+
+run_name: serial_order_later_ab
+output_dir: results
+seeds: [0, 1, 2, 3, 4]
+
+models:
+  - name: qwen3.5-0.8b
+    model_id: Qwen/Qwen3.5-0.8B
+    max_image_size: 512
+    max_new_tokens: 100
+
+tasks:
+  - task: serial_order
+    datasets: [Brady2008, things]
+    n_images: [2, 5, 25, 100]
+    prompts: [later]
+    n_trials: 20

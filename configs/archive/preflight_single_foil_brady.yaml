@@ -1,0 +1,43 @@
+# Preflight (2026-09-30): Brady recognition with `single_foil` at n=2,399, one trial per model, before
+# any full run. `single_foil` draws n studied items + 1 foil instead of a foil per studied item, which
+# lifts recognition's ceiling from 1,200 to 2,399 without changing what a trial tests (one studied item
+# vs one never-seen object). ~159k tokens, the same as the Brady serial-order n=2,400 preflight.
+# Read error, peak_gpu_gb, elapsed_s and choice_mass only.
+
+run_name: xl_preflight
+
+output_dir: results
+
+seeds: [0]
+
+models:
+  - name: qwen3.5-0.8b
+    model_id: Qwen/Qwen3.5-0.8B
+    max_image_size: 512
+    max_new_tokens: 100
+  - name: qwen3.5-2b
+    model_id: Qwen/Qwen3.5-2B
+    max_image_size: 512
+    max_new_tokens: 100
+  - name: qwen3.5-4b
+    model_id: Qwen/Qwen3.5-4B
+    max_image_size: 512
+    max_new_tokens: 100
+  - name: qwen3.5-9b
+    model_id: Qwen/Qwen3.5-9B
+    max_image_size: 512
+    max_new_tokens: 100
+  - name: qwen3.5-27b
+    model_id: Qwen/Qwen3.5-27B
+    max_image_size: 512
+    max_new_tokens: 100
+    device_map: auto
+
+tasks:
+  - task: afc_recognition
+    prompts: [original]
+    datasets: [Brady2008]
+    foil_types: [novel]
+    single_foil: true
+    n_images: [2399]
+    n_trials: 1

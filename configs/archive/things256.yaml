@@ -1,0 +1,70 @@
+# THINGS at 256 px, the full ladder, all five sizes (2026-09-30).
+#
+# At the usual 512 px cap a THINGS photo costs ~257 tokens, so ~1,000 fill the 262,144-token context and
+# the 27B cannot hold n=927 on any card we can get (it needs ~172 GB and a single 16 GB allocation on
+# the first card). At 256 px a photo costs ~66 tokens, the same as a Brady object (natively 256 px), so
+# the ceiling becomes the dataset instead: one photo per concept, 1,854 concepts -> serial order 1,854,
+# paired associates 1,637 (word pool), recognition 927 (half the concepts are foils).
+#
+# This is a different stimulus condition from every existing THINGS result (512 px), so it is kept apart:
+# its own run_name and `-img256` model names, as configs/img_resolution.yaml did, so summarize/plot can
+# never pool the two. The whole ladder runs, not only the new sizes: the cells at n<=500 use the same
+# seeds as the 512 px sweeps, hence the same episodes, and are the paired resolution comparison. The only
+# earlier evidence was the 0.8B on recognition at n=1 and 5 (0.94 vs 0.92).
+#
+# Reading rule, fixed before the run: a 256 px cell within 10 points of its 512 px cell (the noise level
+# at 100 episodes) counts as equivalent. If a model/task differs by more than that at n<=500, its 256 px
+# cells beyond 500 are reported as a separate condition, not as an extension of the 512 px curve.
+#
+# Largest prompt is serial order at 1,854 images, below the 158,704 tokens of Brady serial order at
+# 2,400, which every model passed in configs/xl_preflight.yaml on this hardware.
+#
+#     sbatch --partition=burst --time=48:00:00 --exclude=ins082 <gres> scripts/bench.sbatch configs/things256.yaml --model qwen3.5-<m>-img256 [--task <t>]
+
+run_name: things256
+
+output_dir: results
+
+seeds: [0, 1]
+
+models:
+  - name: qwen3.5-0.8b-img256
+    model_id: Qwen/Qwen3.5-0.8B
+    max_image_size: 256
+    max_new_tokens: 100
+  - name: qwen3.5-2b-img256
+    model_id: Qwen/Qwen3.5-2B
+    max_image_size: 256
+    max_new_tokens: 100
+  - name: qwen3.5-4b-img256
+    model_id: Qwen/Qwen3.5-4B
+    max_image_size: 256
+    max_new_tokens: 100
+  - name: qwen3.5-9b-img256
+    model_id: Qwen/Qwen3.5-9B
+    max_image_size: 256
+    max_new_tokens: 100
+  - name: qwen3.5-27b-img256
+    model_id: Qwen/Qwen3.5-27B
+    max_image_size: 256
+    max_new_tokens: 100
+    device_map: auto
+
+tasks:
+  - task: afc_recognition
+    prompts: [original]
+    datasets: [things]
+    foil_types: [novel]
+    n_images: [1, 5, 25, 100, 250, 500, 927]
+    n_trials: 50
+
+  - task: paired_associates
+    datasets: [things]
+    n_images: [1, 5, 25, 100, 250, 500, 1000, 1500, 1637]
+    n_trials: 50
+
+  - task: serial_order
+    prompts: [original]
+    datasets: [things]
+    n_images: [2, 5, 25, 100, 250, 500, 1000, 1500, 1854]
+    n_trials: 50

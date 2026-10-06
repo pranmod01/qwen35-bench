@@ -1,0 +1,54 @@
+# The 27B cells that configs/qwen35_27b.yaml leaves out: n=250 and n=500 on **both** datasets, across
+# the three tasks (24 runs).
+#
+# Same `run_name`, so these results land beside the rest of the 27B sweep and one summarize call covers
+# both. Kept separate because of hardware, not design.
+#
+# What binds is the first card, not the total. 54.71 GB of weights sharded over two cards leaves ~27 GB
+# on card 0 before activations, so on 2 x L40S (48 GB each) even Brady n=250 -- 72 GB in total, which
+# the 2 x A6000 probe passed -- was rejected. Give these cells cards with real headroom.
+#
+#   sbatch --gres=gpu:h100:2 --partition=burst --time=24:00:00 scripts/bench.sbatch \
+#          configs/qwen35_27b_things500.yaml --task <task>
+#
+# 2 x H100 NVL is 188 GB with only two cards to place, which schedules more easily than 3-4 A6000s
+# while leaving ample headroom for accelerate's uneven sharding. 4 x A6000 (190 GB) also works if the
+# H100 nodes are busy.
+#
+# Splitting these cells out rather than relying on a `--dependency` mop-up job is deliberate: on
+# 2026-09-26 such a job was cancelled `DependencyNeverSatisfied` even though its parents completed.
+#
+# Timing: unmeasured at this size. The 27B took 111 s per trial at THINGS n=250, so n=500 is likely
+# 4-5 minutes per trial, i.e. ~7-8 h per 100-episode cell. One task per job.
+
+run_name: qwen35_27b
+
+output_dir: results
+
+seeds: [0, 1]
+
+models:
+  - name: qwen3.5-27b
+    model_id: Qwen/Qwen3.5-27B
+    max_image_size: 512
+    max_new_tokens: 100
+    device_map: auto
+
+tasks:
+  - task: afc_recognition
+    prompts: [original]
+    datasets: [Brady2008, things]
+    foil_types: [novel]
+    n_images: [250, 500]
+    n_trials: 50
+
+  - task: paired_associates
+    datasets: [Brady2008, things]
+    n_images: [250, 500]
+    n_trials: 50
+
+  - task: serial_order
+    prompts: [original]
+    datasets: [Brady2008, things]
+    n_images: [250, 500]
+    n_trials: 50

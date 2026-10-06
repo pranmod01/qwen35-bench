@@ -1,0 +1,94 @@
+# Qwen3.5-4B: same three tasks and sizes as the 2B run, for a like-for-like comparison.
+# 2 seeds x 50 = 100 episodes per condition at every size (about +/-5 points on accuracy).
+# Episodes resample independently, so seeds mainly split each condition into resumable files.
+
+run_name: qwen35_4b
+
+output_dir: results
+
+seeds: [0, 1]
+
+models:
+  - name: qwen3.5-4b
+    model_id: Qwen/Qwen3.5-4B
+    max_image_size: 512
+    max_new_tokens: 100
+
+tasks:
+  - task: afc_recognition
+    prompts: [original]            # chosen via configs/prompt_ab.yaml (2026-09-22)
+    datasets: [Brady2008, things]
+    foil_types: [novel]
+    n_images: [1, 5, 25, 100, 250, 500]
+    n_trials: 50
+
+  - task: paired_associates
+    datasets: [Brady2008, things]
+    n_images: [1, 5, 25, 100, 250, 500]
+    n_trials: 50
+
+  - task: serial_order
+    prompts: [original]            # chosen via configs/prompt_ab.yaml (2026-09-22)
+    datasets: [Brady2008, things]
+    n_images: [2, 5, 25, 100, 250, 500]    # needs at least 2 studied images
+    n_trials: 50
+
+  # Only `novel` foils have been run (Open Item 15); with them the 4B is at 0.99-1.00 from n=1 to
+  # n=500, so recognition has no headroom. Brady2008Exemplar/State hold 100 pairs each, which is the
+  # size ceiling here; things has no state foils and expand_conditions skips that pair.
+  - task: afc_recognition
+    prompts: [original]
+    datasets: [Brady2008, things]
+    foil_types: [exemplar, state]
+    n_images: [1, 5, 25, 100]
+    n_trials: 50
+
+  # Sized in chains: 4 study images per chain (A,B then B,C), plus cue and two options at test.
+  # Brady images cost 66 tokens, so the ladder reaches the 500-chain (2,003-image) ceiling measured
+  # on a 48 GB A6000; 800 chains OOMs on the 2B and 4B.
+  # DISABLED 2026-09-27. Associative inference has no working test format: a direct-association
+  # control showed the models cannot retrieve even a *studied* A-B pair in this layout (they answer
+  # one side on ~100% of trials), and a layout A/B rejected all three candidates. Re-enabling this
+  # block would regenerate ~80 runs of response-bias data. The earlier results are archived at
+  # results/archive_2026-09-26_assoc_inf_broken/. See LIMITATIONS.md and Open Item 18.
+  #   - task: associative_inference
+  #     datasets: [Brady2008]
+  #     pair_types: [image]
+  #     n_chains: [2, 5, 25, 100, 250, 500]
+  #     prompts: [original]
+  #     n_trials: 50
+  #
+  #   # THINGS images cost 258 tokens, so the same chain counts make a 4x larger prompt: 200 chains needs
+  #   # 45-52 GB and 250 chains is 258k of the 262k context. Stops at 100.
+
+  # DISABLED 2026-09-27. Associative inference has no working test format: a direct-association
+  # control showed the models cannot retrieve even a *studied* A-B pair in this layout (they answer
+  # one side on ~100% of trials), and a layout A/B rejected all three candidates. Re-enabling this
+  # block would regenerate ~80 runs of response-bias data. The earlier results are archived at
+  # results/archive_2026-09-26_assoc_inf_broken/. See LIMITATIONS.md and Open Item 18.
+  #   - task: associative_inference
+  #     datasets: [things]
+  #     pair_types: [image]
+  #     n_chains: [2, 5, 25, 100]
+  #     prompts: [original]
+  #     n_trials: 50
+  #
+  #   # Answer layout chosen by configs/scoring_ab2.yaml: `numbered` (digit answers, mapping reshuffled
+  #   # per trial). `words` holds only 0.13-0.79 of the next-token mass; `fixed` keeps the mass but the
+  #   # ordinal bias it was meant to avoid showed up anyway (2B MST answered "old" = digit 1 on 88-98%
+  #   # of trials). Cost of `numbered`: it also asks the model to hold a mapping, so it reads lower than
+  #   # `words` on accuracy -- treated as a measurement floor, see LIMITATIONS.md.
+  #   #
+  #   # Both tasks are dataset-bound, not GPU-bound: the capacity probe (jobs 12900577-79) put the full
+  #   # 576-image MST and 540-image color episodes at 18.7-25.5 GB, inside a 48 GB card on every model.
+
+  - task: mst
+    n_images: [1, 5, 25, 100, 250, 576]     # 1,152 MST pairs, half needed as foils
+    prompts: [numbered]
+    n_trials: 50
+
+  - task: color_memory
+    modes: [named, continuous]
+    n_images: [1, 5, 25, 100, 250, 540]     # Brady2013ColorObjects holds 540 images
+    prompts: [numbered]
+    n_trials: 50

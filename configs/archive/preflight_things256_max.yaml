@@ -1,0 +1,52 @@
+# Preflight (2026-09-30): THINGS at 256 px beyond the one-photo-per-concept limits, one trial per model.
+#   - recognition with `single_foil` at n=1,853 (every concept but the foil's), ~123k tokens
+#   - serial order with `exemplars_per_concept: 2` at n=3,500 (two photos per concept, shuffled into one
+#     list; the test pair never shares a concept), ~231k tokens. The 27B runs recognition only
+#     (submit it with --task afc_recognition): it cannot hold a ~231k-token prompt on any card here.
+# Keep these off the RTX PRO 6000 nodes for serial order: they crashed (illegal memory access) on
+# ~238k-token prompts on 2026-09-30. Read error, peak_gpu_gb, elapsed_s and choice_mass only.
+
+run_name: xl_preflight
+
+output_dir: results
+
+seeds: [0]
+
+models:
+  - name: qwen3.5-0.8b-img256
+    model_id: Qwen/Qwen3.5-0.8B
+    max_image_size: 256
+    max_new_tokens: 100
+  - name: qwen3.5-2b-img256
+    model_id: Qwen/Qwen3.5-2B
+    max_image_size: 256
+    max_new_tokens: 100
+  - name: qwen3.5-4b-img256
+    model_id: Qwen/Qwen3.5-4B
+    max_image_size: 256
+    max_new_tokens: 100
+  - name: qwen3.5-9b-img256
+    model_id: Qwen/Qwen3.5-9B
+    max_image_size: 256
+    max_new_tokens: 100
+  - name: qwen3.5-27b-img256
+    model_id: Qwen/Qwen3.5-27B
+    max_image_size: 256
+    max_new_tokens: 100
+    device_map: auto
+
+tasks:
+  - task: afc_recognition
+    prompts: [original]
+    datasets: [things]
+    foil_types: [novel]
+    single_foil: true
+    n_images: [1853]
+    n_trials: 1
+
+  - task: serial_order
+    prompts: [original]
+    datasets: [things]
+    exemplars_per_concept: 2
+    n_images: [3500]
+    n_trials: 1

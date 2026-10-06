@@ -1,0 +1,32 @@
+# Qwen3.5-35B-A3B: paired associates only, as a third large model for the 9B-vs-27B inversion
+# (2026-09-28). At n>=100 the 9B beats the 27B on both datasets; this says which of the two is the
+# outlier. It is also the first MoE in the sweep (~3B active of 35B total), so it separates total
+# from active parameters (Open Item 29). Serial order and 2-AFC are left out until PAM is read.
+#
+# Same ladder, seeds and trial count as the 9B and 27B, so the curves are directly comparable.
+#
+# Weights are ~72 GB (bf16), so they must shard. Two H100s give 160-188 GB; accelerate fills card 0
+# first (Open Item 31), so if THINGS n>=250 is skipped for capacity, split those cells into their own
+# config on bigger cards rather than using a --dependency mop-up (Open Item 27).
+#
+#     sbatch --gres=gpu:h100:2 --partition=burst --time=24:00:00 scripts/bench.sbatch \
+#            configs/qwen35_35b_a3b.yaml
+
+run_name: qwen35_35b_a3b
+
+output_dir: results
+
+seeds: [0, 1]
+
+models:
+  - name: qwen3.5-35b-a3b
+    model_id: Qwen/Qwen3.5-35B-A3B
+    max_image_size: 512
+    max_new_tokens: 100
+    device_map: auto
+
+tasks:
+  - task: paired_associates
+    datasets: [Brady2008, things]
+    n_images: [1, 5, 25, 100, 250, 500]
+    n_trials: 50

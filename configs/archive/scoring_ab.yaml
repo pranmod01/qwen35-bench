@@ -1,0 +1,46 @@
+# Side-by-side test of the two answer layouts for the tasks whose answers are words, both scored by
+# forced choice. Same shape as configs/prompt_ab.yaml, which chose the 2-AFC test-turn layout.
+#
+# words:    the answer set is the words themselves (old/similar/new, or the six color names).
+# numbered: the options are listed against digits and the model answers with a digit; which digit
+#           means which answer is reshuffled every trial and recorded, so a digit preference reads as
+#           chance accuracy rather than as memory.
+#
+# Why: asked for a word, the models hold only 0.07-0.86 of their next-token mass on the answer set,
+# leaking it to digits (the 4B answers MST with "1" at up to 0.64), <|im_end|>, Chinese translations
+# and out-of-set colors like gray (diag_word_choices.py, jobs 12901178-79). Below 0.9 mass on more
+# than 10% of trials a cell is flagged LOW_MASS, which nearly every word cell would be.
+#
+# Decision rule, fixed before the run: take the layout with the higher choice mass, unless it is more
+# biased (one answer on >80% of trials) or its accuracy moves in a way that points at a confound.
+# Then pin the winner in the model configs and keep the loser in the code so archived results stay
+# identified.
+run_name: scoring_ab
+output_dir: results
+seeds: [0]
+
+models:
+  - name: qwen3.5-0.8b
+    model_id: Qwen/Qwen3.5-0.8B
+    max_image_size: 512
+    max_new_tokens: 100
+  - name: qwen3.5-2b
+    model_id: Qwen/Qwen3.5-2B
+    max_image_size: 512
+    max_new_tokens: 100
+  - name: qwen3.5-4b
+    model_id: Qwen/Qwen3.5-4B
+    max_image_size: 512
+    max_new_tokens: 100
+
+tasks:
+  - task: mst
+    n_images: [1, 5, 25, 100]
+    prompts: [words, numbered]
+    n_trials: 50
+
+  - task: color_memory
+    modes: [named]               # continuous has no answer set to lay out; it is not in this A/B
+    n_images: [1, 5, 25, 100]
+    prompts: [words, numbered]
+    n_trials: 50

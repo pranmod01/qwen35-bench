@@ -1,0 +1,46 @@
+# Serial order, counterbalanced scoring A/B (2026-10-03).
+#
+# Under `original` ("which appeared first?") the 9B scores below the 4B at short lists (Brady n=2:
+# 0.74 vs 1.00) because it answers with the first image *in the test*, whatever was studied first;
+# the `later` A/B flipped its answers, and also flipped the 4B's and 27B's at n=2, so wording cannot fix it.
+#
+# `counterbalance: true` scores every trial twice on the same study list, with the two test images
+# swapped, and sums the log-odds for the same image across the two orders. A preference for a test
+# position adds equally to both orders and cancels; what is left is evidence about the studied order.
+# The order-shown half reproduces the main-sweep trial (same seeds, same episodes -- checked on CPU
+# against results/qwen35_9b/), so arm A is results/qwen35_{4b,9b}/ and is not rerun.
+#
+# The 4B is the comparison: it is balanced at n=2-5 under `original`, so counterbalancing should leave
+# it roughly where it is.
+#
+# Decision rule, fixed before the run:
+#   - 9B counterbalanced accuracy at n=2 >= 0.90 on both datasets (and n=5 clearly above its 0.56-0.62):
+#     the short-list inversion was the position bias. Adopt `counterbalance: true` for every model's
+#     final serial-order runs.
+#   - 9B stays near 0.7 at n=2: the 9B genuinely discriminates order worse at short lists. Report it as
+#     real; counterbalancing is then not worth doubling the cost of the max-capacity runs.
+#
+#     sbatch --gres=gpu:1 --partition=burst --exclude=ins048,ins082,ins091 \
+#            scripts/bench.sbatch configs/serial_order_counterbalance_ab.yaml --model qwen3.5-9b
+
+run_name: serial_order_counterbalance_ab
+output_dir: results
+seeds: [0, 1]
+
+models:
+  - name: qwen3.5-4b
+    model_id: Qwen/Qwen3.5-4B
+    max_image_size: 512
+    max_new_tokens: 100
+  - name: qwen3.5-9b
+    model_id: Qwen/Qwen3.5-9B
+    max_image_size: 512
+    max_new_tokens: 100
+
+tasks:
+  - task: serial_order
+    prompts: [original]
+    counterbalance: true
+    datasets: [Brady2008, things]
+    n_images: [2, 5, 25, 100]
+    n_trials: 50

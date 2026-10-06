@@ -1,0 +1,47 @@
+# Paired-associates layout, fourth and fifth arms (2026-09-30): does stating the binding on both sides
+# remove the off-by-one for both models?
+#
+# What is known so far, previous-pair swaps as a share of 100 trials:
+#
+#   cell                original  pair_numbered  pair_plain
+#   27B THINGS n=500       54%         2%           51%
+#   27B Brady  n=500       36%        18%           51%
+#   9B  THINGS n=500        6%        35%            --
+#   9B  THINGS n=100        --        15%           52%
+#
+# `pair_plain` showed the index is the identifier, not the separator: removing it made things much
+# worse. These two arms repeat the index on the word as well, so neither element has to be bound by
+# adjacency alone:
+#
+#   pair_both   Pair 7: [img] Word 7: SWORD
+#   tagged      Pair 7 - Image: [img] Pair 7 - Word: SWORD
+#
+# Decision rule, fixed before the run (unchanged from the earlier arms): prefer the layout with the
+# lower previous-pair swap rate, and require it to be low for **both** models. A layout that moves the
+# artefact between models is not an improvement however good its accuracy looks. Accuracy is secondary.
+#
+# Cells: the 9B gets all four, since it is the model with the residual problem and it is cheap
+# (~30 min for eight runs). The 27B is in configs/pam_layout_tags_27b.yaml with a reduced set -- its
+# THINGS n=500 cell costs ~7-8 h per arm and is already clean at 2% under `pair_numbered`, so it is
+# only worth paying for once an arm has won.
+#
+#     sbatch --gres=gpu:1 --partition=burst --time=12:00:00 scripts/bench.sbatch configs/pam_layout_tags.yaml
+
+run_name: pam_layout_ab
+
+output_dir: results
+
+seeds: [0, 1]
+
+models:
+  - name: qwen3.5-9b
+    model_id: Qwen/Qwen3.5-9B
+    max_image_size: 512
+    max_new_tokens: 100
+
+tasks:
+  - task: paired_associates
+    prompts: [pair_both, tagged]
+    datasets: [Brady2008, things]
+    n_images: [100, 500]
+    n_trials: 50

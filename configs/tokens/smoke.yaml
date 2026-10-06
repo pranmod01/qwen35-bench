@@ -1,0 +1,32 @@
+# End-to-end check of the `tokens` dataset (token-ID sequences instead of images; tokens/stimuli.py)
+# on one GPU: recognition with both foil types and serial order, at two item lengths.
+#
+#     sbatch scripts/bench.sbatch configs/tokens/smoke.yaml
+run_name: tokens_smoke
+output_dir: results
+seeds: [0]
+
+models:
+  - name: qwen3.5-0.8b
+    model_id: Qwen/Qwen3.5-0.8B
+    max_new_tokens: 100
+
+tasks:
+  - task: afc_recognition
+    datasets: [tokens]
+    foil_types: [novel, recombined]
+    single_foil: true
+    item_lengths: [8, 64]
+    token_pools: [alpha]
+    n_images: [5]
+    prompts: [original]
+    n_trials: 3
+
+  - task: serial_order
+    datasets: [tokens]
+    item_lengths: [8, 64]
+    token_pools: [alpha]
+    counterbalance: true
+    n_images: [5]
+    prompts: [original]
+    n_trials: 3

@@ -1,0 +1,56 @@
+# THINGS counterpart of configs/xl_preflight.yaml (2026-09-30): one real trial per task at n=927, per
+# model, before the full cells run. 927 is the recognition dataset limit (1,854 concepts, half as foils)
+# and ~238k of the 262,144-token context; serial order and paired associates would fit ~1,000, but that
+# is within ~1% of the context and nothing detects a prompt that runs over. A separate config from the
+# Brady preflight because the two need different hardware. Read error, peak_gpu_gb, elapsed_s and
+# choice_mass only.
+#
+#     sbatch --partition=burst --time=04:00:00 <gres> scripts/bench.sbatch configs/xl_preflight_things.yaml --model qwen3.5-<m>
+
+run_name: xl_preflight
+
+output_dir: results
+
+seeds: [0]
+
+models:
+  - name: qwen3.5-0.8b
+    model_id: Qwen/Qwen3.5-0.8B
+    max_image_size: 512
+    max_new_tokens: 100
+  - name: qwen3.5-2b
+    model_id: Qwen/Qwen3.5-2B
+    max_image_size: 512
+    max_new_tokens: 100
+  - name: qwen3.5-4b
+    model_id: Qwen/Qwen3.5-4B
+    max_image_size: 512
+    max_new_tokens: 100
+  - name: qwen3.5-9b
+    model_id: Qwen/Qwen3.5-9B
+    max_image_size: 512
+    max_new_tokens: 100
+  - name: qwen3.5-27b
+    model_id: Qwen/Qwen3.5-27B
+    max_image_size: 512
+    max_new_tokens: 100
+    device_map: auto
+
+tasks:
+  - task: afc_recognition
+    prompts: [original]
+    datasets: [things]
+    foil_types: [novel]
+    n_images: [927]
+    n_trials: 1
+
+  - task: paired_associates
+    datasets: [things]
+    n_images: [927]
+    n_trials: 1
+
+  - task: serial_order
+    prompts: [original]
+    datasets: [things]
+    n_images: [927]
+    n_trials: 1

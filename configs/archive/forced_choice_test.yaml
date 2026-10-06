@@ -1,0 +1,28 @@
+# Check of forced-choice scoring (p("1") vs p("2")) on the conditions where the 2B/4B answered with
+# paragraphs. PAM is left out: it is unchanged since configs/prompt_test.yaml.
+run_name: forced_choice_test
+output_dir: results
+seeds: [0]
+
+models:
+  - name: qwen3.5-2b
+    model_id: Qwen/Qwen3.5-2B
+    max_image_size: 512
+    max_new_tokens: 100
+  - name: qwen3.5-4b
+    model_id: Qwen/Qwen3.5-4B
+    max_image_size: 512
+    max_new_tokens: 100
+
+tasks:
+  - task: afc_recognition
+    datasets: [Brady2008, things]
+    foil_types: [novel]
+    n_images: [5, 25, 100]
+    n_trials: 10
+
+  - task: serial_order
+    datasets: [Brady2008, things]
+    n_images: [5, 25]
+    n_trials: 10
+

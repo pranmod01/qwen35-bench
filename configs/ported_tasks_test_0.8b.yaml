@@ -1,0 +1,39 @@
+# Small end-to-end check of the re-ported tasks (2026-10-05 port audit) on the 0.8B, one seed.
+# Checks that they run and score, not memory: the 0.8B is a floor model and 10 trials per cell
+# cannot separate anything from chance.
+#   associative_inference: vision-memory's "(AB pair)"/"(BC pair)" study labels, a random chain per
+#     episode, and the direct_ab / direct_bc probes the layout A/B gates on (configs/assoc_inf_ab.yaml).
+#   color_memory: continuous replies now parsed as vision-memory does (last number in [0, 360]).
+#   mst: unchanged code; included so all three ported tasks are exercised in one job.
+
+run_name: ported_tasks_test
+
+output_dir: results
+
+seeds: [0]
+
+models:
+  - name: qwen3.5-0.8b
+    model_id: Qwen/Qwen3.5-0.8B
+    max_image_size: 512
+    max_new_tokens: 100
+
+tasks:
+  - task: associative_inference
+    datasets: [Brady2008]
+    pair_types: [image, word]
+    probe_types: [inference, direct_ab, direct_bc]
+    n_chains: [2, 5]
+    prompts: [original]
+    n_trials: 10
+
+  - task: mst
+    n_images: [5, 25]
+    prompts: [numbered]
+    n_trials: 10
+
+  - task: color_memory
+    modes: [named, continuous]
+    n_images: [5, 25]
+    prompts: [numbered]
+    n_trials: 10

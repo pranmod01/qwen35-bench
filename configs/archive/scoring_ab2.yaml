@@ -1,0 +1,45 @@
+# Follow-up to configs/scoring_ab.yaml, which compared `words` against `numbered` and found that
+# numbered holds 0.95-1.00 of the next-token mass against words' 0.15-0.79, but scores lower almost
+# everywhere (4B MST n=5: 0.94 words vs 0.74 numbered).
+#
+# The candidate explanation is that `numbered` reshuffles the digit->answer mapping every trial, so
+# the model has to hold a mapping as well as remember. `fixed` is the same prompt with the mapping
+# held constant (1 = old, 2 = similar, 3 = new; colors in palette order), which removes the
+# indirection while keeping the digit answer set.
+#
+# Decision rule, fixed before the run: prefer `fixed` if it recovers words-level accuracy while
+# keeping mass near 1.0 and no answer above 80% of trials. If `fixed` is as biased as an ordinal
+# preference would predict (a digit dominating regardless of what it means), fall back to `numbered`
+# and report the mapping cost as a limitation.
+#
+# Also reruns `words` and `numbered`: the color palette bug (targets cycled from the head of the list,
+# so n=1 was always red) was fixed after the first A/B, so those color cells are not comparable.
+run_name: scoring_ab2
+output_dir: results
+seeds: [0]
+
+models:
+  - name: qwen3.5-0.8b
+    model_id: Qwen/Qwen3.5-0.8B
+    max_image_size: 512
+    max_new_tokens: 100
+  - name: qwen3.5-2b
+    model_id: Qwen/Qwen3.5-2B
+    max_image_size: 512
+    max_new_tokens: 100
+  - name: qwen3.5-4b
+    model_id: Qwen/Qwen3.5-4B
+    max_image_size: 512
+    max_new_tokens: 100
+
+tasks:
+  - task: mst
+    n_images: [1, 5, 25, 100]
+    prompts: [words, numbered, fixed]
+    n_trials: 50
+
+  - task: color_memory
+    modes: [named]
+    n_images: [1, 5, 25, 100]
+    prompts: [words, numbered, fixed]
+    n_trials: 50

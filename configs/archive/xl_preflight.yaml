@@ -1,0 +1,55 @@
+# Preflight for configs/qwen35_*_xl.yaml (2026-09-30): one real trial at each task's largest Brady rung,
+# per model, before the full 100-episode cells are submitted. Confirms the forward pass and generation
+# run at that size on the requested hardware, and records the true per-trial peak_gpu_gb (the capacity
+# pre-check that used to inflate it is gone). Accuracy from one trial means nothing; read error,
+# peak_gpu_gb, elapsed_s and choice_mass only.
+#
+#     sbatch --partition=burst --time=04:00:00 <gres> scripts/bench.sbatch configs/xl_preflight.yaml --model qwen3.5-<m>
+
+run_name: xl_preflight
+
+output_dir: results
+
+seeds: [0]
+
+models:
+  - name: qwen3.5-0.8b
+    model_id: Qwen/Qwen3.5-0.8B
+    max_image_size: 512
+    max_new_tokens: 100
+  - name: qwen3.5-2b
+    model_id: Qwen/Qwen3.5-2B
+    max_image_size: 512
+    max_new_tokens: 100
+  - name: qwen3.5-4b
+    model_id: Qwen/Qwen3.5-4B
+    max_image_size: 512
+    max_new_tokens: 100
+  - name: qwen3.5-9b
+    model_id: Qwen/Qwen3.5-9B
+    max_image_size: 512
+    max_new_tokens: 100
+  - name: qwen3.5-27b
+    model_id: Qwen/Qwen3.5-27B
+    max_image_size: 512
+    max_new_tokens: 100
+    device_map: auto
+
+tasks:
+  - task: afc_recognition
+    prompts: [original]
+    datasets: [Brady2008]
+    foil_types: [novel]
+    n_images: [1200]
+    n_trials: 1
+
+  - task: paired_associates
+    datasets: [Brady2008]
+    n_images: [1637]
+    n_trials: 1
+
+  - task: serial_order
+    prompts: [original]
+    datasets: [Brady2008]
+    n_images: [2400]
+    n_trials: 1

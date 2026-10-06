@@ -1,0 +1,42 @@
+# Qwen3.5-0.8B at n=250/500 on the three original tasks (2026-09-28), to match the 2B-27B ladders.
+#
+# The main config (qwen35_0.8b.yaml) stops at n=100 by design, not capacity: the 0.8B looked like a
+# floor at the time, but it has since taken 3,601 images at 38 GB and is the best small model on paired
+# associates at n=25-100. MST and color memory are left at n<=100 for now.
+#
+# Design differs from the main 0.8B config on purpose: 2 seeds x 50 episodes (as for the 2B-27B) rather
+# than 5 x 20. Both give 100 independent episodes per cell, so the cells are comparable. Same run_name,
+# so these land in results/qwen35_0.8b/ and pool with the n<=100 cells in summarize/plot.
+#
+#     sbatch --partition=burst --time=24:00:00 scripts/bench.sbatch configs/qwen35_0.8b_large.yaml --task <t>
+
+run_name: qwen35_0.8b
+
+output_dir: results
+
+seeds: [0, 1]
+
+models:
+  - name: qwen3.5-0.8b
+    model_id: Qwen/Qwen3.5-0.8B
+    max_image_size: 512
+    max_new_tokens: 100
+
+tasks:
+  - task: afc_recognition
+    prompts: [original]
+    datasets: [Brady2008, things]
+    foil_types: [novel]
+    n_images: [250, 500]
+    n_trials: 50
+
+  - task: paired_associates
+    datasets: [Brady2008, things]
+    n_images: [250, 500]
+    n_trials: 50
+
+  - task: serial_order
+    prompts: [original]
+    datasets: [Brady2008, things]
+    n_images: [250, 500]
+    n_trials: 50

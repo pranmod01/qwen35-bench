@@ -1,0 +1,71 @@
+# Is the 9B's serial-order "1" preference for the digit, or for the image shown first? (2026-09-28)
+#
+# Under `original` ("which appeared first?") the 9B says "1" on 73-94% of trials from n=2: hit1 = 1.00,
+# hit2 = 0.14-0.48. The `labeled` A/B (configs/serial_order_ab_9b.yaml) did not balance it, but both of
+# those prompts ask for "first" and answer with "1", so "first" and "1" may be read as the same thing.
+# `later` asks "which appeared later?", which flips the correct digit on every trial.
+#
+# Only `later` runs here. The `original` arm is results/qwen35_9b/: same seeds, so the same episodes.
+# Trials record `earlier_image` (the image actually studied first), so the two can be compared directly.
+#
+# Decision rule, fixed before the run. Read p(say "1") and hit1/hit2 at n=2-25, not accuracy:
+#   - Still says "1" on most trials (>= 0.70): a preference for the digit itself. Prompt-independent;
+#     report it as the model's response bias, as LIMITATIONS.md currently does.
+#   - Says "2" on most trials (<= 0.30): it takes the first-named position word to mean the first-shown
+#     image under both wordings. A prompt effect, not memory; the wording confounds serial order for
+#     this model and needs a design that does not ask by position.
+#   - Balanced (p(say "1") near 0.5) with both hit rates well above the `original` hit2: the "first"
+#     wording caused the bias, and `later` measures order memory without it.
+#
+#     sbatch --gres=gpu:1 --partition=burst scripts/bench.sbatch configs/serial_order_later_ab.yaml
+#
+# Extended to the 2B, 4B and 27B (2026-09-30). The 9B met the second branch in every cell (says "1" on
+# 0-19% under `later` against 76-85% under `original`), which leaves open whether the other models'
+# "1" preference is the same reading of the question or a fallback when discrimination fails: the 4B is
+# balanced at n=2-5 and says "1" by n=100, the 2B is ~0.5 by n=100, and the 27B leans the other way
+# (says "1" on 32-38%). Their `original` arms are results/qwen35_{2b,4b,27b}/: same seeds and n_trials,
+# so the same episodes. The 0.8B's main sweep uses 5 seeds x 20 trials, so it has its own config
+# (configs/serial_order_later_ab_0.8b.yaml) writing into this run_name.
+#
+# Decision rule for the added models, fixed before the run. The 9B rule read n=2-25 because the 9B is
+# biased from n=2; these models are not, so read each cell against its own `original` arm:
+#   - Cells where `original` says "1" on >= 0.70 of trials: the three branches above apply unchanged
+#     (>= 0.70 under `later` = digit fallback; <= 0.30 = position reading, as for the 9B; in between
+#     with both hit rates up = the "first" wording).
+#   - Cells balanced under `original` (4B n=2-5, 27B n=2-25): `later` should stay balanced with both
+#     hit rates high. That is the check that the model reads "later" at all; if accuracy collapses
+#     there, the wording is not understood and the biased cells cannot be interpreted.
+#
+#     sbatch --gres=gpu:1 --partition=burst scripts/bench.sbatch configs/serial_order_later_ab.yaml --model qwen3.5-2b
+#     sbatch --gres=gpu:1 --partition=burst scripts/bench.sbatch configs/serial_order_later_ab.yaml --model qwen3.5-4b
+#     sbatch --gres=gpu:2 --partition=burst scripts/bench.sbatch configs/serial_order_later_ab.yaml --model qwen3.5-27b
+
+run_name: serial_order_later_ab
+output_dir: results
+seeds: [0, 1]
+
+models:
+  - name: qwen3.5-2b
+    model_id: Qwen/Qwen3.5-2B
+    max_image_size: 512
+    max_new_tokens: 100
+  - name: qwen3.5-4b
+    model_id: Qwen/Qwen3.5-4B
+    max_image_size: 512
+    max_new_tokens: 100
+  - name: qwen3.5-9b
+    model_id: Qwen/Qwen3.5-9B
+    max_image_size: 512
+    max_new_tokens: 100
+  - name: qwen3.5-27b
+    model_id: Qwen/Qwen3.5-27B
+    max_image_size: 512
+    max_new_tokens: 100
+    device_map: auto
+
+tasks:
+  - task: serial_order
+    datasets: [Brady2008, things]
+    n_images: [2, 5, 25, 100]
+    prompts: [later]
+    n_trials: 50

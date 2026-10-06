@@ -1,0 +1,47 @@
+# Qwen3.5-2B beyond n=500 on Brady2008, the three original tasks (2026-09-30).
+#
+# Brady2008Objects holds 2,400 images, so each task runs 1,000, 1,500, ... up to what it can use:
+#   - serial order: 2,400 (every image)
+#   - paired associates: 1,637 (the word pool)
+#   - recognition: 1,200 (each studied image needs an unstudied foil)
+# All fit the 262,144-token context with room to spare: real prompts measure 158,704 / 115,413 / 79,510
+# tokens at those maxima ($ZROOT/tmp/context_probe.py, job 12963688). THINGS is left out: it fills the
+# context at ~1,000 images.
+#
+# 2 seeds x 50 episodes, as in the main sweeps. Same run_name, so results pool in results/qwen35_2b/.
+# configs/xl_preflight.yaml runs one trial at each maximum first, to confirm the model runs at that size.
+#
+# Hardware: ~35 GB at serial order n=2,400 (159k tokens): one 48 GB card.
+#
+#     sbatch --partition=burst --time=48:00:00 --gres=gpu:1 scripts/bench.sbatch configs/qwen35_2b_xl.yaml --task <t>
+
+run_name: qwen35_2b
+
+output_dir: results
+
+seeds: [0, 1]
+
+models:
+  - name: qwen3.5-2b
+    model_id: Qwen/Qwen3.5-2B
+    max_image_size: 512
+    max_new_tokens: 100
+
+tasks:
+  - task: afc_recognition
+    prompts: [original]
+    datasets: [Brady2008]
+    foil_types: [novel]
+    n_images: [1000, 1200]
+    n_trials: 50
+
+  - task: paired_associates
+    datasets: [Brady2008]
+    n_images: [1000, 1500, 1637]
+    n_trials: 50
+
+  - task: serial_order
+    prompts: [original]
+    datasets: [Brady2008]
+    n_images: [1000, 1500, 2000, 2400]
+    n_trials: 50

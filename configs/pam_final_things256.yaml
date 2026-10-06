@@ -1,0 +1,40 @@
+# Paired associates, final runs: `sandwich` layout, THINGS at 256 px, every model, n=1 to the word-pool
+# limit (2026-10-06). Design, rationale and submission pattern in configs/pam_final_brady.yaml; same
+# run_name. 256 px matches the final recognition and serial-order THINGS condition; the `-img256` names
+# keep these from pooling with 512 px results.
+
+run_name: pam_final
+
+output_dir: results
+
+seeds: [0, 1]
+
+models:
+  - name: qwen3.5-0.8b-img256
+    model_id: Qwen/Qwen3.5-0.8B
+    max_image_size: 256
+    max_new_tokens: 100
+  - name: qwen3.5-2b-img256
+    model_id: Qwen/Qwen3.5-2B
+    max_image_size: 256
+    max_new_tokens: 100
+  - name: qwen3.5-4b-img256
+    model_id: Qwen/Qwen3.5-4B
+    max_image_size: 256
+    max_new_tokens: 100
+  - name: qwen3.5-9b-img256
+    model_id: Qwen/Qwen3.5-9B
+    max_image_size: 256
+    max_new_tokens: 100
+  - name: qwen3.5-27b-img256
+    model_id: Qwen/Qwen3.5-27B
+    max_image_size: 256
+    max_new_tokens: 100
+    device_map: auto
+
+tasks:
+  - task: paired_associates
+    prompts: [sandwich]
+    datasets: [things]
+    n_images: [1, 5, 25, 100, 250, 500, 1000, 1500, 1637]
+    n_trials: 50
