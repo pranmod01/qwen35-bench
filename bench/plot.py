@@ -33,7 +33,7 @@ TASKS = [
      "2AFC — Novel"),
     ("serial_order", {"prompt": "original"}, ["Brady2008", "things"],
      "Serial AFC"),
-    ("paired_associates", {"prompt": ""}, ["Brady2008", "things"],
+    ("paired_associates", {"prompt": "sandwich"}, ["Brady2008", "things"],
      "PAM (image-word)"),
 ]
 DATASET_LABELS = {"Brady2008": "Brady2008", "things": "Things", "": ""}
@@ -52,8 +52,16 @@ LAYOUTS = [
     ("pair_plain", '"Pair:" boundary, no index', ":"),
     ("pair_both", '"Pair k:" + "Word k:"', "-."),
     ("tagged", 'tagged image and word', (0, (3, 1, 1, 1))),
+    ("sandwich", 'sandwich', (0, (5, 1))),
 ]
 LAYOUT_MODELS = ["qwen3.5-9b", "qwen3.5-27b"]
+
+
+
+def base_model(name):
+    """THINGS runs at 256 px are stored as e.g. "qwen3.5-2b-img256"; they are still that model size."""
+    return name.removesuffix("-img256")
+
 
 # Same reference point the original repo plots.
 HUMAN = {("afc_recognition", "Brady2008"): (2500, 93.0, "Brady et al. 2008")}
@@ -144,7 +152,7 @@ def make_plot(rows, task, dataset, title, out_dir):
     fig, ax = plt.subplots(figsize=(8, 6.5))
 
     for model, label, color, marker in MODELS:
-        cells = [r for r in rows if r["model"] == model]
+        cells = [r for r in rows if base_model(r["model"]) == model]
         if cells:
             plot_series(ax, cells, color, marker, "-", label)
 
@@ -165,7 +173,7 @@ def make_plot(rows, task, dataset, title, out_dir):
 def make_hit_plot(rows, dataset, metric, title, out_dir):
     fig, ax = plt.subplots(figsize=(8, 6.5))
     for model, label, color, marker in MODELS:
-        cells = [r for r in rows if r["model"] == model]
+        cells = [r for r in rows if base_model(r["model"]) == model]
         if cells:
             plot_series(ax, cells, color, marker, "-", label, metric=metric)
     # An unbiased guesser averages 50% on each split; an "always 1" model sits at 100% hit1 / 0% hit2.
@@ -183,7 +191,7 @@ def make_layout_plot(rows, dataset, out_dir):
     for model in LAYOUT_MODELS:
         label, color, marker = style[model]
         for prompt, layout_label, linestyle in LAYOUTS:
-            cells = [r for r in rows if r["model"] == model and r["prompt"] == prompt]
+            cells = [r for r in rows if base_model(r["model"]) == model and r["prompt"] == prompt]
             if cells:
                 plot_series(ax, cells, color, marker, linestyle, f"{label} — {layout_label}")
     plot_chance(ax, rows)
@@ -208,6 +216,11 @@ def main():
                    and all(r[k] == v for k, v in filt.items())]
             if not sel:
                 continue
+            # A model name outside MODELS is silently left off the figure; this is how every THINGS
+            # series went missing when those runs were renamed "-img256".
+            known = {m for m, *_ in MODELS}
+            for name in sorted({r["model"] for r in sel if base_model(r["model"]) not in known}):
+                print(f"warning: {task} {dataset}: model {name!r} matches no plotted series")
             # A cell short of the full two seeds gets a wider CI, but say so rather than rely on that.
             for r in sel:
                 if r["seeds"] < 2:
@@ -220,7 +233,7 @@ def main():
 
     for dataset in ("Brady2008", "things"):
         sel = [r for r in rows if r["task"] == "paired_associates" and r["dataset"] == dataset
-               and r["model"] in LAYOUT_MODELS]
+               and base_model(r["model"]) in LAYOUT_MODELS]
         if any(r["prompt"] == "pair_numbered" for r in sel):
             make_layout_plot(sel, dataset, args.out)
 
