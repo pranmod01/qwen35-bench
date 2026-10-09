@@ -13,6 +13,7 @@ import random
 import re
 
 from tokens import stimuli as token_stimuli
+from bench.tasks.thinking import thinking_metrics, thinking_record
 from src.metrics import calculate_2afc_metrics
 from tasks.recognition import AFCRecognitionTask
 
@@ -218,11 +219,13 @@ def run(evaluator, condition, seed):
             trial_data["study_sequence"], trial_data["study_prompt"],
             test_trial["images"], condition["prompt"],
         )
-        forced = evaluator.score_choices(messages)
+        # None with thinking off; otherwise one trace that both the forced and the free answer follow.
+        thought = evaluator.think(messages, f"{seed}:{i}")
+        forced = evaluator.score_choices(messages, thought=thought)
         response = int(forced["choice"])
         # Kept alongside the forced choice so we can still report how often the model would
         # have answered in the requested format if left to generate freely.
-        free = evaluator._call_api(messages)
+        free = evaluator._call_api(messages, thought=thought)
         trials.append({
             "trial": i,
             "target": test_trial["target"],
@@ -235,8 +238,10 @@ def run(evaluator, condition, seed):
             "free_response": free,
             "free_parsed": parse_response(free),
             **({"metadata": test_trial["metadata"]} if "metadata" in test_trial else {}),
+            **({"thinking": thinking_record(thought)} if thought else {}),
         })
 
     metrics = calculate_2afc_metrics(trials)
     metrics.update(free_text_metrics(trials))
+    metrics.update(thinking_metrics(trials))
     return {"trials": trials, "metrics": metrics}

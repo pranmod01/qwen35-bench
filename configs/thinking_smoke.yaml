@@ -1,0 +1,58 @@
+# Thinking-mode smoke test (2026-10-08), before the thinking versions of the three final tasks.
+#
+# Measures what the full runs need decided: trace length (mean / max tokens), how often a trace hits
+# the 4,096 budget (`thinking_frac_budget`), and seconds per trial at a short and a long list. Same task
+# settings as the finals (single_foil, counterbalanced serial order, PAM `sandwich`), Brady only.
+# 5 trials per cell, so accuracies here say nothing about memory.
+#
+# Thinking decoding is Qwen's recommended sampling, seeded per trial from `seeds` (trial i of seed s
+# uses "s:i"; the swapped serial-order pass uses "s:i:swapped").
+#
+#     sbatch --gres=gpu:1 scripts/bench.sbatch configs/thinking_smoke.yaml
+
+run_name: thinking_smoke
+
+output_dir: results
+
+seeds: [0]
+
+thinking: &thinking
+  enabled: true
+  budget: 4096
+  temperature: 0.6
+  top_p: 0.95
+  top_k: 20
+
+models:
+  - name: qwen3.5-0.8b
+    model_id: Qwen/Qwen3.5-0.8B
+    max_image_size: 512
+    max_new_tokens: 100
+    thinking: *thinking
+  - name: qwen3.5-4b
+    model_id: Qwen/Qwen3.5-4B
+    max_image_size: 512
+    max_new_tokens: 100
+    thinking: *thinking
+
+tasks:
+  - task: afc_recognition
+    prompts: [original]
+    datasets: [Brady2008]
+    foil_types: [novel]
+    single_foil: true
+    n_images: [5, 500]
+    n_trials: 5
+
+  - task: serial_order
+    prompts: [original]
+    counterbalance: true
+    datasets: [Brady2008]
+    n_images: [5, 500]
+    n_trials: 5
+
+  - task: paired_associates
+    prompts: [sandwich]
+    datasets: [Brady2008]
+    n_images: [5, 500]
+    n_trials: 5

@@ -151,6 +151,8 @@ versions (identical counts) -- `$ZROOT/tmp/context_probe.py`, job 12963688:
 | Paired associates (70 tok/pair) | **1,637** -- word pool, 115k tokens | **1,002** -- context |
 
 - Brady runs out of images (or words) long before the context; THINGS fills the context at ~1,000.
+- Recognition here is the standard 2n-image episode. `single_foil` raises it to 2,399 Brady / 1,853 THINGS
+  (see "Stimulus set sizes").
 - **Nothing detects a prompt that exceeds the context.** Past 262k tokens the model silently runs on
   positions it was not trained on. Stay clear of the THINGS ceilings: the n>500 configs use 927 on
   THINGS for all three tasks, ~9% under the context for serial order and paired associates.
@@ -582,7 +584,15 @@ regeneration instead.
 - Brady2008Objects has 2,400 images, so a single prompt cannot have more than 2,400 distinct Brady objects.
   Past that, the perception test also drew from THINGS (one image per concept, shrunk to 256 px to match
   Brady's token cost), and says so in its output.
-- THINGS has 1,854 concepts and 26,107 images.
+- THINGS has 1,854 concepts and 26,107 images. A concept is an object category ("aardvark", "hammer")
+  with at least 12 photos each. Tasks use one photo per concept, so the usable pool is 1,854, not 26,107:
+  two photos of one concept in a list would be near-duplicates, which is a different test.
+- Serial order's opt-in `exemplars_per_concept: k` (THINGS only) draws k photos per concept and never
+  tests a same-concept pair. At k=2 the ceiling is 3,708 (configs use 3,500, ~231k tokens at 256 px).
+  It is a separate condition, because the study list contains same-concept photos.
+- Recognition's standard episode gives every studied item its own foil (2n images), so it stops at
+  1,200 Brady / 927 THINGS. `single_foil` draws n + 1 and reaches 2,399 / 1,853; it is the final
+  recognition condition (see "Recognition always tested the first studied image" below).
 - If a config asks for more images than a dataset holds, surface it before running rather than clamping
   silently.
 - MST has 6 sets x 192 pairs = 1,152. An episode needs as many unstudied pairs as studied ones for its

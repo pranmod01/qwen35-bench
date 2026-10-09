@@ -13,6 +13,7 @@ import re
 
 from bench.tasks.afc_recognition_eval import token_variants
 from tokens import stimuli as token_stimuli
+from bench.tasks.thinking import thinking_metrics, thinking_record
 from src.metrics import calculate_afc_serial_order_metrics
 from tasks.serial_order_memory import AFCSerialOrderMemoryTask
 
@@ -178,11 +179,13 @@ def run(evaluator, condition, seed):
             trial_data["study_sequence"], trial_data["study_prompt"],
             test_trial["images"], condition["prompt"],
         )
-        forced = evaluator.score_choices(messages)
+        # None with thinking off; otherwise one trace that both the forced and the free answer follow.
+        thought = evaluator.think(messages, f"{seed}:{i}")
+        forced = evaluator.score_choices(messages, thought=thought)
         reported = int(forced["choice"])
         # Kept alongside the forced choice so we can still report how often the model would
         # have answered in the requested format if left to generate freely.
-        free = evaluator._call_api(messages)
+        free = evaluator._call_api(messages, thought=thought)
         trial = {
             "trial": i,
             "target": target,
@@ -195,19 +198,22 @@ def run(evaluator, condition, seed):
             "free_response": free,
             "free_parsed": parse_afc_response(free),
             "metadata": test_trial["metadata"],
+            **({"thinking": thinking_record(thought)} if thought else {}),
         }
         if condition.get("counterbalance"):
-            trial.update(score_swapped(evaluator, trial_data, test_trial, condition["prompt"], target, forced))
+            trial.update(score_swapped(evaluator, trial_data, test_trial, condition["prompt"], target, forced,
+                                       f"{seed}:{i}:swapped"))
         trials.append(trial)
 
     metrics = calculate_afc_serial_order_metrics(trials)
     metrics.update(free_text_metrics(trials))
     if condition.get("counterbalance"):
         metrics.update(counterbalance_metrics(trials))
+    metrics.update(thinking_metrics(trials))
     return {"trials": trials, "metrics": metrics}
 
 
-def score_swapped(evaluator, trial_data, test_trial, prompt, target, forced):
+def score_swapped(evaluator, trial_data, test_trial, prompt, target, forced, trial_seed):
     """Score the same trial with the two test images swapped, and combine the two orders.
 
     A preference for answering "1" (or for the image shown first in the test) adds the same amount
@@ -216,13 +222,15 @@ def score_swapped(evaluator, trial_data, test_trial, prompt, target, forced):
     `reported`/`correct`, still labelled by its position in the order shown, so hit1/hit2 and the
     BIAS flag keep their meaning. Ties (log-odds exactly 0) resolve to the order shown's choice.
     No random draws happen here, so episodes stay identical to the uncounterbalanced runs.
+    With thinking on, the swapped order gets its own trace: the reasoning has to see that order.
     """
     swapped_messages = build_messages(
         evaluator,
         trial_data["study_sequence"], trial_data["study_prompt"],
         test_trial["images"][::-1], prompt,
     )
-    swapped = evaluator.score_choices(swapped_messages)
+    swapped_thought = evaluator.think(swapped_messages, trial_seed)
+    swapped = evaluator.score_choices(swapped_messages, thought=swapped_thought)
     lo_target = log_odds(forced["probs"], target) + log_odds(swapped["probs"], 3 - target)
     reported_shown = int(forced["choice"])
     reported_swapped = int(swapped["choice"])
@@ -244,4 +252,5 @@ def score_swapped(evaluator, trial_data, test_trial, prompt, target, forced):
         "correct_order_swapped": int(reported_swapped == 3 - target),
         # Same image picked in both orders: in the swapped order that image sits at 3 - position.
         "consistent": int(reported_swapped == 3 - reported_shown),
+        **({"thinking_swapped": thinking_record(swapped_thought)} if swapped_thought else {}),
     }

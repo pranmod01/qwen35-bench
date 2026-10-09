@@ -7,6 +7,7 @@ comparable. The model must produce the word, so chance is near zero rather than 
 import random
 import re
 
+from bench.tasks.thinking import thinking_metrics, thinking_record
 from src.metrics import calculate_pam_metrics
 from tasks.paired_associate_memory import PairedAssociateMemoryTask
 
@@ -147,7 +148,8 @@ def run(evaluator, condition, seed):
             test_trial["image"],
             layout=condition.get("prompt") or "original",
         )
-        raw = evaluator._call_api(messages)
+        thought = evaluator.think(messages, f"{seed}:{i}")
+        raw = evaluator._call_api(messages, thought=thought)
         reported = parse_word_response(raw, test_trial["target"])
         study_words = [w.lower() for _, w in trial_data["study_sequence"]]
         study_position = study_words.index(test_trial["target"].lower()) + 1
@@ -166,6 +168,7 @@ def run(evaluator, condition, seed):
             # Recorded so a layout-driven swap shows up in every run without regenerating the lists.
             "swap_offset": (reported_position - study_position
                             if reported_position and reported_position != study_position else None),
+            **({"thinking": thinking_record(thought)} if thought else {}),
         })
 
     metrics = calculate_pam_metrics(trials)
@@ -173,4 +176,5 @@ def run(evaluator, condition, seed):
     offsets = [t["swap_offset"] for t in trials if t["swap_offset"] is not None]
     metrics["n_swaps"] = len(offsets)
     metrics["frac_swaps_prev_pair"] = sum(o == -1 for o in offsets) / len(offsets) if offsets else None
+    metrics.update(thinking_metrics(trials))
     return {"trials": trials, "metrics": metrics}

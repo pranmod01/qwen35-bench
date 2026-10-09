@@ -1,4 +1,5 @@
 """Qwen3.5 evaluator, plus the layer-type override used for architecture variants."""
+import hashlib
 import re
 
 import torch
@@ -15,6 +16,11 @@ CHOICE_PREFILL = "Answer: "
 # Stands in for a token item while the chat template renders; replaced by the item's IDs afterwards.
 TOKENS_SENTINEL = "<<<tokens:{}>>>"
 TOKENS_SENTINEL_RE = re.compile(r"<<<tokens:(\d+)>>>")
+
+# Thinking-mode decoding when a config's `thinking` block leaves these out: Qwen's recommended
+# settings for thinking mode. Greedy decoding is not offered as a default because Qwen warns it
+# makes thinking traces loop.
+THINKING_DEFAULTS = {"budget": 4096, "temperature": 0.6, "top_p": 0.95, "top_k": 20}
 
 
 def resolve_layer_types(base_layer_types, variant):
@@ -49,10 +55,12 @@ class Qwen35Evaluator(BaseEvaluator):
     """Local inference for the Qwen3.5 family (natively image-text-to-text)."""
 
     def __init__(self, model_id, max_image_size=512, max_new_tokens=100,
-                 dtype=torch.bfloat16, layer_variant=None, name=None, device_map="cuda"):
+                 dtype=torch.bfloat16, layer_variant=None, name=None, device_map="cuda", thinking=None):
         super().__init__(model_id)
         self.max_image_size = max_image_size
         self.max_new_tokens = max_new_tokens
+        # None (the default) keeps the template's empty think block, as every run before 2026-10-08 had.
+        self.thinking = {**THINKING_DEFAULTS, **thinking} if thinking and thinking.get("enabled") else None
         self.dtype = dtype
         self.layer_variant = layer_variant
         self.name = name or model_id.split("/")[-1].lower()
@@ -97,6 +105,7 @@ class Qwen35Evaluator(BaseEvaluator):
                 eos.append(token)
         self.eos_token_id = eos
         self.pad_token_id = tokenizer.pad_token_id
+        self.think_end_id = tokenizer.convert_tokens_to_ids("</think>")
 
         print(f"Loaded {self.model_id} on {next(self.model.parameters()).device} (eos={eos})")
 
@@ -138,13 +147,21 @@ class Qwen35Evaluator(BaseEvaluator):
             for item in msg["content"] if isinstance(item, dict) and item.get("type") == "image"
         ]
 
-    def _prepare_inputs(self, messages, prefill=None):
+    def _prepare_inputs(self, messages, prefill=None, thought=None, opening_think=False):
+        """Render the prompt. With thinking on, the template leaves a think block open; `thought`
+        (from think()) closes it, so the answer then sits where it does with thinking off.
+        `opening_think` is think() itself asking for the open block."""
+        if self.thinking and thought is None and not opening_think:
+            raise ValueError("thinking is enabled but no thought was passed; call think() first "
+                             "(this task may not support thinking)")
         images = self._collect_images(messages)
         token_items = []
         messages = self._stub_token_items(messages, token_items)
         text = self.processor.apply_chat_template(
-            messages, tokenize=False, add_generation_prompt=True, enable_thinking=False,
+            messages, tokenize=False, add_generation_prompt=True, enable_thinking=bool(self.thinking),
         )
+        if thought is not None:
+            text += thought["prefill"]
         if prefill:
             text += prefill
         if token_items:
@@ -200,14 +217,47 @@ class Qwen35Evaluator(BaseEvaluator):
             raise ValueError(f"no token decodes to choice {choice!r}")
         return ids
 
-    def score_choices(self, messages, choices=("1", "2"), prefill=CHOICE_PREFILL):
+    def think(self, messages, trial_seed):
+        """Generate a thinking trace for this prompt; None when thinking is off.
+
+        Sampled with torch seeded from `trial_seed` (e.g. "0:17" for seed 0, trial 17), so a trial's
+        trace reproduces without the run consuming the task's own RNG, which would change the episodes.
+        A trace that reaches the budget is closed with </think> and the trial is still scored;
+        `stop` records which happened ("closed", "budget", or "eos" if the turn ended inside the block).
+        """
+        if not self.thinking:
+            return None
+        cfg = self.thinking
+        inputs = self._prepare_inputs(messages, opening_think=True)
+        torch.manual_seed(int.from_bytes(hashlib.sha256(str(trial_seed).encode()).digest()[:8], "big"))
+        with torch.no_grad():
+            out = self.model.generate(
+                **inputs, max_new_tokens=cfg["budget"], do_sample=True,
+                temperature=cfg["temperature"], top_p=cfg["top_p"], top_k=cfg["top_k"],
+                eos_token_id=[self.think_end_id, *self.eos_token_id], pad_token_id=self.pad_token_id,
+            )
+        ids = out[0, inputs.input_ids.shape[1]:].tolist()
+        if self.think_end_id in ids:
+            stop = "closed"
+            ids = ids[:ids.index(self.think_end_id)]
+        elif ids and ids[-1] in self.eos_token_id:
+            stop = "eos"
+            ids = ids[:-1]
+        else:
+            stop = "budget"
+        trace = self.processor.tokenizer.decode(ids, skip_special_tokens=False)
+        close = "</think>\n\n" if trace.endswith("\n") else "\n</think>\n\n"
+        return {"trace": trace, "n_tokens": len(ids), "stop": stop, "seed": str(trial_seed),
+                "prefill": trace + close}
+
+    def score_choices(self, messages, choices=("1", "2"), prefill=CHOICE_PREFILL, thought=None):
         """Forced choice: probability of each choice as the first token after `prefill`.
 
         Free generation lets the model answer with a paragraph that then has to be parsed, which
         silently turned format failures into memory scores. This reads the answer off the logits
         instead, so every trial yields a choice and nothing needs parsing.
         """
-        inputs = self._prepare_inputs(messages, prefill=prefill)
+        inputs = self._prepare_inputs(messages, prefill=prefill, thought=thought)
         with torch.no_grad():
             # Only the last position's logits are needed. Without this the model materialises
             # logits for every position: at 250 THINGS images that is 64k tokens x 248k vocab,
@@ -229,8 +279,8 @@ class Qwen35Evaluator(BaseEvaluator):
         top_tokens = [[tokenizer.decode([int(i)]), round(float(p), 4)] for p, i in zip(top.values, top.indices)]
         return {"choice": chosen, "probs": norm, "choice_mass": total, "top_tokens": top_tokens, "prefill": prefill}
 
-    def _call_api(self, messages):
-        inputs = self._prepare_inputs(messages)
+    def _call_api(self, messages, thought=None):
+        inputs = self._prepare_inputs(messages, thought=thought)
 
         with torch.no_grad():
             out = self.model.generate(
@@ -254,4 +304,5 @@ def build_evaluator(model_cfg):
         layer_variant=model_cfg.get("layer_variant"),
         name=model_cfg["name"],
         device_map=model_cfg.get("device_map", "cuda"),
+        thinking=model_cfg.get("thinking"),
     )
