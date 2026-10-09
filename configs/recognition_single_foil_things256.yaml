@@ -1,6 +1,8 @@
 # Recognition to the dataset limit with `single_foil`, THINGS at 256 px (2026-10-03). Design and reading
 # rule are in configs/recognition_single_foil_brady.yaml; same run_name.
 #
+# n=1 added 2026-10-06 (user request) so the curve starts where PAM does; existing cells are untouched.
+#
 # Standard-mode THINGS-256 stops at 927 (half the 1,854 concepts are foils); `single_foil` reaches 1,853.
 # 927 was the bridge to the standard mode (results kept on disk; replaced by 1,000 on 2026-10-04), which turned out to
 # test the first studied image only; see the Brady config). The `-img256` names keep these from pooling
@@ -50,5 +52,5 @@ tasks:
     datasets: [things]
     foil_types: [novel]
     single_foil: true
-    n_images: [5, 25, 100, 250, 500, 1000, 1500, 1853]
+    n_images: [1, 5, 25, 100, 250, 500, 1000, 1500, 1853]
     n_trials: 50

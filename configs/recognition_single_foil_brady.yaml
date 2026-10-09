@@ -1,6 +1,8 @@
 # Recognition to the dataset limit with `single_foil`, Brady (2026-10-03). THINGS-256 is in
 # configs/recognition_single_foil_things256.yaml, same run_name (it needs the `-img256` model names).
 #
+# n=1 added 2026-10-06 (user request) so the curve starts where PAM does; existing cells are untouched.
+#
 # The standard episode draws a foil per studied item, so Brady recognition stops at 1,200 (2,400 objects)
 # although only one foil is ever tested. `single_foil` draws n studied + 1 foil, lifting the ceiling to
 # 2,399 with the same trial: one studied object vs one never-seen object. 4B/9B/27B are 0.98-1.00 at
@@ -56,5 +58,5 @@ tasks:
     datasets: [Brady2008]
     foil_types: [novel]
     single_foil: true
-    n_images: [5, 25, 100, 250, 500, 1000, 1500, 2000, 2399]
+    n_images: [1, 5, 25, 100, 250, 500, 1000, 1500, 2000, 2399]
     n_trials: 50

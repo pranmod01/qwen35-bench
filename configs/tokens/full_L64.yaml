@@ -1,0 +1,50 @@
+# Token-item full run, item length L=64 (2026-10-08; open item 63). One config per L so a model's job for one
+# length fits the 48 h limit. All three share run_name `tokens_full`; design is configs/tokens/preflight_max.yaml.
+#
+# n grid: log-spaced up to the preflight maximum (3,750 items, ~244k of the 262k context). Serial order
+# starts at 2 (a list of one has no order); `recombined` needs 3 studied items (config check rejects n<3), so its grid starts at 5.
+# The grid sums to 496,015 stimulus tokens per trial pass, ~2.0x the max cell alone.
+# 50 trials x 2 seeds, pool `clean`, as the image runs.
+#
+# Hardware from the preflight peaks (summed over cards, near-constant across L): 0.8B 21 GB, 2B 43, 4B 81,
+# 9B 127 (needed expandable_segments). 27B: decided after job 13282100 (6 x A6000).
+#
+#     X="--partition=burst --exclude=ins082,ins091 --time=48:00:00 --export=ALL,PYTORCH_ALLOC_CONF=expandable_segments:True"
+#     sbatch $X --gres=gpu:A6000:1 scripts/bench.sbatch configs/tokens/full_L64.yaml --model qwen3.5-0.8b
+#     sbatch $X --gres=gpu:A6000:2 --mem=96G scripts/bench.sbatch configs/tokens/full_L64.yaml --model qwen3.5-2b  (also 4b)
+#     sbatch $X --gres=gpu:A6000:3 --mem=128G scripts/bench.sbatch configs/tokens/full_L64.yaml --model qwen3.5-9b
+
+run_name: tokens_full
+
+output_dir: results
+
+seeds: [0, 1]
+
+models:
+  - name: qwen3.5-0.8b
+    model_id: Qwen/Qwen3.5-0.8B
+    max_new_tokens: 100
+  - name: qwen3.5-2b
+    model_id: Qwen/Qwen3.5-2B
+    max_new_tokens: 100
+    device_map: auto
+  - name: qwen3.5-4b
+    model_id: Qwen/Qwen3.5-4B
+    max_new_tokens: 100
+    device_map: auto
+  - name: qwen3.5-9b
+    model_id: Qwen/Qwen3.5-9B
+    max_new_tokens: 100
+    device_map: auto
+  - name: qwen3.5-27b
+    model_id: Qwen/Qwen3.5-27B
+    max_new_tokens: 100
+    device_map: auto
+
+tasks:
+  - {task: afc_recognition, prompts: [original], datasets: [tokens], foil_types: [novel],
+     single_foil: true, token_pools: [clean], item_lengths: [64], n_images: [1, 5, 25, 100, 250, 500, 1000, 2000, 3750], n_trials: 50}
+  - {task: afc_recognition, prompts: [original], datasets: [tokens], foil_types: [recombined],
+     single_foil: true, token_pools: [clean], item_lengths: [64], n_images: [5, 25, 100, 250, 500, 1000, 2000, 3750], n_trials: 50}
+  - {task: serial_order, prompts: [original], datasets: [tokens], counterbalance: true,
+     token_pools: [clean], item_lengths: [64], n_images: [2, 5, 25, 100, 250, 500, 1000, 2000, 3750], n_trials: 50}
