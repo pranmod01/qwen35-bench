@@ -1,0 +1,27 @@
+# Token cued-recall probe (2026-10-10), bench/tasks/token_recall_eval.py. In tokens_full L=8 recognition the 2B is
+# near chance at n=1 (0.60 / 0.66, says "1" on ~95% of trials), and labeling the options did not help
+# (configs/tokens/ab_labeled.yaml). This asks whether the studied item is held at all, with no 1/2 answer: cue with
+# its first 4 tokens and score the true last 4 against an unstudied tail. Same stimuli settings as full_L8.yaml.
+#
+#     sbatch --partition=burst --exclude=ins082,ins091 --time=6:00:00 --gres=gpu:1 \
+#         --job-name=tok_recall scripts/bench.sbatch configs/tokens/recall_probe.yaml
+
+run_name: tokens_recall_probe
+
+output_dir: results
+
+seeds: [0, 1]
+
+models:
+  - name: qwen3.5-0.8b
+    model_id: Qwen/Qwen3.5-0.8B
+    max_new_tokens: 100
+  - name: qwen3.5-2b
+    model_id: Qwen/Qwen3.5-2B
+    max_new_tokens: 100
+  - name: qwen3.5-4b
+    model_id: Qwen/Qwen3.5-4B
+    max_new_tokens: 100
+
+tasks:
+  - {task: token_recall, datasets: [tokens], token_pools: [clean], item_lengths: [8], n_images: [1, 5, 100, 1000], n_trials: 50}

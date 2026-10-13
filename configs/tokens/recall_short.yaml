@@ -1,0 +1,32 @@
+# Token cued-recall, full grids, short cells (2026-10-11; follows configs/tokens/recall_probe.yaml, same run_name so
+# its 24 cells are reused). The n grids are full_L{8,64,256}.yaml's, split at ~33k prompt tokens (n x (L + 1)): these
+# fit one 48 GB card for 0.8B-9B (9B ~33 GB est., from the preflight's 127 GB at 244k minus ~19 GB weights, scaled),
+# so they need not wait for multi-GPU nodes. The longer cells are in recall_long.yaml. 27B after its preflight (13282100).
+#
+#     X="--partition=burst --exclude=ins046,ins047,ins058,ins082,ins091 --time=12:00:00 --gres=gpu:1"
+#     sbatch $X --job-name=recs_<model> scripts/bench.sbatch configs/tokens/recall_short.yaml --model qwen3.5-<model>
+
+run_name: tokens_recall_probe
+
+output_dir: results
+
+seeds: [0, 1]
+
+models:
+  - name: qwen3.5-0.8b
+    model_id: Qwen/Qwen3.5-0.8B
+    max_new_tokens: 100
+  - name: qwen3.5-2b
+    model_id: Qwen/Qwen3.5-2B
+    max_new_tokens: 100
+  - name: qwen3.5-4b
+    model_id: Qwen/Qwen3.5-4B
+    max_new_tokens: 100
+  - name: qwen3.5-9b
+    model_id: Qwen/Qwen3.5-9B
+    max_new_tokens: 100
+
+tasks:
+  - {task: token_recall, datasets: [tokens], token_pools: [clean], item_lengths: [8], n_images: [1, 5, 25, 100, 250, 1000, 2500], n_trials: 50}
+  - {task: token_recall, datasets: [tokens], token_pools: [clean], item_lengths: [64], n_images: [1, 5, 25, 100, 250, 500], n_trials: 50}
+  - {task: token_recall, datasets: [tokens], token_pools: [clean], item_lengths: [256], n_images: [1, 5, 25, 100], n_trials: 50}

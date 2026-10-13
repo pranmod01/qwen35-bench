@@ -4,12 +4,12 @@ A wrapper provides NAME, expand_conditions(task_cfg) and run(evaluator, conditio
 max_n_images(condition) / min_n_images(condition), which the runner checks before loading any model.
 """
 from bench.tasks import (afc_recognition_eval, associative_inference_eval, color_memory_eval,
-                        mst_eval, pam_eval, serial_order_eval)
+                        mst_eval, pam_eval, serial_order_eval, token_recall_eval)
 
 ADAPTERS = {
     module.NAME: module
     for module in (afc_recognition_eval, associative_inference_eval, color_memory_eval,
-                   mst_eval, pam_eval, serial_order_eval)
+                   mst_eval, pam_eval, serial_order_eval, token_recall_eval)
 }
 
 

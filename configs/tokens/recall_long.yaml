@@ -1,0 +1,39 @@
+# Token cued-recall, full grids, long cells (2026-10-11): the part of full_L{8,64,256}.yaml's n grids above ~33k
+# prompt tokens; the rest is in recall_short.yaml (same run_name). Up to ~244k tokens, so hardware as the token full
+# runs (preflight peaks, summed over cards: 0.8B 21 GB, 2B 43, 4B 81, 9B 127). Each trial is two forward passes and no
+# generation; estimated from preflight timings at ~1-3 min per pass at max context for 4B/9B (not measured).
+#
+#     X="--partition=burst --exclude=ins046,ins047,ins058,ins082,ins091 --time=48:00:00 --export=ALL,PYTORCH_ALLOC_CONF=expandable_segments:True"
+#     sbatch $X --gres=gpu:1 --job-name=recl_0.8b scripts/bench.sbatch configs/tokens/recall_long.yaml --model qwen3.5-0.8b
+#     sbatch $X --gres=gpu:h100:1 --mem=96G ... --model qwen3.5-2b      (43 GB fits one 80 GB card)
+#     sbatch $X --gres=gpu:2 --mem=128G ... --model qwen3.5-4b          (81 GB: any 2 burst cards, all >= 48 GB)
+#     sbatch $X --gres=gpu:A6000:3 --mem=128G ... --model qwen3.5-9b    (127 GB: too tight on 2 x H100)
+# H100 for 2B/4B because only ins094 (4 x A6000) is outside owner partition pmg1 (2026-10-11).
+
+run_name: tokens_recall_probe
+
+output_dir: results
+
+seeds: [0, 1]
+
+models:
+  - name: qwen3.5-0.8b
+    model_id: Qwen/Qwen3.5-0.8B
+    max_new_tokens: 100
+  - name: qwen3.5-2b
+    model_id: Qwen/Qwen3.5-2B
+    max_new_tokens: 100
+    device_map: auto
+  - name: qwen3.5-4b
+    model_id: Qwen/Qwen3.5-4B
+    max_new_tokens: 100
+    device_map: auto
+  - name: qwen3.5-9b
+    model_id: Qwen/Qwen3.5-9B
+    max_new_tokens: 100
+    device_map: auto
+
+tasks:
+  - {task: token_recall, datasets: [tokens], token_pools: [clean], item_lengths: [8], n_images: [10000, 27000], n_trials: 50}
+  - {task: token_recall, datasets: [tokens], token_pools: [clean], item_lengths: [64], n_images: [1000, 2000, 3750], n_trials: 50}
+  - {task: token_recall, datasets: [tokens], token_pools: [clean], item_lengths: [256], n_images: [250, 500, 950], n_trials: 50}

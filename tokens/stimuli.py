@@ -116,6 +116,26 @@ def recognition_trials(pool_ids, n_items, item_length, foil_type):
     }
 
 
+def recall_trials(pool_ids, n_items, item_length):
+    """Cued recall of a studied item at a random position: its first half is the cue, its second half the target.
+
+    The foil tail is the second half of an unstudied item, so it shares no token with the study list. Scoring the
+    target against it by likelihood is a 2-way choice with no answer digit, the control for recognition's 1/2 mapping.
+    """
+    items = sample_items(pool_ids, n_items + 1, item_length)
+    study, unstudied = items[:n_items], items[n_items]
+    tested = random.randrange(n_items)
+    half = item_length // 2
+    return {
+        "study_prompt": "Here is a sequence of items to remember.",
+        "study_sequence": study,
+        "cue": study[tested].ids[:half],
+        "target_tail": study[tested].ids[half:],
+        "foil_tail": unstudied.ids[half:],
+        "metadata": {"test_position": tested + 1},
+    }
+
+
 # Serial lags covered by each of tasks/serial_order_memory.lag_bin's bins; the last is open-ended.
 LAG_BINS = [(1, 1), (2, 3), (4, 10), (11, 100), (101, None)]
 
