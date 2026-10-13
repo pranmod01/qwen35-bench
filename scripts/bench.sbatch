@@ -18,6 +18,8 @@ ZROOT="/insomnia001/depts/zgroup/zgroup_burg/zgroup/users/pm3361"
 export HF_HOME="$ZROOT/hf_cache"
 export HF_HUB_OFFLINE=1        # models are pre-downloaded on the login node
 export PYTHONUNBUFFERED=1
+# Triton's kernel cache defaults to ~/.triton; a full home quota killed a run mid-way (2026-10-09).
+export TRITON_CACHE_DIR="$ZROOT/triton_cache"
 
 cd "$REPO_DIR"
 source "$ZROOT/envs/qwen35/bin/activate"
