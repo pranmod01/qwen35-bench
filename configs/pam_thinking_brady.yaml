@@ -1,0 +1,64 @@
+# Paired associates (`sandwich`), thinking on (2026-10-09).
+# THINGS-256 is in configs/pam_thinking_things256.yaml, same run_name.
+#
+# Same task settings as configs/pam_final_brady.yaml (the no-thinking final),
+# on a reduced grid with thinking enabled.
+# Budget and grid come from configs/thinking_budget_test.yaml (4B/9B, Brady, n=100/500, 16k budget):
+#   - Traces that ended on their own were at most 9,659 tokens (9B PAM n=500), so 12,288 covers them.
+#   - 14 of the 16 traces that hit 16k were loops (one line repeated 22-528 times, or the study list
+#     walked past its end to "Image 1000" at n=500), so a trace that hits 12,288 is read as a loop and
+#     `thinking_frac_budget` reports the loop rate per cell. Those trials are still scored (force-closed).
+#   - n stops at 500: recognition traces stop finishing there (4B 0/5, 9B 2/5), so larger n would spend
+#     most of its GPU time on loops.
+# The 0.8B is left out: its traces looped even at n=5 (configs/thinking_smoke.yaml).
+# Thinking decoding is Qwen's recommended sampling, seeded per trial: trial i of seed s uses "s:i".
+#
+# Runs only after configs/thinking_preflight.yaml passes (2B and 27B; 4B/9B ran n=500 at 16k already).
+#
+#     X="--partition=burst --exclude=ins048,ins082,ins091 --time=48:00:00"
+#     sbatch $X --gres=gpu:1 scripts/bench.sbatch configs/pam_thinking_brady.yaml --model qwen3.5-2b  (also 4b, 9b)
+#     sbatch $X --gres=gpu:2 --mem=128G scripts/bench.sbatch configs/pam_thinking_brady.yaml --model qwen3.5-27b
+#     (27B peaks at ~70 GB at n=500 (configs/thinking_preflight.yaml), so any two 48 GB cards fit it)
+
+run_name: pam_final_thinking
+
+output_dir: results
+
+seeds: [0, 1]
+
+thinking: &thinking
+  enabled: true
+  budget: 12288
+  temperature: 0.6
+  top_p: 0.95
+  top_k: 20
+
+models:
+  - name: qwen3.5-2b
+    model_id: Qwen/Qwen3.5-2B
+    max_image_size: 512
+    max_new_tokens: 100
+    thinking: *thinking
+  - name: qwen3.5-4b
+    model_id: Qwen/Qwen3.5-4B
+    max_image_size: 512
+    max_new_tokens: 100
+    thinking: *thinking
+  - name: qwen3.5-9b
+    model_id: Qwen/Qwen3.5-9B
+    max_image_size: 512
+    max_new_tokens: 100
+    thinking: *thinking
+  - name: qwen3.5-27b
+    model_id: Qwen/Qwen3.5-27B
+    max_image_size: 512
+    max_new_tokens: 100
+    thinking: *thinking
+    device_map: auto
+
+tasks:
+  - task: paired_associates
+    prompts: [sandwich]
+    datasets: [Brady2008]
+    n_images: [1, 5, 25, 100, 250, 500]
+    n_trials: 50

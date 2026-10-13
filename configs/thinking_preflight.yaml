@@ -1,0 +1,65 @@
+# Preflight for the six configs/*_thinking_*.yaml (2026-10-09): 2B and 27B, the two sizes the budget test
+# did not cover (4B/9B ran n=500 at a 16k budget in configs/thinking_budget_test.yaml).
+# Same budget (12,288), sampling and task settings as the full configs; Brady, n=25 and the top cell 500.
+# 5 trials per cell, so accuracies here say nothing about memory. Read:
+#   - error and peak_gpu_gb (27B: thinking adds up to 12k tokens of KV on top of the n=500 prompt);
+#   - thinking_frac_budget: whether the 2B loops like the 0.8B (then drop it, as the 0.8B was);
+#   - elapsed_s per trial, for the full-run GPU-hour estimate.
+# Uses the `-img256` names: Brady objects are natively 256 px, so the prompt is the same as at 512 px.
+#
+# The 27B is split by task: if every trace loops to 12,288, serial order (two traces per trial) alone
+# could take several hours.
+#
+#     sbatch --job-name=thpf_2b --gres=gpu:1 scripts/bench.sbatch configs/thinking_preflight.yaml --model qwen3.5-2b-img256
+#     (27B moved 2026-10-10 from 2 x H100 on burst, which sat a day with no H100 free, to one 96 GB R6000:
+#     ~35k-token prompt + 12k trace, far below the ~238k-token R6000 crash in LIMITATIONS.md)
+#     sbatch --gres=gpu:R6000:1 --mem=128G --job-name=thpf_27b_<task> scripts/bench.sbatch configs/thinking_preflight.yaml \
+#            --model qwen3.5-27b-img256 --task <task>     (afc_recognition, serial_order, paired_associates)
+
+run_name: thinking_preflight
+
+output_dir: results
+
+seeds: [0]
+
+thinking: &thinking
+  enabled: true
+  budget: 12288
+  temperature: 0.6
+  top_p: 0.95
+  top_k: 20
+
+models:
+  - name: qwen3.5-2b-img256
+    model_id: Qwen/Qwen3.5-2B
+    max_image_size: 256
+    max_new_tokens: 100
+    thinking: *thinking
+  - name: qwen3.5-27b-img256
+    model_id: Qwen/Qwen3.5-27B
+    max_image_size: 256
+    max_new_tokens: 100
+    thinking: *thinking
+    device_map: auto
+
+tasks:
+  - task: afc_recognition
+    prompts: [original]
+    datasets: [Brady2008]
+    foil_types: [novel]
+    single_foil: true
+    n_images: [25, 500]
+    n_trials: 5
+
+  - task: serial_order
+    prompts: [original]
+    counterbalance: true
+    datasets: [Brady2008]
+    n_images: [25, 500]
+    n_trials: 5
+
+  - task: paired_associates
+    prompts: [sandwich]
+    datasets: [Brady2008]
+    n_images: [25, 500]
+    n_trials: 5

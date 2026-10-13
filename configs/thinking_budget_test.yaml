@@ -1,0 +1,53 @@
+# Thinking budget test (2026-10-09), for the budget policy of the thinking runs (user leaning: budget
+# scaled with n, reduced n grid).
+#
+# configs/thinking_smoke.yaml showed traces walk the study list item by item (~10-12 tokens per image),
+# so a 4,096 budget cut every 4B recognition trace at n=500. With a 16k budget this measures:
+#   - trace length when nothing cuts it off, at n=100 and 500 (tokens per studied image);
+#   - whether finishing the walk changes the answer: seed 0 gives the 4B the same episodes and trace
+#     seeds as the smoke run, so its n=500 trials pair one to one with the 4k-truncated ones;
+#   - seconds per trial, for the full-run estimate.
+# Serial order is left out: its 4B traces stayed under 900 tokens at n=500 in the smoke run.
+# 5 trials per cell, so accuracies here say nothing about memory.
+#
+#     sbatch --gres=gpu:1 scripts/bench.sbatch configs/thinking_budget_test.yaml
+
+run_name: thinking_budget_test
+
+output_dir: results
+
+seeds: [0]
+
+thinking: &thinking
+  enabled: true
+  budget: 16384
+  temperature: 0.6
+  top_p: 0.95
+  top_k: 20
+
+models:
+  - name: qwen3.5-4b
+    model_id: Qwen/Qwen3.5-4B
+    max_image_size: 512
+    max_new_tokens: 100
+    thinking: *thinking
+  - name: qwen3.5-9b
+    model_id: Qwen/Qwen3.5-9B
+    max_image_size: 512
+    max_new_tokens: 100
+    thinking: *thinking
+
+tasks:
+  - task: afc_recognition
+    prompts: [original]
+    datasets: [Brady2008]
+    foil_types: [novel]
+    single_foil: true
+    n_images: [100, 500]
+    n_trials: 5
+
+  - task: paired_associates
+    prompts: [sandwich]
+    datasets: [Brady2008]
+    n_images: [100, 500]
+    n_trials: 5
