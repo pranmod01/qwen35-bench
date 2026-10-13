@@ -1,0 +1,26 @@
+# Token-item layout A/B (2026-10-09). In tokens_full L=8, the 0.8B/2B answer "1" on ~95% of n=1 trials and the
+# 2B peaks at n=100 (d' 2.34) rather than at n=1 (d' 0.35-0.57), although the n=1 test shows the studied item
+# verbatim. Hypothesis: with bare newline-separated options the model cannot map "first line" to the digit 1.
+# If `labeled` ("Item 1:"/"Item 2:") lifts n=1 to ~1.0, the unlabeled tokens_full runs measure that mapping, not memory.
+# Both layouts run here so the comparison is within one job; everything else matches full_L8.yaml.
+#
+#     sbatch --partition=burst --exclude=ins082,ins091 --time=6:00:00 --gres=gpu:1 \
+#         --job-name=tok_ab_lab scripts/bench.sbatch configs/tokens/ab_labeled.yaml
+
+run_name: tokens_ab_labeled
+
+output_dir: results
+
+seeds: [0, 1]
+
+models:
+  - name: qwen3.5-2b
+    model_id: Qwen/Qwen3.5-2B
+    max_new_tokens: 100
+  - name: qwen3.5-4b
+    model_id: Qwen/Qwen3.5-4B
+    max_new_tokens: 100
+
+tasks:
+  - {task: afc_recognition, prompts: [original, labeled], datasets: [tokens], foil_types: [novel],
+     single_foil: true, token_pools: [clean], item_lengths: [8], n_images: [1, 5, 100, 1000], n_trials: 50}
