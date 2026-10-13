@@ -1,0 +1,1995 @@
+{
+  "run": {
+    "model": {
+      "name": "qwen3.5-2b",
+      "model_id": "Qwen/Qwen3.5-2B",
+      "max_image_size": 512,
+      "max_new_tokens": 100
+    },
+    "task": "associative_inference",
+    "condition": {
+      "dataset": "Brady2008",
+      "pair_type": "image",
+      "probe": "direct_bc",
+      "n_chains": 25,
+      "n_images": 100,
+      "prompt": "cue_turn",
+      "n_trials": 50
+    },
+    "seed": 0
+  },
+  "config": {
+    "run_name": "assoc_inf_ab",
+    "output_dir": "results",
+    "seeds": [
+      0
+    ],
+    "models": [
+      {
+        "name": "qwen3.5-2b",
+        "model_id": "Qwen/Qwen3.5-2B",
+        "max_image_size": 512,
+        "max_new_tokens": 100
+      },
+      {
+        "name": "qwen3.5-4b",
+        "model_id": "Qwen/Qwen3.5-4B",
+        "max_image_size": 512,
+        "max_new_tokens": 100
+      }
+    ],
+    "tasks": [
+      {
+        "task": "associative_inference",
+        "datasets": [
+          "Brady2008"
+        ],
+        "pair_types": [
+          "image",
+          "word"
+        ],
+        "probe_types": [
+          "inference",
+          "direct_ab",
+          "direct_bc"
+        ],
+        "n_chains": [
+          2,
+          5,
+          25
+        ],
+        "prompts": [
+          "original",
+          "cue_turn",
+          "labeled"
+        ],
+        "n_trials": 50
+      }
+    ]
+  },
+  "provenance": {
+    "config_hash": "d49714f7009d",
+    "gpu": "NVIDIA A100-SXM4-80GB",
+    "git_commit": null,
+    "git_dirty": false,
+    "torch": "2.10.0+cu128",
+    "transformers": "5.17.0"
+  },
+  "elapsed_s": 249.5,
+  "peak_gpu_gb": 5.75,
+  "error": null,
+  "trials": [
+    {
+      "trial": 0,
+      "target": 2,
+      "reported": 2,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.20181322818853872,
+        "2": 0.7981867718114612
+      },
+      "choice_mass": 0.9912717640399933,
+      "top_tokens": [
+        [
+          "2",
+          0.7912
+        ],
+        [
+          "1",
+          0.2001
+        ],
+        [
+          "3",
+          0.0042
+        ],
+        [
+          "4",
+          0.002
+        ],
+        [
+          "<|im_end|>",
+          0.0009
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 18,
+        "foil_chain_index": 22
+      }
+    },
+    {
+      "trial": 1,
+      "target": 2,
+      "reported": 2,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.09534946683954725,
+        "2": 0.9046505331604527
+      },
+      "choice_mass": 0.9942693263292313,
+      "top_tokens": [
+        [
+          "2",
+          0.8995
+        ],
+        [
+          "1",
+          0.0948
+        ],
+        [
+          "<|im_end|>",
+          0.0022
+        ],
+        [
+          "3",
+          0.002
+        ],
+        [
+          "4",
+          0.0006
+        ]
+      ],
+      "free_response": "Based on the visual content of the images, the cue image is a silver blimp with a red wheel.\n\nThe first image (1) shows a mattress inside a storage box.\nThe second image (2) shows a portable metal cot.\n\nThere is no direct visual connection between a blimp and a cot. However, both items are associated with the concept of travel or transportation. A blimp is a type of airship used for travel, and a cot is a piece of furniture",
+      "metadata": {
+        "chain_index": 6,
+        "foil_chain_index": 7
+      }
+    },
+    {
+      "trial": 2,
+      "target": 1,
+      "reported": 2,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.1066905977017178,
+        "2": 0.8933094022982823
+      },
+      "choice_mass": 0.9830148369073868,
+      "top_tokens": [
+        [
+          "2",
+          0.8781
+        ],
+        [
+          "1",
+          0.1049
+        ],
+        [
+          "3",
+          0.0076
+        ],
+        [
+          "4",
+          0.0041
+        ],
+        [
+          "5",
+          0.0013
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 15,
+        "foil_chain_index": 11
+      }
+    },
+    {
+      "trial": 3,
+      "target": 1,
+      "reported": 2,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.20181321751402087,
+        "2": 0.7981867824859791
+      },
+      "choice_mass": 0.9536388069391251,
+      "top_tokens": [
+        [
+          "2",
+          0.7612
+        ],
+        [
+          "1",
+          0.1925
+        ],
+        [
+          "3",
+          0.0158
+        ],
+        [
+          "4",
+          0.0158
+        ],
+        [
+          "5",
+          0.0051
+        ]
+      ],
+      "free_response": "Based on the visual content of the images, the cue image is a striped pole with a yellow top, which is a type of traffic signal or light pole.\n\nThe first image (labeled 1) is a vending machine.\nThe second image (labeled 2) is a yellow notepad or ledger.\n\nNeither of these images is a traffic signal or light pole. Therefore, the correct answer is 2.",
+      "metadata": {
+        "chain_index": 10,
+        "foil_chain_index": 21
+      }
+    },
+    {
+      "trial": 4,
+      "target": 2,
+      "reported": 2,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.2689414483338997,
+        "2": 0.7310585516661003
+      },
+      "choice_mass": 0.945512980222702,
+      "top_tokens": [
+        [
+          "2",
+          0.6912
+        ],
+        [
+          "1",
+          0.2543
+        ],
+        [
+          "3",
+          0.0268
+        ],
+        [
+          "4",
+          0.0112
+        ],
+        [
+          "5",
+          0.0047
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 21,
+        "foil_chain_index": 11
+      }
+    },
+    {
+      "trial": 5,
+      "target": 1,
+      "reported": 2,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.13296423885083694,
+        "2": 0.867035761149163
+      },
+      "choice_mass": 0.9446882605552673,
+      "top_tokens": [
+        [
+          "2",
+          0.8191
+        ],
+        [
+          "1",
+          0.1256
+        ],
+        [
+          "3",
+          0.0218
+        ],
+        [
+          "4",
+          0.0103
+        ],
+        [
+          "6",
+          0.0071
+        ]
+      ],
+      "free_response": "Based on the visual content of the images, the cue image shows a wooden doll walker with yellow wheels and a red-and-white striped cushion.\n\nThe first image (labeled 1) is a silver statue of a fairy sitting on a green box.\nThe second image (labeled 2) is a black double-basin kitchen sink with a chrome faucet.\n\nThere is no obvious connection between the doll walker and either the fairy statue or the kitchen sink. Therefore, neither image is a",
+      "metadata": {
+        "chain_index": 8,
+        "foil_chain_index": 15
+      }
+    },
+    {
+      "trial": 6,
+      "target": 2,
+      "reported": 2,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.14804718176686874,
+        "2": 0.8519528182331313
+      },
+      "choice_mass": 0.9880622178316116,
+      "top_tokens": [
+        [
+          "2",
+          0.8418
+        ],
+        [
+          "1",
+          0.1463
+        ],
+        [
+          "3",
+          0.0057
+        ],
+        [
+          "4",
+          0.003
+        ],
+        [
+          "<|im_end|>",
+          0.001
+        ]
+      ],
+      "free_response": "Based on the visual content of the images, the cue image is a pumpkin.\n\nThe first image (labeled 1) is a red baseball cap with a baseball patch.\nThe second image (labeled 2) is a silver, ornate locket.\n\nThere is no obvious connection between a pumpkin and either a baseball cap or a locket. However, the second image (the locket) is a very common type of gift that is often given as a present, which",
+      "metadata": {
+        "chain_index": 9,
+        "foil_chain_index": 2
+      }
+    },
+    {
+      "trial": 7,
+      "target": 1,
+      "reported": 2,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.3208213211608509,
+        "2": 0.6791786788391492
+      },
+      "choice_mass": 0.9865943789482117,
+      "top_tokens": [
+        [
+          "2",
+          0.6701
+        ],
+        [
+          "1",
+          0.3165
+        ],
+        [
+          "3",
+          0.0066
+        ],
+        [
+          "4",
+          0.0027
+        ],
+        [
+          "5",
+          0.001
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 15,
+        "foil_chain_index": 1
+      }
+    },
+    {
+      "trial": 8,
+      "target": 2,
+      "reported": 2,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.06008664901741738,
+        "2": 0.9399133509825827
+      },
+      "choice_mass": 0.9840011261403561,
+      "top_tokens": [
+        [
+          "2",
+          0.9249
+        ],
+        [
+          "1",
+          0.0591
+        ],
+        [
+          "3",
+          0.0071
+        ],
+        [
+          "4",
+          0.0038
+        ],
+        [
+          "5",
+          0.0014
+        ]
+      ],
+      "free_response": "Based on the visual analysis of the two images provided:\n\n- The cue image shows a black, rectangular object with a flat, elongated surface and a curved metal frame attached to one end.\n- The first image (labeled as 1) shows a small, metallic electronic component with multiple threaded ports and a label.\n- The second image (labeled as 2) shows a wooden carving of a Buddha's head.\n\nThe objects in the two images are completely different in nature",
+      "metadata": {
+        "chain_index": 21,
+        "foil_chain_index": 4
+      }
+    },
+    {
+      "trial": 9,
+      "target": 2,
+      "reported": 2,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.2689414522572442,
+        "2": 0.7310585477427558
+      },
+      "choice_mass": 0.919908195734024,
+      "top_tokens": [
+        [
+          "2",
+          0.6725
+        ],
+        [
+          "1",
+          0.2474
+        ],
+        [
+          "3",
+          0.0295
+        ],
+        [
+          "4",
+          0.023
+        ],
+        [
+          "5",
+          0.0085
+        ]
+      ],
+      "free_response": "Based on the visual content of the images, the cue image is a blue-handled brush with dark bristles.\n\nThe image that matches this description is the second one, which shows a red plastic lock with the text \"BREAK FOR ACCESS\" on it.\n\nTherefore, the correct digit is 2.",
+      "metadata": {
+        "chain_index": 11,
+        "foil_chain_index": 5
+      }
+    },
+    {
+      "trial": 10,
+      "target": 1,
+      "reported": 2,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.222700152216617,
+        "2": 0.777299847783383
+      },
+      "choice_mass": 0.8916128128767014,
+      "top_tokens": [
+        [
+          "2",
+          0.6931
+        ],
+        [
+          "1",
+          0.1986
+        ],
+        [
+          "3",
+          0.0443
+        ],
+        [
+          "4",
+          0.0209
+        ],
+        [
+          "6",
+          0.0127
+        ]
+      ],
+      "free_response": "Based on the visual analysis of the provided images, the cue image is a vintage wooden box with a brass latch.\n\nThe two images presented are:\n1.  A wicker basket filled with Easter-themed items, including a plush bunny and a chocolate box.\n2.  A yellow origami crane.\n\nThere is no visual connection between the cue image and either of the two images. Therefore, neither image was paired with it.\n\nThe correct answer is neither.",
+      "metadata": {
+        "chain_index": 12,
+        "foil_chain_index": 10
+      }
+    },
+    {
+      "trial": 11,
+      "target": 2,
+      "reported": 2,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.1645164502983343,
+        "2": 0.8354835497016657
+      },
+      "choice_mass": 0.9936353415250778,
+      "top_tokens": [
+        [
+          "2",
+          0.8302
+        ],
+        [
+          "1",
+          0.1635
+        ],
+        [
+          "3",
+          0.003
+        ],
+        [
+          "4",
+          0.001
+        ],
+        [
+          "<|im_end|>",
+          0.0007
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 16,
+        "foil_chain_index": 24
+      }
+    },
+    {
+      "trial": 12,
+      "target": 2,
+      "reported": 2,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.2689414399615362,
+        "2": 0.7310585600384638
+      },
+      "choice_mass": 0.9565546810626984,
+      "top_tokens": [
+        [
+          "2",
+          0.6993
+        ],
+        [
+          "1",
+          0.2573
+        ],
+        [
+          "3",
+          0.0239
+        ],
+        [
+          "4",
+          0.0078
+        ],
+        [
+          "6",
+          0.0025
+        ]
+      ],
+      "free_response": "Based on the analysis of the provided images, here is the logical deduction:\n\n- The cue image is a yellow toy excavator.\n- Image 1 is a red barbecue grill.\n- Image 2 is a pair of white double doors set within a brick archway.\n\nThere is no direct visual or functional connection between a barbecue grill and a pair of doors. However, both of these items are associated with outdoor activities and are commonly found in a backyard or garden setting. The excav",
+      "metadata": {
+        "chain_index": 18,
+        "foil_chain_index": 12
+      }
+    },
+    {
+      "trial": 13,
+      "target": 1,
+      "reported": 2,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.10669059902352737,
+        "2": 0.8933094009764726
+      },
+      "choice_mass": 0.993159331381321,
+      "top_tokens": [
+        [
+          "2",
+          0.8872
+        ],
+        [
+          "1",
+          0.106
+        ],
+        [
+          "3",
+          0.0025
+        ],
+        [
+          "<|im_end|>",
+          0.0022
+        ],
+        [
+          "4",
+          0.0009
+        ]
+      ],
+      "free_response": "Based on the visual analysis, the cue image is a blue exercise mat.\n\n- The first image (1) is a black, threaded spool or weight.\n- The second image (2) is a silver and black exercise pump.\n\nNeither of these items is a blue exercise mat. Therefore, the correct pair is not 1 or 2.\n\nHowever, looking at the provided list of images, there is another image that is a blue exercise mat. Let's re-examine",
+      "metadata": {
+        "chain_index": 5,
+        "foil_chain_index": 23
+      }
+    },
+    {
+      "trial": 14,
+      "target": 1,
+      "reported": 2,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.1824255360737962,
+        "2": 0.8175744639262038
+      },
+      "choice_mass": 0.9924023300409317,
+      "top_tokens": [
+        [
+          "2",
+          0.8114
+        ],
+        [
+          "1",
+          0.181
+        ],
+        [
+          "3",
+          0.0033
+        ],
+        [
+          "<|im_end|>",
+          0.0016
+        ],
+        [
+          "4",
+          0.0014
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 1,
+        "foil_chain_index": 8
+      }
+    },
+    {
+      "trial": 15,
+      "target": 1,
+      "reported": 2,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.14804719042117062,
+        "2": 0.8519528095788294
+      },
+      "choice_mass": 0.9948708266019821,
+      "top_tokens": [
+        [
+          "2",
+          0.8476
+        ],
+        [
+          "1",
+          0.1473
+        ],
+        [
+          "3",
+          0.0024
+        ],
+        [
+          "4",
+          0.0009
+        ],
+        [
+          "<|im_end|>",
+          0.0006
+        ]
+      ],
+      "free_response": "Based on the visual analysis, the cue image is a black steering wheel.\n\nThe image that shares a connection with the cue image is the second one, which is a green public trash can. Both items are associated with the concept of a vehicle or transportation.\n\nTherefore, the digit representing the paired image is 2.",
+      "metadata": {
+        "chain_index": 0,
+        "foil_chain_index": 22
+      }
+    },
+    {
+      "trial": 16,
+      "target": 1,
+      "reported": 2,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.08509903994900313,
+        "2": 0.9149009600509969
+      },
+      "choice_mass": 0.9779035001993179,
+      "top_tokens": [
+        [
+          "2",
+          0.8947
+        ],
+        [
+          "1",
+          0.0832
+        ],
+        [
+          "3",
+          0.0099
+        ],
+        [
+          "4",
+          0.0041
+        ],
+        [
+          "6",
+          0.002
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 21,
+        "foil_chain_index": 15
+      }
+    },
+    {
+      "trial": 17,
+      "target": 1,
+      "reported": 2,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.16451645184850786,
+        "2": 0.8354835481514922
+      },
+      "choice_mass": 0.9380879998207092,
+      "top_tokens": [
+        [
+          "2",
+          0.7838
+        ],
+        [
+          "1",
+          0.1543
+        ],
+        [
+          "3",
+          0.0237
+        ],
+        [
+          "4",
+          0.0144
+        ],
+        [
+          "5",
+          0.0068
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 4,
+        "foil_chain_index": 21
+      }
+    },
+    {
+      "trial": 18,
+      "target": 2,
+      "reported": 2,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.07585817691607757,
+        "2": 0.9241418230839225
+      },
+      "choice_mass": 0.985353633761406,
+      "top_tokens": [
+        [
+          "2",
+          0.9106
+        ],
+        [
+          "1",
+          0.0747
+        ],
+        [
+          "3",
+          0.0054
+        ],
+        [
+          "4",
+          0.0026
+        ],
+        [
+          "<|im_end|>",
+          0.0023
+        ]
+      ],
+      "free_response": "Based on the visual analysis of the provided images, the cue image is a wooden armchair with a built-in desk.\n\nThe two images provided are:\n- Image 1: A red fire alarm.\n- Image 2: A bucket of popcorn.\n\nThere is no visual or semantic connection between a fire alarm and popcorn. Therefore, neither image was paired with the cue image.\n\nThe correct answer is neither.",
+      "metadata": {
+        "chain_index": 10,
+        "foil_chain_index": 8
+      }
+    },
+    {
+      "trial": 19,
+      "target": 1,
+      "reported": 2,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.053403334247187705,
+        "2": 0.9465966657528123
+      },
+      "choice_mass": 0.9898187071084976,
+      "top_tokens": [
+        [
+          "2",
+          0.937
+        ],
+        [
+          "1",
+          0.0529
+        ],
+        [
+          "3",
+          0.0038
+        ],
+        [
+          "4",
+          0.0018
+        ],
+        [
+          "<|im_end|>",
+          0.0012
+        ]
+      ],
+      "free_response": "Based on the visual content of the images, the cue image is a white, rectangular traffic sign with a blue circle containing a white arrow pointing down and to the left, along with two yellow reflective panels.\n\nThe first image (labeled 1) shows a wooden artist's palette with paint wells and a paintbrush.\nThe second image (labeled 2) shows a red baseball cap with a white patch featuring a blue baseball graphic.\n\nThere is no direct visual or semantic connection between",
+      "metadata": {
+        "chain_index": 22,
+        "foil_chain_index": 12
+      }
+    },
+    {
+      "trial": 20,
+      "target": 1,
+      "reported": 2,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.1645164540663571,
+        "2": 0.8354835459336429
+      },
+      "choice_mass": 0.9725037813186646,
+      "top_tokens": [
+        [
+          "2",
+          0.8125
+        ],
+        [
+          "1",
+          0.16
+        ],
+        [
+          "3",
+          0.0131
+        ],
+        [
+          "4",
+          0.007
+        ],
+        [
+          "5",
+          0.002
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 11,
+        "foil_chain_index": 17
+      }
+    },
+    {
+      "trial": 21,
+      "target": 1,
+      "reported": 2,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.1329642477714126,
+        "2": 0.8670357522285874
+      },
+      "choice_mass": 0.9899505972862244,
+      "top_tokens": [
+        [
+          "2",
+          0.8583
+        ],
+        [
+          "1",
+          0.1316
+        ],
+        [
+          "3",
+          0.004
+        ],
+        [
+          "4",
+          0.0024
+        ],
+        [
+          "5",
+          0.0009
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 2,
+        "foil_chain_index": 5
+      }
+    },
+    {
+      "trial": 22,
+      "target": 2,
+      "reported": 2,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.24508500870960603,
+        "2": 0.754914991290394
+      },
+      "choice_mass": 0.9783713519573212,
+      "top_tokens": [
+        [
+          "2",
+          0.7386
+        ],
+        [
+          "1",
+          0.2398
+        ],
+        [
+          "3",
+          0.0093
+        ],
+        [
+          "4",
+          0.0039
+        ],
+        [
+          "<|im_end|>",
+          0.0027
+        ]
+      ],
+      "free_response": "Based on the visual content of the images, the cue image is a metal scoop.\n\nThe first image (1) is a baby bib.\nThe second image (2) is a cylindrical tea canister.\n\nThere is no obvious connection between a metal scoop and either a baby bib or a tea canister. Therefore, neither image is a direct match.\n\n2",
+      "metadata": {
+        "chain_index": 4,
+        "foil_chain_index": 9
+      }
+    },
+    {
+      "trial": 23,
+      "target": 1,
+      "reported": 2,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.14804718693186372,
+        "2": 0.8519528130681363
+      },
+      "choice_mass": 0.9877683818340302,
+      "top_tokens": [
+        [
+          "2",
+          0.8415
+        ],
+        [
+          "1",
+          0.1462
+        ],
+        [
+          "3",
+          0.0057
+        ],
+        [
+          "4",
+          0.003
+        ],
+        [
+          "<|im_end|>",
+          0.001
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 5,
+        "foil_chain_index": 12
+      }
+    },
+    {
+      "trial": 24,
+      "target": 1,
+      "reported": 2,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.2450850053519306,
+        "2": 0.7549149946480694
+      },
+      "choice_mass": 0.8954455554485321,
+      "top_tokens": [
+        [
+          "2",
+          0.676
+        ],
+        [
+          "1",
+          0.2195
+        ],
+        [
+          "3",
+          0.049
+        ],
+        [
+          "4",
+          0.0337
+        ],
+        [
+          "5",
+          0.0096
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 10,
+        "foil_chain_index": 1
+      }
+    },
+    {
+      "trial": 25,
+      "target": 1,
+      "reported": 2,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.11920291792150789,
+        "2": 0.8807970820784922
+      },
+      "choice_mass": 0.990421749651432,
+      "top_tokens": [
+        [
+          "2",
+          0.8724
+        ],
+        [
+          "1",
+          0.1181
+        ],
+        [
+          "3",
+          0.0046
+        ],
+        [
+          "4",
+          0.0019
+        ],
+        [
+          "5",
+          0.0007
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 23,
+        "foil_chain_index": 13
+      }
+    },
+    {
+      "trial": 26,
+      "target": 1,
+      "reported": 2,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.0850990458694141,
+        "2": 0.9149009541305859
+      },
+      "choice_mass": 0.9965388476848602,
+      "top_tokens": [
+        [
+          "2",
+          0.9117
+        ],
+        [
+          "1",
+          0.0848
+        ],
+        [
+          "3",
+          0.0012
+        ],
+        [
+          "<|im_end|>",
+          0.0009
+        ],
+        [
+          "4",
+          0.0004
+        ]
+      ],
+      "free_response": "Based on the visual content of the images, the cue image is a brass door knob.\n\nThe first image (1) is a black walkie-talkie.\nThe second image (2) is a motorcycle brake lever.\n\nNeither of these items is a door knob. However, looking at the entire list of pairs provided in the prompt, we can find a pair that matches the *style* or *material* of the door knob.\n\nThe door knob is a brass-colored knob.",
+      "metadata": {
+        "chain_index": 24,
+        "foil_chain_index": 0
+      }
+    },
+    {
+      "trial": 27,
+      "target": 1,
+      "reported": 2,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.2942149620051218,
+        "2": 0.7057850379948781
+      },
+      "choice_mass": 0.9711964428424835,
+      "top_tokens": [
+        [
+          "2",
+          0.6855
+        ],
+        [
+          "1",
+          0.2857
+        ],
+        [
+          "3",
+          0.0126
+        ],
+        [
+          "4",
+          0.0086
+        ],
+        [
+          "5",
+          0.0032
+        ]
+      ],
+      "free_response": "Based on the visual content of the images, the cue image (the bathroom sign) is paired with the second image (the blue blueprint).\n\n2",
+      "metadata": {
+        "chain_index": 9,
+        "foil_chain_index": 7
+      }
+    },
+    {
+      "trial": 28,
+      "target": 1,
+      "reported": 2,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.16451645337090218,
+        "2": 0.8354835466290979
+      },
+      "choice_mass": 0.9671788513660431,
+      "top_tokens": [
+        [
+          "2",
+          0.8081
+        ],
+        [
+          "1",
+          0.1591
+        ],
+        [
+          "3",
+          0.019
+        ],
+        [
+          "4",
+          0.007
+        ],
+        [
+          "5",
+          0.0018
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 1,
+        "foil_chain_index": 18
+      }
+    },
+    {
+      "trial": 29,
+      "target": 1,
+      "reported": 2,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.20181321585071757,
+        "2": 0.7981867841492825
+      },
+      "choice_mass": 0.9665059149265289,
+      "top_tokens": [
+        [
+          "2",
+          0.7715
+        ],
+        [
+          "1",
+          0.1951
+        ],
+        [
+          "3",
+          0.0141
+        ],
+        [
+          "4",
+          0.0059
+        ],
+        [
+          "6",
+          0.004
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 14,
+        "foil_chain_index": 21
+      }
+    },
+    {
+      "trial": 30,
+      "target": 2,
+      "reported": 2,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.017986209895982194,
+        "2": 0.9820137901040178
+      },
+      "choice_mass": 0.9950726423412561,
+      "top_tokens": [
+        [
+          "2",
+          0.9772
+        ],
+        [
+          "1",
+          0.0179
+        ],
+        [
+          "<|im_end|>",
+          0.0019
+        ],
+        [
+          "3",
+          0.0015
+        ],
+        [
+          "4",
+          0.0005
+        ]
+      ],
+      "free_response": "Based on the visual content of the images, the cue image shows a green table tennis table with ornate wooden legs.\n\nThe image that matches this description is the second one, which features a wooden model of the Eiffel Tower.\n\nTherefore, the correct digit is 2.",
+      "metadata": {
+        "chain_index": 18,
+        "foil_chain_index": 11
+      }
+    },
+    {
+      "trial": 31,
+      "target": 1,
+      "reported": 2,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.07585817836476359,
+        "2": 0.9241418216352364
+      },
+      "choice_mass": 0.9856412932276726,
+      "top_tokens": [
+        [
+          "2",
+          0.9109
+        ],
+        [
+          "1",
+          0.0748
+        ],
+        [
+          "3",
+          0.007
+        ],
+        [
+          "4",
+          0.0033
+        ],
+        [
+          "5",
+          0.0011
+        ]
+      ],
+      "free_response": "Based on the visual content of the images, the cue image shows a pair of red boxing gloves.\n\nThe first image (labeled 1) is a dark, old-looking book with a cross on the cover.\nThe second image (labeled 2) is a wooden mask with red and gold coloring.\n\nThere is no obvious connection between the boxing gloves and either the book or the mask. Therefore, neither image is a direct match.\n\nHowever, if we must choose the most",
+      "metadata": {
+        "chain_index": 9,
+        "foil_chain_index": 11
+      }
+    },
+    {
+      "trial": 32,
+      "target": 1,
+      "reported": 2,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.09534946410498095,
+        "2": 0.9046505358950191
+      },
+      "choice_mass": 0.9874954223632812,
+      "top_tokens": [
+        [
+          "2",
+          0.8933
+        ],
+        [
+          "1",
+          0.0942
+        ],
+        [
+          "3",
+          0.006
+        ],
+        [
+          "4",
+          0.0025
+        ],
+        [
+          "5",
+          0.0008
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 22,
+        "foil_chain_index": 19
+      }
+    },
+    {
+      "trial": 33,
+      "target": 2,
+      "reported": 2,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.07585818006825779,
+        "2": 0.9241418199317423
+      },
+      "choice_mass": 0.9959826618432999,
+      "top_tokens": [
+        [
+          "2",
+          0.9204
+        ],
+        [
+          "1",
+          0.0756
+        ],
+        [
+          "3",
+          0.0012
+        ],
+        [
+          "4",
+          0.0008
+        ],
+        [
+          "<|im_end|>",
+          0.0007
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 3,
+        "foil_chain_index": 7
+      }
+    },
+    {
+      "trial": 34,
+      "target": 2,
+      "reported": 2,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.14804718207247422,
+        "2": 0.8519528179275258
+      },
+      "choice_mass": 0.992121085524559,
+      "top_tokens": [
+        [
+          "2",
+          0.8452
+        ],
+        [
+          "1",
+          0.1469
+        ],
+        [
+          "3",
+          0.0039
+        ],
+        [
+          "4",
+          0.0013
+        ],
+        [
+          "<|im_end|>",
+          0.0009
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 6,
+        "foil_chain_index": 15
+      }
+    },
+    {
+      "trial": 35,
+      "target": 2,
+      "reported": 2,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.14804718525440844,
+        "2": 0.8519528147455916
+      },
+      "choice_mass": 0.9669745117425919,
+      "top_tokens": [
+        [
+          "2",
+          0.8238
+        ],
+        [
+          "1",
+          0.1432
+        ],
+        [
+          "3",
+          0.0171
+        ],
+        [
+          "4",
+          0.0092
+        ],
+        [
+          "5",
+          0.002
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 1,
+        "foil_chain_index": 10
+      }
+    },
+    {
+      "trial": 36,
+      "target": 2,
+      "reported": 2,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.1645164568489359,
+        "2": 0.8354835431510641
+      },
+      "choice_mass": 0.9885897934436798,
+      "top_tokens": [
+        [
+          "2",
+          0.826
+        ],
+        [
+          "1",
+          0.1626
+        ],
+        [
+          "3",
+          0.0063
+        ],
+        [
+          "<|im_end|>",
+          0.0016
+        ],
+        [
+          "4",
+          0.0016
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 19,
+        "foil_chain_index": 4
+      }
+    },
+    {
+      "trial": 37,
+      "target": 2,
+      "reported": 2,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.07585818154828255,
+        "2": 0.9241418184517175
+      },
+      "choice_mass": 0.9934803619980812,
+      "top_tokens": [
+        [
+          "2",
+          0.9181
+        ],
+        [
+          "1",
+          0.0754
+        ],
+        [
+          "3",
+          0.0026
+        ],
+        [
+          "<|im_end|>",
+          0.0018
+        ],
+        [
+          "4",
+          0.0008
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 6,
+        "foil_chain_index": 24
+      }
+    },
+    {
+      "trial": 38,
+      "target": 2,
+      "reported": 2,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.2942149703558992,
+        "2": 0.7057850296441008
+      },
+      "choice_mass": 0.9729504287242889,
+      "top_tokens": [
+        [
+          "2",
+          0.6867
+        ],
+        [
+          "1",
+          0.2863
+        ],
+        [
+          "3",
+          0.0126
+        ],
+        [
+          "4",
+          0.0046
+        ],
+        [
+          "6",
+          0.0028
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 6,
+        "foil_chain_index": 10
+      }
+    },
+    {
+      "trial": 39,
+      "target": 1,
+      "reported": 2,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.18242552721091784,
+        "2": 0.8175744727890821
+      },
+      "choice_mass": 0.9683971405029297,
+      "top_tokens": [
+        [
+          "2",
+          0.7917
+        ],
+        [
+          "1",
+          0.1767
+        ],
+        [
+          "3",
+          0.0145
+        ],
+        [
+          "4",
+          0.0078
+        ],
+        [
+          "5",
+          0.0029
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 17,
+        "foil_chain_index": 14
+      }
+    },
+    {
+      "trial": 40,
+      "target": 1,
+      "reported": 2,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.29421498674136104,
+        "2": 0.705785013258639
+      },
+      "choice_mass": 0.9490856230258942,
+      "top_tokens": [
+        [
+          "2",
+          0.6699
+        ],
+        [
+          "1",
+          0.2792
+        ],
+        [
+          "3",
+          0.026
+        ],
+        [
+          "4",
+          0.0123
+        ],
+        [
+          "5",
+          0.004
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 2,
+        "foil_chain_index": 3
+      }
+    },
+    {
+      "trial": 41,
+      "target": 1,
+      "reported": 2,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.43782348418502737,
+        "2": 0.5621765158149726
+      },
+      "choice_mass": 0.974553644657135,
+      "top_tokens": [
+        [
+          "2",
+          0.5479
+        ],
+        [
+          "1",
+          0.4267
+        ],
+        [
+          "3",
+          0.0114
+        ],
+        [
+          "4",
+          0.0042
+        ],
+        [
+          "5",
+          0.0022
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 13,
+        "foil_chain_index": 2
+      }
+    },
+    {
+      "trial": 42,
+      "target": 2,
+      "reported": 2,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.294214959311048,
+        "2": 0.705785040688952
+      },
+      "choice_mass": 0.9866441488265991,
+      "top_tokens": [
+        [
+          "2",
+          0.6964
+        ],
+        [
+          "1",
+          0.2903
+        ],
+        [
+          "3",
+          0.0077
+        ],
+        [
+          "4",
+          0.002
+        ],
+        [
+          "<|im_end|>",
+          0.0017
+        ]
+      ],
+      "free_response": "Based on the visual features of the cue image and the provided options, here is the analysis:\n\n- The cue image shows a single, knitted sock with a red cuff.\n- Option 1 is a brown mouse pad with water droplets.\n- Option 2 is a pile of rubber bands.\n\nNeither of these options shares a direct visual similarity with the sock. However, the sock is a type of footwear, and rubber bands are a type of fastener. While not a",
+      "metadata": {
+        "chain_index": 16,
+        "foil_chain_index": 1
+      }
+    },
+    {
+      "trial": 43,
+      "target": 1,
+      "reported": 2,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.11920291906366512,
+        "2": 0.8807970809363349
+      },
+      "choice_mass": 0.9855461046099663,
+      "top_tokens": [
+        [
+          "2",
+          0.8681
+        ],
+        [
+          "1",
+          0.1175
+        ],
+        [
+          "3",
+          0.0066
+        ],
+        [
+          "4",
+          0.004
+        ],
+        [
+          "<|im_end|>",
+          0.001
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 11,
+        "foil_chain_index": 2
+      }
+    },
+    {
+      "trial": 44,
+      "target": 1,
+      "reported": 2,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.14804719334095137,
+        "2": 0.8519528066590486
+      },
+      "choice_mass": 0.9965888261795044,
+      "top_tokens": [
+        [
+          "2",
+          0.849
+        ],
+        [
+          "1",
+          0.1475
+        ],
+        [
+          "<|im_end|>",
+          0.0013
+        ],
+        [
+          "3",
+          0.0011
+        ],
+        [
+          "4",
+          0.0003
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 7,
+        "foil_chain_index": 21
+      }
+    },
+    {
+      "trial": 45,
+      "target": 2,
+      "reported": 2,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.3486451269644708,
+        "2": 0.6513548730355292
+      },
+      "choice_mass": 0.91594198346138,
+      "top_tokens": [
+        [
+          "2",
+          0.5966
+        ],
+        [
+          "1",
+          0.3193
+        ],
+        [
+          "3",
+          0.0381
+        ],
+        [
+          "4",
+          0.0204
+        ],
+        [
+          "5",
+          0.0085
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 20,
+        "foil_chain_index": 9
+      }
+    },
+    {
+      "trial": 46,
+      "target": 2,
+      "reported": 2,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.16451646128547612,
+        "2": 0.8354835387145239
+      },
+      "choice_mass": 0.9723511189222336,
+      "top_tokens": [
+        [
+          "2",
+          0.8124
+        ],
+        [
+          "1",
+          0.16
+        ],
+        [
+          "3",
+          0.0131
+        ],
+        [
+          "4",
+          0.0055
+        ],
+        [
+          "<|im_end|>",
+          0.0033
+        ]
+      ],
+      "free_response": "Based on the visual content of the images, the cue image (the glass of milk) is paired with the image of the wooden pizza peel.\n\nTherefore, the correct image is 2.",
+      "metadata": {
+        "chain_index": 1,
+        "foil_chain_index": 22
+      }
+    },
+    {
+      "trial": 47,
+      "target": 2,
+      "reported": 2,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.025957356369813278,
+        "2": 0.9740426436301867
+      },
+      "choice_mass": 0.9969529025256634,
+      "top_tokens": [
+        [
+          "2",
+          0.9711
+        ],
+        [
+          "1",
+          0.0259
+        ],
+        [
+          "3",
+          0.001
+        ],
+        [
+          "<|im_end|>",
+          0.0009
+        ],
+        [
+          "4",
+          0.0004
+        ]
+      ],
+      "free_response": "Based on the visual content of the images, the cue image (the orange power cord) is paired with the rocket model.\n\nThe correct digit is 2.",
+      "metadata": {
+        "chain_index": 11,
+        "foil_chain_index": 2
+      }
+    },
+    {
+      "trial": 48,
+      "target": 1,
+      "reported": 2,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.20181322698099746,
+        "2": 0.7981867730190025
+      },
+      "choice_mass": 0.9921073764562607,
+      "top_tokens": [
+        [
+          "2",
+          0.7919
+        ],
+        [
+          "1",
+          0.2002
+        ],
+        [
+          "3",
+          0.0037
+        ],
+        [
+          "4",
+          0.0015
+        ],
+        [
+          "<|im_end|>",
+          0.0013
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 18,
+        "foil_chain_index": 2
+      }
+    },
+    {
+      "trial": 49,
+      "target": 2,
+      "reported": 2,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.3486451353533487,
+        "2": 0.6513548646466514
+      },
+      "choice_mass": 0.9358281195163727,
+      "top_tokens": [
+        [
+          "2",
+          0.6096
+        ],
+        [
+          "1",
+          0.3263
+        ],
+        [
+          "3",
+          0.0303
+        ],
+        [
+          "4",
+          0.0162
+        ],
+        [
+          "5",
+          0.0053
+        ]
+      ],
+      "free_response": "Based on the visual content of the images, the cue image is a wooden doohickey (a type of wind instrument).\n\nThe image that shares a similar object category is the second image, which shows a doohickey.\n\nTherefore, the correct digit is 2.",
+      "metadata": {
+        "chain_index": 10,
+        "foil_chain_index": 11
+      }
+    }
+  ],
+  "metrics": {
+    "accuracy": 0.44,
+    "n_correct": 22,
+    "total": 50,
+    "free_text_bare_digit": 0.58,
+    "mean_p_chosen": 0.8252109188848681,
+    "mean_choice_mass": 0.9734509544447064,
+    "frac_low_mass": 0.04,
+    "response_distribution": {
+      "2": 50
+    }
+  }
+}

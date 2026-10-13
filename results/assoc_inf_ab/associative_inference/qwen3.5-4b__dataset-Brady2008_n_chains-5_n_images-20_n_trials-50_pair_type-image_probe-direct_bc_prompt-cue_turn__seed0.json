@@ -1,0 +1,1996 @@
+{
+  "run": {
+    "model": {
+      "name": "qwen3.5-4b",
+      "model_id": "Qwen/Qwen3.5-4B",
+      "max_image_size": 512,
+      "max_new_tokens": 100
+    },
+    "task": "associative_inference",
+    "condition": {
+      "dataset": "Brady2008",
+      "pair_type": "image",
+      "probe": "direct_bc",
+      "n_chains": 5,
+      "n_images": 20,
+      "prompt": "cue_turn",
+      "n_trials": 50
+    },
+    "seed": 0
+  },
+  "config": {
+    "run_name": "assoc_inf_ab",
+    "output_dir": "results",
+    "seeds": [
+      0
+    ],
+    "models": [
+      {
+        "name": "qwen3.5-2b",
+        "model_id": "Qwen/Qwen3.5-2B",
+        "max_image_size": 512,
+        "max_new_tokens": 100
+      },
+      {
+        "name": "qwen3.5-4b",
+        "model_id": "Qwen/Qwen3.5-4B",
+        "max_image_size": 512,
+        "max_new_tokens": 100
+      }
+    ],
+    "tasks": [
+      {
+        "task": "associative_inference",
+        "datasets": [
+          "Brady2008"
+        ],
+        "pair_types": [
+          "image",
+          "word"
+        ],
+        "probe_types": [
+          "inference",
+          "direct_ab",
+          "direct_bc"
+        ],
+        "n_chains": [
+          2,
+          5,
+          25
+        ],
+        "prompts": [
+          "original",
+          "cue_turn",
+          "labeled"
+        ],
+        "n_trials": 50
+      }
+    ]
+  },
+  "provenance": {
+    "config_hash": "d49714f7009d",
+    "gpu": "NVIDIA A100-SXM4-80GB",
+    "git_commit": null,
+    "git_dirty": false,
+    "torch": "2.10.0+cu128",
+    "transformers": "5.17.0"
+  },
+  "elapsed_s": 129.5,
+  "peak_gpu_gb": 9.49,
+  "error": null,
+  "trials": [
+    {
+      "trial": 0,
+      "target": 1,
+      "reported": 2,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.24508499870910067,
+        "2": 0.7549150012908994
+      },
+      "choice_mass": 0.9966433644294739,
+      "top_tokens": [
+        [
+          "2",
+          0.7524
+        ],
+        [
+          "1",
+          0.2443
+        ],
+        [
+          " ",
+          0.0016
+        ],
+        [
+          "3",
+          0.0009
+        ],
+        [
+          "<|im_end|>",
+          0.0003
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 4,
+        "foil_chain_index": 0
+      }
+    },
+    {
+      "trial": 1,
+      "target": 2,
+      "reported": 1,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.7549149953655733,
+        "2": 0.24508500463442673
+      },
+      "choice_mass": 0.9947876036167145,
+      "top_tokens": [
+        [
+          "1",
+          0.751
+        ],
+        [
+          "2",
+          0.2438
+        ],
+        [
+          "3",
+          0.0039
+        ],
+        [
+          " ",
+          0.0006
+        ],
+        [
+          "4",
+          0.0002
+        ]
+      ],
+      "free_response": "To determine the correct pair, I will compare the cue image with the two options provided.\n\n- The cue image is a yellow emergency cart with the words \"EMERGENCY\" and \"URGENCE\" written on it.\n- Option 1 is a silver and black computer webcam.\n- Option 2 is a wooden stool with a box on top.\n\nBased on the pairs I remembered from the initial sequence, the emergency cart was paired with a jar of gumballs. Neither",
+      "metadata": {
+        "chain_index": 1,
+        "foil_chain_index": 2
+      }
+    },
+    {
+      "trial": 2,
+      "target": 1,
+      "reported": 2,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.3208213262226906,
+        "2": 0.6791786737773094
+      },
+      "choice_mass": 0.994539201259613,
+      "top_tokens": [
+        [
+          "2",
+          0.6755
+        ],
+        [
+          "1",
+          0.3191
+        ],
+        [
+          " ",
+          0.0021
+        ],
+        [
+          "3",
+          0.0013
+        ],
+        [
+          "<|im_end|>",
+          0.0007
+        ]
+      ],
+      "free_response": "Based on the provided image pairs, the cue image is the white key labeled \"F1\".\n\nThis image was paired with the image of the knight statue.\nTherefore, the correct option is:\n2",
+      "metadata": {
+        "chain_index": 3,
+        "foil_chain_index": 2
+      }
+    },
+    {
+      "trial": 3,
+      "target": 2,
+      "reported": 1,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.5621764915821111,
+        "2": 0.4378235084178888
+      },
+      "choice_mass": 0.9896923303604126,
+      "top_tokens": [
+        [
+          "1",
+          0.5564
+        ],
+        [
+          "2",
+          0.4333
+        ],
+        [
+          "3",
+          0.007
+        ],
+        [
+          "<|im_end|>",
+          0.0008
+        ],
+        [
+          " ",
+          0.0007
+        ]
+      ],
+      "free_response": "Based on the provided image pairs, the black pot with a glass lid was paired with the silver thimble.\n\nThe first image you chose is the cinnamon roll.\nThe second image you chose is the thimble.\nTherefore, the correct answer is 2.",
+      "metadata": {
+        "chain_index": 2,
+        "foil_chain_index": 4
+      }
+    },
+    {
+      "trial": 4,
+      "target": 2,
+      "reported": 1,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.7772998625058208,
+        "2": 0.2227001374941792
+      },
+      "choice_mass": 0.986585333943367,
+      "top_tokens": [
+        [
+          "1",
+          0.7669
+        ],
+        [
+          "2",
+          0.2197
+        ],
+        [
+          "3",
+          0.0097
+        ],
+        [
+          " ",
+          0.0019
+        ],
+        [
+          "4",
+          0.001
+        ]
+      ],
+      "free_response": "1",
+      "metadata": {
+        "chain_index": 2,
+        "foil_chain_index": 3
+      }
+    },
+    {
+      "trial": 5,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.6224593149683104,
+        "2": 0.3775406850316895
+      },
+      "choice_mass": 0.9774857461452484,
+      "top_tokens": [
+        [
+          "1",
+          0.6084
+        ],
+        [
+          "2",
+          0.369
+        ],
+        [
+          "3",
+          0.0126
+        ],
+        [
+          "4",
+          0.0036
+        ],
+        [
+          " ",
+          0.0032
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 2,
+        "foil_chain_index": 4
+      }
+    },
+    {
+      "trial": 6,
+      "target": 2,
+      "reported": 2,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.294214971453339,
+        "2": 0.705785028546661
+      },
+      "choice_mass": 0.9653741121292114,
+      "top_tokens": [
+        [
+          "2",
+          0.6813
+        ],
+        [
+          "1",
+          0.284
+        ],
+        [
+          "3",
+          0.0299
+        ],
+        [
+          "4",
+          0.0028
+        ],
+        [
+          " ",
+          0.001
+        ]
+      ],
+      "free_response": "To determine the correct pair, let's review the connections established in the initial sequence.\n\n- The red tractor is paired with the brown paper bag.\n- The brown paper bag is also paired with the black leather pouch.\n- The black leather pouch is paired with the red and blue vase.\n- The red and blue vase is paired with the wooden inkwell.\n\nFollowing this chain, the image that was directly paired with the red tractor is the brown paper bag. Looking at the options",
+      "metadata": {
+        "chain_index": 2,
+        "foil_chain_index": 0
+      }
+    },
+    {
+      "trial": 7,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.7310585649548103,
+        "2": 0.2689414350451898
+      },
+      "choice_mass": 0.9963015913963318,
+      "top_tokens": [
+        [
+          "1",
+          0.7284
+        ],
+        [
+          "2",
+          0.2679
+        ],
+        [
+          "3",
+          0.0012
+        ],
+        [
+          " ",
+          0.001
+        ],
+        [
+          "0",
+          0.0005
+        ]
+      ],
+      "free_response": "1",
+      "metadata": {
+        "chain_index": 3,
+        "foil_chain_index": 0
+      }
+    },
+    {
+      "trial": 8,
+      "target": 2,
+      "reported": 1,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.9399133506812746,
+        "2": 0.060086649318725406
+      },
+      "choice_mass": 0.9979436844587326,
+      "top_tokens": [
+        [
+          "1",
+          0.938
+        ],
+        [
+          "2",
+          0.06
+        ],
+        [
+          "3",
+          0.0007
+        ],
+        [
+          " ",
+          0.0005
+        ],
+        [
+          "<|im_end|>",
+          0.0002
+        ]
+      ],
+      "free_response": "To determine the correct pair, I will first identify the cue image and then locate its partner in the provided sequence.\n\n- The cue image is a cuttlefish.\n- According to the instructions, I need to find the image that was paired with the cuttlefish.\n- In the initial sequence of image pairs, the cuttlefish appears in two instances:\n    - It is the second image in the third pair (the pair consisting of a copper-colored cushion and the cuttle",
+      "metadata": {
+        "chain_index": 1,
+        "foil_chain_index": 4
+      }
+    },
+    {
+      "trial": 9,
+      "target": 2,
+      "reported": 2,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.1645164562118686,
+        "2": 0.8354835437881314
+      },
+      "choice_mass": 0.9972729086875916,
+      "top_tokens": [
+        [
+          "2",
+          0.8332
+        ],
+        [
+          "1",
+          0.1641
+        ],
+        [
+          " ",
+          0.001
+        ],
+        [
+          "3",
+          0.0009
+        ],
+        [
+          "0",
+          0.0003
+        ]
+      ],
+      "free_response": "To determine the correct pair, let's review the connections established in the first part of the request.\n\n- The hamburger image was paired with the image of the green glass figure (Image 4).\n- The hamburger image was also paired with the image of the military canteen (Image 15).\n\nNow, let's look at the options provided for the final question:\n- Image 1 is a hand puppet.\n- Image 2 is a military canteen.",
+      "metadata": {
+        "chain_index": 2,
+        "foil_chain_index": 1
+      }
+    },
+    {
+      "trial": 10,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.5,
+        "2": 0.5
+      },
+      "choice_mass": 0.9976741671562195,
+      "top_tokens": [
+        [
+          "2",
+          0.4988
+        ],
+        [
+          "1",
+          0.4988
+        ],
+        [
+          " ",
+          0.001
+        ],
+        [
+          "3",
+          0.0007
+        ],
+        [
+          "<|im_end|>",
+          0.0002
+        ]
+      ],
+      "free_response": "To determine the correct pair, let's review the connections established in the initial sequence.\n\n- The cue image is a long, thin pin with a white spherical head.\n- In the first set of pairs, this specific pin was paired with a feather duster.\n- In the second set of pairs, this same pin was paired with a long, thin metal rod.\n- Looking at the options provided:\n    - Image 1 is a spray mop.\n    - Image",
+      "metadata": {
+        "chain_index": 3,
+        "foil_chain_index": 2
+      }
+    },
+    {
+      "trial": 11,
+      "target": 2,
+      "reported": 1,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.6513548522181302,
+        "2": 0.34864514778186984
+      },
+      "choice_mass": 0.9963475167751312,
+      "top_tokens": [
+        [
+          "1",
+          0.649
+        ],
+        [
+          "2",
+          0.3474
+        ],
+        [
+          "3",
+          0.0014
+        ],
+        [
+          "0",
+          0.0007
+        ],
+        [
+          " ",
+          0.0005
+        ]
+      ],
+      "free_response": "To determine the correct pair, I will first identify the cue image and then locate its partner in the provided sequence.\n\n- The cue image is a skateboard with a leopard print design.\n- Based on the initial instruction to remember pairs and their connections, I will search for the image that was paired with the skateboard.\n- In the sequence, the skateboard (image 10) is explicitly linked to another image in a \"(BC pair)\" relationship.\n- The image paired with the skateboard",
+      "metadata": {
+        "chain_index": 4,
+        "foil_chain_index": 1
+      }
+    },
+    {
+      "trial": 12,
+      "target": 2,
+      "reported": 2,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.07585818115951483,
+        "2": 0.9241418188404852
+      },
+      "choice_mass": 0.9982182681560516,
+      "top_tokens": [
+        [
+          "2",
+          0.9225
+        ],
+        [
+          "1",
+          0.0757
+        ],
+        [
+          "3",
+          0.0007
+        ],
+        [
+          " ",
+          0.0005
+        ],
+        [
+          "4",
+          0.0002
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 4,
+        "foil_chain_index": 3
+      }
+    },
+    {
+      "trial": 13,
+      "target": 2,
+      "reported": 1,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.9525741269385423,
+        "2": 0.047425873061457686
+      },
+      "choice_mass": 0.9981551915407181,
+      "top_tokens": [
+        [
+          "1",
+          0.9508
+        ],
+        [
+          "2",
+          0.0473
+        ],
+        [
+          "3",
+          0.0007
+        ],
+        [
+          " ",
+          0.0005
+        ],
+        [
+          "<|im_end|>",
+          0.0002
+        ]
+      ],
+      "free_response": "To determine the correct pair, I will first identify the items in the provided sequence based on the given pairings.\n\n- The cue image is the ornate, shield-like object with swords.\n- According to the instructions, this item is part of a \"(BC pair)\".\n- This means it is paired with one of the items labeled 'B' or 'C'.\n- Let's find the items labeled 'B' and 'C' from the initial sequence:\n    - Item",
+      "metadata": {
+        "chain_index": 1,
+        "foil_chain_index": 0
+      }
+    },
+    {
+      "trial": 14,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.7549149832878554,
+        "2": 0.24508501671214455
+      },
+      "choice_mass": 0.9978529065847397,
+      "top_tokens": [
+        [
+          "1",
+          0.7533
+        ],
+        [
+          "2",
+          0.2446
+        ],
+        [
+          "3",
+          0.0011
+        ],
+        [
+          " ",
+          0.0004
+        ],
+        [
+          "<|im_end|>",
+          0.0002
+        ]
+      ],
+      "free_response": "To solve this, we need to look at the provided image pairs to find which one contains the cue image.\n\n- The cue image is a pile of long, brown, dried plant pods.\n- According to the instructions, the first image in the pair is labeled 'A' and the second is 'B'.\n- We are looking for a pair where one of the images is the cue image.\n- In the first pair shown, image 'A' is the green cup and image",
+      "metadata": {
+        "chain_index": 0,
+        "foil_chain_index": 2
+      }
+    },
+    {
+      "trial": 15,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.9875683489762549,
+        "2": 0.012431651023745098
+      },
+      "choice_mass": 0.9983818531036377,
+      "top_tokens": [
+        [
+          "1",
+          0.986
+        ],
+        [
+          "2",
+          0.0124
+        ],
+        [
+          "<|im_end|>",
+          0.0005
+        ],
+        [
+          " ",
+          0.0004
+        ],
+        [
+          "3",
+          0.0003
+        ]
+      ],
+      "free_response": "To determine the correct pair, I will examine the connections established in the initial sequence of images.\n\n- The first image shown is a reindeer headband.\n- This image is explicitly labeled as an \"(AB pair)\" and is followed by another image of the same reindeer headband, which is labeled as a \"(BC pair)\".\n- This indicates that the reindeer headband is the common element, or \"link,\" between the first and second groups of images.\n- The question",
+      "metadata": {
+        "chain_index": 0,
+        "foil_chain_index": 3
+      }
+    },
+    {
+      "trial": 16,
+      "target": 2,
+      "reported": 1,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.8354835497166524,
+        "2": 0.16451645028334755
+      },
+      "choice_mass": 0.9980209171772003,
+      "top_tokens": [
+        [
+          "1",
+          0.8338
+        ],
+        [
+          "2",
+          0.1642
+        ],
+        [
+          "3",
+          0.0008
+        ],
+        [
+          " ",
+          0.0004
+        ],
+        [
+          "<|im_end|>",
+          0.0003
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 3,
+        "foil_chain_index": 2
+      }
+    },
+    {
+      "trial": 17,
+      "target": 2,
+      "reported": 2,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.22270015311437752,
+        "2": 0.7772998468856225
+      },
+      "choice_mass": 0.997583344578743,
+      "top_tokens": [
+        [
+          "2",
+          0.7754
+        ],
+        [
+          "1",
+          0.2222
+        ],
+        [
+          "3",
+          0.001
+        ],
+        [
+          " ",
+          0.0007
+        ],
+        [
+          "<|im_end|>",
+          0.0003
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 1,
+        "foil_chain_index": 2
+      }
+    },
+    {
+      "trial": 18,
+      "target": 2,
+      "reported": 2,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.4073334022022849,
+        "2": 0.592666597797715
+      },
+      "choice_mass": 0.9924161434173584,
+      "top_tokens": [
+        [
+          "2",
+          0.5882
+        ],
+        [
+          "1",
+          0.4042
+        ],
+        [
+          "3",
+          0.0027
+        ],
+        [
+          "4",
+          0.0019
+        ],
+        [
+          "<|im_end|>",
+          0.0011
+        ]
+      ],
+      "free_response": "To determine the correct pair, I will first identify the cue image and then review the pairs I was given to find its match.\n\n- The cue image is a set of tools in an open wooden box.\n- Based on the initial instructions, I need to find which of the two options below was part of a pair with the tool set.\n- Let's examine the pairs provided:\n    - One pair consists of the tool set and a blue office chair.\n    - Another pair",
+      "metadata": {
+        "chain_index": 2,
+        "foil_chain_index": 3
+      }
+    },
+    {
+      "trial": 19,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.7981867767089534,
+        "2": 0.20181322329104656
+      },
+      "choice_mass": 0.9943578541278839,
+      "top_tokens": [
+        [
+          "1",
+          0.7937
+        ],
+        [
+          "2",
+          0.2007
+        ],
+        [
+          "3",
+          0.0017
+        ],
+        [
+          "<|im_end|>",
+          0.0012
+        ],
+        [
+          " ",
+          0.0012
+        ]
+      ],
+      "free_response": "1",
+      "metadata": {
+        "chain_index": 3,
+        "foil_chain_index": 0
+      }
+    },
+    {
+      "trial": 20,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.8807970758909163,
+        "2": 0.11920292410908369
+      },
+      "choice_mass": 0.9944166615605354,
+      "top_tokens": [
+        [
+          "1",
+          0.8759
+        ],
+        [
+          "2",
+          0.1185
+        ],
+        [
+          "3",
+          0.0036
+        ],
+        [
+          " ",
+          0.0007
+        ],
+        [
+          "4",
+          0.0004
+        ]
+      ],
+      "free_response": "1",
+      "metadata": {
+        "chain_index": 2,
+        "foil_chain_index": 0
+      }
+    },
+    {
+      "trial": 21,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.9940889315027839,
+        "2": 0.005911068497216076
+      },
+      "choice_mass": 0.9983863979578018,
+      "top_tokens": [
+        [
+          "1",
+          0.9925
+        ],
+        [
+          "2",
+          0.0059
+        ],
+        [
+          " ",
+          0.0006
+        ],
+        [
+          "<|im_end|>",
+          0.0004
+        ],
+        [
+          "3",
+          0.0002
+        ]
+      ],
+      "free_response": "1",
+      "metadata": {
+        "chain_index": 0,
+        "foil_chain_index": 2
+      }
+    },
+    {
+      "trial": 22,
+      "target": 2,
+      "reported": 1,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.6791786993935909,
+        "2": 0.32082130060640907
+      },
+      "choice_mass": 0.9967459738254547,
+      "top_tokens": [
+        [
+          "1",
+          0.677
+        ],
+        [
+          "2",
+          0.3198
+        ],
+        [
+          "3",
+          0.0019
+        ],
+        [
+          " ",
+          0.0008
+        ],
+        [
+          "4",
+          0.0002
+        ]
+      ],
+      "free_response": "Based on the provided image pairs, the cue image is the half avocado.\n\n- The first image is a green chili pepper.\n- The second image is a red rubber stamp.\n\nIn the sequence of pairs you provided, the half avocado was paired with the green chili pepper.\n\nTherefore, the correct answer is:\n1",
+      "metadata": {
+        "chain_index": 1,
+        "foil_chain_index": 3
+      }
+    },
+    {
+      "trial": 23,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.8175744637103698,
+        "2": 0.1824255362896302
+      },
+      "choice_mass": 0.9861992001533508,
+      "top_tokens": [
+        [
+          "1",
+          0.8063
+        ],
+        [
+          "2",
+          0.1799
+        ],
+        [
+          "3",
+          0.0101
+        ],
+        [
+          "4",
+          0.0014
+        ],
+        [
+          " ",
+          0.0008
+        ]
+      ],
+      "free_response": "Based on the provided image pairs, the switch labeled \"FEEL MINI\" is paired with the wooden soap press.\n\nTherefore, the correct answer is:\n1",
+      "metadata": {
+        "chain_index": 1,
+        "foil_chain_index": 3
+      }
+    },
+    {
+      "trial": 24,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.5,
+        "2": 0.5
+      },
+      "choice_mass": 0.997565746307373,
+      "top_tokens": [
+        [
+          "2",
+          0.4988
+        ],
+        [
+          "1",
+          0.4988
+        ],
+        [
+          "3",
+          0.0011
+        ],
+        [
+          " ",
+          0.0004
+        ],
+        [
+          "4",
+          0.0004
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 2,
+        "foil_chain_index": 0
+      }
+    },
+    {
+      "trial": 25,
+      "target": 2,
+      "reported": 1,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.5926665852129409,
+        "2": 0.4073334147870591
+      },
+      "choice_mass": 0.9959264695644379,
+      "top_tokens": [
+        [
+          "1",
+          0.5903
+        ],
+        [
+          "2",
+          0.4057
+        ],
+        [
+          "5",
+          0.0013
+        ],
+        [
+          " ",
+          0.0011
+        ],
+        [
+          "3",
+          0.0008
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 3,
+        "foil_chain_index": 2
+      }
+    },
+    {
+      "trial": 26,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.979667648344532,
+        "2": 0.020332351655467956
+      },
+      "choice_mass": 0.9987889006733894,
+      "top_tokens": [
+        [
+          "1",
+          0.9785
+        ],
+        [
+          "2",
+          0.0203
+        ],
+        [
+          " ",
+          0.0005
+        ],
+        [
+          "3",
+          0.0003
+        ],
+        [
+          "0",
+          0.0001
+        ]
+      ],
+      "free_response": "1",
+      "metadata": {
+        "chain_index": 0,
+        "foil_chain_index": 4
+      }
+    },
+    {
+      "trial": 27,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.8933094042571754,
+        "2": 0.10669059574282458
+      },
+      "choice_mass": 0.9942088201642036,
+      "top_tokens": [
+        [
+          "1",
+          0.8881
+        ],
+        [
+          "2",
+          0.1061
+        ],
+        [
+          "3",
+          0.0028
+        ],
+        [
+          " ",
+          0.0017
+        ],
+        [
+          "4",
+          0.0005
+        ]
+      ],
+      "free_response": "1",
+      "metadata": {
+        "chain_index": 2,
+        "foil_chain_index": 1
+      }
+    },
+    {
+      "trial": 28,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.970687768314139,
+        "2": 0.029312231685860942
+      },
+      "choice_mass": 0.9980042073875666,
+      "top_tokens": [
+        [
+          "1",
+          0.9688
+        ],
+        [
+          "2",
+          0.0293
+        ],
+        [
+          "3",
+          0.0009
+        ],
+        [
+          "0",
+          0.0003
+        ],
+        [
+          " ",
+          0.0003
+        ]
+      ],
+      "free_response": "To determine the correct pair, I will examine the provided image sequences.\n\n- The first image in the sequence is a green, decorated pumpkin.\n- The second image in the sequence is a set of colorful wooden building blocks.\n- The third image in the sequence is a white step ladder.\n- The fourth image in the sequence is a red lipstick.\n- The fifth image in the sequence is a pair of blue ice hockey gloves.\n- The sixth image in the sequence is a",
+      "metadata": {
+        "chain_index": 0,
+        "foil_chain_index": 2
+      }
+    },
+    {
+      "trial": 29,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.932453308664415,
+        "2": 0.06754669133558494
+      },
+      "choice_mass": 0.9970866367220879,
+      "top_tokens": [
+        [
+          "1",
+          0.9297
+        ],
+        [
+          "2",
+          0.0673
+        ],
+        [
+          " ",
+          0.0014
+        ],
+        [
+          "3",
+          0.0007
+        ],
+        [
+          "4",
+          0.0002
+        ]
+      ],
+      "free_response": "To determine the correct pair, I will examine the connections established in the initial sequence of images.\n\n- The cue image is a piece of pyrite, also known as \"fool's gold\".\n- In the first set of pairs, the pyrite image (the 8th image) is shown to be paired with the image of the pyrite rock (the 14th image). This is indicated by the \"(BC pair)\" label next to the pyrite rock image, where",
+      "metadata": {
+        "chain_index": 3,
+        "foil_chain_index": 1
+      }
+    },
+    {
+      "trial": 30,
+      "target": 2,
+      "reported": 2,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.43782350700840245,
+        "2": 0.5621764929915976
+      },
+      "choice_mass": 0.9969916045665741,
+      "top_tokens": [
+        [
+          "2",
+          0.5605
+        ],
+        [
+          "1",
+          0.4365
+        ],
+        [
+          "3",
+          0.0012
+        ],
+        [
+          " ",
+          0.0007
+        ],
+        [
+          "<|im_end|>",
+          0.0004
+        ]
+      ],
+      "free_response": "1",
+      "metadata": {
+        "chain_index": 4,
+        "foil_chain_index": 2
+      }
+    },
+    {
+      "trial": 31,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.5312093912646357,
+        "2": 0.46879060873536427
+      },
+      "choice_mass": 0.9955669045448303,
+      "top_tokens": [
+        [
+          "1",
+          0.5289
+        ],
+        [
+          "2",
+          0.4667
+        ],
+        [
+          "3",
+          0.0024
+        ],
+        [
+          "4",
+          0.0007
+        ],
+        [
+          " ",
+          0.0005
+        ]
+      ],
+      "free_response": "Based on the provided image pairs, the cue image is an adjustable medical table.\n\n- Image 1 is a bison.\n- Image 2 is a trophy.\nIn the sequence of pairs, the adjustable medical table was paired with the trophy.\n\nTherefore, the correct image is 2.",
+      "metadata": {
+        "chain_index": 2,
+        "foil_chain_index": 3
+      }
+    },
+    {
+      "trial": 32,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.6224593295439844,
+        "2": 0.3775406704560156
+      },
+      "choice_mass": 0.996999979019165,
+      "top_tokens": [
+        [
+          "1",
+          0.6206
+        ],
+        [
+          "2",
+          0.3764
+        ],
+        [
+          "3",
+          0.0014
+        ],
+        [
+          " ",
+          0.0008
+        ],
+        [
+          "4",
+          0.0002
+        ]
+      ],
+      "free_response": "To determine the correct pair, I will first identify the cue image and then locate its partner in the provided sequence.\n\n- The cue image is a white, circular smoke detector.\n- I will now scan the list of image pairs to find where this smoke detector appears.\n- The smoke detector is found in the (BC pair) and again in the (BC pair).\n- The other image in these pairs is a brass fire alarm pull station.\n- The question asks to choose between",
+      "metadata": {
+        "chain_index": 4,
+        "foil_chain_index": 0
+      }
+    },
+    {
+      "trial": 33,
+      "target": 2,
+      "reported": 2,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.11920291902237758,
+        "2": 0.8807970809776224
+      },
+      "choice_mass": 0.9983466640114784,
+      "top_tokens": [
+        [
+          "2",
+          0.8793
+        ],
+        [
+          "1",
+          0.119
+        ],
+        [
+          " ",
+          0.0006
+        ],
+        [
+          "3",
+          0.0004
+        ],
+        [
+          "<|im_end|>",
+          0.0003
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 0,
+        "foil_chain_index": 2
+      }
+    },
+    {
+      "trial": 34,
+      "target": 2,
+      "reported": 2,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.22270014068862717,
+        "2": 0.7772998593113728
+      },
+      "choice_mass": 0.9952916204929352,
+      "top_tokens": [
+        [
+          "2",
+          0.7736
+        ],
+        [
+          "1",
+          0.2217
+        ],
+        [
+          "3",
+          0.0019
+        ],
+        [
+          " ",
+          0.0015
+        ],
+        [
+          "4",
+          0.0005
+        ]
+      ],
+      "free_response": "To determine the correct pair, I will examine the connections established in the initial sequence.\n\n- The first image in the sequence is a brown fishing vest.\n- This vest is shown in a pair with a yellow work light.\n- Later in the sequence, the same yellow work light is shown in another pair, this time with a brass faucet.\n- The question asks which of the two options was paired with the fishing vest.\n- Option 1 is a pair of hands on a",
+      "metadata": {
+        "chain_index": 1,
+        "foil_chain_index": 4
+      }
+    },
+    {
+      "trial": 35,
+      "target": 2,
+      "reported": 1,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.5312093636437505,
+        "2": 0.46879063635624946
+      },
+      "choice_mass": 0.9979842007160187,
+      "top_tokens": [
+        [
+          "1",
+          0.5301
+        ],
+        [
+          "2",
+          0.4678
+        ],
+        [
+          "3",
+          0.0008
+        ],
+        [
+          " ",
+          0.0006
+        ],
+        [
+          "<|im_end|>",
+          0.0001
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 0,
+        "foil_chain_index": 3
+      }
+    },
+    {
+      "trial": 36,
+      "target": 2,
+      "reported": 1,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.6791786825238291,
+        "2": 0.32082131747617093
+      },
+      "choice_mass": 0.9976079761981964,
+      "top_tokens": [
+        [
+          "1",
+          0.6776
+        ],
+        [
+          "2",
+          0.3201
+        ],
+        [
+          "3",
+          0.0012
+        ],
+        [
+          " ",
+          0.0005
+        ],
+        [
+          "<|im_end|>",
+          0.0002
+        ]
+      ],
+      "free_response": "To determine the correct pair, I will first identify the cue image and then find its partner in the provided sequence.\n\n- The cue image is a fishing lure, specifically a streamer fly.\n- Based on the initial instructions, I need to find the image that was paired with this lure.\n- In the sequence of pairs provided, the fishing lure is part of a \"BC pair\".\n- The other image in this \"BC pair\" is a golden, hanging oil lamp.",
+      "metadata": {
+        "chain_index": 4,
+        "foil_chain_index": 1
+      }
+    },
+    {
+      "trial": 37,
+      "target": 1,
+      "reported": 2,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.46879062745625066,
+        "2": 0.5312093725437493
+      },
+      "choice_mass": 0.9972400367259979,
+      "top_tokens": [
+        [
+          "2",
+          0.5297
+        ],
+        [
+          "1",
+          0.4675
+        ],
+        [
+          "3",
+          0.0015
+        ],
+        [
+          "4",
+          0.0003
+        ],
+        [
+          " ",
+          0.0002
+        ]
+      ],
+      "free_response": "Based on the provided image pairs, the yellow mailbox is paired with the fruit plate.\n\nTherefore, the correct answer is:\n1",
+      "metadata": {
+        "chain_index": 1,
+        "foil_chain_index": 4
+      }
+    },
+    {
+      "trial": 38,
+      "target": 2,
+      "reported": 1,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.6513548485389434,
+        "2": 0.34864515146105657
+      },
+      "choice_mass": 0.9968429505825043,
+      "top_tokens": [
+        [
+          "1",
+          0.6493
+        ],
+        [
+          "2",
+          0.3475
+        ],
+        [
+          "3",
+          0.0023
+        ],
+        [
+          " ",
+          0.0003
+        ],
+        [
+          "4",
+          0.0002
+        ]
+      ],
+      "free_response": "To determine the correct pair, I will first identify the cue image and then review the pairs provided in the initial sequence.\n\n- The cue image is a sepia-toned picture of a stone barn with a wooden arched door.\n- Based on the initial sequence, the image of the stone barn is paired with the image of the old-fashioned cash register. This is labeled as a (BC pair).\n- The other option, a bowl of oatmeal, is not part of any pair",
+      "metadata": {
+        "chain_index": 1,
+        "foil_chain_index": 3
+      }
+    },
+    {
+      "trial": 39,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.6791786950972735,
+        "2": 0.3208213049027265
+      },
+      "choice_mass": 0.9931687116622925,
+      "top_tokens": [
+        [
+          "1",
+          0.6745
+        ],
+        [
+          "2",
+          0.3186
+        ],
+        [
+          " ",
+          0.0028
+        ],
+        [
+          "3",
+          0.0021
+        ],
+        [
+          "0",
+          0.0006
+        ]
+      ],
+      "free_response": "Based on the provided image pairs, the image of the patterned beads is paired with the image of the baseball.\n\nTherefore, the correct digit is:\n1",
+      "metadata": {
+        "chain_index": 4,
+        "foil_chain_index": 3
+      }
+    },
+    {
+      "trial": 40,
+      "target": 1,
+      "reported": 2,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.4378234955266902,
+        "2": 0.5621765044733098
+      },
+      "choice_mass": 0.9971594214439392,
+      "top_tokens": [
+        [
+          "2",
+          0.5606
+        ],
+        [
+          "1",
+          0.4366
+        ],
+        [
+          "3",
+          0.0016
+        ],
+        [
+          "<|im_end|>",
+          0.0007
+        ],
+        [
+          " ",
+          0.0002
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 0,
+        "foil_chain_index": 1
+      }
+    },
+    {
+      "trial": 41,
+      "target": 1,
+      "reported": 2,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.16451645285156505,
+        "2": 0.835483547148435
+      },
+      "choice_mass": 0.998121440410614,
+      "top_tokens": [
+        [
+          "2",
+          0.8339
+        ],
+        [
+          "1",
+          0.1642
+        ],
+        [
+          "3",
+          0.0008
+        ],
+        [
+          " ",
+          0.0005
+        ],
+        [
+          "4",
+          0.0002
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 3,
+        "foil_chain_index": 0
+      }
+    },
+    {
+      "trial": 42,
+      "target": 2,
+      "reported": 2,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.37754066423833416,
+        "2": 0.6224593357616659
+      },
+      "choice_mass": 0.9951974451541901,
+      "top_tokens": [
+        [
+          "2",
+          0.6195
+        ],
+        [
+          "1",
+          0.3757
+        ],
+        [
+          "3",
+          0.0017
+        ],
+        [
+          " ",
+          0.0017
+        ],
+        [
+          "<|im_end|>",
+          0.0005
+        ]
+      ],
+      "free_response": "Based on the provided image pairs, the airbrush in its case (the cue image) was paired with the tissue box.\n\nTherefore, the correct image is:\n2",
+      "metadata": {
+        "chain_index": 4,
+        "foil_chain_index": 0
+      }
+    },
+    {
+      "trial": 43,
+      "target": 1,
+      "reported": 2,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.43782349029072426,
+        "2": 0.5621765097092758
+      },
+      "choice_mass": 0.9943253695964813,
+      "top_tokens": [
+        [
+          "2",
+          0.559
+        ],
+        [
+          "1",
+          0.4353
+        ],
+        [
+          "3",
+          0.0029
+        ],
+        [
+          "<|im_end|>",
+          0.0014
+        ],
+        [
+          " ",
+          0.0007
+        ]
+      ],
+      "free_response": "To determine the correct pair, I will first identify the cue image and then find its partner in the provided sequence.\n\n- The cue image is the taxidermy hawk.\n- According to the instructions, I need to find the image that was paired with the hawk.\n- In the sequence of pairs, the hawk is shown in a pair with a wooden hairbrush.\n\nThe first image presented for the final question is the wooden hairbrush. Therefore, this is the image that was paired",
+      "metadata": {
+        "chain_index": 2,
+        "foil_chain_index": 0
+      }
+    },
+    {
+      "trial": 44,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.9324533026745706,
+        "2": 0.06754669732542938
+      },
+      "choice_mass": 0.9979806616902351,
+      "top_tokens": [
+        [
+          "1",
+          0.9306
+        ],
+        [
+          "2",
+          0.0674
+        ],
+        [
+          "3",
+          0.001
+        ],
+        [
+          " ",
+          0.0004
+        ],
+        [
+          "4",
+          0.0002
+        ]
+      ],
+      "free_response": "1",
+      "metadata": {
+        "chain_index": 1,
+        "foil_chain_index": 0
+      }
+    },
+    {
+      "trial": 45,
+      "target": 2,
+      "reported": 2,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.11920292339313333,
+        "2": 0.8807970766068667
+      },
+      "choice_mass": 0.9919974133372307,
+      "top_tokens": [
+        [
+          "2",
+          0.8737
+        ],
+        [
+          "1",
+          0.1182
+        ],
+        [
+          "3",
+          0.0059
+        ],
+        [
+          " ",
+          0.0007
+        ],
+        [
+          "4",
+          0.0005
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 2,
+        "foil_chain_index": 0
+      }
+    },
+    {
+      "trial": 46,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.9859363736872354,
+        "2": 0.014063626312764617
+      },
+      "choice_mass": 0.9986340524628758,
+      "top_tokens": [
+        [
+          "1",
+          0.9846
+        ],
+        [
+          "2",
+          0.014
+        ],
+        [
+          "<|im_end|>",
+          0.0005
+        ],
+        [
+          "3",
+          0.0003
+        ],
+        [
+          " ",
+          0.0002
+        ]
+      ],
+      "free_response": "To determine the correct pair, I will first identify the cue image and then find its partner from the provided sequence.\n\n- The cue image is a small, ornate glass bottle surrounded by autumn leaves.\n- According to the instructions, I need to find the image that was paired with this one.\n- In the sequence of image pairs, the first pair is labeled \"(AB pair)\" and consists of the chocolate-covered popsicle and the bottle with leaves.\n- The second pair is labeled",
+      "metadata": {
+        "chain_index": 0,
+        "foil_chain_index": 1
+      }
+    },
+    {
+      "trial": 47,
+      "target": 2,
+      "reported": 2,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.24508501433186008,
+        "2": 0.7549149856681399
+      },
+      "choice_mass": 0.9905594736337662,
+      "top_tokens": [
+        [
+          "2",
+          0.7478
+        ],
+        [
+          "1",
+          0.2428
+        ],
+        [
+          "3",
+          0.005
+        ],
+        [
+          "4",
+          0.0024
+        ],
+        [
+          " ",
+          0.0008
+        ]
+      ],
+      "free_response": "To determine the correct pair, I will first identify the cue image and then review the pairs I've stored in memory.\n\n- The cue image is a single, white endive vegetable.\n- Based on the initial set of pairs, the endive vegetable was paired with a large, white, spherical flower that has many small petals, resembling a chrysanthemum.\n- I will now examine the two options provided in the current question.\n- Option 1 is a plush toy",
+      "metadata": {
+        "chain_index": 2,
+        "foil_chain_index": 0
+      }
+    },
+    {
+      "trial": 48,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.9241418155009568,
+        "2": 0.07585818449904325
+      },
+      "choice_mass": 0.9953990951180458,
+      "top_tokens": [
+        [
+          "1",
+          0.9199
+        ],
+        [
+          "2",
+          0.0755
+        ],
+        [
+          " ",
+          0.002
+        ],
+        [
+          "<|im_end|>",
+          0.001
+        ],
+        [
+          "3",
+          0.0008
+        ]
+      ],
+      "free_response": "To determine the correct pair, I will examine the connections established in the initial sequence of images.\n\n- The first image shown is a black toolbox.\n- In the provided sequence, this toolbox is explicitly paired with another image.\n- The pair is: (black toolbox) -> (Russian nesting doll).\n- The question asks which of the two new images was paired with the cue image (the black toolbox).\n- Image 1 is the Russian nesting doll.\n- Image 2",
+      "metadata": {
+        "chain_index": 4,
+        "foil_chain_index": 0
+      }
+    },
+    {
+      "trial": 49,
+      "target": 2,
+      "reported": 1,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.5621764939320563,
+        "2": 0.43782350606794374
+      },
+      "choice_mass": 0.9891928434371948,
+      "top_tokens": [
+        [
+          "1",
+          0.5561
+        ],
+        [
+          "2",
+          0.4331
+        ],
+        [
+          "3",
+          0.0048
+        ],
+        [
+          "4",
+          0.0042
+        ],
+        [
+          " ",
+          0.0007
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 2,
+        "foil_chain_index": 3
+      }
+    }
+  ],
+  "metrics": {
+    "accuracy": 0.62,
+    "n_correct": 31,
+    "total": 50,
+    "free_text_bare_digit": 0.44,
+    "mean_p_chosen": 0.7489317735144249,
+    "mean_choice_mass": 0.9947514183633029,
+    "frac_low_mass": 0.0,
+    "response_distribution": {
+      "1": 33,
+      "2": 17
+    }
+  }
+}

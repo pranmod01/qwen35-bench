@@ -1,0 +1,1996 @@
+{
+  "run": {
+    "model": {
+      "name": "qwen3.5-4b",
+      "model_id": "Qwen/Qwen3.5-4B",
+      "max_image_size": 512,
+      "max_new_tokens": 100
+    },
+    "task": "associative_inference",
+    "condition": {
+      "dataset": "Brady2008",
+      "pair_type": "word",
+      "probe": "direct_bc",
+      "n_chains": 2,
+      "n_images": 6,
+      "prompt": "original",
+      "n_trials": 50
+    },
+    "seed": 0
+  },
+  "config": {
+    "run_name": "assoc_inf_ab",
+    "output_dir": "results",
+    "seeds": [
+      0
+    ],
+    "models": [
+      {
+        "name": "qwen3.5-2b",
+        "model_id": "Qwen/Qwen3.5-2B",
+        "max_image_size": 512,
+        "max_new_tokens": 100
+      },
+      {
+        "name": "qwen3.5-4b",
+        "model_id": "Qwen/Qwen3.5-4B",
+        "max_image_size": 512,
+        "max_new_tokens": 100
+      }
+    ],
+    "tasks": [
+      {
+        "task": "associative_inference",
+        "datasets": [
+          "Brady2008"
+        ],
+        "pair_types": [
+          "image",
+          "word"
+        ],
+        "probe_types": [
+          "inference",
+          "direct_ab",
+          "direct_bc"
+        ],
+        "n_chains": [
+          2,
+          5,
+          25
+        ],
+        "prompts": [
+          "original",
+          "cue_turn",
+          "labeled"
+        ],
+        "n_trials": 50
+      }
+    ]
+  },
+  "provenance": {
+    "config_hash": "d49714f7009d",
+    "gpu": "NVIDIA A100-SXM4-80GB",
+    "git_commit": null,
+    "git_dirty": false,
+    "torch": "2.10.0+cu128",
+    "transformers": "5.17.0"
+  },
+  "elapsed_s": 28.3,
+  "peak_gpu_gb": 9.27,
+  "error": null,
+  "trials": [
+    {
+      "trial": 0,
+      "target": 2,
+      "reported": 2,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.24508500685016754,
+        "2": 0.7549149931498325
+      },
+      "choice_mass": 0.9936003535985947,
+      "top_tokens": [
+        [
+          "2",
+          0.7501
+        ],
+        [
+          "1",
+          0.2435
+        ],
+        [
+          "3",
+          0.0016
+        ],
+        [
+          " ",
+          0.0016
+        ],
+        [
+          "<|im_end|>",
+          0.0011
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 0,
+        "foil_chain_index": 1
+      }
+    },
+    {
+      "trial": 1,
+      "target": 2,
+      "reported": 2,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.46879062665394666,
+        "2": 0.5312093733460533
+      },
+      "choice_mass": 0.9893509745597839,
+      "top_tokens": [
+        [
+          "2",
+          0.5256
+        ],
+        [
+          "1",
+          0.4638
+        ],
+        [
+          "<|im_end|>",
+          0.0035
+        ],
+        [
+          " ",
+          0.0031
+        ],
+        [
+          "3",
+          0.001
+        ]
+      ],
+      "free_response": "To solve this, we need to trace the connections between the images and the words provided.\n\n- The cue image is the open compact of blush or eyeshadow.\n- In the provided sequence, this image appears in two places:\n    - As the second image in the (AB) pair.\n    - As the first image in the (BC) pair.\n- The word \"DECK\" is explicitly linked to the (BC) pair.\n- Since the cue image",
+      "metadata": {
+        "chain_index": 0,
+        "foil_chain_index": 1
+      }
+    },
+    {
+      "trial": 2,
+      "target": 1,
+      "reported": 2,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.20181321855861925,
+        "2": 0.7981867814413808
+      },
+      "choice_mass": 0.9905275404453278,
+      "top_tokens": [
+        [
+          "2",
+          0.7906
+        ],
+        [
+          "1",
+          0.1999
+        ],
+        [
+          " ",
+          0.0032
+        ],
+        [
+          "<|im_end|>",
+          0.0029
+        ],
+        [
+          " (",
+          0.0009
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 1,
+        "foil_chain_index": 0
+      }
+    },
+    {
+      "trial": 3,
+      "target": 2,
+      "reported": 2,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.18242552436144968,
+        "2": 0.8175744756385503
+      },
+      "choice_mass": 0.991754561662674,
+      "top_tokens": [
+        [
+          "2",
+          0.8108
+        ],
+        [
+          "1",
+          0.1809
+        ],
+        [
+          "<|im_end|>",
+          0.0038
+        ],
+        [
+          " ",
+          0.0023
+        ],
+        [
+          "3",
+          0.0007
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 1,
+        "foil_chain_index": 0
+      }
+    },
+    {
+      "trial": 4,
+      "target": 2,
+      "reported": 1,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.6224593423486948,
+        "2": 0.3775406576513052
+      },
+      "choice_mass": 0.9907792210578918,
+      "top_tokens": [
+        [
+          "1",
+          0.6167
+        ],
+        [
+          "2",
+          0.3741
+        ],
+        [
+          "<|im_end|>",
+          0.0024
+        ],
+        [
+          " ",
+          0.0017
+        ],
+        [
+          "3",
+          0.0011
+        ]
+      ],
+      "free_response": "To solve this, we need to look at the connections established in the first part of the prompt.\n\n- The image of the wooden basket is shown in two pairs:\n- (BC pair) and (Word: FIELD).\n- This means the wooden basket is connected to the word \"FIELD\".\n\nThe cue image is the wooden basket. Therefore, the word paired with it is \"FIELD\".\n\n1",
+      "metadata": {
+        "chain_index": 1,
+        "foil_chain_index": 0
+      }
+    },
+    {
+      "trial": 5,
+      "target": 1,
+      "reported": 2,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.22270014317593007,
+        "2": 0.7772998568240699
+      },
+      "choice_mass": 0.991645410656929,
+      "top_tokens": [
+        [
+          "2",
+          0.7708
+        ],
+        [
+          "1",
+          0.2208
+        ],
+        [
+          " ",
+          0.004
+        ],
+        [
+          "<|im_end|>",
+          0.0019
+        ],
+        [
+          "3",
+          0.0008
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 1,
+        "foil_chain_index": 0
+      }
+    },
+    {
+      "trial": 6,
+      "target": 2,
+      "reported": 2,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.2018132197225219,
+        "2": 0.7981867802774781
+      },
+      "choice_mass": 0.9938338547945023,
+      "top_tokens": [
+        [
+          "2",
+          0.7933
+        ],
+        [
+          "1",
+          0.2006
+        ],
+        [
+          "<|im_end|>",
+          0.0022
+        ],
+        [
+          " ",
+          0.0017
+        ],
+        [
+          "3",
+          0.0008
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 1,
+        "foil_chain_index": 0
+      }
+    },
+    {
+      "trial": 7,
+      "target": 1,
+      "reported": 2,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.2942149774456309,
+        "2": 0.705785022554369
+      },
+      "choice_mass": 0.9894502460956573,
+      "top_tokens": [
+        [
+          "2",
+          0.6983
+        ],
+        [
+          "1",
+          0.2911
+        ],
+        [
+          " ",
+          0.0032
+        ],
+        [
+          "<|im_end|>",
+          0.0032
+        ],
+        [
+          "3",
+          0.002
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 1,
+        "foil_chain_index": 0
+      }
+    },
+    {
+      "trial": 8,
+      "target": 2,
+      "reported": 2,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.3208213012583271,
+        "2": 0.6791786987416729
+      },
+      "choice_mass": 0.9889667630195618,
+      "top_tokens": [
+        [
+          "2",
+          0.6717
+        ],
+        [
+          "1",
+          0.3173
+        ],
+        [
+          " ",
+          0.004
+        ],
+        [
+          "<|im_end|>",
+          0.0031
+        ],
+        [
+          "3",
+          0.0017
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 0,
+        "foil_chain_index": 1
+      }
+    },
+    {
+      "trial": 9,
+      "target": 2,
+      "reported": 2,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.14804718773679992,
+        "2": 0.8519528122632001
+      },
+      "choice_mass": 0.9918706268072128,
+      "top_tokens": [
+        [
+          "2",
+          0.845
+        ],
+        [
+          "1",
+          0.1468
+        ],
+        [
+          " ",
+          0.0044
+        ],
+        [
+          "<|im_end|>",
+          0.0011
+        ],
+        [
+          "3",
+          0.0006
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 1,
+        "foil_chain_index": 0
+      }
+    },
+    {
+      "trial": 10,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.5621764986123532,
+        "2": 0.4378235013876468
+      },
+      "choice_mass": 0.9908250868320465,
+      "top_tokens": [
+        [
+          "1",
+          0.557
+        ],
+        [
+          "2",
+          0.4338
+        ],
+        [
+          " ",
+          0.0033
+        ],
+        [
+          "<|im_end|>",
+          0.0029
+        ],
+        [
+          "0",
+          0.0007
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 1,
+        "foil_chain_index": 0
+      }
+    },
+    {
+      "trial": 11,
+      "target": 2,
+      "reported": 2,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.18242553482371096,
+        "2": 0.8175744651762891
+      },
+      "choice_mass": 0.990762785077095,
+      "top_tokens": [
+        [
+          "2",
+          0.81
+        ],
+        [
+          "1",
+          0.1807
+        ],
+        [
+          "<|im_end|>",
+          0.0055
+        ],
+        [
+          " ",
+          0.0016
+        ],
+        [
+          "3",
+          0.0007
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 0,
+        "foil_chain_index": 1
+      }
+    },
+    {
+      "trial": 12,
+      "target": 2,
+      "reported": 2,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.3486451470030878,
+        "2": 0.6513548529969122
+      },
+      "choice_mass": 0.9947917759418488,
+      "top_tokens": [
+        [
+          "2",
+          0.648
+        ],
+        [
+          "1",
+          0.3468
+        ],
+        [
+          "<|im_end|>",
+          0.0023
+        ],
+        [
+          " ",
+          0.0008
+        ],
+        [
+          "3",
+          0.0007
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 1,
+        "foil_chain_index": 0
+      }
+    },
+    {
+      "trial": 13,
+      "target": 2,
+      "reported": 2,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.437823519248819,
+        "2": 0.562176480751181
+      },
+      "choice_mass": 0.9825429916381836,
+      "top_tokens": [
+        [
+          "2",
+          0.5524
+        ],
+        [
+          "1",
+          0.4302
+        ],
+        [
+          " ",
+          0.007
+        ],
+        [
+          "<|im_end|>",
+          0.007
+        ],
+        [
+          "3",
+          0.0008
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 0,
+        "foil_chain_index": 1
+      }
+    },
+    {
+      "trial": 14,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.7549149980255345,
+        "2": 0.2450850019744655
+      },
+      "choice_mass": 0.9898558855056763,
+      "top_tokens": [
+        [
+          "1",
+          0.7473
+        ],
+        [
+          "2",
+          0.2426
+        ],
+        [
+          " ",
+          0.0027
+        ],
+        [
+          " (",
+          0.0024
+        ],
+        [
+          "<|im_end|>",
+          0.0014
+        ]
+      ],
+      "free_response": "To determine the correct word, let's trace the connections provided in the prompt.\n\n- The first image (a perfume bottle with autumn leaves) is paired with the word **BRIDGE**.\n- The second image (a car seat) is paired with the word **VITAMIN**.\n- The third image (a scarf) is connected to the second image (the car seat) via the word **BRIDGE**.\n- The fourth image (a paint roller) is connected to the",
+      "metadata": {
+        "chain_index": 0,
+        "foil_chain_index": 1
+      }
+    },
+    {
+      "trial": 15,
+      "target": 1,
+      "reported": 2,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.4073334207753142,
+        "2": 0.5926665792246858
+      },
+      "choice_mass": 0.9929338097572327,
+      "top_tokens": [
+        [
+          "2",
+          0.5885
+        ],
+        [
+          "1",
+          0.4045
+        ],
+        [
+          " ",
+          0.0021
+        ],
+        [
+          "<|im_end|>",
+          0.0021
+        ],
+        [
+          "3",
+          0.0009
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 0,
+        "foil_chain_index": 1
+      }
+    },
+    {
+      "trial": 16,
+      "target": 2,
+      "reported": 2,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.24508501684734518,
+        "2": 0.7549149831526548
+      },
+      "choice_mass": 0.9909639656543732,
+      "top_tokens": [
+        [
+          "2",
+          0.7481
+        ],
+        [
+          "1",
+          0.2429
+        ],
+        [
+          "<|im_end|>",
+          0.005
+        ],
+        [
+          " ",
+          0.0021
+        ],
+        [
+          "3",
+          0.0006
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 1,
+        "foil_chain_index": 0
+      }
+    },
+    {
+      "trial": 17,
+      "target": 2,
+      "reported": 2,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.32082131197202113,
+        "2": 0.6791786880279789
+      },
+      "choice_mass": 0.992843747138977,
+      "top_tokens": [
+        [
+          "2",
+          0.6743
+        ],
+        [
+          "1",
+          0.3185
+        ],
+        [
+          " ",
+          0.0035
+        ],
+        [
+          "<|im_end|>",
+          0.0019
+        ],
+        [
+          "3",
+          0.0004
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 0,
+        "foil_chain_index": 1
+      }
+    },
+    {
+      "trial": 18,
+      "target": 2,
+      "reported": 2,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.4378234980120471,
+        "2": 0.5621765019879529
+      },
+      "choice_mass": 0.9916703104972839,
+      "top_tokens": [
+        [
+          "2",
+          0.5575
+        ],
+        [
+          "1",
+          0.4342
+        ],
+        [
+          " ",
+          0.0033
+        ],
+        [
+          "<|im_end|>",
+          0.0029
+        ],
+        [
+          "3",
+          0.0006
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 1,
+        "foil_chain_index": 0
+      }
+    },
+    {
+      "trial": 19,
+      "target": 1,
+      "reported": 2,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.37754068456460105,
+        "2": 0.622459315435399
+      },
+      "choice_mass": 0.992182195186615,
+      "top_tokens": [
+        [
+          "2",
+          0.6176
+        ],
+        [
+          "1",
+          0.3746
+        ],
+        [
+          " ",
+          0.0032
+        ],
+        [
+          "<|im_end|>",
+          0.002
+        ],
+        [
+          "3",
+          0.0011
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 1,
+        "foil_chain_index": 0
+      }
+    },
+    {
+      "trial": 20,
+      "target": 1,
+      "reported": 2,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.4378234973803285,
+        "2": 0.5621765026196716
+      },
+      "choice_mass": 0.9930195808410645,
+      "top_tokens": [
+        [
+          "2",
+          0.5583
+        ],
+        [
+          "1",
+          0.4348
+        ],
+        [
+          " ",
+          0.0023
+        ],
+        [
+          "<|im_end|>",
+          0.0013
+        ],
+        [
+          "3",
+          0.0008
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 1,
+        "foil_chain_index": 0
+      }
+    },
+    {
+      "trial": 21,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.6224593193223091,
+        "2": 0.3775406806776909
+      },
+      "choice_mass": 0.9920150935649872,
+      "top_tokens": [
+        [
+          "1",
+          0.6175
+        ],
+        [
+          "2",
+          0.3745
+        ],
+        [
+          "<|im_end|>",
+          0.0029
+        ],
+        [
+          " ",
+          0.0022
+        ],
+        [
+          " (",
+          0.0009
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 0,
+        "foil_chain_index": 1
+      }
+    },
+    {
+      "trial": 22,
+      "target": 2,
+      "reported": 2,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.40733341425677483,
+        "2": 0.5926665857432252
+      },
+      "choice_mass": 0.9874760508537292,
+      "top_tokens": [
+        [
+          "2",
+          0.5852
+        ],
+        [
+          "1",
+          0.4022
+        ],
+        [
+          "<|im_end|>",
+          0.0057
+        ],
+        [
+          " ",
+          0.0035
+        ],
+        [
+          "3",
+          0.0011
+        ]
+      ],
+      "free_response": "2. PERSON",
+      "metadata": {
+        "chain_index": 0,
+        "foil_chain_index": 1
+      }
+    },
+    {
+      "trial": 23,
+      "target": 1,
+      "reported": 2,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.4687906436714723,
+        "2": 0.5312093563285277
+      },
+      "choice_mass": 0.9927405118942261,
+      "top_tokens": [
+        [
+          "2",
+          0.5274
+        ],
+        [
+          "1",
+          0.4654
+        ],
+        [
+          "<|im_end|>",
+          0.0019
+        ],
+        [
+          " ",
+          0.0019
+        ],
+        [
+          "3",
+          0.0019
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 0,
+        "foil_chain_index": 1
+      }
+    },
+    {
+      "trial": 24,
+      "target": 1,
+      "reported": 2,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.4073334071187586,
+        "2": 0.5926665928812413
+      },
+      "choice_mass": 0.9863366782665253,
+      "top_tokens": [
+        [
+          "2",
+          0.5846
+        ],
+        [
+          "1",
+          0.4018
+        ],
+        [
+          "<|im_end|>",
+          0.0083
+        ],
+        [
+          " ",
+          0.0021
+        ],
+        [
+          "3",
+          0.0009
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 1,
+        "foil_chain_index": 0
+      }
+    },
+    {
+      "trial": 25,
+      "target": 2,
+      "reported": 2,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.20181321867492055,
+        "2": 0.7981867813250795
+      },
+      "choice_mass": 0.9900212436914444,
+      "top_tokens": [
+        [
+          "2",
+          0.7902
+        ],
+        [
+          "1",
+          0.1998
+        ],
+        [
+          "<|im_end|>",
+          0.006
+        ],
+        [
+          " ",
+          0.0025
+        ],
+        [
+          " (",
+          0.0003
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 1,
+        "foil_chain_index": 0
+      }
+    },
+    {
+      "trial": 26,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.8354835479066094,
+        "2": 0.16451645209339055
+      },
+      "choice_mass": 0.990792527794838,
+      "top_tokens": [
+        [
+          "1",
+          0.8278
+        ],
+        [
+          "2",
+          0.163
+        ],
+        [
+          "<|im_end|>",
+          0.0034
+        ],
+        [
+          " ",
+          0.0021
+        ],
+        [
+          " (",
+          0.0012
+        ]
+      ],
+      "free_response": "1",
+      "metadata": {
+        "chain_index": 0,
+        "foil_chain_index": 1
+      }
+    },
+    {
+      "trial": 27,
+      "target": 1,
+      "reported": 2,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.29421496680518594,
+        "2": 0.705785033194814
+      },
+      "choice_mass": 0.9817045032978058,
+      "top_tokens": [
+        [
+          "2",
+          0.6929
+        ],
+        [
+          "1",
+          0.2888
+        ],
+        [
+          "<|im_end|>",
+          0.0099
+        ],
+        [
+          " ",
+          0.0053
+        ],
+        [
+          " (",
+          0.0009
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 1,
+        "foil_chain_index": 0
+      }
+    },
+    {
+      "trial": 28,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.8354835416607468,
+        "2": 0.1645164583392532
+      },
+      "choice_mass": 0.9911222755908966,
+      "top_tokens": [
+        [
+          "1",
+          0.8281
+        ],
+        [
+          "2",
+          0.1631
+        ],
+        [
+          " ",
+          0.0023
+        ],
+        [
+          "<|im_end|>",
+          0.0018
+        ],
+        [
+          " (",
+          0.0013
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 0,
+        "foil_chain_index": 1
+      }
+    },
+    {
+      "trial": 29,
+      "target": 1,
+      "reported": 2,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.18242553463872824,
+        "2": 0.8175744653612718
+      },
+      "choice_mass": 0.9924002140760422,
+      "top_tokens": [
+        [
+          "2",
+          0.8114
+        ],
+        [
+          "1",
+          0.181
+        ],
+        [
+          "<|im_end|>",
+          0.0033
+        ],
+        [
+          " ",
+          0.0013
+        ],
+        [
+          "3",
+          0.001
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 1,
+        "foil_chain_index": 0
+      }
+    },
+    {
+      "trial": 30,
+      "target": 2,
+      "reported": 2,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.40733340885370245,
+        "2": 0.5926665911462975
+      },
+      "choice_mass": 0.9907750487327576,
+      "top_tokens": [
+        [
+          "2",
+          0.5872
+        ],
+        [
+          "1",
+          0.4036
+        ],
+        [
+          " ",
+          0.0035
+        ],
+        [
+          "<|im_end|>",
+          0.0024
+        ],
+        [
+          "3",
+          0.0008
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 1,
+        "foil_chain_index": 0
+      }
+    },
+    {
+      "trial": 31,
+      "target": 1,
+      "reported": 2,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.29421496824725246,
+        "2": 0.7057850317527475
+      },
+      "choice_mass": 0.9919935762882233,
+      "top_tokens": [
+        [
+          "2",
+          0.7001
+        ],
+        [
+          "1",
+          0.2919
+        ],
+        [
+          " ",
+          0.0032
+        ],
+        [
+          "<|im_end|>",
+          0.0016
+        ],
+        [
+          "3",
+          0.0009
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 1,
+        "foil_chain_index": 0
+      }
+    },
+    {
+      "trial": 32,
+      "target": 2,
+      "reported": 2,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.14804719396615748,
+        "2": 0.8519528060338425
+      },
+      "choice_mass": 0.9950916320085526,
+      "top_tokens": [
+        [
+          "2",
+          0.8478
+        ],
+        [
+          "1",
+          0.1473
+        ],
+        [
+          " ",
+          0.0019
+        ],
+        [
+          "<|im_end|>",
+          0.001
+        ],
+        [
+          "3",
+          0.0007
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 0,
+        "foil_chain_index": 1
+      }
+    },
+    {
+      "trial": 33,
+      "target": 2,
+      "reported": 2,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.3486451597697048,
+        "2": 0.6513548402302952
+      },
+      "choice_mass": 0.9913212358951569,
+      "top_tokens": [
+        [
+          "2",
+          0.6457
+        ],
+        [
+          "1",
+          0.3456
+        ],
+        [
+          "<|im_end|>",
+          0.0034
+        ],
+        [
+          " ",
+          0.0026
+        ],
+        [
+          "3",
+          0.0009
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 0,
+        "foil_chain_index": 1
+      }
+    },
+    {
+      "trial": 34,
+      "target": 2,
+      "reported": 1,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.5,
+        "2": 0.5
+      },
+      "choice_mass": 0.9862111210823059,
+      "top_tokens": [
+        [
+          "2",
+          0.4931
+        ],
+        [
+          "1",
+          0.4931
+        ],
+        [
+          " ",
+          0.008
+        ],
+        [
+          "<|im_end|>",
+          0.0023
+        ],
+        [
+          "3",
+          0.0014
+        ]
+      ],
+      "free_response": "2. SHRUB",
+      "metadata": {
+        "chain_index": 0,
+        "foil_chain_index": 1
+      }
+    },
+    {
+      "trial": 35,
+      "target": 2,
+      "reported": 1,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.6513548721064305,
+        "2": 0.3486451278935695
+      },
+      "choice_mass": 0.9893237352371216,
+      "top_tokens": [
+        [
+          "1",
+          0.6444
+        ],
+        [
+          "2",
+          0.3449
+        ],
+        [
+          "<|im_end|>",
+          0.0038
+        ],
+        [
+          " ",
+          0.003
+        ],
+        [
+          "3",
+          0.001
+        ]
+      ],
+      "free_response": "1",
+      "metadata": {
+        "chain_index": 0,
+        "foil_chain_index": 1
+      }
+    },
+    {
+      "trial": 36,
+      "target": 2,
+      "reported": 2,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.37754067650648837,
+        "2": 0.6224593234935116
+      },
+      "choice_mass": 0.9909976720809937,
+      "top_tokens": [
+        [
+          "2",
+          0.6169
+        ],
+        [
+          "1",
+          0.3741
+        ],
+        [
+          " ",
+          0.0032
+        ],
+        [
+          "<|im_end|>",
+          0.0022
+        ],
+        [
+          " IC",
+          0.0009
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 0,
+        "foil_chain_index": 1
+      }
+    },
+    {
+      "trial": 37,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.6513548701761055,
+        "2": 0.34864512982389456
+      },
+      "choice_mass": 0.9913543164730072,
+      "top_tokens": [
+        [
+          "1",
+          0.6457
+        ],
+        [
+          "2",
+          0.3456
+        ],
+        [
+          "<|im_end|>",
+          0.0049
+        ],
+        [
+          " ",
+          0.0014
+        ],
+        [
+          "3",
+          0.001
+        ]
+      ],
+      "free_response": "1",
+      "metadata": {
+        "chain_index": 0,
+        "foil_chain_index": 1
+      }
+    },
+    {
+      "trial": 38,
+      "target": 2,
+      "reported": 2,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.34864514731129714,
+        "2": 0.6513548526887029
+      },
+      "choice_mass": 0.9815136790275574,
+      "top_tokens": [
+        [
+          "2",
+          0.6393
+        ],
+        [
+          "1",
+          0.3422
+        ],
+        [
+          "<|im_end|>",
+          0.0103
+        ],
+        [
+          " ",
+          0.0034
+        ],
+        [
+          " (",
+          0.0017
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 0,
+        "foil_chain_index": 1
+      }
+    },
+    {
+      "trial": 39,
+      "target": 2,
+      "reported": 1,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.622459335434607,
+        "2": 0.37754066456539304
+      },
+      "choice_mass": 0.9871827065944672,
+      "top_tokens": [
+        [
+          "1",
+          0.6145
+        ],
+        [
+          "2",
+          0.3727
+        ],
+        [
+          " ",
+          0.0041
+        ],
+        [
+          "<|im_end|>",
+          0.0025
+        ],
+        [
+          " (",
+          0.0015
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 1,
+        "foil_chain_index": 0
+      }
+    },
+    {
+      "trial": 40,
+      "target": 1,
+      "reported": 2,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.033085978304347285,
+        "2": 0.9669140216956528
+      },
+      "choice_mass": 0.9942178726196289,
+      "top_tokens": [
+        [
+          "2",
+          0.9613
+        ],
+        [
+          "1",
+          0.0329
+        ],
+        [
+          " ",
+          0.0021
+        ],
+        [
+          "<|im_end|>",
+          0.0014
+        ],
+        [
+          " (",
+          0.0005
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 0,
+        "foil_chain_index": 1
+      }
+    },
+    {
+      "trial": 41,
+      "target": 1,
+      "reported": 2,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.29421496377003914,
+        "2": 0.7057850362299608
+      },
+      "choice_mass": 0.9870312809944153,
+      "top_tokens": [
+        [
+          "2",
+          0.6966
+        ],
+        [
+          "1",
+          0.2904
+        ],
+        [
+          "<|im_end|>",
+          0.006
+        ],
+        [
+          " ",
+          0.0028
+        ],
+        [
+          "3",
+          0.0011
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 1,
+        "foil_chain_index": 0
+      }
+    },
+    {
+      "trial": 42,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.5621765051848892,
+        "2": 0.4378234948151109
+      },
+      "choice_mass": 0.9948411881923676,
+      "top_tokens": [
+        [
+          "1",
+          0.5593
+        ],
+        [
+          "2",
+          0.4356
+        ],
+        [
+          " ",
+          0.0018
+        ],
+        [
+          "<|im_end|>",
+          0.0018
+        ],
+        [
+          "3",
+          0.0004
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 0,
+        "foil_chain_index": 1
+      }
+    },
+    {
+      "trial": 43,
+      "target": 1,
+      "reported": 2,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.407333409854465,
+        "2": 0.592666590145535
+      },
+      "choice_mass": 0.9928767681121826,
+      "top_tokens": [
+        [
+          "2",
+          0.5884
+        ],
+        [
+          "1",
+          0.4044
+        ],
+        [
+          " ",
+          0.0031
+        ],
+        [
+          "<|im_end|>",
+          0.0011
+        ],
+        [
+          "3",
+          0.0008
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 1,
+        "foil_chain_index": 0
+      }
+    },
+    {
+      "trial": 44,
+      "target": 1,
+      "reported": 2,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.40733341570221426,
+        "2": 0.5926665842977857
+      },
+      "choice_mass": 0.9913739562034607,
+      "top_tokens": [
+        [
+          "2",
+          0.5876
+        ],
+        [
+          "1",
+          0.4038
+        ],
+        [
+          "<|im_end|>",
+          0.0035
+        ],
+        [
+          " ",
+          0.0024
+        ],
+        [
+          "3",
+          0.0011
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 0,
+        "foil_chain_index": 1
+      }
+    },
+    {
+      "trial": 45,
+      "target": 2,
+      "reported": 1,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.7981867754102014,
+        "2": 0.2018132245897986
+      },
+      "choice_mass": 0.9754950851202011,
+      "top_tokens": [
+        [
+          "1",
+          0.7786
+        ],
+        [
+          "2",
+          0.1969
+        ],
+        [
+          "<|im_end|>",
+          0.0183
+        ],
+        [
+          " ",
+          0.0028
+        ],
+        [
+          " (",
+          0.0016
+        ]
+      ],
+      "free_response": "1",
+      "metadata": {
+        "chain_index": 1,
+        "foil_chain_index": 0
+      }
+    },
+    {
+      "trial": 46,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.8354835499103487,
+        "2": 0.16451645008965127
+      },
+      "choice_mass": 0.9867952615022659,
+      "top_tokens": [
+        [
+          "1",
+          0.8245
+        ],
+        [
+          "2",
+          0.1623
+        ],
+        [
+          "<|im_end|>",
+          0.0063
+        ],
+        [
+          " ",
+          0.0034
+        ],
+        [
+          " (",
+          0.0012
+        ]
+      ],
+      "free_response": "1",
+      "metadata": {
+        "chain_index": 0,
+        "foil_chain_index": 1
+      }
+    },
+    {
+      "trial": 47,
+      "target": 2,
+      "reported": 2,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.3208213219968482,
+        "2": 0.6791786780031518
+      },
+      "choice_mass": 0.9913772940635681,
+      "top_tokens": [
+        [
+          "2",
+          0.6733
+        ],
+        [
+          "1",
+          0.3181
+        ],
+        [
+          "<|im_end|>",
+          0.0024
+        ],
+        [
+          " ",
+          0.0021
+        ],
+        [
+          "3",
+          0.0011
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 1,
+        "foil_chain_index": 0
+      }
+    },
+    {
+      "trial": 48,
+      "target": 2,
+      "reported": 2,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.40733342234636655,
+        "2": 0.5926665776536335
+      },
+      "choice_mass": 0.9921492636203766,
+      "top_tokens": [
+        [
+          "2",
+          0.588
+        ],
+        [
+          "1",
+          0.4041
+        ],
+        [
+          " ",
+          0.0027
+        ],
+        [
+          "<|im_end|>",
+          0.0027
+        ],
+        [
+          "3",
+          0.0007
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 0,
+        "foil_chain_index": 1
+      }
+    },
+    {
+      "trial": 49,
+      "target": 2,
+      "reported": 2,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.2942149740139704,
+        "2": 0.7057850259860297
+      },
+      "choice_mass": 0.9899174273014069,
+      "top_tokens": [
+        [
+          "2",
+          0.6987
+        ],
+        [
+          "1",
+          0.2912
+        ],
+        [
+          "<|im_end|>",
+          0.0053
+        ],
+        [
+          " ",
+          0.0014
+        ],
+        [
+          "3",
+          0.0012
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 1,
+        "foil_chain_index": 0
+      }
+    }
+  ],
+  "metrics": {
+    "accuracy": 0.6,
+    "n_correct": 30,
+    "total": 50,
+    "free_text_bare_digit": 0.9,
+    "mean_p_chosen": 0.6864457018779894,
+    "mean_choice_mass": 0.9902124181389809,
+    "frac_low_mass": 0.0,
+    "response_distribution": {
+      "2": 37,
+      "1": 13
+    }
+  }
+}

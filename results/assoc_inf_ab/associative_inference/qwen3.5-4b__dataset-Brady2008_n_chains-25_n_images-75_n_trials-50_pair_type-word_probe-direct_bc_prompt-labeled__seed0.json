@@ -1,0 +1,1996 @@
+{
+  "run": {
+    "model": {
+      "name": "qwen3.5-4b",
+      "model_id": "Qwen/Qwen3.5-4B",
+      "max_image_size": 512,
+      "max_new_tokens": 100
+    },
+    "task": "associative_inference",
+    "condition": {
+      "dataset": "Brady2008",
+      "pair_type": "word",
+      "probe": "direct_bc",
+      "n_chains": 25,
+      "n_images": 75,
+      "prompt": "labeled",
+      "n_trials": 50
+    },
+    "seed": 0
+  },
+  "config": {
+    "run_name": "assoc_inf_ab",
+    "output_dir": "results",
+    "seeds": [
+      0
+    ],
+    "models": [
+      {
+        "name": "qwen3.5-2b",
+        "model_id": "Qwen/Qwen3.5-2B",
+        "max_image_size": 512,
+        "max_new_tokens": 100
+      },
+      {
+        "name": "qwen3.5-4b",
+        "model_id": "Qwen/Qwen3.5-4B",
+        "max_image_size": 512,
+        "max_new_tokens": 100
+      }
+    ],
+    "tasks": [
+      {
+        "task": "associative_inference",
+        "datasets": [
+          "Brady2008"
+        ],
+        "pair_types": [
+          "image",
+          "word"
+        ],
+        "probe_types": [
+          "inference",
+          "direct_ab",
+          "direct_bc"
+        ],
+        "n_chains": [
+          2,
+          5,
+          25
+        ],
+        "prompts": [
+          "original",
+          "cue_turn",
+          "labeled"
+        ],
+        "n_trials": 50
+      }
+    ]
+  },
+  "provenance": {
+    "config_hash": "d49714f7009d",
+    "gpu": "NVIDIA A100-SXM4-80GB",
+    "git_commit": null,
+    "git_dirty": false,
+    "torch": "2.10.0+cu128",
+    "transformers": "5.17.0"
+  },
+  "elapsed_s": 274.3,
+  "peak_gpu_gb": 10.25,
+  "error": null,
+  "trials": [
+    {
+      "trial": 0,
+      "target": 2,
+      "reported": 1,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.8175744722694618,
+        "2": 0.18242552773053822
+      },
+      "choice_mass": 0.9874264597892761,
+      "top_tokens": [
+        [
+          "1",
+          0.8073
+        ],
+        [
+          "2",
+          0.1801
+        ],
+        [
+          "<|im_end|>",
+          0.0062
+        ],
+        [
+          " ",
+          0.0033
+        ],
+        [
+          "3",
+          0.0016
+        ]
+      ],
+      "free_response": "To determine the correct answer, we need to look at the provided pairs and find the one that includes the cue image.\n\n- The cue image is a slice of salami.\n- We are given two options:\n    - Word 1: PIKE\n    - Word 2: BLOUSE\n- By reviewing the list of pairs, we can find the following connection:\n    - The image of the salami is paired with the word \"BLOUSE\".\n\nTherefore",
+      "metadata": {
+        "chain_index": 18,
+        "foil_chain_index": 22
+      }
+    },
+    {
+      "trial": 1,
+      "target": 2,
+      "reported": 1,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.6513548582061975,
+        "2": 0.3486451417938025
+      },
+      "choice_mass": 0.9909253418445587,
+      "top_tokens": [
+        [
+          "1",
+          0.6454
+        ],
+        [
+          "2",
+          0.3455
+        ],
+        [
+          " ",
+          0.0056
+        ],
+        [
+          "3",
+          0.0014
+        ],
+        [
+          "<|im_end|>",
+          0.0005
+        ]
+      ],
+      "free_response": "To determine the correct answer, we need to find the word that is semantically related to the image provided.\n\n- The image shows a pair of striped socks.\n- Word 1 is \"ELECTRICIAN\". This is a profession and is not related to socks.\n- Word 2 is \"CAN\". This is a type of container and is not related to socks.\n\nBased on the provided options, neither word is directly related to the image of socks. However, in the",
+      "metadata": {
+        "chain_index": 6,
+        "foil_chain_index": 7
+      }
+    },
+    {
+      "trial": 2,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.7057850391057512,
+        "2": 0.29421496089424876
+      },
+      "choice_mass": 0.9862317740917206,
+      "top_tokens": [
+        [
+          "1",
+          0.6961
+        ],
+        [
+          "2",
+          0.2902
+        ],
+        [
+          " ",
+          0.0068
+        ],
+        [
+          "<|im_end|>",
+          0.0041
+        ],
+        [
+          "3",
+          0.001
+        ]
+      ],
+      "free_response": "To determine the correct answer, we need to look at the provided pairs and find the one associated with the cue image.\n\n- The cue image is a glass of Bloody Mary with a celery stalk.\n- We are given two options:\n    - Word 1: KEYBOARD\n    - Word 2: HAMMOCK\n- By reviewing the list of pairs, we can find the following connection:\n    - The image of the Bloody Mary is paired with the word **FIELD**.",
+      "metadata": {
+        "chain_index": 15,
+        "foil_chain_index": 11
+      }
+    },
+    {
+      "trial": 3,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.5621764860424544,
+        "2": 0.4378235139575456
+      },
+      "choice_mass": 0.9846317768096924,
+      "top_tokens": [
+        [
+          "1",
+          0.5535
+        ],
+        [
+          "2",
+          0.4311
+        ],
+        [
+          " ",
+          0.0101
+        ],
+        [
+          "<|im_end|>",
+          0.0018
+        ],
+        [
+          "3",
+          0.0011
+        ]
+      ],
+      "free_response": "To determine the correct word, let's analyze the connection between the cue image and the options.\n\n- The cue image is a beige, corded landline telephone.\n- Word 1 is \"WITNESS\".\n- Word 2 is \"DOORBELL\".\nA landline telephone is a common device used to receive calls at a door, functioning similarly to a doorbell in that it alerts someone to an arrival.\n While a doorbell is specifically for doors, the telephone",
+      "metadata": {
+        "chain_index": 10,
+        "foil_chain_index": 21
+      }
+    },
+    {
+      "trial": 4,
+      "target": 2,
+      "reported": 2,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.437823488709474,
+        "2": 0.5621765112905259
+      },
+      "choice_mass": 0.9859753847122192,
+      "top_tokens": [
+        [
+          "2",
+          0.5543
+        ],
+        [
+          "1",
+          0.4317
+        ],
+        [
+          " ",
+          0.0062
+        ],
+        [
+          "3",
+          0.0037
+        ],
+        [
+          "4",
+          0.0009
+        ]
+      ],
+      "free_response": "To determine the correct answer, we need to find the word that is semantically related to the image provided.\n\n- The cue image is a receipt printer.\n- Word 1 is \"CELLO\". A cello is a large stringed musical instrument.\n- Word 2 is \"POT\". A pot is a container for cooking.\nThere is no direct semantic connection between a receipt printer and either a cello or a pot. However, looking at the provided pairs, we",
+      "metadata": {
+        "chain_index": 21,
+        "foil_chain_index": 11
+      }
+    },
+    {
+      "trial": 5,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.9820137893918404,
+        "2": 0.017986210608159654
+      },
+      "choice_mass": 0.99053462035954,
+      "top_tokens": [
+        [
+          "1",
+          0.9727
+        ],
+        [
+          "2",
+          0.0178
+        ],
+        [
+          " ",
+          0.0051
+        ],
+        [
+          "0",
+          0.0009
+        ],
+        [
+          "<|im_end|>",
+          0.0005
+        ]
+      ],
+      "free_response": "To determine the correct answer, we need to find the word that is semantically related to the image provided.\n\n- The image shows a long, wooden wind instrument with finger holes. This is a type of flute, specifically a fife or a small flute.\n- Let's evaluate the given options:\n    - Word 1: GUITAR. A guitar is a stringed instrument. It is not related to the flute in the image.\n    - Word 2: V",
+      "metadata": {
+        "chain_index": 8,
+        "foil_chain_index": 15
+      }
+    },
+    {
+      "trial": 6,
+      "target": 2,
+      "reported": 2,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.24508501583871886,
+        "2": 0.7549149841612811
+      },
+      "choice_mass": 0.9919528812170029,
+      "top_tokens": [
+        [
+          "2",
+          0.7488
+        ],
+        [
+          "1",
+          0.2431
+        ],
+        [
+          " ",
+          0.0035
+        ],
+        [
+          "3",
+          0.0014
+        ],
+        [
+          "5",
+          0.0005
+        ]
+      ],
+      "free_response": "To determine the correct answer, we need to find the word that is semantically related to the cue image.\n\n- The cue image is a camel.\n- Word 1 is \"SCROLL\". A scroll is a rolled-up document or piece of parchment. There is no direct connection between a camel and a scroll.\n- Word 2 is \"CAFETERIA\". A cafeteria is a place where food is served. Camels are often used as pack animals or for transport in regions where",
+      "metadata": {
+        "chain_index": 9,
+        "foil_chain_index": 2
+      }
+    },
+    {
+      "trial": 7,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.9626731133599009,
+        "2": 0.03732688664009907
+      },
+      "choice_mass": 0.9861137941479683,
+      "top_tokens": [
+        [
+          "1",
+          0.9493
+        ],
+        [
+          "2",
+          0.0368
+        ],
+        [
+          " ",
+          0.0064
+        ],
+        [
+          "<|im_end|>",
+          0.0032
+        ],
+        [
+          "0",
+          0.0015
+        ]
+      ],
+      "free_response": "To determine the correct answer, we need to find the hidden connection between the cue image and the two word options.\n\n- **Cue Image:** The image shows a CPR (Cardiopulmonary Resuscitation) mask, which is a medical device used for emergency resuscitation.\n- **Word 1: OPERATOR**\n- **Word 2: LAMP**\n\nThe connection is based on the word \"OPERATOR\". An operator is a person who operates a machine or",
+      "metadata": {
+        "chain_index": 15,
+        "foil_chain_index": 1
+      }
+    },
+    {
+      "trial": 8,
+      "target": 2,
+      "reported": 1,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.6513548484408527,
+        "2": 0.34864515155914727
+      },
+      "choice_mass": 0.9816003441810608,
+      "top_tokens": [
+        [
+          "1",
+          0.6394
+        ],
+        [
+          "2",
+          0.3422
+        ],
+        [
+          " ",
+          0.0103
+        ],
+        [
+          "3",
+          0.0034
+        ],
+        [
+          "4",
+          0.0007
+        ]
+      ],
+      "free_response": "To determine the correct word, we need to find the hidden connection between the cue image and the options.\n\n- **Cue Image:** The image shows a large, traditional East Asian building, likely a temple or palace.\n- **Word 1: ENGINE**\n- **Word 2: OATMEAL**\n\nThe connection is based on the first letter of each word.\n\n- The cue image is associated with the word **ENGINE**.\n- The word **OATME",
+      "metadata": {
+        "chain_index": 21,
+        "foil_chain_index": 4
+      }
+    },
+    {
+      "trial": 9,
+      "target": 2,
+      "reported": 1,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.9399133511436817,
+        "2": 0.060086648856318314
+      },
+      "choice_mass": 0.9887450784444809,
+      "top_tokens": [
+        [
+          "1",
+          0.9293
+        ],
+        [
+          "2",
+          0.0594
+        ],
+        [
+          " ",
+          0.008
+        ],
+        [
+          "<|im_end|>",
+          0.0008
+        ],
+        [
+          "3",
+          0.0007
+        ]
+      ],
+      "free_response": "1",
+      "metadata": {
+        "chain_index": 11,
+        "foil_chain_index": 5
+      }
+    },
+    {
+      "trial": 10,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.8175744772055993,
+        "2": 0.18242552279440077
+      },
+      "choice_mass": 0.9870999157428741,
+      "top_tokens": [
+        [
+          "1",
+          0.807
+        ],
+        [
+          "2",
+          0.1801
+        ],
+        [
+          "<|im_end|>",
+          0.0048
+        ],
+        [
+          " ",
+          0.0042
+        ],
+        [
+          "3",
+          0.0013
+        ]
+      ],
+      "free_response": "To determine the correct answer, we need to find the image that was paired with the word \"BEAVER\" in the provided sequence.\n\n- The cue image is a white electrical box with a switch.\n- By reviewing the list of pairs, we can locate the image of the electrical box.\n- This image is shown twice in the sequence.\n- The first time it appears, it is paired with the word \"CHIME\".\n- The second time it appears, it is",
+      "metadata": {
+        "chain_index": 12,
+        "foil_chain_index": 10
+      }
+    },
+    {
+      "trial": 11,
+      "target": 2,
+      "reported": 2,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.3775406747410174,
+        "2": 0.6224593252589826
+      },
+      "choice_mass": 0.9838620722293854,
+      "top_tokens": [
+        [
+          "2",
+          0.6124
+        ],
+        [
+          "1",
+          0.3714
+        ],
+        [
+          " ",
+          0.0099
+        ],
+        [
+          "3",
+          0.0022
+        ],
+        [
+          "<|im_end|>",
+          0.0007
+        ]
+      ],
+      "free_response": "To determine the correct answer, I need to find the word that is semantically related to the image provided.\n\n- The image shows a single, round, yellow-orange fruit with a stem, which is identifiable as a persimmon.\n- I will now evaluate the two options:\n    - Word 1: CASH. This word is related to money and has no direct connection to the fruit in the image.\n    - Word 2: RUG. This word is related",
+      "metadata": {
+        "chain_index": 16,
+        "foil_chain_index": 24
+      }
+    },
+    {
+      "trial": 12,
+      "target": 2,
+      "reported": 2,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.04742587263222599,
+        "2": 0.952574127367774
+      },
+      "choice_mass": 0.9935540705919266,
+      "top_tokens": [
+        [
+          "2",
+          0.9464
+        ],
+        [
+          "1",
+          0.0471
+        ],
+        [
+          " ",
+          0.0039
+        ],
+        [
+          "3",
+          0.0006
+        ],
+        [
+          "<|im_end|>",
+          0.0003
+        ]
+      ],
+      "free_response": "To determine the correct word, let's analyze the connection between the cue image and the options.\n\n- The cue image is a wooden dresser with several drawers.\n- Word 1 is \"REEF\". A reef is a natural formation of coral or rock, typically underwater. There is no direct connection between a dresser and a reef.\n- Word 2 is \"SCAPEGOAT\". The word \"scapegoat\" is composed of two parts: \"scape\" and \"goat",
+      "metadata": {
+        "chain_index": 18,
+        "foil_chain_index": 12
+      }
+    },
+    {
+      "trial": 13,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.8933094068176741,
+        "2": 0.10669059318232589
+      },
+      "choice_mass": 0.9913631975650787,
+      "top_tokens": [
+        [
+          "1",
+          0.8856
+        ],
+        [
+          "2",
+          0.1058
+        ],
+        [
+          " ",
+          0.0041
+        ],
+        [
+          "3",
+          0.0014
+        ],
+        [
+          " (",
+          0.0006
+        ]
+      ],
+      "free_response": "To determine the correct word, let's analyze the connection between the cue image and the options.\n\n- The cue image is a pair of hedge shears, which are used for trimming hedges.\n- Word 1 is \"SIGN\".\n- Word 2 is \"ATMOSPHERE\".\nThe word \"SIGN\" can be associated with the image in the context of a \"sign\" for a hedge, such as a sign indicating the name of a hedge or a signpost near",
+      "metadata": {
+        "chain_index": 5,
+        "foil_chain_index": 23
+      }
+    },
+    {
+      "trial": 14,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.9626731136538801,
+        "2": 0.037326886346119935
+      },
+      "choice_mass": 0.9923325516283512,
+      "top_tokens": [
+        [
+          "1",
+          0.9553
+        ],
+        [
+          "2",
+          0.037
+        ],
+        [
+          " ",
+          0.0039
+        ],
+        [
+          "<|im_end|>",
+          0.0007
+        ],
+        [
+          "0",
+          0.0006
+        ]
+      ],
+      "free_response": "1",
+      "metadata": {
+        "chain_index": 1,
+        "foil_chain_index": 8
+      }
+    },
+    {
+      "trial": 15,
+      "target": 1,
+      "reported": 2,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.3486451505395836,
+        "2": 0.6513548494604163
+      },
+      "choice_mass": 0.9872318804264069,
+      "top_tokens": [
+        [
+          "2",
+          0.643
+        ],
+        [
+          "1",
+          0.3442
+        ],
+        [
+          " ",
+          0.0056
+        ],
+        [
+          "<|im_end|>",
+          0.003
+        ],
+        [
+          "3",
+          0.0018
+        ]
+      ],
+      "free_response": "To solve this, we need to find the word that is semantically related to the image of the yellow crane.\n\n- **Word 1: CHAMPAGNE** - This is a type of sparkling wine. It has no direct connection to a crane.\n- **Word 2: YARD** - A crane is a piece of heavy machinery used for lifting and moving heavy objects. The term \"yard\" is commonly used to describe the area where such equipment is stored and operated,",
+      "metadata": {
+        "chain_index": 0,
+        "foil_chain_index": 22
+      }
+    },
+    {
+      "trial": 16,
+      "target": 1,
+      "reported": 2,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.4073334150854173,
+        "2": 0.5926665849145827
+      },
+      "choice_mass": 0.9888893663883209,
+      "top_tokens": [
+        [
+          "2",
+          0.5861
+        ],
+        [
+          "1",
+          0.4028
+        ],
+        [
+          " ",
+          0.0051
+        ],
+        [
+          "3",
+          0.0027
+        ],
+        [
+          "4",
+          0.0008
+        ]
+      ],
+      "free_response": "To determine the correct answer, we need to find the hidden connection between the cue image and the two word options.\n\n- **Cue Image:** The image shows a white intercom or video door station, a device used for communication with visitors at a building's entrance.\n- **Word 1: GHETTO**\n- **Word 2: NOTE**\n\nLet's analyze the potential connections:\n\n- **Connection with GHETTO:** The word \"ghetto\" can be associated with",
+      "metadata": {
+        "chain_index": 21,
+        "foil_chain_index": 15
+      }
+    },
+    {
+      "trial": 17,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.9399133506652049,
+        "2": 0.060086649334795156
+      },
+      "choice_mass": 0.9911540895700455,
+      "top_tokens": [
+        [
+          "1",
+          0.9316
+        ],
+        [
+          "2",
+          0.0596
+        ],
+        [
+          " ",
+          0.0055
+        ],
+        [
+          "3",
+          0.0005
+        ],
+        [
+          "<|im_end|>",
+          0.0004
+        ]
+      ],
+      "free_response": "To determine the correct answer, we need to find the word that is semantically related to the image provided.\n\n- The image shows a black, circular object with a flat top and several small, protruding feet or supports. This object is a common component in vehicles, specifically a car floor mat or a part of a vehicle's interior.\n- Let's evaluate the given options:\n    - Word 1: AUTOMOBILE. An automobile is a car or truck. The object",
+      "metadata": {
+        "chain_index": 4,
+        "foil_chain_index": 21
+      }
+    },
+    {
+      "trial": 18,
+      "target": 2,
+      "reported": 1,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.9046505418246535,
+        "2": 0.09534945817534647
+      },
+      "choice_mass": 0.9933813586831093,
+      "top_tokens": [
+        [
+          "1",
+          0.8987
+        ],
+        [
+          "2",
+          0.0947
+        ],
+        [
+          " ",
+          0.0037
+        ],
+        [
+          "3",
+          0.0011
+        ],
+        [
+          "4",
+          0.0004
+        ]
+      ],
+      "free_response": "To determine the correct word, let's analyze the connection between the cue image and the options.\n\n- The cue image shows a pair of blue footrests, which are commonly used in a gym or fitness setting for leg exercises.\n- Word 1 is \"QUARTER\". A quarter is a coin.\n- Word 2 is \"CITRUS\". Citrus refers to a type of fruit, like oranges or lemons.\n\nThere is no direct semantic link between foot",
+      "metadata": {
+        "chain_index": 10,
+        "foil_chain_index": 8
+      }
+    },
+    {
+      "trial": 19,
+      "target": 1,
+      "reported": 2,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.37754067040605244,
+        "2": 0.6224593295939476
+      },
+      "choice_mass": 0.9926759898662567,
+      "top_tokens": [
+        [
+          "2",
+          0.6179
+        ],
+        [
+          "1",
+          0.3748
+        ],
+        [
+          " ",
+          0.0029
+        ],
+        [
+          "3",
+          0.002
+        ],
+        [
+          "4",
+          0.0006
+        ]
+      ],
+      "free_response": "To determine the correct answer, we need to look at the word pairs provided and find the one that contains the cue image.\n\n- The cue image is a fishing reel.\n- We are given two options:\n    - Word 1: STAKE\n    - Word 2: VILLAIN\n- Looking through the list of pairs, we can find the following connection:\n    - The image of the fishing reel is paired with the word **STAKE**.\n\nTherefore, the",
+      "metadata": {
+        "chain_index": 22,
+        "foil_chain_index": 12
+      }
+    },
+    {
+      "trial": 20,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.9669140208011233,
+        "2": 0.033085979198876694
+      },
+      "choice_mass": 0.990732941776514,
+      "top_tokens": [
+        [
+          "1",
+          0.958
+        ],
+        [
+          "2",
+          0.0328
+        ],
+        [
+          " ",
+          0.005
+        ],
+        [
+          "<|im_end|>",
+          0.0018
+        ],
+        [
+          "3",
+          0.0007
+        ]
+      ],
+      "free_response": "To determine the correct word, let's analyze the connection between the cue image and the options.\n\n- The cue image is a mechanical device, specifically a water meter.\n- The word \"SPIDER\" is associated with the image of a spider.\n- The word \"RUST\" is associated with the image of a cucumber.\n- The connection between the water meter and the word \"SPIDER\" is that the brand name of the water meter is \"SPIDER\".\n\nTherefore,",
+      "metadata": {
+        "chain_index": 11,
+        "foil_chain_index": 17
+      }
+    },
+    {
+      "trial": 21,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.5926665979653497,
+        "2": 0.4073334020346503
+      },
+      "choice_mass": 0.9922349154949188,
+      "top_tokens": [
+        [
+          "1",
+          0.5881
+        ],
+        [
+          "2",
+          0.4042
+        ],
+        [
+          "3",
+          0.0031
+        ],
+        [
+          " ",
+          0.0021
+        ],
+        [
+          "<|im_end|>",
+          0.0005
+        ]
+      ],
+      "free_response": "To determine the correct word, we need to find the hidden connection between the cue image and the options.\n\n- The cue image is a lanyard, which is a strap used to carry an ID badge, keys, or other small items.\n- Word 1 is \"CELERY\".\n- Word 2 is \"COMPUTER\".\n\nThe connection is based on the first letter of each word. The first letter of \"CELERY\" is C, and the first letter of \"",
+      "metadata": {
+        "chain_index": 2,
+        "foil_chain_index": 5
+      }
+    },
+    {
+      "trial": 22,
+      "target": 2,
+      "reported": 2,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.43782350661824015,
+        "2": 0.5621764933817598
+      },
+      "choice_mass": 0.9795413017272949,
+      "top_tokens": [
+        [
+          "2",
+          0.5507
+        ],
+        [
+          "1",
+          0.4289
+        ],
+        [
+          "5",
+          0.0114
+        ],
+        [
+          " ",
+          0.0029
+        ],
+        [
+          "3",
+          0.0029
+        ]
+      ],
+      "free_response": "To determine the correct word, we need to analyze the hidden connections between the words and the images.\n\n- The cue image is a tarantula, which is a type of spider.\n- The word \"FAIRY\" is associated with this image.\n- A fairy is a mythical creature, and a tarantula is a real creature.\n- The word \"PUBLICATION\" is associated with the image of a miniature golf set.\n- A publication is a printed work",
+      "metadata": {
+        "chain_index": 4,
+        "foil_chain_index": 9
+      }
+    },
+    {
+      "trial": 23,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.8519528129617892,
+        "2": 0.1480471870382108
+      },
+      "choice_mass": 0.9876928925514221,
+      "top_tokens": [
+        [
+          "1",
+          0.8415
+        ],
+        [
+          "2",
+          0.1462
+        ],
+        [
+          " ",
+          0.005
+        ],
+        [
+          "3",
+          0.0021
+        ],
+        [
+          "<|im_end|>",
+          0.0013
+        ]
+      ],
+      "free_response": "To determine the correct answer, we need to find the hidden connection between the cue word \"COMET\" and one of the options.\n\n- **Cue Word:** COMET\n- **Option 1:** SHORTS\n- **Option 2:** CASH\n\nLet's analyze the possible connections:\n\n- **COMET and SHORTS:** There is no direct or common association between a comet and shorts.\n- **COMET and CASH:** The word \"COMET\" can",
+      "metadata": {
+        "chain_index": 5,
+        "foil_chain_index": 12
+      }
+    },
+    {
+      "trial": 24,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.9626731136810286,
+        "2": 0.03732688631897145
+      },
+      "choice_mass": 0.9918861389160156,
+      "top_tokens": [
+        [
+          "1",
+          0.9549
+        ],
+        [
+          "2",
+          0.037
+        ],
+        [
+          " ",
+          0.0034
+        ],
+        [
+          "<|im_end|>",
+          0.0018
+        ],
+        [
+          "3",
+          0.0007
+        ]
+      ],
+      "free_response": "To determine the correct answer, we need to find the word that is semantically related to the image shown.\n\n- The cue image is of a wooden walking stick or cane.\n- Let's analyze the options:\n    - Word 1: WHISTLE. A whistle is a small device used to make a loud sound. It is not related to a walking stick.\n    - Word 2: NUCLEUS. A nucleus is the central part of a cell or a",
+      "metadata": {
+        "chain_index": 10,
+        "foil_chain_index": 1
+      }
+    },
+    {
+      "trial": 25,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.7772998523047115,
+        "2": 0.22270014769528845
+      },
+      "choice_mass": 0.984748974442482,
+      "top_tokens": [
+        [
+          "1",
+          0.7654
+        ],
+        [
+          "2",
+          0.2193
+        ],
+        [
+          " ",
+          0.0052
+        ],
+        [
+          "<|im_end|>",
+          0.0052
+        ],
+        [
+          "3",
+          0.0028
+        ]
+      ],
+      "free_response": "1",
+      "metadata": {
+        "chain_index": 23,
+        "foil_chain_index": 13
+      }
+    },
+    {
+      "trial": 26,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.5,
+        "2": 0.5
+      },
+      "choice_mass": 0.9823427796363831,
+      "top_tokens": [
+        [
+          "2",
+          0.4912
+        ],
+        [
+          "1",
+          0.4912
+        ],
+        [
+          "3",
+          0.0062
+        ],
+        [
+          " ",
+          0.0062
+        ],
+        [
+          "<|im_end|>",
+          0.0029
+        ]
+      ],
+      "free_response": "To determine the correct answer, we need to find the word that is semantically related to the image provided.\n\n- The image shows a plate of cinnamon rolls.\n- Word 1 is \"HAMMER\". A hammer is a tool used for building or construction. It is not related to food.\n- Word 2 is \"CUSTARD\". Custard is a dessert made from milk, sugar, and eggs. Cinnamon rolls are a type of sweet pastry, and they are often",
+      "metadata": {
+        "chain_index": 24,
+        "foil_chain_index": 0
+      }
+    },
+    {
+      "trial": 27,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.5926665790038852,
+        "2": 0.4073334209961148
+      },
+      "choice_mass": 0.9949657320976257,
+      "top_tokens": [
+        [
+          "1",
+          0.5897
+        ],
+        [
+          "2",
+          0.4053
+        ],
+        [
+          " ",
+          0.0024
+        ],
+        [
+          "3",
+          0.0007
+        ],
+        [
+          "0",
+          0.0004
+        ]
+      ],
+      "free_response": "To determine the correct word, let's analyze the connection between the cue image and the given options.\n\n- **Cue Image:** The image shows a three-panel room divider or screen. It is made of wood with a red fabric covering.\n- **Word 1: MINT**\n- **Word 2: SPIDER**\nThe connection is based on the word \"BLOUSE\".\n- A \"blouse\" is a type of shirt for women.\n- A",
+      "metadata": {
+        "chain_index": 9,
+        "foil_chain_index": 7
+      }
+    },
+    {
+      "trial": 28,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.9465966686526482,
+        "2": 0.05340333134735171
+      },
+      "choice_mass": 0.9901435524225235,
+      "top_tokens": [
+        [
+          "1",
+          0.9373
+        ],
+        [
+          "2",
+          0.0529
+        ],
+        [
+          " ",
+          0.0043
+        ],
+        [
+          "3",
+          0.0013
+        ],
+        [
+          "<|im_end|>",
+          0.0009
+        ]
+      ],
+      "free_response": "To determine the correct answer, we need to find the word that is semantically related to the image shown.\n\n- The image displays a bicycle brake lever, which is a component of a bicycle.\n- Let's analyze the given options:\n    - Word 1: OUTFIT. An outfit is a set of clothes. A bicycle is not typically considered an outfit.\n    - Word 2: CAVE. A cave is a natural underground space. A bicycle is not related",
+      "metadata": {
+        "chain_index": 1,
+        "foil_chain_index": 18
+      }
+    },
+    {
+      "trial": 29,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.9149009614925384,
+        "2": 0.08509903850746157
+      },
+      "choice_mass": 0.9938779696822166,
+      "top_tokens": [
+        [
+          "1",
+          0.9093
+        ],
+        [
+          "2",
+          0.0846
+        ],
+        [
+          "3",
+          0.0023
+        ],
+        [
+          " ",
+          0.0009
+        ],
+        [
+          "0",
+          0.0006
+        ]
+      ],
+      "free_response": "To determine the correct word, let's analyze the connection between the cue image and the options.\n\n- The cue image is a brass bugle, a musical instrument used for making loud, clear sounds.\n- Word 1 is \"TWEEZERS\". Tweezers are a small tool used for picking up tiny objects. There is no direct connection between a bugle and tweezers.\n- Word 2 is \"FLESH\". The word \"bugle\" is a",
+      "metadata": {
+        "chain_index": 14,
+        "foil_chain_index": 21
+      }
+    },
+    {
+      "trial": 30,
+      "target": 2,
+      "reported": 2,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.4687906160498191,
+        "2": 0.5312093839501809
+      },
+      "choice_mass": 0.9917188286781311,
+      "top_tokens": [
+        [
+          "2",
+          0.5268
+        ],
+        [
+          "1",
+          0.4649
+        ],
+        [
+          " ",
+          0.0046
+        ],
+        [
+          "3",
+          0.0012
+        ],
+        [
+          "<|im_end|>",
+          0.0008
+        ]
+      ],
+      "free_response": "1",
+      "metadata": {
+        "chain_index": 18,
+        "foil_chain_index": 11
+      }
+    },
+    {
+      "trial": 31,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.6513548553308691,
+        "2": 0.34864514466913094
+      },
+      "choice_mass": 0.9874398708343506,
+      "top_tokens": [
+        [
+          "1",
+          0.6432
+        ],
+        [
+          "2",
+          0.3443
+        ],
+        [
+          " ",
+          0.0056
+        ],
+        [
+          "3",
+          0.0034
+        ],
+        [
+          "4",
+          0.0007
+        ]
+      ],
+      "free_response": "To determine the correct answer, we need to find the hidden connection between the cue image and the two options.\n\n- The cue image is a blue barrel.\n- Word 1 is \"DOUGHNUT\".\n- Word 2 is \"COOKBOOK\".\n\nThe connection is based on the word \"BARREL\".\n\n- A \"barrel\" of oil or paint is a common type of barrel.\n- A \"barrel\" of doughnuts is a common way to",
+      "metadata": {
+        "chain_index": 9,
+        "foil_chain_index": 11
+      }
+    },
+    {
+      "trial": 32,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.5312093905676114,
+        "2": 0.4687906094323886
+      },
+      "choice_mass": 0.984266459941864,
+      "top_tokens": [
+        [
+          "1",
+          0.5229
+        ],
+        [
+          "2",
+          0.4614
+        ],
+        [
+          " ",
+          0.0096
+        ],
+        [
+          "3",
+          0.0024
+        ],
+        [
+          "0",
+          0.0007
+        ]
+      ],
+      "free_response": "To determine the correct word, let's analyze the connection between the cue image and the options.\n\n- The cue image is a cardboard cutout of a muscular man.\n- The word \"MOSQUITO\" is associated with this image in the provided pairs.\n- The connection is that a mosquito is a common pest that bites humans, and the cutout depicts a human body, which is what gets bitten.\n- The word \"FINGERNAIL\" is paired with a different",
+      "metadata": {
+        "chain_index": 22,
+        "foil_chain_index": 19
+      }
+    },
+    {
+      "trial": 33,
+      "target": 2,
+      "reported": 2,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.20181323292928388,
+        "2": 0.7981867670707161
+      },
+      "choice_mass": 0.9892705529928207,
+      "top_tokens": [
+        [
+          "2",
+          0.7896
+        ],
+        [
+          "1",
+          0.1996
+        ],
+        [
+          " ",
+          0.0041
+        ],
+        [
+          "3",
+          0.0028
+        ],
+        [
+          "4",
+          0.0009
+        ]
+      ],
+      "free_response": "To determine the correct word, we need to find the hidden connection between the cue image and the options.\n\n- **Cue Image:** The image shows a red and black push lawnmower.\n- **Word 1: ADULT**\n- **Word 2: CASKET**\n\nThe connection is based on the meaning of the words. A lawnmower is a machine used for cutting grass, which is a common outdoor task. A casket is a type of coffin",
+      "metadata": {
+        "chain_index": 3,
+        "foil_chain_index": 7
+      }
+    },
+    {
+      "trial": 34,
+      "target": 2,
+      "reported": 1,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.9046505388705927,
+        "2": 0.09534946112940731
+      },
+      "choice_mass": 0.9949542805552483,
+      "top_tokens": [
+        [
+          "1",
+          0.9001
+        ],
+        [
+          "2",
+          0.0949
+        ],
+        [
+          " ",
+          0.002
+        ],
+        [
+          "3",
+          0.0007
+        ],
+        [
+          "<|im_end|>",
+          0.0007
+        ]
+      ],
+      "free_response": "To determine the correct answer, we need to find the word that is semantically related to the image shown.\n\n- The image displays a statue of a knight in armor, holding a spear.\n- Let's evaluate the given options:\n    - Word 1: STAGE. A stage is a platform for performances. While a knight might be a character on a stage, the word itself doesn't have a direct, defining connection to the image of a knight.\n    - Word",
+      "metadata": {
+        "chain_index": 6,
+        "foil_chain_index": 15
+      }
+    },
+    {
+      "trial": 35,
+      "target": 2,
+      "reported": 1,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.7772998539966897,
+        "2": 0.2227001460033103
+      },
+      "choice_mass": 0.9872918128967285,
+      "top_tokens": [
+        [
+          "1",
+          0.7674
+        ],
+        [
+          "2",
+          0.2199
+        ],
+        [
+          " ",
+          0.0075
+        ],
+        [
+          "3",
+          0.0023
+        ],
+        [
+          " (",
+          0.0005
+        ]
+      ],
+      "free_response": "To determine the correct word, let's analyze the connection between the cue image and the options.\n\n- The cue image is a lion's head.\n- Word 1 is \"NOVEL\".\n- Word 2 is \"PILLOW\".\nThe connection is based on the word \"lion\".\n- \"Lion\" is a type of animal.\n- \"Novel\" is a type of book.\n- \"Pillow\" is a type of bedding.\nThere",
+      "metadata": {
+        "chain_index": 1,
+        "foil_chain_index": 10
+      }
+    },
+    {
+      "trial": 36,
+      "target": 2,
+      "reported": 1,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.5621764943543122,
+        "2": 0.4378235056456878
+      },
+      "choice_mass": 0.9916814565658569,
+      "top_tokens": [
+        [
+          "1",
+          0.5575
+        ],
+        [
+          "2",
+          0.4342
+        ],
+        [
+          " ",
+          0.0048
+        ],
+        [
+          "3",
+          0.0011
+        ],
+        [
+          "0",
+          0.0004
+        ]
+      ],
+      "free_response": "To determine the correct answer, we need to find the word that is semantically related to the image shown.\n\n- The image displays a black lamppost with a red sign attached to it.\n- The sign has the text \"Le Royer\" on it.\n- Let's analyze the given options:\n    - Word 1: MAID. This word is not related to a lamppost or a sign.\n    - Word 2: COUGAR. This",
+      "metadata": {
+        "chain_index": 19,
+        "foil_chain_index": 4
+      }
+    },
+    {
+      "trial": 37,
+      "target": 2,
+      "reported": 2,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.26894144428529626,
+        "2": 0.7310585557147037
+      },
+      "choice_mass": 0.98894864320755,
+      "top_tokens": [
+        [
+          "2",
+          0.723
+        ],
+        [
+          "1",
+          0.266
+        ],
+        [
+          " ",
+          0.0043
+        ],
+        [
+          "<|im_end|>",
+          0.0016
+        ],
+        [
+          "3",
+          0.0016
+        ]
+      ],
+      "free_response": "To determine the correct answer, we need to find the word that is semantically related to the image shown in the cue.\n\n- The cue image displays a container filled with sewing pins.\n- Word 1 is \"TOOL\". A pin is a small tool used for sewing and other crafts.\n- Word 2 is \"HOSE\". A hose is a flexible tube used for conveying fluids or gases, which is not related to the image.\nBased on this, the word \"",
+      "metadata": {
+        "chain_index": 6,
+        "foil_chain_index": 24
+      }
+    },
+    {
+      "trial": 38,
+      "target": 2,
+      "reported": 1,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.7310585549058501,
+        "2": 0.2689414450941498
+      },
+      "choice_mass": 0.9889989495277405,
+      "top_tokens": [
+        [
+          "1",
+          0.723
+        ],
+        [
+          "2",
+          0.266
+        ],
+        [
+          " ",
+          0.0063
+        ],
+        [
+          "<|im_end|>",
+          0.0014
+        ],
+        [
+          "3",
+          0.001
+        ]
+      ],
+      "free_response": "To determine the correct answer, we need to find the image that was paired with the word \"TRICYCLE\" in the provided list.\n\n- The cue image is a brown, wooden rack with multiple hooks, which is a wine rack.\n- Looking through the list of word-image pairs, we can find the following pair:\n    - Word: TRICYCLE (BC pair)\n    - Image: A pair of yellow earplugs.\n- This is not the correct pair",
+      "metadata": {
+        "chain_index": 6,
+        "foil_chain_index": 10
+      }
+    },
+    {
+      "trial": 39,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.798186773660237,
+        "2": 0.20181322633976298
+      },
+      "choice_mass": 0.9864734411239624,
+      "top_tokens": [
+        [
+          "1",
+          0.7874
+        ],
+        [
+          "2",
+          0.1991
+        ],
+        [
+          " ",
+          0.0053
+        ],
+        [
+          "3",
+          0.0025
+        ],
+        [
+          "<|im_end|>",
+          0.0017
+        ]
+      ],
+      "free_response": "1",
+      "metadata": {
+        "chain_index": 17,
+        "foil_chain_index": 14
+      }
+    },
+    {
+      "trial": 40,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.9324533035083165,
+        "2": 0.0675466964916836
+      },
+      "choice_mass": 0.989653043448925,
+      "top_tokens": [
+        [
+          "1",
+          0.9228
+        ],
+        [
+          "2",
+          0.0668
+        ],
+        [
+          " ",
+          0.0043
+        ],
+        [
+          "3",
+          0.0014
+        ],
+        [
+          "<|im_end|>",
+          0.0012
+        ]
+      ],
+      "free_response": "1",
+      "metadata": {
+        "chain_index": 2,
+        "foil_chain_index": 3
+      }
+    },
+    {
+      "trial": 41,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.9046505409729875,
+        "2": 0.09534945902701258
+      },
+      "choice_mass": 0.9866707101464272,
+      "top_tokens": [
+        [
+          "1",
+          0.8926
+        ],
+        [
+          "2",
+          0.0941
+        ],
+        [
+          " ",
+          0.0068
+        ],
+        [
+          "3",
+          0.0022
+        ],
+        [
+          "0",
+          0.0013
+        ]
+      ],
+      "free_response": "1",
+      "metadata": {
+        "chain_index": 13,
+        "foil_chain_index": 2
+      }
+    },
+    {
+      "trial": 42,
+      "target": 2,
+      "reported": 2,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.46879060925697214,
+        "2": 0.5312093907430279
+      },
+      "choice_mass": 0.9912655055522919,
+      "top_tokens": [
+        [
+          "2",
+          0.5266
+        ],
+        [
+          "1",
+          0.4647
+        ],
+        [
+          " ",
+          0.0046
+        ],
+        [
+          "3",
+          0.0017
+        ],
+        [
+          "<|im_end|>",
+          0.0006
+        ]
+      ],
+      "free_response": "To determine the correct word, let's analyze the connection between the cue image and the options.\n\n- The cue image is a seahorse.\n- Word 1 is \"PORCUPINE\". A porcupine is an animal, but it is not related to a seahorse.\n- Word 2 is \"PATH\". A path is a route or way. This is also not directly related to a seahorse.\n\nLet's re-examine the pairs to find",
+      "metadata": {
+        "chain_index": 16,
+        "foil_chain_index": 1
+      }
+    },
+    {
+      "trial": 43,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.8354835437423781,
+        "2": 0.1645164562576219
+      },
+      "choice_mass": 0.9912576079368591,
+      "top_tokens": [
+        [
+          "1",
+          0.8282
+        ],
+        [
+          "2",
+          0.1631
+        ],
+        [
+          " ",
+          0.0038
+        ],
+        [
+          "3",
+          0.0014
+        ],
+        [
+          "<|im_end|>",
+          0.0012
+        ]
+      ],
+      "free_response": "To determine the correct answer, we need to find the word that is semantically related to the image.\n\n- The cue image is a fish, specifically a brook trout.\n- Word 1 is \"NEWSPAPER\". A newspaper is not related to a fish.\n- Word 2 is \"SKILLET\". A skillet is a type of pan used for cooking.\n\nThe connection is that a fish is a common food item that can be cooked in a skillet. Therefore,",
+      "metadata": {
+        "chain_index": 11,
+        "foil_chain_index": 2
+      }
+    },
+    {
+      "trial": 44,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.9820137892696047,
+        "2": 0.01798621073039535
+      },
+      "choice_mass": 0.9946038853377104,
+      "top_tokens": [
+        [
+          "1",
+          0.9767
+        ],
+        [
+          "2",
+          0.0179
+        ],
+        [
+          " ",
+          0.0027
+        ],
+        [
+          "0",
+          0.0009
+        ],
+        [
+          "3",
+          0.0005
+        ]
+      ],
+      "free_response": "To determine the correct answer, we need to find the word that has a hidden connection to the cue image.\n\n- The cue image is a small, blue, house-shaped object. This is a birdhouse.\n- We are given two options: `STREAM` and `COMPUTER`.\n- Let's look for a connection between the word \"STREAM\" and the image of a birdhouse.\n- A \"stream\" can refer to a small river or a flow of water.",
+      "metadata": {
+        "chain_index": 7,
+        "foil_chain_index": 21
+      }
+    },
+    {
+      "trial": 45,
+      "target": 2,
+      "reported": 1,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.8807970749142575,
+        "2": 0.1192029250857425
+      },
+      "choice_mass": 0.9919980242848396,
+      "top_tokens": [
+        [
+          "1",
+          0.8737
+        ],
+        [
+          "2",
+          0.1182
+        ],
+        [
+          " ",
+          0.004
+        ],
+        [
+          "3",
+          0.0019
+        ],
+        [
+          "4",
+          0.0003
+        ]
+      ],
+      "free_response": "To determine the correct answer, we need to find the word that is semantically related to the cue image.\n\n- The cue image is a \"Happy Birthday\" party decoration.\n- Let's analyze the options:\n    - Word 1: STATUE. A statue is a sculpture of a person or animal. It is not related to a birthday party.\n    - Word 2: DIRT. Dirt is soil or earth. It is not related to a birthday party.",
+      "metadata": {
+        "chain_index": 20,
+        "foil_chain_index": 9
+      }
+    },
+    {
+      "trial": 46,
+      "target": 2,
+      "reported": 2,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.3775406623618611,
+        "2": 0.6224593376381389
+      },
+      "choice_mass": 0.9880002737045288,
+      "top_tokens": [
+        [
+          "2",
+          0.615
+        ],
+        [
+          "1",
+          0.373
+        ],
+        [
+          " ",
+          0.0077
+        ],
+        [
+          "3",
+          0.0013
+        ],
+        [
+          "<|im_end|>",
+          0.0012
+        ]
+      ],
+      "free_response": "To determine the correct answer, I need to find the image that was paired with the word \"NOOSE\" in the provided list.\n\n- The first image in the list is a rainbow-colored hat with a propeller on top.\n- The second image is a blue lamp with a gold base.\n- The third image is a black stapler.\n- The fourth image is a green, circular rug with a floral pattern.\n- The fifth image is a blue rubber mallet with",
+      "metadata": {
+        "chain_index": 1,
+        "foil_chain_index": 22
+      }
+    },
+    {
+      "trial": 47,
+      "target": 2,
+      "reported": 1,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.5926665903931113,
+        "2": 0.4073334096068887
+      },
+      "choice_mass": 0.9875034987926483,
+      "top_tokens": [
+        [
+          "1",
+          0.5853
+        ],
+        [
+          "2",
+          0.4022
+        ],
+        [
+          " ",
+          0.0057
+        ],
+        [
+          "<|im_end|>",
+          0.0022
+        ],
+        [
+          "3",
+          0.0015
+        ]
+      ],
+      "free_response": "To determine the correct word, we need to find the image that was paired with the word \"MEDICINE\" in the provided sequence.\n\n- The cue image is a baby bottle.\n- We will scan the list of word-image pairs to find the one with the word \"MEDICINE\".\n- The pair is: `Word: MEDICINE(BC pair)` followed by the image of the baby bottle.\n\nThis shows that the baby bottle image is paired with the word \"",
+      "metadata": {
+        "chain_index": 11,
+        "foil_chain_index": 2
+      }
+    },
+    {
+      "trial": 48,
+      "target": 1,
+      "reported": 2,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.34864512982389456,
+        "2": 0.6513548701761055
+      },
+      "choice_mass": 0.9913543164730072,
+      "top_tokens": [
+        [
+          "2",
+          0.6457
+        ],
+        [
+          "1",
+          0.3456
+        ],
+        [
+          " ",
+          0.0044
+        ],
+        [
+          "<|im_end|>",
+          0.0014
+        ],
+        [
+          "3",
+          0.0012
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 18,
+        "foil_chain_index": 2
+      }
+    },
+    {
+      "trial": 49,
+      "target": 2,
+      "reported": 1,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.6513548554636722,
+        "2": 0.34864514453632783
+      },
+      "choice_mass": 0.9814489781856537,
+      "top_tokens": [
+        [
+          "1",
+          0.6393
+        ],
+        [
+          "2",
+          0.3422
+        ],
+        [
+          " ",
+          0.0133
+        ],
+        [
+          "3",
+          0.002
+        ],
+        [
+          "<|im_end|>",
+          0.0012
+        ]
+      ],
+      "free_response": "To determine the correct word, let's analyze the hidden connections between the words and the images.\n\n- **Word 1: THORN** is paired with an image of a pincushion. A pincushion is used to hold sewing pins, which have sharp points that can be considered like thorns.\n- **Word 2: SHORE** is paired with an image of a life preserver (a lifebuoy). A life preserver is a safety device used",
+      "metadata": {
+        "chain_index": 10,
+        "foil_chain_index": 11
+      }
+    }
+  ],
+  "metrics": {
+    "accuracy": 0.68,
+    "n_correct": 34,
+    "total": 50,
+    "free_text_bare_digit": 0.16,
+    "mean_p_chosen": 0.7563650825132572,
+    "mean_choice_mass": 0.9889729857444763,
+    "frac_low_mass": 0.0,
+    "response_distribution": {
+      "1": 36,
+      "2": 14
+    }
+  }
+}

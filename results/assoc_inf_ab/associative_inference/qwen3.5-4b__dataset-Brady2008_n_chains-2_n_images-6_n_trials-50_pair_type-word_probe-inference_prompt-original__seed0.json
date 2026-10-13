@@ -1,0 +1,2646 @@
+{
+  "run": {
+    "model": {
+      "name": "qwen3.5-4b",
+      "model_id": "Qwen/Qwen3.5-4B",
+      "max_image_size": 512,
+      "max_new_tokens": 100
+    },
+    "task": "associative_inference",
+    "condition": {
+      "dataset": "Brady2008",
+      "pair_type": "word",
+      "probe": "inference",
+      "n_chains": 2,
+      "n_images": 6,
+      "prompt": "original",
+      "n_trials": 50
+    },
+    "seed": 0
+  },
+  "config": {
+    "run_name": "assoc_inf_ab",
+    "output_dir": "results",
+    "seeds": [
+      0
+    ],
+    "models": [
+      {
+        "name": "qwen3.5-2b",
+        "model_id": "Qwen/Qwen3.5-2B",
+        "max_image_size": 512,
+        "max_new_tokens": 100
+      },
+      {
+        "name": "qwen3.5-4b",
+        "model_id": "Qwen/Qwen3.5-4B",
+        "max_image_size": 512,
+        "max_new_tokens": 100
+      }
+    ],
+    "tasks": [
+      {
+        "task": "associative_inference",
+        "datasets": [
+          "Brady2008"
+        ],
+        "pair_types": [
+          "image",
+          "word"
+        ],
+        "probe_types": [
+          "inference",
+          "direct_ab",
+          "direct_bc"
+        ],
+        "n_chains": [
+          2,
+          5,
+          25
+        ],
+        "prompts": [
+          "original",
+          "cue_turn",
+          "labeled"
+        ],
+        "n_trials": 50
+      }
+    ]
+  },
+  "provenance": {
+    "config_hash": "d49714f7009d",
+    "gpu": "NVIDIA A100-SXM4-80GB",
+    "git_commit": null,
+    "git_dirty": false,
+    "torch": "2.10.0+cu128",
+    "transformers": "5.17.0"
+  },
+  "elapsed_s": 88.2,
+  "peak_gpu_gb": 9.27,
+  "error": null,
+  "trials": [
+    {
+      "trial": 0,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.5,
+        "2": 0.5
+      },
+      "choice_mass": 0.9899594187736511,
+      "top_tokens": [
+        [
+          "2",
+          0.495
+        ],
+        [
+          "1",
+          0.495
+        ],
+        [
+          "<|im_end|>",
+          0.0043
+        ],
+        [
+          " ",
+          0.0029
+        ],
+        [
+          "3",
+          0.001
+        ]
+      ],
+      "free_response": "To solve this, we need to find the word that is indirectly associated with the cue image.\n\n- The cue image is a miniature, decorated house, likely a Christmas village scene.\n- We are given two words to choose from: HAYSTACK and PHYSICIAN.\n- Let's look for connections between the cue image and each word.\n\n---\n\n- **Connection to PHYSICIAN:** A physician is a doctor. There is no direct or obvious connection between a miniature house and",
+      "metadata": {
+        "chain_index": 0,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/Aceramichous2.jpg",
+          "name": "Aceramichous2.jpg",
+          "role": "A",
+          "chain_index": 0
+        },
+        "correct_option": {
+          "role": "C",
+          "chain_index": 0
+        },
+        "foil_option": {
+          "role": "C",
+          "chain_index": 1
+        }
+      }
+    },
+    {
+      "trial": 1,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.6224593408278466,
+        "2": 0.3775406591721534
+      },
+      "choice_mass": 0.9950923919677734,
+      "top_tokens": [
+        [
+          "1",
+          0.6194
+        ],
+        [
+          "2",
+          0.3757
+        ],
+        [
+          "<|im_end|>",
+          0.0017
+        ],
+        [
+          " ",
+          0.0012
+        ],
+        [
+          "3",
+          0.0005
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 0,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/zip-a.jpg",
+          "name": "zip-a.jpg",
+          "role": "A",
+          "chain_index": 0
+        },
+        "correct_option": {
+          "role": "C",
+          "chain_index": 0
+        },
+        "foil_option": {
+          "role": "C",
+          "chain_index": 1
+        }
+      }
+    },
+    {
+      "trial": 2,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.5621765014014535,
+        "2": 0.4378234985985465
+      },
+      "choice_mass": 0.9950138032436371,
+      "top_tokens": [
+        [
+          "1",
+          0.5594
+        ],
+        [
+          "2",
+          0.4356
+        ],
+        [
+          " ",
+          0.0016
+        ],
+        [
+          "<|im_end|>",
+          0.0016
+        ],
+        [
+          "0",
+          0.0005
+        ]
+      ],
+      "free_response": "1",
+      "metadata": {
+        "chain_index": 1,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/26421583.thl.jpg",
+          "name": "26421583.thl.jpg",
+          "role": "A",
+          "chain_index": 1
+        },
+        "correct_option": {
+          "role": "C",
+          "chain_index": 1
+        },
+        "foil_option": {
+          "role": "C",
+          "chain_index": 0
+        }
+      }
+    },
+    {
+      "trial": 3,
+      "target": 2,
+      "reported": 2,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.437823509018147,
+        "2": 0.562176490981853
+      },
+      "choice_mass": 0.993893563747406,
+      "top_tokens": [
+        [
+          "2",
+          0.5587
+        ],
+        [
+          "1",
+          0.4351
+        ],
+        [
+          "<|im_end|>",
+          0.0033
+        ],
+        [
+          " ",
+          0.001
+        ],
+        [
+          "3",
+          0.0007
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 1,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/Arake4.jpg",
+          "name": "Arake4.jpg",
+          "role": "A",
+          "chain_index": 1
+        },
+        "correct_option": {
+          "role": "C",
+          "chain_index": 1
+        },
+        "foil_option": {
+          "role": "C",
+          "chain_index": 0
+        }
+      }
+    },
+    {
+      "trial": 4,
+      "target": 1,
+      "reported": 2,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.3486451425374265,
+        "2": 0.6513548574625735
+      },
+      "choice_mass": 0.994949072599411,
+      "top_tokens": [
+        [
+          "2",
+          0.6481
+        ],
+        [
+          "1",
+          0.3469
+        ],
+        [
+          " ",
+          0.0018
+        ],
+        [
+          "3",
+          0.0014
+        ],
+        [
+          "<|im_end|>",
+          0.0004
+        ]
+      ],
+      "free_response": "To solve this, we need to find the hidden connections between the items and words.\n\n- **Image A (Nautical Clock):** This is a piece of equipment used on a ship.\n- **Image B (Fruit Goblet):** This is a type of drinking glass.\n- **Image C (Peanut):** This is a type of food.\n- **Image D (Wooden Basket):** This is a container for holding items.\n\nNow let's look at the word",
+      "metadata": {
+        "chain_index": 1,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/Apeanut3.jpg",
+          "name": "Apeanut3.jpg",
+          "role": "A",
+          "chain_index": 1
+        },
+        "correct_option": {
+          "role": "C",
+          "chain_index": 1
+        },
+        "foil_option": {
+          "role": "C",
+          "chain_index": 0
+        }
+      }
+    },
+    {
+      "trial": 5,
+      "target": 2,
+      "reported": 1,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.5312093762819248,
+        "2": 0.46879062371807523
+      },
+      "choice_mass": 0.9966898858547211,
+      "top_tokens": [
+        [
+          "1",
+          0.5295
+        ],
+        [
+          "2",
+          0.4672
+        ],
+        [
+          "<|im_end|>",
+          0.0013
+        ],
+        [
+          " ",
+          0.0008
+        ],
+        [
+          "3",
+          0.0005
+        ]
+      ],
+      "free_response": "1",
+      "metadata": {
+        "chain_index": 1,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/26455774.thl.jpg",
+          "name": "26455774.thl.jpg",
+          "role": "A",
+          "chain_index": 1
+        },
+        "correct_option": {
+          "role": "C",
+          "chain_index": 1
+        },
+        "foil_option": {
+          "role": "C",
+          "chain_index": 0
+        }
+      }
+    },
+    {
+      "trial": 6,
+      "target": 2,
+      "reported": 1,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.5926666065574258,
+        "2": 0.40733339344257424
+      },
+      "choice_mass": 0.9925969541072845,
+      "top_tokens": [
+        [
+          "1",
+          0.5883
+        ],
+        [
+          "2",
+          0.4043
+        ],
+        [
+          " ",
+          0.0031
+        ],
+        [
+          "3",
+          0.0013
+        ],
+        [
+          " (",
+          0.0007
+        ]
+      ],
+      "free_response": "To determine the correct answer, we need to trace the connections between the words and the images.\n\n- The cue image is of Tower Bridge in London.\n- From the provided pairs, we know that the image of the robot (Image B) is associated with the word \"PLAZA\".\n- We also know that the image of the cinnamon roll (Image C) is associated with the word \"SKIN\".\n- The image of Tower Bridge (Image A) is not directly paired",
+      "metadata": {
+        "chain_index": 1,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/Abridge9.jpg",
+          "name": "Abridge9.jpg",
+          "role": "A",
+          "chain_index": 1
+        },
+        "correct_option": {
+          "role": "C",
+          "chain_index": 1
+        },
+        "foil_option": {
+          "role": "C",
+          "chain_index": 0
+        }
+      }
+    },
+    {
+      "trial": 7,
+      "target": 1,
+      "reported": 2,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.4687906213606439,
+        "2": 0.5312093786393561
+      },
+      "choice_mass": 0.9939277172088623,
+      "top_tokens": [
+        [
+          "2",
+          0.528
+        ],
+        [
+          "1",
+          0.4659
+        ],
+        [
+          " ",
+          0.0022
+        ],
+        [
+          "<|im_end|>",
+          0.0014
+        ],
+        [
+          "3",
+          0.0012
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 1,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/ACOLUMN5.jpg",
+          "name": "ACOLUMN5.jpg",
+          "role": "A",
+          "chain_index": 1
+        },
+        "correct_option": {
+          "role": "C",
+          "chain_index": 1
+        },
+        "foil_option": {
+          "role": "C",
+          "chain_index": 0
+        }
+      }
+    },
+    {
+      "trial": 8,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.5,
+        "2": 0.5
+      },
+      "choice_mass": 0.991229772567749,
+      "top_tokens": [
+        [
+          "2",
+          0.4956
+        ],
+        [
+          "1",
+          0.4956
+        ],
+        [
+          " ",
+          0.0029
+        ],
+        [
+          "<|im_end|>",
+          0.0026
+        ],
+        [
+          "3",
+          0.0011
+        ]
+      ],
+      "free_response": "To determine the correct answer, we need to trace the connections between the words and the images based on the provided pairs.\n\n- The cue image is a trumpet.\n- From the first pair, we know that the trumpet (image A) is associated with the word ARTERY.\n- From the second pair, we know that the drum (image B) is associated with the word FRIEND.\n- The question asks for an *indirect* association. This means we are looking for",
+      "metadata": {
+        "chain_index": 0,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/ABORKEHOR.jpg",
+          "name": "ABORKEHOR.jpg",
+          "role": "A",
+          "chain_index": 0
+        },
+        "correct_option": {
+          "role": "C",
+          "chain_index": 0
+        },
+        "foil_option": {
+          "role": "C",
+          "chain_index": 1
+        }
+      }
+    },
+    {
+      "trial": 9,
+      "target": 2,
+      "reported": 2,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.40733341436814385,
+        "2": 0.5926665856318561
+      },
+      "choice_mass": 0.9934743642807007,
+      "top_tokens": [
+        [
+          "2",
+          0.5888
+        ],
+        [
+          "1",
+          0.4047
+        ],
+        [
+          "<|im_end|>",
+          0.0027
+        ],
+        [
+          " ",
+          0.0021
+        ],
+        [
+          "3",
+          0.0008
+        ]
+      ],
+      "free_response": "To determine the correct answer, we need to trace the connections between the words and the images based on the provided pairs.\n\n- The cue image is a green tray with a rooster on it. This corresponds to image C.\n- We are looking for a word that is *indirectly* associated with this image.\n- Let's follow the chain of connections:\n    - Image C (rooster tray) is part of the (BC) pair.\n    - The (",
+      "metadata": {
+        "chain_index": 1,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/APICTURE.jpg",
+          "name": "APICTURE.jpg",
+          "role": "A",
+          "chain_index": 1
+        },
+        "correct_option": {
+          "role": "C",
+          "chain_index": 1
+        },
+        "foil_option": {
+          "role": "C",
+          "chain_index": 0
+        }
+      }
+    },
+    {
+      "trial": 10,
+      "target": 2,
+      "reported": 1,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.5,
+        "2": 0.5
+      },
+      "choice_mass": 0.9959651231765747,
+      "top_tokens": [
+        [
+          "2",
+          0.498
+        ],
+        [
+          "1",
+          0.498
+        ],
+        [
+          " ",
+          0.0018
+        ],
+        [
+          "3",
+          0.0007
+        ],
+        [
+          "5",
+          0.0003
+        ]
+      ],
+      "free_response": "To determine the correct answer, we need to follow the chain of associations established in the initial pairs.\n\n- The first pair is (Monkey, Squash).\n- The second pair is (Squash, Duster).\n- The third pair is (Duster, Baseball).\n- The fourth pair is (Baseball, Wasp).\n\nThe cue image is a school bus. We need to find which word is indirectly associated with it.\n\n- The word \"WASP\"",
+      "metadata": {
+        "chain_index": 1,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/schoolbus.jpg",
+          "name": "schoolbus.jpg",
+          "role": "A",
+          "chain_index": 1
+        },
+        "correct_option": {
+          "role": "C",
+          "chain_index": 1
+        },
+        "foil_option": {
+          "role": "C",
+          "chain_index": 0
+        }
+      }
+    },
+    {
+      "trial": 11,
+      "target": 1,
+      "reported": 2,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.4687906084718319,
+        "2": 0.5312093915281682
+      },
+      "choice_mass": 0.9938533008098602,
+      "top_tokens": [
+        [
+          "2",
+          0.5279
+        ],
+        [
+          "1",
+          0.4659
+        ],
+        [
+          " ",
+          0.0024
+        ],
+        [
+          "<|im_end|>",
+          0.0024
+        ],
+        [
+          "3",
+          0.0004
+        ]
+      ],
+      "free_response": "To solve this, we need to find the hidden connection between the items in the pairs and then link that connection to the cue image.\n\n- The first pair is a **lanyard** and a **wooden mallet**.\n- The second pair is a **saxophone** and a **DB-9 connector**.\n- The third pair is the **wooden mallet** and a **DB-9 connector**.\n\nThe common thread is that all three items (lany",
+      "metadata": {
+        "chain_index": 0,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/Lanyard.jpg",
+          "name": "Lanyard.jpg",
+          "role": "A",
+          "chain_index": 0
+        },
+        "correct_option": {
+          "role": "C",
+          "chain_index": 0
+        },
+        "foil_option": {
+          "role": "C",
+          "chain_index": 1
+        }
+      }
+    },
+    {
+      "trial": 12,
+      "target": 2,
+      "reported": 1,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.7310585514914791,
+        "2": 0.2689414485085208
+      },
+      "choice_mass": 0.9932894110679626,
+      "top_tokens": [
+        [
+          "1",
+          0.7262
+        ],
+        [
+          "2",
+          0.2671
+        ],
+        [
+          " ",
+          0.0018
+        ],
+        [
+          "<|im_end|>",
+          0.0016
+        ],
+        [
+          "3",
+          0.0016
+        ]
+      ],
+      "free_response": "1",
+      "metadata": {
+        "chain_index": 1,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/AEASEL22.jpg",
+          "name": "AEASEL22.jpg",
+          "role": "A",
+          "chain_index": 1
+        },
+        "correct_option": {
+          "role": "C",
+          "chain_index": 1
+        },
+        "foil_option": {
+          "role": "C",
+          "chain_index": 0
+        }
+      }
+    },
+    {
+      "trial": 13,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.5312093747325609,
+        "2": 0.4687906252674391
+      },
+      "choice_mass": 0.9945657253265381,
+      "top_tokens": [
+        [
+          "1",
+          0.5283
+        ],
+        [
+          "2",
+          0.4662
+        ],
+        [
+          " ",
+          0.0022
+        ],
+        [
+          "<|im_end|>",
+          0.0008
+        ],
+        [
+          " (",
+          0.0007
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 0,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/ABROWNBAG.jpg",
+          "name": "ABROWNBAG.jpg",
+          "role": "A",
+          "chain_index": 0
+        },
+        "correct_option": {
+          "role": "C",
+          "chain_index": 0
+        },
+        "foil_option": {
+          "role": "C",
+          "chain_index": 1
+        }
+      }
+    },
+    {
+      "trial": 14,
+      "target": 2,
+      "reported": 2,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.40733340722697164,
+        "2": 0.5926665927730284
+      },
+      "choice_mass": 0.9945717751979828,
+      "top_tokens": [
+        [
+          "2",
+          0.5894
+        ],
+        [
+          "1",
+          0.4051
+        ],
+        [
+          " ",
+          0.0013
+        ],
+        [
+          "3",
+          0.0011
+        ],
+        [
+          "<|im_end|>",
+          0.0009
+        ]
+      ],
+      "free_response": "To solve this, we need to find the hidden connections between the items and words.\n\n- The first image shows a bottle of what appears to be balsamic vinegar or a similar dark liquid, surrounded by autumn leaves.\n- The second image is a child's car seat with a plaid pattern.\n- The third image is a set of colorful, translucent scarves.\n- The fourth image is a paint roller.\n\nLet's analyze the connections:\n\n- **Image 1 (",
+      "metadata": {
+        "chain_index": 0,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/Aperfumebottl.jpg",
+          "name": "Aperfumebottl.jpg",
+          "role": "A",
+          "chain_index": 0
+        },
+        "correct_option": {
+          "role": "C",
+          "chain_index": 0
+        },
+        "foil_option": {
+          "role": "C",
+          "chain_index": 1
+        }
+      }
+    },
+    {
+      "trial": 15,
+      "target": 2,
+      "reported": 2,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.2942149703760055,
+        "2": 0.7057850296239945
+      },
+      "choice_mass": 0.9925843179225922,
+      "top_tokens": [
+        [
+          "2",
+          0.7006
+        ],
+        [
+          "1",
+          0.292
+        ],
+        [
+          " ",
+          0.0042
+        ],
+        [
+          "3",
+          0.0009
+        ],
+        [
+          "<|im_end|>",
+          0.0005
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 0,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/AGLASSBAL.jpg",
+          "name": "AGLASSBAL.jpg",
+          "role": "A",
+          "chain_index": 0
+        },
+        "correct_option": {
+          "role": "C",
+          "chain_index": 0
+        },
+        "foil_option": {
+          "role": "C",
+          "chain_index": 1
+        }
+      }
+    },
+    {
+      "trial": 16,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.5,
+        "2": 0.5
+      },
+      "choice_mass": 0.9904148578643799,
+      "top_tokens": [
+        [
+          "2",
+          0.4952
+        ],
+        [
+          "1",
+          0.4952
+        ],
+        [
+          "<|im_end|>",
+          0.0062
+        ],
+        [
+          " ",
+          0.0016
+        ],
+        [
+          "3",
+          0.0005
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 1,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/26427867.thl.jpg",
+          "name": "26427867.thl.jpg",
+          "role": "A",
+          "chain_index": 1
+        },
+        "correct_option": {
+          "role": "C",
+          "chain_index": 1
+        },
+        "foil_option": {
+          "role": "C",
+          "chain_index": 0
+        }
+      }
+    },
+    {
+      "trial": 17,
+      "target": 2,
+      "reported": 1,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.5621764853432033,
+        "2": 0.4378235146567967
+      },
+      "choice_mass": 0.9911356568336487,
+      "top_tokens": [
+        [
+          "1",
+          0.5572
+        ],
+        [
+          "2",
+          0.4339
+        ],
+        [
+          "<|im_end|>",
+          0.0043
+        ],
+        [
+          " ",
+          0.0033
+        ],
+        [
+          "3",
+          0.0003
+        ]
+      ],
+      "free_response": "1",
+      "metadata": {
+        "chain_index": 0,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/Afoodproces22.jpg",
+          "name": "Afoodproces22.jpg",
+          "role": "A",
+          "chain_index": 0
+        },
+        "correct_option": {
+          "role": "C",
+          "chain_index": 0
+        },
+        "foil_option": {
+          "role": "C",
+          "chain_index": 1
+        }
+      }
+    },
+    {
+      "trial": 18,
+      "target": 1,
+      "reported": 2,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.348645153906088,
+        "2": 0.651354846093912
+      },
+      "choice_mass": 0.993622213602066,
+      "top_tokens": [
+        [
+          "2",
+          0.6472
+        ],
+        [
+          "1",
+          0.3464
+        ],
+        [
+          " ",
+          0.0034
+        ],
+        [
+          "3",
+          0.0012
+        ],
+        [
+          "<|im_end|>",
+          0.0004
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 1,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/gameboy.jpg",
+          "name": "gameboy.jpg",
+          "role": "A",
+          "chain_index": 1
+        },
+        "correct_option": {
+          "role": "C",
+          "chain_index": 1
+        },
+        "foil_option": {
+          "role": "C",
+          "chain_index": 0
+        }
+      }
+    },
+    {
+      "trial": 19,
+      "target": 2,
+      "reported": 1,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.5926665916262394,
+        "2": 0.4073334083737607
+      },
+      "choice_mass": 0.9920812547206879,
+      "top_tokens": [
+        [
+          "1",
+          0.588
+        ],
+        [
+          "2",
+          0.4041
+        ],
+        [
+          " ",
+          0.0035
+        ],
+        [
+          "3",
+          0.0015
+        ],
+        [
+          "<|im_end|>",
+          0.0008
+        ]
+      ],
+      "free_response": "To solve this, we need to find the hidden connection between the items in the pairs and then see which word is associated with that connection.\n\n- The first pair is a **walnut** and a **crowbar**.\n- The second pair is a **bowling ball** and a **kiwi**.\n- The third pair is a **crowbar** and a **kiwi**.\n- The word **PIANO** is associated with the third pair.\n- The word **",
+      "metadata": {
+        "chain_index": 1,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/M15589.jpg",
+          "name": "M15589.jpg",
+          "role": "A",
+          "chain_index": 1
+        },
+        "correct_option": {
+          "role": "C",
+          "chain_index": 1
+        },
+        "foil_option": {
+          "role": "C",
+          "chain_index": 0
+        }
+      }
+    },
+    {
+      "trial": 20,
+      "target": 2,
+      "reported": 1,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.5621765010429417,
+        "2": 0.43782349895705835
+      },
+      "choice_mass": 0.9958475828170776,
+      "top_tokens": [
+        [
+          "1",
+          0.5598
+        ],
+        [
+          "2",
+          0.436
+        ],
+        [
+          " ",
+          0.0016
+        ],
+        [
+          "3",
+          0.001
+        ],
+        [
+          "<|im_end|>",
+          0.0005
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 1,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/greenbeans.jpg",
+          "name": "greenbeans.jpg",
+          "role": "A",
+          "chain_index": 1
+        },
+        "correct_option": {
+          "role": "C",
+          "chain_index": 1
+        },
+        "foil_option": {
+          "role": "C",
+          "chain_index": 0
+        }
+      }
+    },
+    {
+      "trial": 21,
+      "target": 1,
+      "reported": 2,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.3775406657679483,
+        "2": 0.6224593342320517
+      },
+      "choice_mass": 0.9956675171852112,
+      "top_tokens": [
+        [
+          "2",
+          0.6198
+        ],
+        [
+          "1",
+          0.3759
+        ],
+        [
+          " ",
+          0.0014
+        ],
+        [
+          "<|im_end|>",
+          0.0014
+        ],
+        [
+          "3",
+          0.0004
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 0,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/Astroboscope5.jpg",
+          "name": "Astroboscope5.jpg",
+          "role": "A",
+          "chain_index": 0
+        },
+        "correct_option": {
+          "role": "C",
+          "chain_index": 0
+        },
+        "foil_option": {
+          "role": "C",
+          "chain_index": 1
+        }
+      }
+    },
+    {
+      "trial": 22,
+      "target": 2,
+      "reported": 2,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.4687906132199784,
+        "2": 0.5312093867800216
+      },
+      "choice_mass": 0.991856724023819,
+      "top_tokens": [
+        [
+          "2",
+          0.5269
+        ],
+        [
+          "1",
+          0.465
+        ],
+        [
+          " ",
+          0.0028
+        ],
+        [
+          "<|im_end|>",
+          0.0022
+        ],
+        [
+          "3",
+          0.0012
+        ]
+      ],
+      "free_response": "To determine the correct answer, we need to follow the chain of associations established in the previous steps.\n\n- The first image is a Jack-o'-lantern.\n- The second image is a pair of oars.\n- The third image is a small elephant figurine.\n- The fourth image is an oil lamp.\n- The word \"PERSON\" is associated with the fourth image (the oil lamp).\n- The word \"LION\" is associated with the third image (",
+      "metadata": {
+        "chain_index": 0,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/AHALLOWE3.jpg",
+          "name": "AHALLOWE3.jpg",
+          "role": "A",
+          "chain_index": 0
+        },
+        "correct_option": {
+          "role": "C",
+          "chain_index": 0
+        },
+        "foil_option": {
+          "role": "C",
+          "chain_index": 1
+        }
+      }
+    },
+    {
+      "trial": 23,
+      "target": 1,
+      "reported": 2,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.43782349183644026,
+        "2": 0.5621765081635598
+      },
+      "choice_mass": 0.992725670337677,
+      "top_tokens": [
+        [
+          "2",
+          0.5581
+        ],
+        [
+          "1",
+          0.4346
+        ],
+        [
+          " ",
+          0.0038
+        ],
+        [
+          "<|im_end|>",
+          0.0012
+        ],
+        [
+          "3",
+          0.0006
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 0,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/ACRICKET2.jpg",
+          "name": "ACRICKET2.jpg",
+          "role": "A",
+          "chain_index": 0
+        },
+        "correct_option": {
+          "role": "C",
+          "chain_index": 0
+        },
+        "foil_option": {
+          "role": "C",
+          "chain_index": 1
+        }
+      }
+    },
+    {
+      "trial": 24,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.5,
+        "2": 0.5
+      },
+      "choice_mass": 0.990817666053772,
+      "top_tokens": [
+        [
+          "2",
+          0.4954
+        ],
+        [
+          "1",
+          0.4954
+        ],
+        [
+          "<|im_end|>",
+          0.0049
+        ],
+        [
+          " ",
+          0.0018
+        ],
+        [
+          "3",
+          0.001
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 1,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/8249141.thl.jpg",
+          "name": "8249141.thl.jpg",
+          "role": "A",
+          "chain_index": 1
+        },
+        "correct_option": {
+          "role": "C",
+          "chain_index": 1
+        },
+        "foil_option": {
+          "role": "C",
+          "chain_index": 0
+        }
+      }
+    },
+    {
+      "trial": 25,
+      "target": 1,
+      "reported": 2,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.46879063459228826,
+        "2": 0.5312093654077118
+      },
+      "choice_mass": 0.9916559159755707,
+      "top_tokens": [
+        [
+          "2",
+          0.5268
+        ],
+        [
+          "1",
+          0.4649
+        ],
+        [
+          "<|im_end|>",
+          0.0046
+        ],
+        [
+          " ",
+          0.0013
+        ],
+        [
+          "3",
+          0.0008
+        ]
+      ],
+      "free_response": "To determine the correct answer, we need to follow the chain of associations established in the initial pairs.\n\n- The first pair links the image of the mistletoe ornament with the word **TUBE**.\n- The second pair links the image of the orange construction sign with the word **BOAT**.\n- The third pair links the image of the orange object with the word **TUBE**.\n- The fourth pair links the image of the orange object with the word **BOAT**.",
+      "metadata": {
+        "chain_index": 1,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/gymbars.jpg",
+          "name": "gymbars.jpg",
+          "role": "A",
+          "chain_index": 1
+        },
+        "correct_option": {
+          "role": "C",
+          "chain_index": 1
+        },
+        "foil_option": {
+          "role": "C",
+          "chain_index": 0
+        }
+      }
+    },
+    {
+      "trial": 26,
+      "target": 1,
+      "reported": 2,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.26894143920222846,
+        "2": 0.7310585607977715
+      },
+      "choice_mass": 0.9960980117321014,
+      "top_tokens": [
+        [
+          "2",
+          0.7282
+        ],
+        [
+          "1",
+          0.2679
+        ],
+        [
+          " ",
+          0.0014
+        ],
+        [
+          "<|im_end|>",
+          0.0009
+        ],
+        [
+          "3",
+          0.0006
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 0,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/Ahumidifier.jpg",
+          "name": "Ahumidifier.jpg",
+          "role": "A",
+          "chain_index": 0
+        },
+        "correct_option": {
+          "role": "C",
+          "chain_index": 0
+        },
+        "foil_option": {
+          "role": "C",
+          "chain_index": 1
+        }
+      }
+    },
+    {
+      "trial": 27,
+      "target": 1,
+      "reported": 2,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.43782348427176593,
+        "2": 0.5621765157282341
+      },
+      "choice_mass": 0.9948736131191254,
+      "top_tokens": [
+        [
+          "2",
+          0.5593
+        ],
+        [
+          "1",
+          0.4356
+        ],
+        [
+          "<|im_end|>",
+          0.0026
+        ],
+        [
+          " ",
+          0.0008
+        ],
+        [
+          "3",
+          0.0007
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 1,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/Ascale60.jpg",
+          "name": "Ascale60.jpg",
+          "role": "A",
+          "chain_index": 1
+        },
+        "correct_option": {
+          "role": "C",
+          "chain_index": 1
+        },
+        "foil_option": {
+          "role": "C",
+          "chain_index": 0
+        }
+      }
+    },
+    {
+      "trial": 28,
+      "target": 2,
+      "reported": 1,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.5,
+        "2": 0.5
+      },
+      "choice_mass": 0.9931218028068542,
+      "top_tokens": [
+        [
+          "2",
+          0.4966
+        ],
+        [
+          "1",
+          0.4966
+        ],
+        [
+          " ",
+          0.0018
+        ],
+        [
+          "<|im_end|>",
+          0.0016
+        ],
+        [
+          "3",
+          0.0014
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 0,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/AAIRPORTC.jpg",
+          "name": "AAIRPORTC.jpg",
+          "role": "A",
+          "chain_index": 0
+        },
+        "correct_option": {
+          "role": "C",
+          "chain_index": 0
+        },
+        "foil_option": {
+          "role": "C",
+          "chain_index": 1
+        }
+      }
+    },
+    {
+      "trial": 29,
+      "target": 2,
+      "reported": 2,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.46879063389316034,
+        "2": 0.5312093661068397
+      },
+      "choice_mass": 0.9929564893245697,
+      "top_tokens": [
+        [
+          "2",
+          0.5275
+        ],
+        [
+          "1",
+          0.4655
+        ],
+        [
+          "<|im_end|>",
+          0.0028
+        ],
+        [
+          " ",
+          0.0024
+        ],
+        [
+          "3",
+          0.0008
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 1,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/Acastingladl2.jpg",
+          "name": "Acastingladl2.jpg",
+          "role": "A",
+          "chain_index": 1
+        },
+        "correct_option": {
+          "role": "C",
+          "chain_index": 1
+        },
+        "foil_option": {
+          "role": "C",
+          "chain_index": 0
+        }
+      }
+    },
+    {
+      "trial": 30,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.5312093615973101,
+        "2": 0.46879063840268986
+      },
+      "choice_mass": 0.9916316866874695,
+      "top_tokens": [
+        [
+          "1",
+          0.5268
+        ],
+        [
+          "2",
+          0.4649
+        ],
+        [
+          "<|im_end|>",
+          0.0035
+        ],
+        [
+          " ",
+          0.0022
+        ],
+        [
+          "3",
+          0.0008
+        ]
+      ],
+      "free_response": "To solve this, we need to find the hidden connections between the items and words.\n\n- **Item A (Light Switch):** The symbol on the switch is for a \"ground fault circuit interrupter\" (GFCI), which protects against electric shock.\n- **Item B (US Flag):** This is the national flag of the United States.\n- **Item C (Trowel):** A small hand shovel, often used for gardening or construction.\n- **Item D (D",
+      "metadata": {
+        "chain_index": 1,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/ATROWEL2.jpg",
+          "name": "ATROWEL2.jpg",
+          "role": "A",
+          "chain_index": 1
+        },
+        "correct_option": {
+          "role": "C",
+          "chain_index": 1
+        },
+        "foil_option": {
+          "role": "C",
+          "chain_index": 0
+        }
+      }
+    },
+    {
+      "trial": 31,
+      "target": 1,
+      "reported": 2,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.4378235020094179,
+        "2": 0.5621764979905821
+      },
+      "choice_mass": 0.9943066239356995,
+      "top_tokens": [
+        [
+          "2",
+          0.559
+        ],
+        [
+          "1",
+          0.4353
+        ],
+        [
+          "<|im_end|>",
+          0.0023
+        ],
+        [
+          " ",
+          0.0018
+        ],
+        [
+          "3",
+          0.0007
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 1,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/ATOILBAG2.jpg",
+          "name": "ATOILBAG2.jpg",
+          "role": "A",
+          "chain_index": 1
+        },
+        "correct_option": {
+          "role": "C",
+          "chain_index": 1
+        },
+        "foil_option": {
+          "role": "C",
+          "chain_index": 0
+        }
+      }
+    },
+    {
+      "trial": 32,
+      "target": 2,
+      "reported": 2,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.32082131072164216,
+        "2": 0.6791786892783578
+      },
+      "choice_mass": 0.9938249886035919,
+      "top_tokens": [
+        [
+          "2",
+          0.675
+        ],
+        [
+          "1",
+          0.3188
+        ],
+        [
+          "<|im_end|>",
+          0.0028
+        ],
+        [
+          " ",
+          0.0017
+        ],
+        [
+          "3",
+          0.0009
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 0,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/ACAMLENSE.jpg",
+          "name": "ACAMLENSE.jpg",
+          "role": "A",
+          "chain_index": 0
+        },
+        "correct_option": {
+          "role": "C",
+          "chain_index": 0
+        },
+        "foil_option": {
+          "role": "C",
+          "chain_index": 1
+        }
+      }
+    },
+    {
+      "trial": 33,
+      "target": 1,
+      "reported": 2,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.06008664711609459,
+        "2": 0.9399133528839054
+      },
+      "choice_mass": 0.9958219416439533,
+      "top_tokens": [
+        [
+          "2",
+          0.936
+        ],
+        [
+          "1",
+          0.0598
+        ],
+        [
+          "<|im_end|>",
+          0.0014
+        ],
+        [
+          " ",
+          0.0009
+        ],
+        [
+          "3",
+          0.0007
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 0,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/Amixer29.jpg",
+          "name": "Amixer29.jpg",
+          "role": "A",
+          "chain_index": 0
+        },
+        "correct_option": {
+          "role": "C",
+          "chain_index": 0
+        },
+        "foil_option": {
+          "role": "C",
+          "chain_index": 1
+        }
+      }
+    },
+    {
+      "trial": 34,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.7772998654245633,
+        "2": 0.22270013457543664
+      },
+      "choice_mass": 0.9938319772481918,
+      "top_tokens": [
+        [
+          "1",
+          0.7725
+        ],
+        [
+          "2",
+          0.2213
+        ],
+        [
+          " ",
+          0.0019
+        ],
+        [
+          "3",
+          0.001
+        ],
+        [
+          "0",
+          0.001
+        ]
+      ],
+      "free_response": "To solve this, we need to find the hidden connection between the items in the pairs and then link that connection to the cue image.\n\n- **Pair A-B:** The image is a wine rack, and the word is \"PEANUT BUTTER\".\n- **Pair B-C:** The image is a jar of peanut butter, and the word is \"SHRUB\".\n- **Pair C-D:** The image is a red toolbox, and the word is \"WOUND\".",
+      "metadata": {
+        "chain_index": 0,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/26425112.thl.jpg",
+          "name": "26425112.thl.jpg",
+          "role": "A",
+          "chain_index": 0
+        },
+        "correct_option": {
+          "role": "C",
+          "chain_index": 0
+        },
+        "foil_option": {
+          "role": "C",
+          "chain_index": 1
+        }
+      }
+    },
+    {
+      "trial": 35,
+      "target": 2,
+      "reported": 2,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.4073333976624881,
+        "2": 0.5926666023375119
+      },
+      "choice_mass": 0.9935782253742218,
+      "top_tokens": [
+        [
+          "2",
+          0.5889
+        ],
+        [
+          "1",
+          0.4047
+        ],
+        [
+          " ",
+          0.0019
+        ],
+        [
+          "<|im_end|>",
+          0.0019
+        ],
+        [
+          "3",
+          0.0011
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 0,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/Aspeakers4.jpg",
+          "name": "Aspeakers4.jpg",
+          "role": "A",
+          "chain_index": 0
+        },
+        "correct_option": {
+          "role": "C",
+          "chain_index": 0
+        },
+        "foil_option": {
+          "role": "C",
+          "chain_index": 1
+        }
+      }
+    },
+    {
+      "trial": 36,
+      "target": 2,
+      "reported": 2,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.437823483741971,
+        "2": 0.562176516258029
+      },
+      "choice_mass": 0.9929290115833282,
+      "top_tokens": [
+        [
+          "2",
+          0.5582
+        ],
+        [
+          "1",
+          0.4347
+        ],
+        [
+          " ",
+          0.0023
+        ],
+        [
+          "<|im_end|>",
+          0.0014
+        ],
+        [
+          "3",
+          0.0011
+        ]
+      ],
+      "free_response": "To solve this, we need to find the hidden connection between the items in the pairs and then link that connection to the cue image.\n\n- The first pair is a ring and a cleaning product.\n- The second pair is lentils and a parachute.\n- The third pair is the same cleaning product and the same parachute.\n- The word \"ICING\" is associated with the parachute.\n- The word \"GIFT\" is associated with the ring.\n\nThe hidden connection is",
+      "metadata": {
+        "chain_index": 0,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/22883664.thl.jpg",
+          "name": "22883664.thl.jpg",
+          "role": "A",
+          "chain_index": 0
+        },
+        "correct_option": {
+          "role": "C",
+          "chain_index": 0
+        },
+        "foil_option": {
+          "role": "C",
+          "chain_index": 1
+        }
+      }
+    },
+    {
+      "trial": 37,
+      "target": 2,
+      "reported": 2,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.4073333983695586,
+        "2": 0.5926666016304414
+      },
+      "choice_mass": 0.9934684038162231,
+      "top_tokens": [
+        [
+          "2",
+          0.5888
+        ],
+        [
+          "1",
+          0.4047
+        ],
+        [
+          "<|im_end|>",
+          0.0031
+        ],
+        [
+          " ",
+          0.0021
+        ],
+        [
+          "3",
+          0.0005
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 0,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/ACATCAGE.jpg",
+          "name": "ACATCAGE.jpg",
+          "role": "A",
+          "chain_index": 0
+        },
+        "correct_option": {
+          "role": "C",
+          "chain_index": 0
+        },
+        "foil_option": {
+          "role": "C",
+          "chain_index": 1
+        }
+      }
+    },
+    {
+      "trial": 38,
+      "target": 2,
+      "reported": 2,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.4378235073566255,
+        "2": 0.5621764926433745
+      },
+      "choice_mass": 0.9923844039440155,
+      "top_tokens": [
+        [
+          "2",
+          0.5579
+        ],
+        [
+          "1",
+          0.4345
+        ],
+        [
+          "<|im_end|>",
+          0.0048
+        ],
+        [
+          " ",
+          0.0014
+        ],
+        [
+          "3",
+          0.0004
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 0,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/26375611.thl.jpg",
+          "name": "26375611.thl.jpg",
+          "role": "A",
+          "chain_index": 0
+        },
+        "correct_option": {
+          "role": "C",
+          "chain_index": 0
+        },
+        "foil_option": {
+          "role": "C",
+          "chain_index": 1
+        }
+      }
+    },
+    {
+      "trial": 39,
+      "target": 2,
+      "reported": 1,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.5312093772440031,
+        "2": 0.468790622755997
+      },
+      "choice_mass": 0.9946959912776947,
+      "top_tokens": [
+        [
+          "1",
+          0.5284
+        ],
+        [
+          "2",
+          0.4663
+        ],
+        [
+          " ",
+          0.0015
+        ],
+        [
+          "3",
+          0.0008
+        ],
+        [
+          "0",
+          0.0006
+        ]
+      ],
+      "free_response": "To determine the correct answer, we need to trace the connections between the words and the images.\n\n- The cue image is a bench.\n- The word \"MEDAL\" is associated with the image of the electric heater (Image 2).\n- The word \"VEST\" is associated with the image of the golf tee holder (Image 1).\n- The image of the bench (Image 3) is associated with the image of the electric heater (Image 2).\n\nFollowing",
+      "metadata": {
+        "chain_index": 1,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/ABLAKBEN2.jpg",
+          "name": "ABLAKBEN2.jpg",
+          "role": "A",
+          "chain_index": 1
+        },
+        "correct_option": {
+          "role": "C",
+          "chain_index": 1
+        },
+        "foil_option": {
+          "role": "C",
+          "chain_index": 0
+        }
+      }
+    },
+    {
+      "trial": 40,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.7057850360793326,
+        "2": 0.29421496392066737
+      },
+      "choice_mass": 0.9943074584007263,
+      "top_tokens": [
+        [
+          "1",
+          0.7018
+        ],
+        [
+          "2",
+          0.2925
+        ],
+        [
+          " ",
+          0.0025
+        ],
+        [
+          "<|im_end|>",
+          0.0011
+        ],
+        [
+          "3",
+          0.0005
+        ]
+      ],
+      "free_response": "To determine the correct answer, we need to follow the chain of associations established in the previous turn.\n\n- The cue image is a gumball machine.\n- The word associated with the gumball machine is **HONEY**.\n- The word associated with **HONEY** is **UNIFORM**.\n- The question asks for the word that is *indirectly* associated with the gumball machine.\n- Since the connection is Gumball Machine \u2192 HONEY \u2192",
+      "metadata": {
+        "chain_index": 0,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/gumballmachine.jpg",
+          "name": "gumballmachine.jpg",
+          "role": "A",
+          "chain_index": 0
+        },
+        "correct_option": {
+          "role": "C",
+          "chain_index": 0
+        },
+        "foil_option": {
+          "role": "C",
+          "chain_index": 1
+        }
+      }
+    },
+    {
+      "trial": 41,
+      "target": 1,
+      "reported": 2,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.4073334161898581,
+        "2": 0.5926665838101419
+      },
+      "choice_mass": 0.9905749261379242,
+      "top_tokens": [
+        [
+          "2",
+          0.5871
+        ],
+        [
+          "1",
+          0.4035
+        ],
+        [
+          "<|im_end|>",
+          0.0051
+        ],
+        [
+          " ",
+          0.0019
+        ],
+        [
+          "3",
+          0.0009
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 1,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/22824840.thl.jpg",
+          "name": "22824840.thl.jpg",
+          "role": "A",
+          "chain_index": 1
+        },
+        "correct_option": {
+          "role": "C",
+          "chain_index": 1
+        },
+        "foil_option": {
+          "role": "C",
+          "chain_index": 0
+        }
+      }
+    },
+    {
+      "trial": 42,
+      "target": 1,
+      "reported": 2,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.2018132268025797,
+        "2": 0.7981867731974203
+      },
+      "choice_mass": 0.9977417588233948,
+      "top_tokens": [
+        [
+          "2",
+          0.7964
+        ],
+        [
+          "1",
+          0.2014
+        ],
+        [
+          "3",
+          0.0006
+        ],
+        [
+          " ",
+          0.0006
+        ],
+        [
+          "<|im_end|>",
+          0.0005
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 0,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/Afuse11.jpg",
+          "name": "Afuse11.jpg",
+          "role": "A",
+          "chain_index": 0
+        },
+        "correct_option": {
+          "role": "C",
+          "chain_index": 0
+        },
+        "foil_option": {
+          "role": "C",
+          "chain_index": 1
+        }
+      }
+    },
+    {
+      "trial": 43,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.5926666050932418,
+        "2": 0.40733339490675824
+      },
+      "choice_mass": 0.9938395023345947,
+      "top_tokens": [
+        [
+          "1",
+          0.589
+        ],
+        [
+          "2",
+          0.4048
+        ],
+        [
+          " ",
+          0.0019
+        ],
+        [
+          "<|im_end|>",
+          0.0017
+        ],
+        [
+          "3",
+          0.0009
+        ]
+      ],
+      "free_response": "1",
+      "metadata": {
+        "chain_index": 1,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/Aangel37.jpg",
+          "name": "Aangel37.jpg",
+          "role": "A",
+          "chain_index": 1
+        },
+        "correct_option": {
+          "role": "C",
+          "chain_index": 1
+        },
+        "foil_option": {
+          "role": "C",
+          "chain_index": 0
+        }
+      }
+    },
+    {
+      "trial": 44,
+      "target": 2,
+      "reported": 2,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.40733340754896724,
+        "2": 0.5926665924510328
+      },
+      "choice_mass": 0.9923983514308929,
+      "top_tokens": [
+        [
+          "2",
+          0.5882
+        ],
+        [
+          "1",
+          0.4042
+        ],
+        [
+          " ",
+          0.004
+        ],
+        [
+          "<|im_end|>",
+          0.0015
+        ],
+        [
+          "3",
+          0.0009
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 0,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/26439297.thl.jpg",
+          "name": "26439297.thl.jpg",
+          "role": "A",
+          "chain_index": 0
+        },
+        "correct_option": {
+          "role": "C",
+          "chain_index": 0
+        },
+        "foil_option": {
+          "role": "C",
+          "chain_index": 1
+        }
+      }
+    },
+    {
+      "trial": 45,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.5926665977735759,
+        "2": 0.40733340222642406
+      },
+      "choice_mass": 0.9923568069934845,
+      "top_tokens": [
+        [
+          "1",
+          0.5881
+        ],
+        [
+          "2",
+          0.4042
+        ],
+        [
+          "<|im_end|>",
+          0.0045
+        ],
+        [
+          " ",
+          0.0013
+        ],
+        [
+          "3",
+          0.0004
+        ]
+      ],
+      "free_response": "1",
+      "metadata": {
+        "chain_index": 1,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/panteneshampoing.jpg",
+          "name": "panteneshampoing.jpg",
+          "role": "A",
+          "chain_index": 1
+        },
+        "correct_option": {
+          "role": "C",
+          "chain_index": 1
+        },
+        "foil_option": {
+          "role": "C",
+          "chain_index": 0
+        }
+      }
+    },
+    {
+      "trial": 46,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.622459337822397,
+        "2": 0.377540662177603
+      },
+      "choice_mass": 0.9918874204158783,
+      "top_tokens": [
+        [
+          "1",
+          0.6174
+        ],
+        [
+          "2",
+          0.3745
+        ],
+        [
+          "<|im_end|>",
+          0.0042
+        ],
+        [
+          " ",
+          0.0015
+        ],
+        [
+          "0",
+          0.0006
+        ]
+      ],
+      "free_response": "1",
+      "metadata": {
+        "chain_index": 0,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/Abellows4.jpg",
+          "name": "Abellows4.jpg",
+          "role": "A",
+          "chain_index": 0
+        },
+        "correct_option": {
+          "role": "C",
+          "chain_index": 0
+        },
+        "foil_option": {
+          "role": "C",
+          "chain_index": 1
+        }
+      }
+    },
+    {
+      "trial": 47,
+      "target": 1,
+      "reported": 2,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.3486451486076002,
+        "2": 0.6513548513923998
+      },
+      "choice_mass": 0.9945113956928253,
+      "top_tokens": [
+        [
+          "2",
+          0.6478
+        ],
+        [
+          "1",
+          0.3467
+        ],
+        [
+          " ",
+          0.0014
+        ],
+        [
+          "<|im_end|>",
+          0.0014
+        ],
+        [
+          "3",
+          0.0011
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 1,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/ASECCAME3.jpg",
+          "name": "ASECCAME3.jpg",
+          "role": "A",
+          "chain_index": 1
+        },
+        "correct_option": {
+          "role": "C",
+          "chain_index": 1
+        },
+        "foil_option": {
+          "role": "C",
+          "chain_index": 0
+        }
+      }
+    },
+    {
+      "trial": 48,
+      "target": 2,
+      "reported": 2,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.32082130265945846,
+        "2": 0.6791786973405415
+      },
+      "choice_mass": 0.9946040213108063,
+      "top_tokens": [
+        [
+          "2",
+          0.6755
+        ],
+        [
+          "1",
+          0.3191
+        ],
+        [
+          " ",
+          0.0015
+        ],
+        [
+          "<|im_end|>",
+          0.001
+        ],
+        [
+          "3",
+          0.001
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 0,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/AAMBULAN7.jpg",
+          "name": "AAMBULAN7.jpg",
+          "role": "A",
+          "chain_index": 0
+        },
+        "correct_option": {
+          "role": "C",
+          "chain_index": 0
+        },
+        "foil_option": {
+          "role": "C",
+          "chain_index": 1
+        }
+      }
+    },
+    {
+      "trial": 49,
+      "target": 2,
+      "reported": 2,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.37754065327184827,
+        "2": 0.6224593467281517
+      },
+      "choice_mass": 0.9935873746871948,
+      "top_tokens": [
+        [
+          "2",
+          0.6185
+        ],
+        [
+          "1",
+          0.3751
+        ],
+        [
+          " ",
+          0.0017
+        ],
+        [
+          "<|im_end|>",
+          0.0017
+        ],
+        [
+          "3",
+          0.0014
+        ]
+      ],
+      "free_response": "To solve this, we need to find the indirect connection between the cue image and the two options.\n\n- The cue image is a **Backspace** key.\n- Let's look for connections to the word **COMB**:\n    - A backspace key is used to delete the last character typed.\n    - The word \"backspace\" contains the letters \"B\", \"A\", \"C\", \"S\", \"P\", \"E\".\n    - The word \"COM",
+      "metadata": {
+        "chain_index": 1,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/ABACKSPAC.jpg",
+          "name": "ABACKSPAC.jpg",
+          "role": "A",
+          "chain_index": 1
+        },
+        "correct_option": {
+          "role": "C",
+          "chain_index": 1
+        },
+        "foil_option": {
+          "role": "C",
+          "chain_index": 0
+        }
+      }
+    }
+  ],
+  "metrics": {
+    "accuracy": 0.54,
+    "n_correct": 27,
+    "total": 50,
+    "free_text_bare_digit": 0.66,
+    "mean_p_chosen": 0.5991697063646464,
+    "mean_choice_mass": 0.9935362768918276,
+    "frac_low_mass": 0.0,
+    "response_distribution": {
+      "2": 28,
+      "1": 22
+    }
+  }
+}

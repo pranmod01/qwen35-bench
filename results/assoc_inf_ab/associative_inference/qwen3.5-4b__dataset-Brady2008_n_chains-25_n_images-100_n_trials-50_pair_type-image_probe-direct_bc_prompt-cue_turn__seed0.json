@@ -1,0 +1,1996 @@
+{
+  "run": {
+    "model": {
+      "name": "qwen3.5-4b",
+      "model_id": "Qwen/Qwen3.5-4B",
+      "max_image_size": 512,
+      "max_new_tokens": 100
+    },
+    "task": "associative_inference",
+    "condition": {
+      "dataset": "Brady2008",
+      "pair_type": "image",
+      "probe": "direct_bc",
+      "n_chains": 25,
+      "n_images": 100,
+      "prompt": "cue_turn",
+      "n_trials": 50
+    },
+    "seed": 0
+  },
+  "config": {
+    "run_name": "assoc_inf_ab",
+    "output_dir": "results",
+    "seeds": [
+      0
+    ],
+    "models": [
+      {
+        "name": "qwen3.5-2b",
+        "model_id": "Qwen/Qwen3.5-2B",
+        "max_image_size": 512,
+        "max_new_tokens": 100
+      },
+      {
+        "name": "qwen3.5-4b",
+        "model_id": "Qwen/Qwen3.5-4B",
+        "max_image_size": 512,
+        "max_new_tokens": 100
+      }
+    ],
+    "tasks": [
+      {
+        "task": "associative_inference",
+        "datasets": [
+          "Brady2008"
+        ],
+        "pair_types": [
+          "image",
+          "word"
+        ],
+        "probe_types": [
+          "inference",
+          "direct_ab",
+          "direct_bc"
+        ],
+        "n_chains": [
+          2,
+          5,
+          25
+        ],
+        "prompts": [
+          "original",
+          "cue_turn",
+          "labeled"
+        ],
+        "n_trials": 50
+      }
+    ]
+  },
+  "provenance": {
+    "config_hash": "d49714f7009d",
+    "gpu": "NVIDIA A100-SXM4-80GB",
+    "git_commit": null,
+    "git_dirty": false,
+    "torch": "2.10.0+cu128",
+    "transformers": "5.17.0"
+  },
+  "elapsed_s": 213.8,
+  "peak_gpu_gb": 10.59,
+  "error": null,
+  "trials": [
+    {
+      "trial": 0,
+      "target": 2,
+      "reported": 1,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.5621765025620417,
+        "2": 0.4378234974379583
+      },
+      "choice_mass": 0.9938773214817047,
+      "top_tokens": [
+        [
+          "1",
+          0.5587
+        ],
+        [
+          "2",
+          0.4351
+        ],
+        [
+          "3",
+          0.0026
+        ],
+        [
+          "<|im_end|>",
+          0.0014
+        ],
+        [
+          " ",
+          0.0014
+        ]
+      ],
+      "free_response": "To determine the correct pair, I will examine the provided images and their connections.\n\n- The cue image is a single slice of salami.\n- The first image (1) is a whole potato.\n- The second image (2) is an old, worn briefcase.\n- In the initial sequence of image pairs, the salami slice was shown as part of an \"(AB pair)\".\n- In the second sequence, which contains the \"BC pair\" connections, the sal",
+      "metadata": {
+        "chain_index": 18,
+        "foil_chain_index": 22
+      }
+    },
+    {
+      "trial": 1,
+      "target": 2,
+      "reported": 2,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.08509904251310556,
+        "2": 0.9149009574868945
+      },
+      "choice_mass": 0.9988474547863007,
+      "top_tokens": [
+        [
+          "2",
+          0.9138
+        ],
+        [
+          "1",
+          0.085
+        ],
+        [
+          "3",
+          0.0006
+        ],
+        [
+          " ",
+          0.0001
+        ],
+        [
+          "4",
+          0.0001
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 6,
+        "foil_chain_index": 7
+      }
+    },
+    {
+      "trial": 2,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.7310585636734271,
+        "2": 0.2689414363265728
+      },
+      "choice_mass": 0.9923601746559143,
+      "top_tokens": [
+        [
+          "1",
+          0.7255
+        ],
+        [
+          "2",
+          0.2669
+        ],
+        [
+          "3",
+          0.0038
+        ],
+        [
+          "<|im_end|>",
+          0.002
+        ],
+        [
+          " ",
+          0.0008
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 15,
+        "foil_chain_index": 11
+      }
+    },
+    {
+      "trial": 3,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.8175744710338082,
+        "2": 0.18242552896619174
+      },
+      "choice_mass": 0.9881136566400528,
+      "top_tokens": [
+        [
+          "1",
+          0.8079
+        ],
+        [
+          "2",
+          0.1803
+        ],
+        [
+          "3",
+          0.0079
+        ],
+        [
+          "<|im_end|>",
+          0.0016
+        ],
+        [
+          " ",
+          0.0014
+        ]
+      ],
+      "free_response": "To determine the correct pair, I will examine the connections established in the first part of the task.\n\n- The cue image is a striped wooden post with a light on top.\n- In the first sequence, this same striped post was paired with a green and black vending machine.\n- In the second sequence, this same striped post was paired with a large, wrapped package.\n- The two images presented for the test are a vending machine and a notepad.\n- Based on the",
+      "metadata": {
+        "chain_index": 10,
+        "foil_chain_index": 21
+      }
+    },
+    {
+      "trial": 4,
+      "target": 2,
+      "reported": 2,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.37754066866746433,
+        "2": 0.6224593313325357
+      },
+      "choice_mass": 0.9826972782611847,
+      "top_tokens": [
+        [
+          "2",
+          0.6117
+        ],
+        [
+          "1",
+          0.371
+        ],
+        [
+          "3",
+          0.0087
+        ],
+        [
+          "<|im_end|>",
+          0.0032
+        ],
+        [
+          " ",
+          0.0028
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 21,
+        "foil_chain_index": 11
+      }
+    },
+    {
+      "trial": 5,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.9770226300920125,
+        "2": 0.022977369907987478
+      },
+      "choice_mass": 0.9982654228806496,
+      "top_tokens": [
+        [
+          "1",
+          0.9753
+        ],
+        [
+          "2",
+          0.0229
+        ],
+        [
+          "3",
+          0.0007
+        ],
+        [
+          " ",
+          0.0004
+        ],
+        [
+          "4",
+          0.0002
+        ]
+      ],
+      "free_response": "To determine the correct pair, I will examine the connections established in the initial sequence of images.\n\n- The cue image is a small, wooden toy stroller.\n- In the first set of pairs, the toy stroller is shown paired with a miniature wooden basket.\n- In the second set of pairs, the toy stroller is shown paired with a silver fairy statue.\n- The question asks which of the two options below was paired with the cue image.\n- Option 1",
+      "metadata": {
+        "chain_index": 8,
+        "foil_chain_index": 15
+      }
+    },
+    {
+      "trial": 6,
+      "target": 2,
+      "reported": 2,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.468790629139189,
+        "2": 0.531209370860811
+      },
+      "choice_mass": 0.9938978850841522,
+      "top_tokens": [
+        [
+          "2",
+          0.528
+        ],
+        [
+          "1",
+          0.4659
+        ],
+        [
+          "3",
+          0.0031
+        ],
+        [
+          "<|im_end|>",
+          0.0017
+        ],
+        [
+          " ",
+          0.0005
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 9,
+        "foil_chain_index": 2
+      }
+    },
+    {
+      "trial": 7,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.5621765009073971,
+        "2": 0.4378234990926029
+      },
+      "choice_mass": 0.9957895874977112,
+      "top_tokens": [
+        [
+          "1",
+          0.5598
+        ],
+        [
+          "2",
+          0.436
+        ],
+        [
+          "3",
+          0.0026
+        ],
+        [
+          "<|im_end|>",
+          0.0007
+        ],
+        [
+          " ",
+          0.0005
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 15,
+        "foil_chain_index": 1
+      }
+    },
+    {
+      "trial": 8,
+      "target": 2,
+      "reported": 1,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.7549149975974864,
+        "2": 0.2450850024025136
+      },
+      "choice_mass": 0.9904486835002899,
+      "top_tokens": [
+        [
+          "1",
+          0.7477
+        ],
+        [
+          "2",
+          0.2427
+        ],
+        [
+          "3",
+          0.0065
+        ],
+        [
+          "4",
+          0.0013
+        ],
+        [
+          " ",
+          0.0008
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 21,
+        "foil_chain_index": 4
+      }
+    },
+    {
+      "trial": 9,
+      "target": 2,
+      "reported": 1,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.7772998553298608,
+        "2": 0.22270014467013927
+      },
+      "choice_mass": 0.9923317134380341,
+      "top_tokens": [
+        [
+          "1",
+          0.7713
+        ],
+        [
+          "2",
+          0.221
+        ],
+        [
+          "3",
+          0.0046
+        ],
+        [
+          "<|im_end|>",
+          0.0017
+        ],
+        [
+          "4",
+          0.0006
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 11,
+        "foil_chain_index": 5
+      }
+    },
+    {
+      "trial": 10,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.8933094060707275,
+        "2": 0.1066905939292725
+      },
+      "choice_mass": 0.9959822595119476,
+      "top_tokens": [
+        [
+          "1",
+          0.8897
+        ],
+        [
+          "2",
+          0.1063
+        ],
+        [
+          "3",
+          0.0025
+        ],
+        [
+          " ",
+          0.0006
+        ],
+        [
+          "<|im_end|>",
+          0.0004
+        ]
+      ],
+      "free_response": "To determine the correct pair, I will compare the cue image with the two options provided.\n\n- The cue image is a vintage-style, rectangular metal box with a brass-colored latch and handle.\n- Image 1 shows an Easter basket filled with a bunny, chocolates, and a \"Happy Easter\" tin.\n- Image 2 shows a yellow origami crane.\n\nBased on the initial review of all image pairs, the vintage metal box was paired with a banana slicer. Neither of",
+      "metadata": {
+        "chain_index": 12,
+        "foil_chain_index": 10
+      }
+    },
+    {
+      "trial": 11,
+      "target": 2,
+      "reported": 2,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.245085009341003,
+        "2": 0.754914990658997
+      },
+      "choice_mass": 0.9951917827129364,
+      "top_tokens": [
+        [
+          "2",
+          0.7513
+        ],
+        [
+          "1",
+          0.2439
+        ],
+        [
+          "3",
+          0.0027
+        ],
+        [
+          "<|im_end|>",
+          0.001
+        ],
+        [
+          " ",
+          0.0005
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 16,
+        "foil_chain_index": 24
+      }
+    },
+    {
+      "trial": 12,
+      "target": 2,
+      "reported": 1,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.6513548535460089,
+        "2": 0.3486451464539911
+      },
+      "choice_mass": 0.9849302470684052,
+      "top_tokens": [
+        [
+          "1",
+          0.6415
+        ],
+        [
+          "2",
+          0.3434
+        ],
+        [
+          "3",
+          0.0118
+        ],
+        [
+          "<|im_end|>",
+          0.0018
+        ],
+        [
+          "4",
+          0.0007
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 18,
+        "foil_chain_index": 12
+      }
+    },
+    {
+      "trial": 13,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.8354835462992636,
+        "2": 0.16451645370073645
+      },
+      "choice_mass": 0.9975835978984833,
+      "top_tokens": [
+        [
+          "1",
+          0.8335
+        ],
+        [
+          "2",
+          0.1641
+        ],
+        [
+          "3",
+          0.0011
+        ],
+        [
+          "<|im_end|>",
+          0.0007
+        ],
+        [
+          " ",
+          0.0003
+        ]
+      ],
+      "free_response": "To determine the correct pair, I will examine the provided images and their connections.\n\n- The cue image is a blue, rectangular exercise mat.\n- Image 1 is a black, cylindrical weight plate.\n- Image 2 is a black and silver manual exercise pump.\n- By reviewing the initial sequence of image pairs, I can find the connection. The blue exercise mat (the cue image) is shown in an (AB pair) with a blue spool of metal balls.",
+      "metadata": {
+        "chain_index": 5,
+        "foil_chain_index": 23
+      }
+    },
+    {
+      "trial": 14,
+      "target": 1,
+      "reported": 2,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.407333408028624,
+        "2": 0.592666591971376
+      },
+      "choice_mass": 0.9865576326847076,
+      "top_tokens": [
+        [
+          "2",
+          0.5847
+        ],
+        [
+          "1",
+          0.4019
+        ],
+        [
+          "3",
+          0.0083
+        ],
+        [
+          "4",
+          0.0019
+        ],
+        [
+          " ",
+          0.0016
+        ]
+      ],
+      "free_response": "To determine the correct pair, I will examine the provided image sequences.\n\n- The first sequence of images contains an \"(AB pair)\" format, where two images are shown together.\n- In this sequence, the image of the silver and black camera is shown directly next to the image of the red crab.\n- The second sequence of images uses a \"(BC pair)\" format.\n- In this sequence, the image of the silver and black camera is shown directly next to the image of the",
+      "metadata": {
+        "chain_index": 1,
+        "foil_chain_index": 8
+      }
+    },
+    {
+      "trial": 15,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.7772998534405983,
+        "2": 0.2227001465594017
+      },
+      "choice_mass": 0.9946281015872955,
+      "top_tokens": [
+        [
+          "1",
+          0.7731
+        ],
+        [
+          "2",
+          0.2215
+        ],
+        [
+          "3",
+          0.0036
+        ],
+        [
+          "4",
+          0.0004
+        ],
+        [
+          "<|im_end|>",
+          0.0003
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 0,
+        "foil_chain_index": 22
+      }
+    },
+    {
+      "trial": 16,
+      "target": 1,
+      "reported": 2,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.4687906204483337,
+        "2": 0.5312093795516664
+      },
+      "choice_mass": 0.9860630035400391,
+      "top_tokens": [
+        [
+          "2",
+          0.5238
+        ],
+        [
+          "1",
+          0.4623
+        ],
+        [
+          "3",
+          0.0096
+        ],
+        [
+          "<|im_end|>",
+          0.0017
+        ],
+        [
+          " ",
+          0.0011
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 21,
+        "foil_chain_index": 15
+      }
+    },
+    {
+      "trial": 17,
+      "target": 1,
+      "reported": 2,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.4687906239075072,
+        "2": 0.5312093760924929
+      },
+      "choice_mass": 0.9919396638870239,
+      "top_tokens": [
+        [
+          "2",
+          0.5269
+        ],
+        [
+          "1",
+          0.465
+        ],
+        [
+          "3",
+          0.0059
+        ],
+        [
+          "4",
+          0.0007
+        ],
+        [
+          " ",
+          0.0004
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 4,
+        "foil_chain_index": 21
+      }
+    },
+    {
+      "trial": 18,
+      "target": 2,
+      "reported": 2,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.32082132158921944,
+        "2": 0.6791786784107805
+      },
+      "choice_mass": 0.9960267245769501,
+      "top_tokens": [
+        [
+          "2",
+          0.6765
+        ],
+        [
+          "1",
+          0.3195
+        ],
+        [
+          "3",
+          0.0022
+        ],
+        [
+          " ",
+          0.0005
+        ],
+        [
+          "4",
+          0.0005
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 10,
+        "foil_chain_index": 8
+      }
+    },
+    {
+      "trial": 19,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.9465966670989203,
+        "2": 0.053403332901079695
+      },
+      "choice_mass": 0.9944940283894539,
+      "top_tokens": [
+        [
+          "1",
+          0.9414
+        ],
+        [
+          "2",
+          0.0531
+        ],
+        [
+          "3",
+          0.0023
+        ],
+        [
+          "<|im_end|>",
+          0.0018
+        ],
+        [
+          "4",
+          0.0005
+        ]
+      ],
+      "free_response": "1",
+      "metadata": {
+        "chain_index": 22,
+        "foil_chain_index": 12
+      }
+    },
+    {
+      "trial": 20,
+      "target": 1,
+      "reported": 2,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.29421496948541104,
+        "2": 0.705785030514589
+      },
+      "choice_mass": 0.996772438287735,
+      "top_tokens": [
+        [
+          "2",
+          0.7035
+        ],
+        [
+          "1",
+          0.2933
+        ],
+        [
+          "3",
+          0.0012
+        ],
+        [
+          "<|im_end|>",
+          0.0009
+        ],
+        [
+          " ",
+          0.0006
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 11,
+        "foil_chain_index": 17
+      }
+    },
+    {
+      "trial": 21,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.957912272213932,
+        "2": 0.042087727786067904
+      },
+      "choice_mass": 0.9954828172922134,
+      "top_tokens": [
+        [
+          "1",
+          0.9536
+        ],
+        [
+          "2",
+          0.0419
+        ],
+        [
+          "3",
+          0.0027
+        ],
+        [
+          "4",
+          0.0008
+        ],
+        [
+          " ",
+          0.0004
+        ]
+      ],
+      "free_response": "1",
+      "metadata": {
+        "chain_index": 2,
+        "foil_chain_index": 5
+      }
+    },
+    {
+      "trial": 22,
+      "target": 2,
+      "reported": 2,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.08509904627877575,
+        "2": 0.9149009537212243
+      },
+      "choice_mass": 0.9956869632005692,
+      "top_tokens": [
+        [
+          "2",
+          0.911
+        ],
+        [
+          "1",
+          0.0847
+        ],
+        [
+          "3",
+          0.002
+        ],
+        [
+          "<|im_end|>",
+          0.0011
+        ],
+        [
+          " ",
+          0.0006
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 4,
+        "foil_chain_index": 9
+      }
+    },
+    {
+      "trial": 23,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.7981867813813931,
+        "2": 0.20181321861860693
+      },
+      "choice_mass": 0.9962275624275208,
+      "top_tokens": [
+        [
+          "1",
+          0.7952
+        ],
+        [
+          "2",
+          0.2011
+        ],
+        [
+          " ",
+          0.0014
+        ],
+        [
+          "3",
+          0.0011
+        ],
+        [
+          "<|im_end|>",
+          0.0006
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 5,
+        "foil_chain_index": 12
+      }
+    },
+    {
+      "trial": 24,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.8670357483439677,
+        "2": 0.1329642516560323
+      },
+      "choice_mass": 0.9947950839996338,
+      "top_tokens": [
+        [
+          "1",
+          0.8625
+        ],
+        [
+          "2",
+          0.1323
+        ],
+        [
+          "3",
+          0.0035
+        ],
+        [
+          " ",
+          0.0007
+        ],
+        [
+          "<|im_end|>",
+          0.0003
+        ]
+      ],
+      "free_response": "Based on the pairs I've memorized, the image paired with the white podium is the pair of crutches.\n\nTherefore, the correct answer is:\n1",
+      "metadata": {
+        "chain_index": 10,
+        "foil_chain_index": 1
+      }
+    },
+    {
+      "trial": 25,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.5926665858592854,
+        "2": 0.4073334141407145
+      },
+      "choice_mass": 0.9913530349731445,
+      "top_tokens": [
+        [
+          "1",
+          0.5875
+        ],
+        [
+          "2",
+          0.4038
+        ],
+        [
+          "3",
+          0.0051
+        ],
+        [
+          "<|im_end|>",
+          0.0019
+        ],
+        [
+          "4",
+          0.001
+        ]
+      ],
+      "free_response": "To determine the correct pair, I will examine the connections established in the initial sequence of images.\n\n- The first image in the sequence is a skull with long horns.\n- Following the chain of connections, the image that is paired with the skull is a zebra figurine.\n- The image that is paired with the zebra is a nutcracker.\n- The image that is paired with the nutcracker is a blue fan.\n- The image that is paired with the",
+      "metadata": {
+        "chain_index": 23,
+        "foil_chain_index": 13
+      }
+    },
+    {
+      "trial": 26,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.651354851964287,
+        "2": 0.34864514803571306
+      },
+      "choice_mass": 0.9910585880279541,
+      "top_tokens": [
+        [
+          "1",
+          0.6455
+        ],
+        [
+          "2",
+          0.3455
+        ],
+        [
+          "3",
+          0.0063
+        ],
+        [
+          "<|im_end|>",
+          0.001
+        ],
+        [
+          " ",
+          0.0008
+        ]
+      ],
+      "free_response": "To determine the correct pair, I will examine the provided images and their connections.\n\n- The cue image is a brass-colored doorknob.\n- The first image (labeled 1) is a black walkie-talkie.\n- The second image (labeled 2) is a grey and silver brake lever.\n- By reviewing the sequence of image pairs, I can find the connection. The brass doorknob appears in an (AB) pair with another doorknob",
+      "metadata": {
+        "chain_index": 24,
+        "foil_chain_index": 0
+      }
+    },
+    {
+      "trial": 27,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.5,
+        "2": 0.5
+      },
+      "choice_mass": 0.9856764078140259,
+      "top_tokens": [
+        [
+          "2",
+          0.4928
+        ],
+        [
+          "1",
+          0.4928
+        ],
+        [
+          "3",
+          0.0116
+        ],
+        [
+          " ",
+          0.0012
+        ],
+        [
+          "<|im_end|>",
+          0.0008
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 9,
+        "foil_chain_index": 7
+      }
+    },
+    {
+      "trial": 28,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.5,
+        "2": 0.5
+      },
+      "choice_mass": 0.9849064946174622,
+      "top_tokens": [
+        [
+          "2",
+          0.4925
+        ],
+        [
+          "1",
+          0.4925
+        ],
+        [
+          "3",
+          0.0116
+        ],
+        [
+          "4",
+          0.0014
+        ],
+        [
+          "<|im_end|>",
+          0.001
+        ]
+      ],
+      "free_response": "To determine the correct pair, I will examine the connections established in the initial sequence.\n\n- The cue image is a metal, cylindrical object with a black handle, which is a type of meat tenderizer.\n- In the first set of pairs, this same image was shown alongside a slice of salami.\n- In the second set of pairs, this same image was shown alongside a coiled copper pipe.\n- Now, I will look at the two options provided for this question.",
+      "metadata": {
+        "chain_index": 1,
+        "foil_chain_index": 18
+      }
+    },
+    {
+      "trial": 29,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.777299858458866,
+        "2": 0.22270014154113407
+      },
+      "choice_mass": 0.9908866435289383,
+      "top_tokens": [
+        [
+          "1",
+          0.7702
+        ],
+        [
+          "2",
+          0.2207
+        ],
+        [
+          "3",
+          0.0046
+        ],
+        [
+          "<|im_end|>",
+          0.0022
+        ],
+        [
+          " ",
+          0.0013
+        ]
+      ],
+      "free_response": "1",
+      "metadata": {
+        "chain_index": 14,
+        "foil_chain_index": 21
+      }
+    },
+    {
+      "trial": 30,
+      "target": 2,
+      "reported": 2,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.2942149596734185,
+        "2": 0.7057850403265815
+      },
+      "choice_mass": 0.9917927384376526,
+      "top_tokens": [
+        [
+          "2",
+          0.7
+        ],
+        [
+          "1",
+          0.2918
+        ],
+        [
+          "3",
+          0.0032
+        ],
+        [
+          " ",
+          0.002
+        ],
+        [
+          "<|im_end|>",
+          0.0015
+        ]
+      ],
+      "free_response": "To determine the correct pair, I will examine the provided images and their connections.\n\n- The cue image is a ping pong table.\n- Image 1 is a spool of film.\n- Image 2 is a model of the Eiffel Tower.\n- By reviewing the initial set of image pairs, I can find the connection. The ping pong table is paired with the film spool.\n\nTherefore, the image paired with the cue image is the one showing the film spool",
+      "metadata": {
+        "chain_index": 18,
+        "foil_chain_index": 11
+      }
+    },
+    {
+      "trial": 31,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.5926665910833684,
+        "2": 0.4073334089166316
+      },
+      "choice_mass": 0.9917902052402496,
+      "top_tokens": [
+        [
+          "1",
+          0.5878
+        ],
+        [
+          "2",
+          0.404
+        ],
+        [
+          "3",
+          0.0045
+        ],
+        [
+          "<|im_end|>",
+          0.0015
+        ],
+        [
+          " ",
+          0.001
+        ]
+      ],
+      "free_response": "To determine the correct pair, I will examine the connections established in the initial sequence of images.\n\n- The cue image is a pair of red boxing gloves.\n- In the first set of pairs, the boxing gloves are shown to be paired with a black book that has a cross on its cover. This is an (AB) pair.\n- In the second set of pairs, the boxing gloves are shown to be paired with a wooden mask. This is a (BC) pair.",
+      "metadata": {
+        "chain_index": 9,
+        "foil_chain_index": 11
+      }
+    },
+    {
+      "trial": 32,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.9241418243483634,
+        "2": 0.07585817565163654
+      },
+      "choice_mass": 0.9952487424015999,
+      "top_tokens": [
+        [
+          "1",
+          0.9198
+        ],
+        [
+          "2",
+          0.0755
+        ],
+        [
+          "3",
+          0.002
+        ],
+        [
+          "<|im_end|>",
+          0.0016
+        ],
+        [
+          "4",
+          0.0004
+        ]
+      ],
+      "free_response": "1",
+      "metadata": {
+        "chain_index": 22,
+        "foil_chain_index": 19
+      }
+    },
+    {
+      "trial": 33,
+      "target": 2,
+      "reported": 2,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.13296424058106757,
+        "2": 0.8670357594189324
+      },
+      "choice_mass": 0.9962563216686249,
+      "top_tokens": [
+        [
+          "2",
+          0.8638
+        ],
+        [
+          "1",
+          0.1325
+        ],
+        [
+          " ",
+          0.0015
+        ],
+        [
+          "3",
+          0.001
+        ],
+        [
+          "<|im_end|>",
+          0.0005
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 3,
+        "foil_chain_index": 7
+      }
+    },
+    {
+      "trial": 34,
+      "target": 2,
+      "reported": 1,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.7310585539742306,
+        "2": 0.2689414460257694
+      },
+      "choice_mass": 0.9899252355098724,
+      "top_tokens": [
+        [
+          "1",
+          0.7237
+        ],
+        [
+          "2",
+          0.2662
+        ],
+        [
+          "3",
+          0.0049
+        ],
+        [
+          " ",
+          0.0026
+        ],
+        [
+          "4",
+          0.0007
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 6,
+        "foil_chain_index": 15
+      }
+    },
+    {
+      "trial": 35,
+      "target": 2,
+      "reported": 2,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.10669059399208139,
+        "2": 0.8933094060079186
+      },
+      "choice_mass": 0.9935342445969582,
+      "top_tokens": [
+        [
+          "2",
+          0.8875
+        ],
+        [
+          "1",
+          0.106
+        ],
+        [
+          "3",
+          0.0047
+        ],
+        [
+          " ",
+          0.0007
+        ],
+        [
+          "4",
+          0.0005
+        ]
+      ],
+      "free_response": "To determine the correct pair, I will examine the connections established in the initial sequence of images.\n\n- The cue image is a black wallet.\n- In the first sequence, the wallet (image 3) is shown in a pair with a green sandbag (image 5).\n- In the second sequence, the wallet (image 3) is shown in a pair with a wooden coffee grinder (image 25).\n- Now I will look at the options provided for the",
+      "metadata": {
+        "chain_index": 1,
+        "foil_chain_index": 10
+      }
+    },
+    {
+      "trial": 36,
+      "target": 2,
+      "reported": 1,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.5926665849929609,
+        "2": 0.4073334150070391
+      },
+      "choice_mass": 0.9869191944599152,
+      "top_tokens": [
+        [
+          "1",
+          0.5849
+        ],
+        [
+          "2",
+          0.402
+        ],
+        [
+          "3",
+          0.0095
+        ],
+        [
+          "<|im_end|>",
+          0.0016
+        ],
+        [
+          "4",
+          0.0008
+        ]
+      ],
+      "free_response": "To determine the correct pair, I will compare the cue image with the two options provided.\n\n- The cue image is a piece of gym equipment, specifically a leg press machine.\n- Image 1 shows a single plum.\n- Image 2 shows a piece of bread, specifically a baguette.\n\nBased on my analysis of the image pairs, neither of the provided options (a plum or a baguette) was ever paired with the leg press machine. The leg press machine",
+      "metadata": {
+        "chain_index": 19,
+        "foil_chain_index": 4
+      }
+    },
+    {
+      "trial": 37,
+      "target": 2,
+      "reported": 2,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.2689414485151562,
+        "2": 0.7310585514848438
+      },
+      "choice_mass": 0.995868593454361,
+      "top_tokens": [
+        [
+          "2",
+          0.728
+        ],
+        [
+          "1",
+          0.2678
+        ],
+        [
+          "3",
+          0.002
+        ],
+        [
+          "<|im_end|>",
+          0.0008
+        ],
+        [
+          " ",
+          0.0005
+        ]
+      ],
+      "free_response": "To determine the correct pair, I will examine the provided image sequences.\n\n- The first image in the sequence is a dark red plum.\n- The second image in the sequence is a rolled-up sleeping bag.\n- Later in the sequence, under the \"(BC pair)\" section, the plum is shown again, and it is paired with the sleeping bag.\n- The question asks which of the two options (1 or 2) was paired with the cue image (the plum).",
+      "metadata": {
+        "chain_index": 6,
+        "foil_chain_index": 24
+      }
+    },
+    {
+      "trial": 38,
+      "target": 2,
+      "reported": 1,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.6791786922307748,
+        "2": 0.32082130776922524
+      },
+      "choice_mass": 0.9954396784305573,
+      "top_tokens": [
+        [
+          "1",
+          0.6761
+        ],
+        [
+          "2",
+          0.3194
+        ],
+        [
+          "3",
+          0.0022
+        ],
+        [
+          "<|im_end|>",
+          0.0008
+        ],
+        [
+          " ",
+          0.0008
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 6,
+        "foil_chain_index": 10
+      }
+    },
+    {
+      "trial": 39,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.8354835484359977,
+        "2": 0.16451645156400233
+      },
+      "choice_mass": 0.9915245622396469,
+      "top_tokens": [
+        [
+          "1",
+          0.8284
+        ],
+        [
+          "2",
+          0.1631
+        ],
+        [
+          "3",
+          0.0056
+        ],
+        [
+          "<|im_end|>",
+          0.0014
+        ],
+        [
+          "4",
+          0.0007
+        ]
+      ],
+      "free_response": "To determine the correct pair, I will compare the cue image with the two options provided.\n\n- The cue image is a metal spatula with a black handle.\n- Image 1 shows a ping pong table.\n- Image 2 shows a candy apple on a stick.\n\nBased on the pairs I have studied, the spatula is paired with the ping pong table.",
+      "metadata": {
+        "chain_index": 17,
+        "foil_chain_index": 14
+      }
+    },
+    {
+      "trial": 40,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.962673112521349,
+        "2": 0.03732688747865102
+      },
+      "choice_mass": 0.9935548938810825,
+      "top_tokens": [
+        [
+          "1",
+          0.9565
+        ],
+        [
+          "2",
+          0.0371
+        ],
+        [
+          "3",
+          0.0044
+        ],
+        [
+          "4",
+          0.0008
+        ],
+        [
+          " ",
+          0.0004
+        ]
+      ],
+      "free_response": "1",
+      "metadata": {
+        "chain_index": 2,
+        "foil_chain_index": 3
+      }
+    },
+    {
+      "trial": 41,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.7310585622760066,
+        "2": 0.2689414377239934
+      },
+      "choice_mass": 0.9921787679195404,
+      "top_tokens": [
+        [
+          "1",
+          0.7253
+        ],
+        [
+          "2",
+          0.2668
+        ],
+        [
+          "3",
+          0.0049
+        ],
+        [
+          "<|im_end|>",
+          0.0011
+        ],
+        [
+          " ",
+          0.0007
+        ]
+      ],
+      "free_response": "To determine the correct pair, I will first identify the cue image and then check its original pairing from the provided data.\n\n- The cue image is a pair of tacos.\n- According to the initial set of pairs, the image of the tacos is paired with the image of a red oil can.\n- In the second set of pairs, the image of the tacos is again paired with the image of a red oil can.\n- The two options provided for the answer are a broom",
+      "metadata": {
+        "chain_index": 13,
+        "foil_chain_index": 2
+      }
+    },
+    {
+      "trial": 42,
+      "target": 2,
+      "reported": 2,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.20181323085719274,
+        "2": 0.7981867691428073
+      },
+      "choice_mass": 0.9898962527513504,
+      "top_tokens": [
+        [
+          "2",
+          0.7901
+        ],
+        [
+          "1",
+          0.1998
+        ],
+        [
+          "3",
+          0.0077
+        ],
+        [
+          " ",
+          0.0012
+        ],
+        [
+          "<|im_end|>",
+          0.0006
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 16,
+        "foil_chain_index": 1
+      }
+    },
+    {
+      "trial": 43,
+      "target": 1,
+      "reported": 2,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.3775406767867608,
+        "2": 0.6224593232132393
+      },
+      "choice_mass": 0.9925239384174347,
+      "top_tokens": [
+        [
+          "2",
+          0.6178
+        ],
+        [
+          "1",
+          0.3747
+        ],
+        [
+          "3",
+          0.0042
+        ],
+        [
+          "<|im_end|>",
+          0.0011
+        ],
+        [
+          " ",
+          0.0011
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 11,
+        "foil_chain_index": 2
+      }
+    },
+    {
+      "trial": 44,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.8519528102262447,
+        "2": 0.14804718977375536
+      },
+      "choice_mass": 0.9963622838258743,
+      "top_tokens": [
+        [
+          "1",
+          0.8489
+        ],
+        [
+          "2",
+          0.1475
+        ],
+        [
+          "3",
+          0.0016
+        ],
+        [
+          "<|im_end|>",
+          0.0009
+        ],
+        [
+          " ",
+          0.0005
+        ]
+      ],
+      "free_response": "To determine the correct pair, I will examine the connections established in the initial sequence of images.\n\n- The cue image is a decorative brass bowl on a wooden stand.\n- In the first set of pairs, this bowl is shown paired with a chess king piece.\n- In the second set of pairs, the same bowl is shown paired with a music stand.\n- The question asks which of the two options (1 or 2) was the original partner for the cue image.",
+      "metadata": {
+        "chain_index": 7,
+        "foil_chain_index": 21
+      }
+    },
+    {
+      "trial": 45,
+      "target": 2,
+      "reported": 2,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.24508501689874293,
+        "2": 0.754914983101257
+      },
+      "choice_mass": 0.9894533902406693,
+      "top_tokens": [
+        [
+          "2",
+          0.747
+        ],
+        [
+          "1",
+          0.2425
+        ],
+        [
+          "3",
+          0.0057
+        ],
+        [
+          "<|im_end|>",
+          0.0024
+        ],
+        [
+          " ",
+          0.0014
+        ]
+      ],
+      "free_response": "To determine the correct pair, I will examine the connections established in the initial sequence of images.\n\n- The cue image is a pink, plush hippo toy.\n- In the first set of pairs, this same pink hippo toy is shown paired with a pink, plush hippo toy. This is an (AB pair).\n- In the second set of pairs, the pink hippo toy is shown again, this time paired with a pink, plush hippo toy. This is also",
+      "metadata": {
+        "chain_index": 20,
+        "foil_chain_index": 9
+      }
+    },
+    {
+      "trial": 46,
+      "target": 2,
+      "reported": 2,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.13296424344869867,
+        "2": 0.8670357565513014
+      },
+      "choice_mass": 0.9908702671527863,
+      "top_tokens": [
+        [
+          "2",
+          0.8591
+        ],
+        [
+          "1",
+          0.1318
+        ],
+        [
+          "3",
+          0.0066
+        ],
+        [
+          " ",
+          0.0011
+        ],
+        [
+          "4",
+          0.0007
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 1,
+        "foil_chain_index": 22
+      }
+    },
+    {
+      "trial": 47,
+      "target": 2,
+      "reported": 2,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.468790626044285,
+        "2": 0.531209373955715
+      },
+      "choice_mass": 0.9960826337337494,
+      "top_tokens": [
+        [
+          "2",
+          0.5291
+        ],
+        [
+          "1",
+          0.467
+        ],
+        [
+          "3",
+          0.0022
+        ],
+        [
+          " ",
+          0.0005
+        ],
+        [
+          "4",
+          0.0004
+        ]
+      ],
+      "free_response": "To determine the correct pair, I will examine the provided images and the original sequence.\n\n- The cue image is an orange extension cord.\n- Image 1 is a bumblebee.\n- Image 2 is a model of a rocket.\n- In the initial sequence of pairs, the orange extension cord was paired with the football.\n- In the second sequence of pairs, the orange extension cord was paired with the model rocket.\n\nBased on this, the image that was paired",
+      "metadata": {
+        "chain_index": 11,
+        "foil_chain_index": 2
+      }
+    },
+    {
+      "trial": 48,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.7772998503629662,
+        "2": 0.2227001496370338
+      },
+      "choice_mass": 0.9935997277498245,
+      "top_tokens": [
+        [
+          "1",
+          0.7723
+        ],
+        [
+          "2",
+          0.2213
+        ],
+        [
+          "3",
+          0.0036
+        ],
+        [
+          " ",
+          0.0008
+        ],
+        [
+          "<|im_end|>",
+          0.0007
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 18,
+        "foil_chain_index": 2
+      }
+    },
+    {
+      "trial": 49,
+      "target": 2,
+      "reported": 1,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.5926665939401741,
+        "2": 0.40733340605982593
+      },
+      "choice_mass": 0.99741992354393,
+      "top_tokens": [
+        [
+          "1",
+          0.5911
+        ],
+        [
+          "2",
+          0.4063
+        ],
+        [
+          "3",
+          0.0015
+        ],
+        [
+          "<|im_end|>",
+          0.0004
+        ],
+        [
+          "4",
+          0.0002
+        ]
+      ],
+      "free_response": "To determine the correct pair, I will examine the provided images and their connections.\n\n- The cue image is a wooden flute.\n- Image 1 shows a small, wheeled cart made of wood and metal.\n- Image 2 shows a white, oval-shaped object with black straps, which appears to be a medical or sports support brace.\n- By reviewing the initial sequence of image pairs, I can find the connection. The wooden flute is paired with the wheeled cart.",
+      "metadata": {
+        "chain_index": 10,
+        "foil_chain_index": 11
+      }
+    }
+  ],
+  "metrics": {
+    "accuracy": 0.74,
+    "n_correct": 37,
+    "total": 50,
+    "free_text_bare_digit": 0.58,
+    "mean_p_chosen": 0.7350200058813937,
+    "mean_choice_mass": 0.9926622769981622,
+    "frac_low_mass": 0.0,
+    "response_distribution": {
+      "1": 31,
+      "2": 19
+    }
+  }
+}

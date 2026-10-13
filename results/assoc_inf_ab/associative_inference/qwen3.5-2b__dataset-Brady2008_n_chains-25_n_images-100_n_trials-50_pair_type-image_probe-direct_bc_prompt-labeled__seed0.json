@@ -1,0 +1,1996 @@
+{
+  "run": {
+    "model": {
+      "name": "qwen3.5-2b",
+      "model_id": "Qwen/Qwen3.5-2B",
+      "max_image_size": 512,
+      "max_new_tokens": 100
+    },
+    "task": "associative_inference",
+    "condition": {
+      "dataset": "Brady2008",
+      "pair_type": "image",
+      "probe": "direct_bc",
+      "n_chains": 25,
+      "n_images": 100,
+      "prompt": "labeled",
+      "n_trials": 50
+    },
+    "seed": 0
+  },
+  "config": {
+    "run_name": "assoc_inf_ab",
+    "output_dir": "results",
+    "seeds": [
+      0
+    ],
+    "models": [
+      {
+        "name": "qwen3.5-2b",
+        "model_id": "Qwen/Qwen3.5-2B",
+        "max_image_size": 512,
+        "max_new_tokens": 100
+      },
+      {
+        "name": "qwen3.5-4b",
+        "model_id": "Qwen/Qwen3.5-4B",
+        "max_image_size": 512,
+        "max_new_tokens": 100
+      }
+    ],
+    "tasks": [
+      {
+        "task": "associative_inference",
+        "datasets": [
+          "Brady2008"
+        ],
+        "pair_types": [
+          "image",
+          "word"
+        ],
+        "probe_types": [
+          "inference",
+          "direct_ab",
+          "direct_bc"
+        ],
+        "n_chains": [
+          2,
+          5,
+          25
+        ],
+        "prompts": [
+          "original",
+          "cue_turn",
+          "labeled"
+        ],
+        "n_trials": 50
+      }
+    ]
+  },
+  "provenance": {
+    "config_hash": "d49714f7009d",
+    "gpu": "NVIDIA A100-SXM4-80GB",
+    "git_commit": null,
+    "git_dirty": false,
+    "torch": "2.10.0+cu128",
+    "transformers": "5.17.0"
+  },
+  "elapsed_s": 289.3,
+  "peak_gpu_gb": 5.75,
+  "error": null,
+  "trials": [
+    {
+      "trial": 0,
+      "target": 2,
+      "reported": 2,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.4378234939171838,
+        "2": 0.5621765060828162
+      },
+      "choice_mass": 0.9924429059028625,
+      "top_tokens": [
+        [
+          "2",
+          0.5579
+        ],
+        [
+          "1",
+          0.4345
+        ],
+        [
+          "3",
+          0.0055
+        ],
+        [
+          "4",
+          0.0011
+        ],
+        [
+          "5",
+          0.0003
+        ]
+      ],
+      "free_response": "Based on the provided images, the cue image is a slice of salami.\n\n- Image 1 shows a potato.\n- Image 2 shows a briefcase.\n\nThe potato (Image 1) is a vegetable, while the salami (cue image) is a type of cured meat. Therefore, the potato is a food item, and the salami is also a food item.\n\nThe briefcase (Image 2) is an object, not food.\n\nSince both",
+      "metadata": {
+        "chain_index": 18,
+        "foil_chain_index": 22
+      }
+    },
+    {
+      "trial": 1,
+      "target": 2,
+      "reported": 2,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.24508501419619477,
+        "2": 0.7549149858038052
+      },
+      "choice_mass": 0.9906837493181229,
+      "top_tokens": [
+        [
+          "2",
+          0.7479
+        ],
+        [
+          "1",
+          0.2428
+        ],
+        [
+          "3",
+          0.0065
+        ],
+        [
+          "4",
+          0.0013
+        ],
+        [
+          "<|im_end|>",
+          0.0005
+        ]
+      ],
+      "free_response": "Based on the visual content of the images, the cue image shows a silver, metallic blimp with a red wheel.\n\n- **Image 1** shows a mattress in a storage box.\n- **Image 2** shows a portable metal cot.\n\nNeither of these items is a blimp. However, the image of the blimp appears in the sequence of images provided in the prompt. Specifically, the blimp is shown in the image labeled as \"Image 1\" in the",
+      "metadata": {
+        "chain_index": 6,
+        "foil_chain_index": 7
+      }
+    },
+    {
+      "trial": 2,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.5621765107198772,
+        "2": 0.4378234892801228
+      },
+      "choice_mass": 0.9940981566905975,
+      "top_tokens": [
+        [
+          "1",
+          0.5589
+        ],
+        [
+          "2",
+          0.4352
+        ],
+        [
+          "3",
+          0.0038
+        ],
+        [
+          "4",
+          0.0012
+        ],
+        [
+          "5",
+          0.0002
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 15,
+        "foil_chain_index": 11
+      }
+    },
+    {
+      "trial": 3,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.5621765003011165,
+        "2": 0.43782349969888346
+      },
+      "choice_mass": 0.9955171048641205,
+      "top_tokens": [
+        [
+          "1",
+          0.5597
+        ],
+        [
+          "2",
+          0.4359
+        ],
+        [
+          "3",
+          0.0029
+        ],
+        [
+          "4",
+          0.0007
+        ],
+        [
+          "<|im_end|>",
+          0.0003
+        ]
+      ],
+      "free_response": "Based on the provided images, the cue image is a striped pole with a yellow top, which is the same object shown in the second image of the pair.\n\nTherefore, the correct image is Image 2.\n\n2",
+      "metadata": {
+        "chain_index": 10,
+        "foil_chain_index": 21
+      }
+    },
+    {
+      "trial": 4,
+      "target": 2,
+      "reported": 2,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.3486451384182901,
+        "2": 0.6513548615817099
+      },
+      "choice_mass": 0.9946534931659698,
+      "top_tokens": [
+        [
+          "2",
+          0.6479
+        ],
+        [
+          "1",
+          0.3468
+        ],
+        [
+          "3",
+          0.0039
+        ],
+        [
+          "4",
+          0.0006
+        ],
+        [
+          "<|im_end|>",
+          0.0004
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 21,
+        "foil_chain_index": 11
+      }
+    },
+    {
+      "trial": 5,
+      "target": 1,
+      "reported": 2,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.4687906387228599,
+        "2": 0.53120936127714
+      },
+      "choice_mass": 0.986765444278717,
+      "top_tokens": [
+        [
+          "2",
+          0.5242
+        ],
+        [
+          "1",
+          0.4626
+        ],
+        [
+          "3",
+          0.0096
+        ],
+        [
+          "4",
+          0.0019
+        ],
+        [
+          "<|im_end|>",
+          0.0005
+        ]
+      ],
+      "free_response": "Based on the provided images, the cue image shows a wooden doll walker with yellow wheels and a red-and-white striped cushion.\n\n- **Image 1** shows a silver statue of a fairy sitting on a green box.\n- **Image 2** shows a black double-basin kitchen sink.\n\nThe cue image (the doll walker) is not present in either Image 1 or Image 2. However, the doll walker is identical to the object shown in the second image of the",
+      "metadata": {
+        "chain_index": 8,
+        "foil_chain_index": 15
+      }
+    },
+    {
+      "trial": 6,
+      "target": 2,
+      "reported": 2,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.4687906114705616,
+        "2": 0.5312093885294384
+      },
+      "choice_mass": 0.9974720478057861,
+      "top_tokens": [
+        [
+          "2",
+          0.5299
+        ],
+        [
+          "1",
+          0.4676
+        ],
+        [
+          "3",
+          0.0017
+        ],
+        [
+          "<|im_end|>",
+          0.0003
+        ],
+        [
+          "4",
+          0.0002
+        ]
+      ],
+      "free_response": "Based on the provided images, the cue image is a pumpkin.\n\n- Image 1 shows a red baseball cap with a baseball patch.\n- Image 2 shows a silver-colored, ornate locket.\n\nNeither of these items is a pumpkin. However, the image of the pumpkin appears in the sequence of images provided in the prompt, specifically as the first image in the list. The other images (Image 1 and Image 2) are not part of that specific sequence.",
+      "metadata": {
+        "chain_index": 9,
+        "foil_chain_index": 2
+      }
+    },
+    {
+      "trial": 7,
+      "target": 1,
+      "reported": 2,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.437823499308192,
+        "2": 0.562176500691808
+      },
+      "choice_mass": 0.9938946068286896,
+      "top_tokens": [
+        [
+          "2",
+          0.5587
+        ],
+        [
+          "1",
+          0.4352
+        ],
+        [
+          "3",
+          0.0043
+        ],
+        [
+          "4",
+          0.0011
+        ],
+        [
+          "<|im_end|>",
+          0.0002
+        ]
+      ],
+      "free_response": "Based on the provided images, the cue image is a pair of white Under Armour boxer briefs.\n\n- Image 1 is a pink, textured heart-shaped pillow.\n- Image 2 is a roll of white paper.\n\nThe image that is paired with the cue image is Image 2.\n\n2",
+      "metadata": {
+        "chain_index": 15,
+        "foil_chain_index": 1
+      }
+    },
+    {
+      "trial": 8,
+      "target": 2,
+      "reported": 2,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.4073334048637159,
+        "2": 0.5926665951362842
+      },
+      "choice_mass": 0.992988795042038,
+      "top_tokens": [
+        [
+          "2",
+          0.5885
+        ],
+        [
+          "1",
+          0.4045
+        ],
+        [
+          "3",
+          0.0051
+        ],
+        [
+          "4",
+          0.001
+        ],
+        [
+          "5",
+          0.0002
+        ]
+      ],
+      "free_response": "Based on the visual content of the images, the cue image shows a black metal object with a rectangular frame and a circular attachment on the left side.\n\n- **Image 1** shows a silver-colored electronic component with multiple threaded ports and a label.\n- **Image 2** shows a wooden carving of a Buddha's head.\n\nThe object in the cue image does not match either of the two images. However, looking at the provided list of pairs, the cue image is paired with",
+      "metadata": {
+        "chain_index": 21,
+        "foil_chain_index": 4
+      }
+    },
+    {
+      "trial": 9,
+      "target": 2,
+      "reported": 2,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.34864514306073363,
+        "2": 0.6513548569392663
+      },
+      "choice_mass": 0.9948218762874603,
+      "top_tokens": [
+        [
+          "2",
+          0.648
+        ],
+        [
+          "1",
+          0.3468
+        ],
+        [
+          "3",
+          0.0034
+        ],
+        [
+          "4",
+          0.0007
+        ],
+        [
+          "<|im_end|>",
+          0.0004
+        ]
+      ],
+      "free_response": "Based on the visual content of the images, I can identify the connection between the cue image and the provided options.\n\n- The cue image is a blue-handled brush with dark bristles.\n- Image 1 is a blue wicker armchair with cushions and a blanket.\n- Image 2 is a red plastic padlock with the words \"BREAK FOR ACCESS\" on it.\n\nBy comparing the cue image with the options, I can see that the blue brush in the cue image",
+      "metadata": {
+        "chain_index": 11,
+        "foil_chain_index": 5
+      }
+    },
+    {
+      "trial": 10,
+      "target": 1,
+      "reported": 2,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.43782350912728585,
+        "2": 0.5621764908727142
+      },
+      "choice_mass": 0.9923271536827087,
+      "top_tokens": [
+        [
+          "2",
+          0.5579
+        ],
+        [
+          "1",
+          0.4345
+        ],
+        [
+          "3",
+          0.0055
+        ],
+        [
+          "4",
+          0.0011
+        ],
+        [
+          "5",
+          0.0002
+        ]
+      ],
+      "free_response": "Based on the visual content of the images, the cue image (Image 1) is a wooden box with a brass latch, which is identical to the second image in the provided list. The first image in the list is a yellow origami crane, which is the second image in the provided list. Therefore, the cue image is paired with the second image.\n\n2",
+      "metadata": {
+        "chain_index": 12,
+        "foil_chain_index": 10
+      }
+    },
+    {
+      "trial": 11,
+      "target": 2,
+      "reported": 2,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.37754067670102437,
+        "2": 0.6224593232989756
+      },
+      "choice_mass": 0.9934565126895905,
+      "top_tokens": [
+        [
+          "2",
+          0.6184
+        ],
+        [
+          "1",
+          0.3751
+        ],
+        [
+          "3",
+          0.0047
+        ],
+        [
+          "4",
+          0.0009
+        ],
+        [
+          "5",
+          0.0002
+        ]
+      ],
+      "free_response": "Based on the visual content of the images, I can identify the following connections:\n\n- **Image 1** shows a peanut in its shell.\n- **Image 2** shows a red barbecue grill.\n\nThe cue image is a sandbox with children playing.\n\nBy comparing the cue image with the two provided images, I can see that neither Image 1 (the peanut) nor Image 2 (the grill) is a direct match for the sandbox. However, the sandbox is a",
+      "metadata": {
+        "chain_index": 16,
+        "foil_chain_index": 24
+      }
+    },
+    {
+      "trial": 12,
+      "target": 2,
+      "reported": 2,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.46879061034856795,
+        "2": 0.531209389651432
+      },
+      "choice_mass": 0.9969262778759003,
+      "top_tokens": [
+        [
+          "2",
+          0.5296
+        ],
+        [
+          "1",
+          0.4673
+        ],
+        [
+          "3",
+          0.0019
+        ],
+        [
+          "<|im_end|>",
+          0.0003
+        ],
+        [
+          "4",
+          0.0003
+        ]
+      ],
+      "free_response": "Based on the provided images, the cue image is a yellow toy excavator.\n\n- Image 1 shows a red and black charcoal grill.\n- Image 2 shows a white double door set within a brick archway.\n\nNeither of these images is a toy excavator. However, the toy excavator appears in the sequence of images labeled as (BC pair) starting from the 33rd image.\n\nTherefore, the correct image from the options is Image 2.\n\n2",
+      "metadata": {
+        "chain_index": 18,
+        "foil_chain_index": 12
+      }
+    },
+    {
+      "trial": 13,
+      "target": 1,
+      "reported": 2,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.46879062613808653,
+        "2": 0.5312093738619135
+      },
+      "choice_mass": 0.9940171539783478,
+      "top_tokens": [
+        [
+          "2",
+          0.528
+        ],
+        [
+          "1",
+          0.466
+        ],
+        [
+          "3",
+          0.004
+        ],
+        [
+          "4",
+          0.001
+        ],
+        [
+          "<|im_end|>",
+          0.0004
+        ]
+      ],
+      "free_response": "Based on the visual content of the images, the cue image (Image 1) is a black, threaded spool or weight. The second image (Image 2) shows a bicycle pump.\n\nThe pair consists of the spool/weight and the bicycle pump. Therefore, the correct image is Image 2.\n\n2",
+      "metadata": {
+        "chain_index": 5,
+        "foil_chain_index": 23
+      }
+    },
+    {
+      "trial": 14,
+      "target": 1,
+      "reported": 2,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.3486451374366851,
+        "2": 0.6513548625633149
+      },
+      "choice_mass": 0.9956371188163757,
+      "top_tokens": [
+        [
+          "2",
+          0.6485
+        ],
+        [
+          "1",
+          0.3471
+        ],
+        [
+          "3",
+          0.003
+        ],
+        [
+          "4",
+          0.0006
+        ],
+        [
+          "<|im_end|>",
+          0.0003
+        ]
+      ],
+      "free_response": "Based on the provided images, the cue image is a silver and black camera.\n\n- Image 1 shows a red crab.\n- Image 2 shows a beige filing cabinet.\n\nThe camera is not paired with either the crab or the filing cabinet. Therefore, neither of the two images was paired with the cue image.\n\nThe correct answer is neither.",
+      "metadata": {
+        "chain_index": 1,
+        "foil_chain_index": 8
+      }
+    },
+    {
+      "trial": 15,
+      "target": 1,
+      "reported": 2,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.4687906196738365,
+        "2": 0.5312093803261635
+      },
+      "choice_mass": 0.9977750182151794,
+      "top_tokens": [
+        [
+          "2",
+          0.53
+        ],
+        [
+          "1",
+          0.4677
+        ],
+        [
+          "3",
+          0.0013
+        ],
+        [
+          "4",
+          0.0003
+        ],
+        [
+          "<|im_end|>",
+          0.0003
+        ]
+      ],
+      "free_response": "Based on the provided images, the cue image is a black steering wheel.\n\n- Image 1 shows a black steering wheel.\n- Image 2 shows a green trash can.\n\nThe image that matches the cue image is Image 1.\n\n1",
+      "metadata": {
+        "chain_index": 0,
+        "foil_chain_index": 22
+      }
+    },
+    {
+      "trial": 16,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.5,
+        "2": 0.5
+      },
+      "choice_mass": 0.9923321008682251,
+      "top_tokens": [
+        [
+          "2",
+          0.4962
+        ],
+        [
+          "1",
+          0.4962
+        ],
+        [
+          "3",
+          0.0055
+        ],
+        [
+          "4",
+          0.001
+        ],
+        [
+          "5",
+          0.0002
+        ]
+      ],
+      "free_response": "Based on the provided images, the cue image is an ambulance, and the first image is a music stand. The second image is a spray gun.\n\nTherefore, the correct pair is Image 1.\n\n1",
+      "metadata": {
+        "chain_index": 21,
+        "foil_chain_index": 15
+      }
+    },
+    {
+      "trial": 17,
+      "target": 1,
+      "reported": 2,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.3486451358124992,
+        "2": 0.6513548641875008
+      },
+      "choice_mass": 0.990728497505188,
+      "top_tokens": [
+        [
+          "2",
+          0.6453
+        ],
+        [
+          "1",
+          0.3454
+        ],
+        [
+          "3",
+          0.0063
+        ],
+        [
+          "4",
+          0.0014
+        ],
+        [
+          "<|im_end|>",
+          0.0005
+        ]
+      ],
+      "free_response": "Based on the visual content of the images, the cue image is a chocolate-covered popsicle on a stick.\n\n- **Image 1** shows a pair of pink wedge sandals with fluffy decorations.\n- **Image 2** shows a black walkie-talkie on a charging base.\n\nNeither of these images is a popsicle. However, the image of the popsicle (the cue image) is identical to the image of the popsicle shown in **Image 2** (which",
+      "metadata": {
+        "chain_index": 4,
+        "foil_chain_index": 21
+      }
+    },
+    {
+      "trial": 18,
+      "target": 2,
+      "reported": 2,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.4378234849649588,
+        "2": 0.5621765150350412
+      },
+      "choice_mass": 0.9849100410938263,
+      "top_tokens": [
+        [
+          "2",
+          0.5537
+        ],
+        [
+          "1",
+          0.4312
+        ],
+        [
+          "3",
+          0.0101
+        ],
+        [
+          "4",
+          0.0023
+        ],
+        [
+          "5",
+          0.0006
+        ]
+      ],
+      "free_response": "Based on the visual content of the images, I can identify the following connections:\n\n- **Image 1** shows a red fire alarm.\n- **Image 2** shows a bucket of popcorn.\n\nThe connection between these two items is that a fire alarm is typically used to signal the presence of a fire, which is the exact reason for which popcorn is served in a movie theater.\n\nTherefore, the image that was paired with the cue image is Image 2.\n\n2",
+      "metadata": {
+        "chain_index": 10,
+        "foil_chain_index": 8
+      }
+    },
+    {
+      "trial": 19,
+      "target": 1,
+      "reported": 2,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.4687906280439697,
+        "2": 0.5312093719560302
+      },
+      "choice_mass": 0.9956439137458801,
+      "top_tokens": [
+        [
+          "2",
+          0.5289
+        ],
+        [
+          "1",
+          0.4667
+        ],
+        [
+          "3",
+          0.0031
+        ],
+        [
+          "4",
+          0.0004
+        ],
+        [
+          "<|im_end|>",
+          0.0003
+        ]
+      ],
+      "free_response": "Based on the visual content of the images, I can identify the following connections:\n\n- **Cue Image:** The cue image is a white, rectangular traffic sign with a blue circle containing a white arrow pointing down and to the left.\n- **Image 1:** This image shows a wooden artist's palette with several paint wells and a paintbrush resting on it.\n- **Image 2:** This image shows a red baseball cap with a white square patch featuring a blue baseball graphic.",
+      "metadata": {
+        "chain_index": 22,
+        "foil_chain_index": 12
+      }
+    },
+    {
+      "trial": 20,
+      "target": 1,
+      "reported": 2,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.3486451320688123,
+        "2": 0.6513548679311877
+      },
+      "choice_mass": 0.9943463802337646,
+      "top_tokens": [
+        [
+          "2",
+          0.6477
+        ],
+        [
+          "1",
+          0.3467
+        ],
+        [
+          "3",
+          0.0039
+        ],
+        [
+          "4",
+          0.0009
+        ],
+        [
+          "<|im_end|>",
+          0.0003
+        ]
+      ],
+      "free_response": "Based on the visual content of the images, the cue image shows a folding ironing board with a light-colored top and a wooden frame.\n\n- **Image 1** shows a brown, furry animal, which appears to be a muskox or a similar species.\n- **Image 2** shows a green, vintage-style engine or pump with a large red wheel.\n\nThe cue image does not match either of these two images. Therefore, neither Image 1 nor Image 2",
+      "metadata": {
+        "chain_index": 11,
+        "foil_chain_index": 17
+      }
+    },
+    {
+      "trial": 21,
+      "target": 1,
+      "reported": 2,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.4687906354829769,
+        "2": 0.5312093645170232
+      },
+      "choice_mass": 0.9982577562332153,
+      "top_tokens": [
+        [
+          "2",
+          0.5303
+        ],
+        [
+          "1",
+          0.468
+        ],
+        [
+          "3",
+          0.0009
+        ],
+        [
+          "4",
+          0.0003
+        ],
+        [
+          "<|im_end|>",
+          0.0002
+        ]
+      ],
+      "free_response": "Based on the provided images, the cue image is a pair of gold-colored binoculars with mother-of-pearl lenses.\n\n- **Image 1** shows a cameo pendant with a profile of a woman.\n- **Image 2** shows a pair of wooden chopsticks.\n\nThe pair of binoculars (the cue image) is not present in either Image 1 or Image 2. However, the pair of chopsticks (Image 2) is a common item",
+      "metadata": {
+        "chain_index": 2,
+        "foil_chain_index": 5
+      }
+    },
+    {
+      "trial": 22,
+      "target": 2,
+      "reported": 2,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.46879063125379056,
+        "2": 0.5312093687462094
+      },
+      "choice_mass": 0.9954048097133636,
+      "top_tokens": [
+        [
+          "2",
+          0.5288
+        ],
+        [
+          "1",
+          0.4666
+        ],
+        [
+          "3",
+          0.0031
+        ],
+        [
+          "4",
+          0.0005
+        ],
+        [
+          "<|im_end|>",
+          0.0003
+        ]
+      ],
+      "free_response": "Based on the provided images, the cue image is a metal scoop.\n\n- Image 1 is a baby bib.\n- Image 2 is a cylindrical tea tin.\n\nNeither of these items is a metal scoop. However, the metal scoop appears in the sequence of images as a pair with a black hair clip.\n\nTherefore, the correct image is Image 2.\n\n2",
+      "metadata": {
+        "chain_index": 4,
+        "foil_chain_index": 9
+      }
+    },
+    {
+      "trial": 23,
+      "target": 1,
+      "reported": 2,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.4687906142859936,
+        "2": 0.5312093857140064
+      },
+      "choice_mass": 0.992335170507431,
+      "top_tokens": [
+        [
+          "2",
+          0.5271
+        ],
+        [
+          "1",
+          0.4652
+        ],
+        [
+          "3",
+          0.0052
+        ],
+        [
+          "4",
+          0.0013
+        ],
+        [
+          "<|im_end|>",
+          0.0003
+        ]
+      ],
+      "free_response": "Based on the provided images, the cue image is the one showing a wooden artist's palette with paint splatters.\n\nThe image that was paired with it is the one showing a tan-colored mannequin torso.\n\nTherefore, the correct image is Image 2.\n\n2",
+      "metadata": {
+        "chain_index": 5,
+        "foil_chain_index": 12
+      }
+    },
+    {
+      "trial": 24,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.5,
+        "2": 0.5
+      },
+      "choice_mass": 0.9932047128677368,
+      "top_tokens": [
+        [
+          "2",
+          0.4966
+        ],
+        [
+          "1",
+          0.4966
+        ],
+        [
+          "3",
+          0.0049
+        ],
+        [
+          "4",
+          0.0011
+        ],
+        [
+          "5",
+          0.0002
+        ]
+      ],
+      "free_response": "Based on the visual content of the images, the cue image (a white pedestal) is paired with the second image (a metal saddle).\n\nTherefore, the correct image is Image 2.\n\n2",
+      "metadata": {
+        "chain_index": 10,
+        "foil_chain_index": 1
+      }
+    },
+    {
+      "trial": 25,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.5621765133516141,
+        "2": 0.43782348664838583
+      },
+      "choice_mass": 0.9967894852161407,
+      "top_tokens": [
+        [
+          "1",
+          0.5604
+        ],
+        [
+          "2",
+          0.4364
+        ],
+        [
+          "3",
+          0.002
+        ],
+        [
+          "4",
+          0.0004
+        ],
+        [
+          "<|im_end|>",
+          0.0002
+        ]
+      ],
+      "free_response": "Based on the visual content of the images, the cue image (the animal skull) is paired with the second image (the golf bag).\n\nTherefore, the correct digit is 2.",
+      "metadata": {
+        "chain_index": 23,
+        "foil_chain_index": 13
+      }
+    },
+    {
+      "trial": 26,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.531209361912374,
+        "2": 0.46879063808762605
+      },
+      "choice_mass": 0.9942978024482727,
+      "top_tokens": [
+        [
+          "1",
+          0.5282
+        ],
+        [
+          "2",
+          0.4661
+        ],
+        [
+          "3",
+          0.004
+        ],
+        [
+          "4",
+          0.0009
+        ],
+        [
+          "<|im_end|>",
+          0.0002
+        ]
+      ],
+      "free_response": "Based on the visual content of the images, the cue image shows a brass doorknob.\n\n- **Image 1** shows a black walkie-talkie.\n- **Image 2** shows a silver motorcycle brake lever.\n\nNeither of these items is a doorknob. However, the doorknob is a common object found in a home, which is where a walkie-talkie might be kept. The motorcycle brake lever is a specific part of a vehicle. Therefore,",
+      "metadata": {
+        "chain_index": 24,
+        "foil_chain_index": 0
+      }
+    },
+    {
+      "trial": 27,
+      "target": 1,
+      "reported": 2,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.46879062151419026,
+        "2": 0.5312093784858097
+      },
+      "choice_mass": 0.986358106136322,
+      "top_tokens": [
+        [
+          "2",
+          0.524
+        ],
+        [
+          "1",
+          0.4624
+        ],
+        [
+          "3",
+          0.0096
+        ],
+        [
+          "4",
+          0.0021
+        ],
+        [
+          "5",
+          0.0004
+        ]
+      ],
+      "free_response": "Based on the visual content of the images, I can identify the following connections:\n\n- **Image 1** shows a restroom sign with male and female figures.\n- **Image 2** shows a rolled-up blueprint or architectural drawing.\n\nThe connection between these two images is that they are both related to **architecture and construction**. A restroom sign is a common fixture found in buildings, and a blueprint is a document used by architects and engineers to plan and build structures.\n\nTherefore, the",
+      "metadata": {
+        "chain_index": 9,
+        "foil_chain_index": 7
+      }
+    },
+    {
+      "trial": 28,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.5,
+        "2": 0.5
+      },
+      "choice_mass": 0.9974228143692017,
+      "top_tokens": [
+        [
+          "2",
+          0.4987
+        ],
+        [
+          "1",
+          0.4987
+        ],
+        [
+          "3",
+          0.0016
+        ],
+        [
+          "4",
+          0.0004
+        ],
+        [
+          "<|im_end|>",
+          0.0002
+        ]
+      ],
+      "free_response": "Based on the provided images, the cue image is a silver, cylindrical object with a black handle and trigger, resembling a toy gun or a specialized tool.\n\n- **Image 1** shows a collection of cookies in various shapes (square, oval, star).\n- **Image 2** shows a saucepan with a lid and a handle, decorated with colorful illustrations of seafood.\n\nNeither of these images matches the visual content of the cue image. However, the question asks which of the",
+      "metadata": {
+        "chain_index": 1,
+        "foil_chain_index": 18
+      }
+    },
+    {
+      "trial": 29,
+      "target": 1,
+      "reported": 2,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.3775406625529781,
+        "2": 0.6224593374470219
+      },
+      "choice_mass": 0.9861688315868378,
+      "top_tokens": [
+        [
+          "2",
+          0.6138
+        ],
+        [
+          "1",
+          0.3723
+        ],
+        [
+          "3",
+          0.0099
+        ],
+        [
+          "4",
+          0.0017
+        ],
+        [
+          "5",
+          0.0004
+        ]
+      ],
+      "free_response": "Based on the visual content of the images, the cue image (the octagonal plate with a musical horn) is paired with the second image (the tambourine).\n\nTherefore, the correct digit is 2.",
+      "metadata": {
+        "chain_index": 14,
+        "foil_chain_index": 21
+      }
+    },
+    {
+      "trial": 30,
+      "target": 2,
+      "reported": 2,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.40733341188906635,
+        "2": 0.5926665881109336
+      },
+      "choice_mass": 0.9967526495456696,
+      "top_tokens": [
+        [
+          "2",
+          0.5907
+        ],
+        [
+          "1",
+          0.406
+        ],
+        [
+          "3",
+          0.0021
+        ],
+        [
+          "4",
+          0.0004
+        ],
+        [
+          "<|im_end|>",
+          0.0003
+        ]
+      ],
+      "free_response": "Based on the visual content of the images, the cue image shows a green table tennis table with ornate wooden legs.\n\n- **Image 1** shows a spool of film with a metal cage and a strip of film.\n- **Image 2** shows a wooden model of the Eiffel Tower.\n\nNeither of these images matches the table tennis table in the cue image. However, the question asks which of the two *provided* images (Image 1 or Image 2",
+      "metadata": {
+        "chain_index": 18,
+        "foil_chain_index": 11
+      }
+    },
+    {
+      "trial": 31,
+      "target": 1,
+      "reported": 2,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.46879061965933966,
+        "2": 0.5312093803406603
+      },
+      "choice_mass": 0.9969499707221985,
+      "top_tokens": [
+        [
+          "2",
+          0.5296
+        ],
+        [
+          "1",
+          0.4674
+        ],
+        [
+          "3",
+          0.0019
+        ],
+        [
+          "4",
+          0.0005
+        ],
+        [
+          "<|im_end|>",
+          0.0002
+        ]
+      ],
+      "free_response": "Based on the provided images, the cue image shows a pair of red boxing gloves.\n\n- Image 1 shows a dark, old-looking book with a cross on the cover.\n- Image 2 shows a colorful, decorated wooden mask.\n\nThe boxing gloves are not present in either Image 1 or Image 2. However, the image of the boxing gloves appears in the sequence of images provided in the prompt, specifically as the first image in the \"BC pair\" section.\n\nTherefore",
+      "metadata": {
+        "chain_index": 9,
+        "foil_chain_index": 11
+      }
+    },
+    {
+      "trial": 32,
+      "target": 1,
+      "reported": 2,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.3208213169164914,
+        "2": 0.6791786830835086
+      },
+      "choice_mass": 0.9958770871162415,
+      "top_tokens": [
+        [
+          "2",
+          0.6764
+        ],
+        [
+          "1",
+          0.3195
+        ],
+        [
+          "3",
+          0.0031
+        ],
+        [
+          "4",
+          0.0005
+        ],
+        [
+          "<|im_end|>",
+          0.0001
+        ]
+      ],
+      "free_response": "Based on the visual content of the images, the cue image (the antique iron) is paired with the second image (the insect).\n\nThe second image is the one that was paired with the cue image.",
+      "metadata": {
+        "chain_index": 22,
+        "foil_chain_index": 19
+      }
+    },
+    {
+      "trial": 33,
+      "target": 2,
+      "reported": 2,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.4073334021054444,
+        "2": 0.5926665978945556
+      },
+      "choice_mass": 0.9955469965934753,
+      "top_tokens": [
+        [
+          "2",
+          0.59
+        ],
+        [
+          "1",
+          0.4055
+        ],
+        [
+          "3",
+          0.0031
+        ],
+        [
+          "4",
+          0.0008
+        ],
+        [
+          "5",
+          0.0001
+        ]
+      ],
+      "free_response": "Based on the provided images, the cue image is a grey rock with white veins.\n\n- Image 1 shows a teal oven mitt with a white diamond pattern.\n- Image 2 shows a wooden writing desk with a chair.\n\nNeither of these images is a rock. However, the cue image (rock) is paired with the image of the oven mitt (Image 1) in the original sequence.\n\nTherefore, the correct image is Image 1.\n\n1",
+      "metadata": {
+        "chain_index": 3,
+        "foil_chain_index": 7
+      }
+    },
+    {
+      "trial": 34,
+      "target": 2,
+      "reported": 2,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.4687906409753252,
+        "2": 0.5312093590246748
+      },
+      "choice_mass": 0.9934021830558777,
+      "top_tokens": [
+        [
+          "2",
+          0.5277
+        ],
+        [
+          "1",
+          0.4657
+        ],
+        [
+          "3",
+          0.0046
+        ],
+        [
+          "4",
+          0.001
+        ],
+        [
+          "5",
+          0.0002
+        ]
+      ],
+      "free_response": "Based on the provided images, the cue image is a muffin tin.\n\n- Image 1 shows a spinning wheel and a bench.\n- Image 2 shows two stone tablets with Hebrew text.\n\nNeither of these images is a muffin tin. However, the muffin tin (cue image) is paired with the spinning wheel and bench (Image 1).\n\nTherefore, the correct image is Image 1.\n\n1",
+      "metadata": {
+        "chain_index": 6,
+        "foil_chain_index": 15
+      }
+    },
+    {
+      "trial": 35,
+      "target": 2,
+      "reported": 2,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.407333411674717,
+        "2": 0.592666588325283
+      },
+      "choice_mass": 0.996182918548584,
+      "top_tokens": [
+        [
+          "2",
+          0.5904
+        ],
+        [
+          "1",
+          0.4058
+        ],
+        [
+          "3",
+          0.0027
+        ],
+        [
+          "4",
+          0.0005
+        ],
+        [
+          "<|im_end|>",
+          0.0002
+        ]
+      ],
+      "free_response": "Based on the provided images, the cue image is an open black wallet.\n\n- Image 1 is a framed certificate.\n- Image 2 is a photograph of a bald eagle.\n\nThe wallet image does not appear in the list of images provided for Image 1 or Image 2. However, the wallet image is identical to the wallet image shown in the second image of the prompt's sequence.\n\nTherefore, the wallet image was paired with the wallet image, which corresponds to the second",
+      "metadata": {
+        "chain_index": 1,
+        "foil_chain_index": 10
+      }
+    },
+    {
+      "trial": 36,
+      "target": 2,
+      "reported": 2,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.43782350245990914,
+        "2": 0.5621764975400909
+      },
+      "choice_mass": 0.9919330477714539,
+      "top_tokens": [
+        [
+          "2",
+          0.5576
+        ],
+        [
+          "1",
+          0.4343
+        ],
+        [
+          "3",
+          0.0062
+        ],
+        [
+          "4",
+          0.001
+        ],
+        [
+          "<|im_end|>",
+          0.0002
+        ]
+      ],
+      "free_response": "Based on the provided images, the cue image is a purple plume (a type of grass) and the paired image is a green chalk stick.\n\n- Image 1 shows a dark purple plum.\n- Image 2 shows a golden-brown braided bread loaf.\n\nNeither of these images matches the paired image of the green chalk stick. Therefore, the correct image is not Image 1 or Image 2.\n\nThe answer is: None.",
+      "metadata": {
+        "chain_index": 19,
+        "foil_chain_index": 4
+      }
+    },
+    {
+      "trial": 37,
+      "target": 2,
+      "reported": 1,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.5312093716402005,
+        "2": 0.46879062835979946
+      },
+      "choice_mass": 0.9895615875720978,
+      "top_tokens": [
+        [
+          "1",
+          0.5257
+        ],
+        [
+          "2",
+          0.4639
+        ],
+        [
+          "3",
+          0.0075
+        ],
+        [
+          "4",
+          0.0017
+        ],
+        [
+          "5",
+          0.0003
+        ]
+      ],
+      "free_response": "Based on the visual content of the images, the cue image is a dark purple plum.\n\n- Image 1 shows a green computer circuit board with a metal bracket.\n- Image 2 shows a rolled-up, light-colored sleeping mat or blanket.\n\nNeither of these images is a plum. However, the image of the plum (the cue) is paired with the image of the sleeping mat (Image 2) in the provided sequence.\n\nTherefore, the correct image is Image 2",
+      "metadata": {
+        "chain_index": 6,
+        "foil_chain_index": 24
+      }
+    },
+    {
+      "trial": 38,
+      "target": 2,
+      "reported": 1,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.5,
+        "2": 0.5
+      },
+      "choice_mass": 0.9912187457084656,
+      "top_tokens": [
+        [
+          "2",
+          0.4956
+        ],
+        [
+          "1",
+          0.4956
+        ],
+        [
+          "3",
+          0.0055
+        ],
+        [
+          "4",
+          0.0014
+        ],
+        [
+          "<|im_end|>",
+          0.0006
+        ]
+      ],
+      "free_response": "Based on the visual content of the images, the cue image (Image 1) shows a wooden box containing a vinyl record. The second image (Image 2) displays a dark green hiking shoe.\n\nThe connection between these two items is that the vinyl record inside the box is a type of food, specifically a candy bar, which is a common snack. Therefore, the image paired with the cue image is Image 2.\n\n2",
+      "metadata": {
+        "chain_index": 6,
+        "foil_chain_index": 10
+      }
+    },
+    {
+      "trial": 39,
+      "target": 1,
+      "reported": 2,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.4378235109678184,
+        "2": 0.5621764890321815
+      },
+      "choice_mass": 0.9958278834819794,
+      "top_tokens": [
+        [
+          "2",
+          0.5598
+        ],
+        [
+          "1",
+          0.436
+        ],
+        [
+          "3",
+          0.0023
+        ],
+        [
+          "4",
+          0.0008
+        ],
+        [
+          "<|im_end|>",
+          0.0004
+        ]
+      ],
+      "free_response": "Based on the provided images, the cue image is a putty knife.\n\n- Image 1 shows a table tennis table.\n- Image 2 shows a candy apple.\n\nNeither of these images is a putty knife. However, the putty knife is a tool, and the table tennis table is a piece of sports equipment. The candy apple is a food item.\n\nUpon closer inspection of the original list of pairs, the putty knife (Image 1) is paired with",
+      "metadata": {
+        "chain_index": 17,
+        "foil_chain_index": 14
+      }
+    },
+    {
+      "trial": 40,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.5926665894973567,
+        "2": 0.40733341050264327
+      },
+      "choice_mass": 0.9950931370258331,
+      "top_tokens": [
+        [
+          "1",
+          0.5898
+        ],
+        [
+          "2",
+          0.4053
+        ],
+        [
+          "3",
+          0.0031
+        ],
+        [
+          "<|im_end|>",
+          0.0006
+        ],
+        [
+          "4",
+          0.0005
+        ]
+      ],
+      "free_response": "Based on the provided images, the cue image is a shower curtain featuring sushi.\n\n- Image 1 shows a brass horn with a red string.\n- Image 2 shows a brass tape measure with a wooden handle.\n\nThe shower curtain with sushi is paired with the brass tape measure.\n\nTherefore, the correct image is Image 2.\n\n2",
+      "metadata": {
+        "chain_index": 2,
+        "foil_chain_index": 3
+      }
+    },
+    {
+      "trial": 41,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.5,
+        "2": 0.5
+      },
+      "choice_mass": 0.9942547678947449,
+      "top_tokens": [
+        [
+          "2",
+          0.4971
+        ],
+        [
+          "1",
+          0.4971
+        ],
+        [
+          "3",
+          0.0038
+        ],
+        [
+          "4",
+          0.0007
+        ],
+        [
+          "<|im_end|>",
+          0.0005
+        ]
+      ],
+      "free_response": "Based on the visual content of the images, the cue image (Image 1) is a brush with a wooden handle and bristles. The second image (Image 2) is a pair of ice axes with black and yellow handles.\n\nThe image that was paired with the cue image is Image 2.\n\n2",
+      "metadata": {
+        "chain_index": 13,
+        "foil_chain_index": 2
+      }
+    },
+    {
+      "trial": 42,
+      "target": 2,
+      "reported": 2,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.4378235164227382,
+        "2": 0.5621764835772618
+      },
+      "choice_mass": 0.9946998953819275,
+      "top_tokens": [
+        [
+          "2",
+          0.5592
+        ],
+        [
+          "1",
+          0.4355
+        ],
+        [
+          "3",
+          0.0038
+        ],
+        [
+          "4",
+          0.0007
+        ],
+        [
+          "<|im_end|>",
+          0.0005
+        ]
+      ],
+      "free_response": "Based on the visual content of the images, the cue image shows a single sock with a red cuff.\n\n- **Image 1** shows a brown mouse pad with water droplets.\n- **Image 2** shows a pile of rubber bands.\n\nNeither of these images is a sock. However, looking at the provided list of pairs, the sock (cue image) is paired with the mouse pad (Image 1).\n\nTherefore, the correct image is Image 1.",
+      "metadata": {
+        "chain_index": 16,
+        "foil_chain_index": 1
+      }
+    },
+    {
+      "trial": 43,
+      "target": 1,
+      "reported": 2,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.4687906209577134,
+        "2": 0.5312093790422866
+      },
+      "choice_mass": 0.9967117607593536,
+      "top_tokens": [
+        [
+          "2",
+          0.5295
+        ],
+        [
+          "1",
+          0.4672
+        ],
+        [
+          "3",
+          0.0022
+        ],
+        [
+          "4",
+          0.0004
+        ],
+        [
+          "<|im_end|>",
+          0.0003
+        ]
+      ],
+      "free_response": "Based on the visual content of the images, the cue image (Image 1) is a yellow tennis ball, and the paired image (Image 2) is a parking meter. The reverse is also true: the cue image (Image 2) is a parking meter, and the paired image (Image 1) is a tennis ball. Therefore, the correct pairing is Image 1 with Image 2.\n\n2",
+      "metadata": {
+        "chain_index": 11,
+        "foil_chain_index": 2
+      }
+    },
+    {
+      "trial": 44,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.6224593305817175,
+        "2": 0.37754066941828246
+      },
+      "choice_mass": 0.9964593350887299,
+      "top_tokens": [
+        [
+          "1",
+          0.6203
+        ],
+        [
+          "2",
+          0.3762
+        ],
+        [
+          "3",
+          0.0022
+        ],
+        [
+          "4",
+          0.0006
+        ],
+        [
+          "<|im_end|>",
+          0.0002
+        ]
+      ],
+      "free_response": "Based on the provided images, the cue image shows a wooden chess piece (specifically, a bishop or king) and the second image shows a music stand. These two items are related in the context of a chess game, where a music stand is often used to hold sheet music while playing. Therefore, the music stand (Image 2) was paired with the chess piece (Image 1).\n\nThe correct digit is 2.",
+      "metadata": {
+        "chain_index": 7,
+        "foil_chain_index": 21
+      }
+    },
+    {
+      "trial": 45,
+      "target": 2,
+      "reported": 2,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.4687906292586254,
+        "2": 0.5312093707413745
+      },
+      "choice_mass": 0.991763174533844,
+      "top_tokens": [
+        [
+          "2",
+          0.5268
+        ],
+        [
+          "1",
+          0.4649
+        ],
+        [
+          "3",
+          0.0059
+        ],
+        [
+          "4",
+          0.001
+        ],
+        [
+          "5",
+          0.0003
+        ]
+      ],
+      "free_response": "Based on the visual content of the images, I can identify the following connections:\n\n- **Image 1** is a cream-colored ceramic jug with a lid and a blue stripe.\n- **Image 2** is a wooden sandbox where four children are playing with toys.\n\nThe connection between these two images is that they are both items found in a kitchen or dining area. A jug is typically used for serving drinks, and a sandbox is a common feature in a home or a child's",
+      "metadata": {
+        "chain_index": 20,
+        "foil_chain_index": 9
+      }
+    },
+    {
+      "trial": 46,
+      "target": 2,
+      "reported": 2,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.29421495144658,
+        "2": 0.70578504855342
+      },
+      "choice_mass": 0.9961284697055817,
+      "top_tokens": [
+        [
+          "2",
+          0.7031
+        ],
+        [
+          "1",
+          0.2931
+        ],
+        [
+          "3",
+          0.0029
+        ],
+        [
+          "4",
+          0.0004
+        ],
+        [
+          "<|im_end|>",
+          0.0002
+        ]
+      ],
+      "free_response": "Based on the provided images, the cue image (Image 1) is a zucchini, and the second image (Image 2) is a wooden pizza peel.\n\nThe pair that matches these two items is the one shown in the final image of the sequence, which features a red pot holder with a floral pattern.\n\nTherefore, the correct image is Image 2.\n\n2",
+      "metadata": {
+        "chain_index": 1,
+        "foil_chain_index": 22
+      }
+    },
+    {
+      "trial": 47,
+      "target": 2,
+      "reported": 2,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.3775406513801637,
+        "2": 0.6224593486198363
+      },
+      "choice_mass": 0.9954004287719727,
+      "top_tokens": [
+        [
+          "2",
+          0.6196
+        ],
+        [
+          "1",
+          0.3758
+        ],
+        [
+          "3",
+          0.0033
+        ],
+        [
+          "4",
+          0.0005
+        ],
+        [
+          "<|im_end|>",
+          0.0003
+        ]
+      ],
+      "free_response": "Based on the provided images, the cue image (an orange extension cord) is paired with the image of the model rocket.\n\nThe image of the model rocket is Image 2.\n\nTherefore, the correct digit is 2.",
+      "metadata": {
+        "chain_index": 11,
+        "foil_chain_index": 2
+      }
+    },
+    {
+      "trial": 48,
+      "target": 1,
+      "reported": 2,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.4687906279686864,
+        "2": 0.5312093720313136
+      },
+      "choice_mass": 0.9959208369255066,
+      "top_tokens": [
+        [
+          "2",
+          0.529
+        ],
+        [
+          "1",
+          0.4669
+        ],
+        [
+          "3",
+          0.0028
+        ],
+        [
+          "4",
+          0.0006
+        ],
+        [
+          "<|im_end|>",
+          0.0002
+        ]
+      ],
+      "free_response": "Based on the visual content of the images, the cue image (a yellow chick) is paired with the second image (a dragonfly).\n\nThe second image is the one that was paired with the cue image.",
+      "metadata": {
+        "chain_index": 18,
+        "foil_chain_index": 2
+      }
+    },
+    {
+      "trial": 49,
+      "target": 2,
+      "reported": 1,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.5,
+        "2": 0.5
+      },
+      "choice_mass": 0.9940120577812195,
+      "top_tokens": [
+        [
+          "2",
+          0.497
+        ],
+        [
+          "1",
+          0.497
+        ],
+        [
+          "3",
+          0.0038
+        ],
+        [
+          "4",
+          0.0011
+        ],
+        [
+          "<|im_end|>",
+          0.0002
+        ]
+      ],
+      "free_response": "Based on the provided images, the cue image is a wooden doofhorn.\n\n- Image 1 shows a decorative metal cart with a wheel.\n- Image 2 shows a white, oval-shaped device with black straps, which appears to be a headband or a piece of jewelry.\n\nThe cue image (doofhorn) is not visually similar to either of these items. However, upon reviewing the full list of pairs, the doofhorn is paired with a red potato-shaped",
+      "metadata": {
+        "chain_index": 10,
+        "foil_chain_index": 11
+      }
+    }
+  ],
+  "metrics": {
+    "accuracy": 0.58,
+    "n_correct": 29,
+    "total": 50,
+    "free_text_bare_digit": 0.04,
+    "mean_p_chosen": 0.570042953891165,
+    "mean_choice_mass": 0.9939074954390525,
+    "frac_low_mass": 0.0,
+    "response_distribution": {
+      "2": 37,
+      "1": 13
+    }
+  }
+}

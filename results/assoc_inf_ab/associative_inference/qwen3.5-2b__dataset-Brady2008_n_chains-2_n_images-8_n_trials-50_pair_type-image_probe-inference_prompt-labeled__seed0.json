@@ -1,0 +1,2846 @@
+{
+  "run": {
+    "model": {
+      "name": "qwen3.5-2b",
+      "model_id": "Qwen/Qwen3.5-2B",
+      "max_image_size": 512,
+      "max_new_tokens": 100
+    },
+    "task": "associative_inference",
+    "condition": {
+      "dataset": "Brady2008",
+      "pair_type": "image",
+      "probe": "inference",
+      "n_chains": 2,
+      "n_images": 8,
+      "prompt": "labeled",
+      "n_trials": 50
+    },
+    "seed": 0
+  },
+  "config": {
+    "run_name": "assoc_inf_ab",
+    "output_dir": "results",
+    "seeds": [
+      0
+    ],
+    "models": [
+      {
+        "name": "qwen3.5-2b",
+        "model_id": "Qwen/Qwen3.5-2B",
+        "max_image_size": 512,
+        "max_new_tokens": 100
+      },
+      {
+        "name": "qwen3.5-4b",
+        "model_id": "Qwen/Qwen3.5-4B",
+        "max_image_size": 512,
+        "max_new_tokens": 100
+      }
+    ],
+    "tasks": [
+      {
+        "task": "associative_inference",
+        "datasets": [
+          "Brady2008"
+        ],
+        "pair_types": [
+          "image",
+          "word"
+        ],
+        "probe_types": [
+          "inference",
+          "direct_ab",
+          "direct_bc"
+        ],
+        "n_chains": [
+          2,
+          5,
+          25
+        ],
+        "prompts": [
+          "original",
+          "cue_turn",
+          "labeled"
+        ],
+        "n_trials": 50
+      }
+    ]
+  },
+  "provenance": {
+    "config_hash": "d49714f7009d",
+    "gpu": "NVIDIA A100-SXM4-80GB",
+    "git_commit": null,
+    "git_dirty": false,
+    "torch": "2.10.0+cu128",
+    "transformers": "5.17.0"
+  },
+  "elapsed_s": 92.9,
+  "peak_gpu_gb": 4.58,
+  "error": null,
+  "trials": [
+    {
+      "trial": 0,
+      "target": 2,
+      "reported": 1,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.6224593190312434,
+        "2": 0.37754068096875665
+      },
+      "choice_mass": 0.9949548244476318,
+      "top_tokens": [
+        [
+          "1",
+          0.6193
+        ],
+        [
+          "2",
+          0.3756
+        ],
+        [
+          "3",
+          0.0032
+        ],
+        [
+          "<|im_end|>",
+          0.0008
+        ],
+        [
+          "4",
+          0.0005
+        ]
+      ],
+      "free_response": "Based on the analysis of the visual content, here is the logical deduction:\n\n- **Image 1** shows a red and black zippered case.\n- **Image 2** shows a set of plastic kitchen utensils, including a spatula, tongs, and a spoon.\n\nThe two images are completely unrelated in terms of their subject matter, function, or visual features. There is no direct or indirect connection between a storage case and a set of kitchen tools.\n\nTherefore,",
+      "metadata": {
+        "chain_index": 0,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/Aceramichous2.jpg",
+          "name": "Aceramichous2.jpg",
+          "role": "A",
+          "chain_index": 0
+        },
+        "correct_option": {
+          "path": "memory_datasets/Brady2008Objects/Akitchentool2.jpg",
+          "name": "Akitchentool2.jpg",
+          "role": "C",
+          "chain_index": 0
+        },
+        "foil_option": {
+          "path": "memory_datasets/Brady2008Objects/Aelectronicg9.jpg",
+          "name": "Aelectronicg9.jpg",
+          "role": "C",
+          "chain_index": 1
+        }
+      }
+    },
+    {
+      "trial": 1,
+      "target": 2,
+      "reported": 1,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.5621764910923318,
+        "2": 0.4378235089076682
+      },
+      "choice_mass": 0.996404230594635,
+      "top_tokens": [
+        [
+          "1",
+          0.5602
+        ],
+        [
+          "2",
+          0.4362
+        ],
+        [
+          "3",
+          0.0023
+        ],
+        [
+          "<|im_end|>",
+          0.0007
+        ],
+        [
+          "4",
+          0.0003
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 0,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/ADRESSE14.jpg",
+          "name": "ADRESSE14.jpg",
+          "role": "A",
+          "chain_index": 0
+        },
+        "correct_option": {
+          "path": "memory_datasets/Brady2008Objects/Aclamp62.jpg",
+          "name": "Aclamp62.jpg",
+          "role": "C",
+          "chain_index": 0
+        },
+        "foil_option": {
+          "path": "memory_datasets/Brady2008Objects/AALMOND1.jpg",
+          "name": "AALMOND1.jpg",
+          "role": "C",
+          "chain_index": 1
+        }
+      }
+    },
+    {
+      "trial": 2,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.6224593261278554,
+        "2": 0.37754067387214457
+      },
+      "choice_mass": 0.9944781363010406,
+      "top_tokens": [
+        [
+          "1",
+          0.619
+        ],
+        [
+          "2",
+          0.3755
+        ],
+        [
+          "3",
+          0.0042
+        ],
+        [
+          "<|im_end|>",
+          0.0006
+        ],
+        [
+          "4",
+          0.0005
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 1,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/26423652.thl.jpg",
+          "name": "26423652.thl.jpg",
+          "role": "A",
+          "chain_index": 1
+        },
+        "correct_option": {
+          "path": "memory_datasets/Brady2008Objects/Abutterdish.jpg",
+          "name": "Abutterdish.jpg",
+          "role": "C",
+          "chain_index": 1
+        },
+        "foil_option": {
+          "path": "memory_datasets/Brady2008Objects/APERSRUG.jpg",
+          "name": "APERSRUG.jpg",
+          "role": "C",
+          "chain_index": 0
+        }
+      }
+    },
+    {
+      "trial": 3,
+      "target": 1,
+      "reported": 2,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.4687906365872465,
+        "2": 0.5312093634127535
+      },
+      "choice_mass": 0.9946782886981964,
+      "top_tokens": [
+        [
+          "2",
+          0.5284
+        ],
+        [
+          "1",
+          0.4663
+        ],
+        [
+          "3",
+          0.004
+        ],
+        [
+          "<|im_end|>",
+          0.0007
+        ],
+        [
+          "4",
+          0.0003
+        ]
+      ],
+      "free_response": "Based on the analysis of the visual content:\n\n- The **cue image** is a film reel, which is a component used for storing and playing motion pictures.\n- **Image 1** shows a metal clamp, which is a tool used for holding objects together.\n- **Image 2** shows a kiwi fruit, which is a type of food.\n\nThere is no direct visual or functional connection between a film reel and either a clamp or a kiwi fruit. However,",
+      "metadata": {
+        "chain_index": 1,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/26421583.thl.jpg",
+          "name": "26421583.thl.jpg",
+          "role": "A",
+          "chain_index": 1
+        },
+        "correct_option": {
+          "path": "memory_datasets/Brady2008Objects/Aringclamp2.jpg",
+          "name": "Aringclamp2.jpg",
+          "role": "C",
+          "chain_index": 1
+        },
+        "foil_option": {
+          "path": "memory_datasets/Brady2008Objects/Akiwifruit6.jpg",
+          "name": "Akiwifruit6.jpg",
+          "role": "C",
+          "chain_index": 0
+        }
+      }
+    },
+    {
+      "trial": 4,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.5,
+        "2": 0.5
+      },
+      "choice_mass": 0.9921742677688599,
+      "top_tokens": [
+        [
+          "2",
+          0.4961
+        ],
+        [
+          "1",
+          0.4961
+        ],
+        [
+          "3",
+          0.0055
+        ],
+        [
+          "<|im_end|>",
+          0.0011
+        ],
+        [
+          "4",
+          0.0007
+        ]
+      ],
+      "free_response": "Based on the analysis of the images provided:\n\n- The **cue image** is a red 20-sided die (d20), which is a standard tool for tabletop role-playing games like Dungeons & Dragons.\n- **Image 1** is a vintage blue and gold treasure chest.\n- **Image 2** is a model of a double-decker tram.\n\nThe connection between the die and the other two images is indirect. The die is a game piece used to roll",
+      "metadata": {
+        "chain_index": 1,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/Adice10.jpg",
+          "name": "Adice10.jpg",
+          "role": "A",
+          "chain_index": 1
+        },
+        "correct_option": {
+          "path": "memory_datasets/Brady2008Objects/ATRUNK15.jpg",
+          "name": "ATRUNK15.jpg",
+          "role": "C",
+          "chain_index": 1
+        },
+        "foil_option": {
+          "path": "memory_datasets/Brady2008Objects/AANTCABL2.jpg",
+          "name": "AANTCABL2.jpg",
+          "role": "C",
+          "chain_index": 0
+        }
+      }
+    },
+    {
+      "trial": 5,
+      "target": 2,
+      "reported": 1,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.5926665889578573,
+        "2": 0.4073334110421427
+      },
+      "choice_mass": 0.9966219067573547,
+      "top_tokens": [
+        [
+          "1",
+          0.5907
+        ],
+        [
+          "2",
+          0.406
+        ],
+        [
+          "3",
+          0.0021
+        ],
+        [
+          "<|im_end|>",
+          0.0006
+        ],
+        [
+          "4",
+          0.0003
+        ]
+      ],
+      "free_response": "Based on the analysis of the visual content, here is the reasoning for the connection:\n\n- The **cue image** is a pair of wooden pepper and salt mills.\n- **Image 1** is a red and black die-cast model of a vintage pickup truck.\n- **Image 2** is a burlap bag with a logo that reads \"HERBES DE PROVENCE\".\n\nThe connection between the cue image (pepper and salt mills) and Image 2",
+      "metadata": {
+        "chain_index": 1,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/ASALTPEPP.jpg",
+          "name": "ASALTPEPP.jpg",
+          "role": "A",
+          "chain_index": 1
+        },
+        "correct_option": {
+          "path": "memory_datasets/Brady2008Objects/Abagofherbs.jpg",
+          "name": "Abagofherbs.jpg",
+          "role": "C",
+          "chain_index": 1
+        },
+        "foil_option": {
+          "path": "memory_datasets/Brady2008Objects/AANTTRUCK.jpg",
+          "name": "AANTTRUCK.jpg",
+          "role": "C",
+          "chain_index": 0
+        }
+      }
+    },
+    {
+      "trial": 6,
+      "target": 2,
+      "reported": 1,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.5312093741604011,
+        "2": 0.4687906258395988
+      },
+      "choice_mass": 0.9917778670787811,
+      "top_tokens": [
+        [
+          "1",
+          0.5268
+        ],
+        [
+          "2",
+          0.4649
+        ],
+        [
+          "3",
+          0.0066
+        ],
+        [
+          "<|im_end|>",
+          0.0005
+        ],
+        [
+          "4",
+          0.0005
+        ]
+      ],
+      "free_response": "Based on the analysis of the provided images and their potential connections:\n\n- **Image 1** shows a corkscrew.\n- **Image 2** shows a traffic light with a sign that says \"LET OP! AUTOMATISCHE SLAGBOMEN\" (Dutch for \"STOP! AUTOMATIC TRASH BINS\").\n\nThe connection between these two images is not direct. However, the corkscrew in Image 1 is a tool used to open bottles of",
+      "metadata": {
+        "chain_index": 1,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/Abowlofpasta.jpg",
+          "name": "Abowlofpasta.jpg",
+          "role": "A",
+          "chain_index": 1
+        },
+        "correct_option": {
+          "path": "memory_datasets/Brady2008Objects/ADRAWBRI3.jpg",
+          "name": "ADRAWBRI3.jpg",
+          "role": "C",
+          "chain_index": 1
+        },
+        "foil_option": {
+          "path": "memory_datasets/Brady2008Objects/corkscrew02.jpg",
+          "name": "corkscrew02.jpg",
+          "role": "C",
+          "chain_index": 0
+        }
+      }
+    },
+    {
+      "trial": 7,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.5621765068680786,
+        "2": 0.4378234931319214
+      },
+      "choice_mass": 0.9910634160041809,
+      "top_tokens": [
+        [
+          "1",
+          0.5572
+        ],
+        [
+          "2",
+          0.4339
+        ],
+        [
+          "3",
+          0.007
+        ],
+        [
+          "<|im_end|>",
+          0.0008
+        ],
+        [
+          "4",
+          0.0007
+        ]
+      ],
+      "free_response": "Based on the analysis of the images provided:\n\n- The **cue image** is a brass telescope with a reddish-brown wooden barrel.\n- **Image 1** is a sewing machine on a table.\n- **Image 2** is a piece of raw meat.\n\nThere is no direct visual or functional connection between a telescope and either a sewing machine or a piece of meat. However, the question asks for an *indirect* association.\n\n- A **telescope",
+      "metadata": {
+        "chain_index": 1,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/ARETRACT2.jpg",
+          "name": "ARETRACT2.jpg",
+          "role": "A",
+          "chain_index": 1
+        },
+        "correct_option": {
+          "path": "memory_datasets/Brady2008Objects/ASEWINGT4.jpg",
+          "name": "ASEWINGT4.jpg",
+          "role": "C",
+          "chain_index": 1
+        },
+        "foil_option": {
+          "path": "memory_datasets/Brady2008Objects/AMEAT2.jpg",
+          "name": "AMEAT2.jpg",
+          "role": "C",
+          "chain_index": 0
+        }
+      }
+    },
+    {
+      "trial": 8,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.5621765049960877,
+        "2": 0.4378234950039123
+      },
+      "choice_mass": 0.9969882965087891,
+      "top_tokens": [
+        [
+          "1",
+          0.5605
+        ],
+        [
+          "2",
+          0.4365
+        ],
+        [
+          "3",
+          0.002
+        ],
+        [
+          "<|im_end|>",
+          0.0005
+        ],
+        [
+          "4",
+          0.0003
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 0,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/Asafetyrope.jpg",
+          "name": "Asafetyrope.jpg",
+          "role": "A",
+          "chain_index": 0
+        },
+        "correct_option": {
+          "path": "memory_datasets/Brady2008Objects/Arubberducky2.jpg",
+          "name": "Arubberducky2.jpg",
+          "role": "C",
+          "chain_index": 0
+        },
+        "foil_option": {
+          "path": "memory_datasets/Brady2008Objects/AGUIRO.jpg",
+          "name": "AGUIRO.jpg",
+          "role": "C",
+          "chain_index": 1
+        }
+      }
+    },
+    {
+      "trial": 9,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.5312093810921804,
+        "2": 0.4687906189078196
+      },
+      "choice_mass": 0.9941253066062927,
+      "top_tokens": [
+        [
+          "1",
+          0.5281
+        ],
+        [
+          "2",
+          0.466
+        ],
+        [
+          "3",
+          0.004
+        ],
+        [
+          "<|im_end|>",
+          0.0008
+        ],
+        [
+          "4",
+          0.0006
+        ]
+      ],
+      "free_response": "Based on the analysis of the provided images and their potential connections:\n\n- The **cue image** is a laboratory setup for liquid-liquid extraction, consisting of a separatory funnel, a stand, and a flask.\n- **Image 1** is a checkers game.\n- **Image 2** is a vintage-looking album or book.\n\nThere is no direct visual or functional link between the laboratory setup and either the checkers game or the album.\n\nHowever, we can",
+      "metadata": {
+        "chain_index": 1,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/ALAB2.jpg",
+          "name": "ALAB2.jpg",
+          "role": "A",
+          "chain_index": 1
+        },
+        "correct_option": {
+          "path": "memory_datasets/Brady2008Objects/8248852.thl.jpg",
+          "name": "8248852.thl.jpg",
+          "role": "C",
+          "chain_index": 1
+        },
+        "foil_option": {
+          "path": "memory_datasets/Brady2008Objects/ABOOK23.jpg",
+          "name": "ABOOK23.jpg",
+          "role": "C",
+          "chain_index": 0
+        }
+      }
+    },
+    {
+      "trial": 10,
+      "target": 2,
+      "reported": 1,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.5,
+        "2": 0.5
+      },
+      "choice_mass": 0.9972297549247742,
+      "top_tokens": [
+        [
+          "2",
+          0.4986
+        ],
+        [
+          "1",
+          0.4986
+        ],
+        [
+          "3",
+          0.002
+        ],
+        [
+          "<|im_end|>",
+          0.0004
+        ],
+        [
+          "4",
+          0.0001
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 1,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/Atoy17.jpg",
+          "name": "Atoy17.jpg",
+          "role": "A",
+          "chain_index": 1
+        },
+        "correct_option": {
+          "path": "memory_datasets/Brady2008Objects/AHARMONS2.jpg",
+          "name": "AHARMONS2.jpg",
+          "role": "C",
+          "chain_index": 1
+        },
+        "foil_option": {
+          "path": "memory_datasets/Brady2008Objects/AFRYPAN7.jpg",
+          "name": "AFRYPAN7.jpg",
+          "role": "C",
+          "chain_index": 0
+        }
+      }
+    },
+    {
+      "trial": 11,
+      "target": 2,
+      "reported": 1,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.5312093843191693,
+        "2": 0.46879061568083075
+      },
+      "choice_mass": 0.9945253133773804,
+      "top_tokens": [
+        [
+          "1",
+          0.5283
+        ],
+        [
+          "2",
+          0.4662
+        ],
+        [
+          "3",
+          0.004
+        ],
+        [
+          "<|im_end|>",
+          0.0005
+        ],
+        [
+          "4",
+          0.0004
+        ]
+      ],
+      "free_response": "Based on the analysis of the provided images and their connections:\n\n- **Image 1** is a wooden spice jar with a lid.\n- **Image 2** is a KitchenAid stand mixer.\n\nThe connection between these two items is that they are both types of containers used for holding and storing food ingredients. A spice jar is used to store spices, while a stand mixer is used to mix ingredients. Therefore, they are indirectly associated through their function as containers for food.",
+      "metadata": {
+        "chain_index": 0,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/APIPEST18.jpg",
+          "name": "APIPEST18.jpg",
+          "role": "A",
+          "chain_index": 0
+        },
+        "correct_option": {
+          "path": "memory_datasets/Brady2008Objects/mixer.jpg",
+          "name": "mixer.jpg",
+          "role": "C",
+          "chain_index": 0
+        },
+        "foil_option": {
+          "path": "memory_datasets/Brady2008Objects/APOTPBAG2.jpg",
+          "name": "APOTPBAG2.jpg",
+          "role": "C",
+          "chain_index": 1
+        }
+      }
+    },
+    {
+      "trial": 12,
+      "target": 2,
+      "reported": 1,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.5926665855557923,
+        "2": 0.40733341444420773
+      },
+      "choice_mass": 0.9940124154090881,
+      "top_tokens": [
+        [
+          "1",
+          0.5891
+        ],
+        [
+          "2",
+          0.4049
+        ],
+        [
+          "3",
+          0.0045
+        ],
+        [
+          "<|im_end|>",
+          0.0005
+        ],
+        [
+          "4",
+          0.0005
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 1,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/Ataco.jpg",
+          "name": "Ataco.jpg",
+          "role": "A",
+          "chain_index": 1
+        },
+        "correct_option": {
+          "path": "memory_datasets/Brady2008Objects/chocolatebar.jpg",
+          "name": "chocolatebar.jpg",
+          "role": "C",
+          "chain_index": 1
+        },
+        "foil_option": {
+          "path": "memory_datasets/Brady2008Objects/ACHAIRDE2.jpg",
+          "name": "ACHAIRDE2.jpg",
+          "role": "C",
+          "chain_index": 0
+        }
+      }
+    },
+    {
+      "trial": 13,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.5,
+        "2": 0.5
+      },
+      "choice_mass": 0.998115062713623,
+      "top_tokens": [
+        [
+          "2",
+          0.4991
+        ],
+        [
+          "1",
+          0.4991
+        ],
+        [
+          "3",
+          0.0011
+        ],
+        [
+          "<|im_end|>",
+          0.0004
+        ],
+        [
+          "4",
+          0.0001
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 0,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/Alambtoy6.jpg",
+          "name": "Alambtoy6.jpg",
+          "role": "A",
+          "chain_index": 0
+        },
+        "correct_option": {
+          "path": "memory_datasets/Brady2008Objects/fortune-cookie.jpg",
+          "name": "fortune-cookie.jpg",
+          "role": "C",
+          "chain_index": 0
+        },
+        "foil_option": {
+          "path": "memory_datasets/Brady2008Objects/26370659.thm.jpg",
+          "name": "26370659.thm.jpg",
+          "role": "C",
+          "chain_index": 1
+        }
+      }
+    },
+    {
+      "trial": 14,
+      "target": 2,
+      "reported": 1,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.6513548584758644,
+        "2": 0.34864514152413567
+      },
+      "choice_mass": 0.995304673910141,
+      "top_tokens": [
+        [
+          "1",
+          0.6483
+        ],
+        [
+          "2",
+          0.347
+        ],
+        [
+          "3",
+          0.0023
+        ],
+        [
+          "<|im_end|>",
+          0.001
+        ],
+        [
+          "4",
+          0.0008
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 0,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/26383637.thl.jpg",
+          "name": "26383637.thl.jpg",
+          "role": "A",
+          "chain_index": 0
+        },
+        "correct_option": {
+          "path": "memory_datasets/Brady2008Objects/AWHISTLE4.jpg",
+          "name": "AWHISTLE4.jpg",
+          "role": "C",
+          "chain_index": 0
+        },
+        "foil_option": {
+          "path": "memory_datasets/Brady2008Objects/AHARPSIC5.jpg",
+          "name": "AHARPSIC5.jpg",
+          "role": "C",
+          "chain_index": 1
+        }
+      }
+    },
+    {
+      "trial": 15,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.5621765086757678,
+        "2": 0.4378234913242321
+      },
+      "choice_mass": 0.9950707256793976,
+      "top_tokens": [
+        [
+          "1",
+          0.5594
+        ],
+        [
+          "2",
+          0.4357
+        ],
+        [
+          "3",
+          0.0033
+        ],
+        [
+          "<|im_end|>",
+          0.0007
+        ],
+        [
+          "4",
+          0.0004
+        ]
+      ],
+      "free_response": "Based on the analysis of the visual content, here is the reasoning for the connection:\n\n- The cue image is a person dressed as Ronald McDonald, wearing a yellow jumpsuit with red and white striped sleeves and a red hood.\n- Image 1 is a beige electronic component, specifically a female-to-male (F-M) adapter.\n- Image 2 is a handheld garment steamer.\n\nThe connection between Ronald McDonald and a steamer is not direct or obvious. However, Ronald",
+      "metadata": {
+        "chain_index": 0,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/ronald.jpg",
+          "name": "ronald.jpg",
+          "role": "A",
+          "chain_index": 0
+        },
+        "correct_option": {
+          "path": "memory_datasets/Brady2008Objects/Aconnector2.jpg",
+          "name": "Aconnector2.jpg",
+          "role": "C",
+          "chain_index": 0
+        },
+        "foil_option": {
+          "path": "memory_datasets/Brady2008Objects/ALINTREMO.jpg",
+          "name": "ALINTREMO.jpg",
+          "role": "C",
+          "chain_index": 1
+        }
+      }
+    },
+    {
+      "trial": 16,
+      "target": 2,
+      "reported": 1,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.5,
+        "2": 0.5
+      },
+      "choice_mass": 0.9940385818481445,
+      "top_tokens": [
+        [
+          "2",
+          0.497
+        ],
+        [
+          "1",
+          0.497
+        ],
+        [
+          "3",
+          0.0043
+        ],
+        [
+          "<|im_end|>",
+          0.001
+        ],
+        [
+          "4",
+          0.0004
+        ]
+      ],
+      "free_response": "Based on the analysis of the visual content, here is the reasoning for the connection:\n\n- The **cue image** is a wheel, which is a component of a vehicle.\n- **Image 1** is a small, square object labeled \"DIAMOND CRYSTAL\" from \"KASAI ZAIRE\". This is a piece of jewelry or a gemstone.\n- **Image 2** is a wooden bead maze toy.\n\nThe connection between the wheel (",
+      "metadata": {
+        "chain_index": 1,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/26427867.thl.jpg",
+          "name": "26427867.thl.jpg",
+          "role": "A",
+          "chain_index": 1
+        },
+        "correct_option": {
+          "path": "memory_datasets/Brady2008Objects/36407726.thl.jpg",
+          "name": "36407726.thl.jpg",
+          "role": "C",
+          "chain_index": 1
+        },
+        "foil_option": {
+          "path": "memory_datasets/Brady2008Objects/ADIAMCRYS.jpg",
+          "name": "ADIAMCRYS.jpg",
+          "role": "C",
+          "chain_index": 0
+        }
+      }
+    },
+    {
+      "trial": 17,
+      "target": 2,
+      "reported": 1,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.622459317132611,
+        "2": 0.37754068286738895
+      },
+      "choice_mass": 0.9978733956813812,
+      "top_tokens": [
+        [
+          "1",
+          0.6211
+        ],
+        [
+          "2",
+          0.3767
+        ],
+        [
+          "3",
+          0.0014
+        ],
+        [
+          "<|im_end|>",
+          0.0004
+        ],
+        [
+          "4",
+          0.0001
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 0,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/Afoodproces13.jpg",
+          "name": "Afoodproces13.jpg",
+          "role": "A",
+          "chain_index": 0
+        },
+        "correct_option": {
+          "path": "memory_datasets/Brady2008Objects/radish.jpg",
+          "name": "radish.jpg",
+          "role": "C",
+          "chain_index": 0
+        },
+        "foil_option": {
+          "path": "memory_datasets/Brady2008Objects/Adiscoball2.jpg",
+          "name": "Adiscoball2.jpg",
+          "role": "C",
+          "chain_index": 1
+        }
+      }
+    },
+    {
+      "trial": 18,
+      "target": 2,
+      "reported": 1,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.5312093751327805,
+        "2": 0.46879062486721945
+      },
+      "choice_mass": 0.9952861964702606,
+      "top_tokens": [
+        [
+          "1",
+          0.5287
+        ],
+        [
+          "2",
+          0.4666
+        ],
+        [
+          "3",
+          0.0031
+        ],
+        [
+          "<|im_end|>",
+          0.001
+        ],
+        [
+          "4",
+          0.0003
+        ]
+      ],
+      "free_response": "Based on the analysis of the images provided:\n\n- The **cue image** is a red Nintendo 3DS handheld gaming console.\n- **Image 1** is a brass water tap.\n- **Image 2** is a white medical or laboratory device, likely a blood gas analyzer or similar instrument.\n\nTo determine the connection, we must look for a hidden link between the items.\n\n- The Nintendo 3DS is a portable electronic device.\n- The water tap is",
+      "metadata": {
+        "chain_index": 1,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/gameboy.jpg",
+          "name": "gameboy.jpg",
+          "role": "A",
+          "chain_index": 1
+        },
+        "correct_option": {
+          "path": "memory_datasets/Brady2008Objects/AMEASDEVI.jpg",
+          "name": "AMEASDEVI.jpg",
+          "role": "C",
+          "chain_index": 1
+        },
+        "foil_option": {
+          "path": "memory_datasets/Brady2008Objects/Afaucet9.jpg",
+          "name": "Afaucet9.jpg",
+          "role": "C",
+          "chain_index": 0
+        }
+      }
+    },
+    {
+      "trial": 19,
+      "target": 2,
+      "reported": 2,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.46879063475423377,
+        "2": 0.5312093652457662
+      },
+      "choice_mass": 0.9939438998699188,
+      "top_tokens": [
+        [
+          "2",
+          0.528
+        ],
+        [
+          "1",
+          0.466
+        ],
+        [
+          "3",
+          0.0046
+        ],
+        [
+          "<|im_end|>",
+          0.0008
+        ],
+        [
+          "4",
+          0.0004
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 1,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/Askirt2.jpg",
+          "name": "Askirt2.jpg",
+          "role": "A",
+          "chain_index": 1
+        },
+        "correct_option": {
+          "path": "memory_datasets/Brady2008Objects/ABANJO5.jpg",
+          "name": "ABANJO5.jpg",
+          "role": "C",
+          "chain_index": 1
+        },
+        "foil_option": {
+          "path": "memory_datasets/Brady2008Objects/Ashoeshines15.jpg",
+          "name": "Ashoeshines15.jpg",
+          "role": "C",
+          "chain_index": 0
+        }
+      }
+    },
+    {
+      "trial": 20,
+      "target": 1,
+      "reported": 2,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.46879061668378047,
+        "2": 0.5312093833162196
+      },
+      "choice_mass": 0.9874155223369598,
+      "top_tokens": [
+        [
+          "2",
+          0.5245
+        ],
+        [
+          "1",
+          0.4629
+        ],
+        [
+          "3",
+          0.0096
+        ],
+        [
+          "4",
+          0.0015
+        ],
+        [
+          "<|im_end|>",
+          0.0009
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 1,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/ANEWSBOX4.jpg",
+          "name": "ANEWSBOX4.jpg",
+          "role": "A",
+          "chain_index": 1
+        },
+        "correct_option": {
+          "path": "memory_datasets/Brady2008Objects/Ascanner11.jpg",
+          "name": "Ascanner11.jpg",
+          "role": "C",
+          "chain_index": 1
+        },
+        "foil_option": {
+          "path": "memory_datasets/Brady2008Objects/AGAUGE.jpg",
+          "name": "AGAUGE.jpg",
+          "role": "C",
+          "chain_index": 0
+        }
+      }
+    },
+    {
+      "trial": 21,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.5621765005943238,
+        "2": 0.4378234994056762
+      },
+      "choice_mass": 0.9971820116043091,
+      "top_tokens": [
+        [
+          "1",
+          0.5606
+        ],
+        [
+          "2",
+          0.4366
+        ],
+        [
+          "3",
+          0.0018
+        ],
+        [
+          "<|im_end|>",
+          0.0005
+        ],
+        [
+          "4",
+          0.0002
+        ]
+      ],
+      "free_response": "Based on the analysis of the visual content, here is the logical deduction:\n\n- The cue image is a pair of blue inline skates.\n- Image 1 is a pressure gauge, which is a piece of equipment used to measure the pressure of a fluid or gas.\n- Image 2 is a parachute, which is a piece of equipment used for skydiving.\n\nThe connection between the skates and the pressure gauge is that the gauge is used to check the air pressure inside",
+      "metadata": {
+        "chain_index": 0,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/rollerblades.jpg",
+          "name": "rollerblades.jpg",
+          "role": "A",
+          "chain_index": 0
+        },
+        "correct_option": {
+          "path": "memory_datasets/Brady2008Objects/8024092.thl.jpg",
+          "name": "8024092.thl.jpg",
+          "role": "C",
+          "chain_index": 0
+        },
+        "foil_option": {
+          "path": "memory_datasets/Brady2008Objects/ASKYDIVE.jpg",
+          "name": "ASKYDIVE.jpg",
+          "role": "C",
+          "chain_index": 1
+        }
+      }
+    },
+    {
+      "trial": 22,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.5926665968999246,
+        "2": 0.4073334031000754
+      },
+      "choice_mass": 0.9950234293937683,
+      "top_tokens": [
+        [
+          "1",
+          0.5897
+        ],
+        [
+          "2",
+          0.4053
+        ],
+        [
+          "3",
+          0.0035
+        ],
+        [
+          "<|im_end|>",
+          0.0008
+        ],
+        [
+          "4",
+          0.0003
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 0,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/AMINITRE7.jpg",
+          "name": "AMINITRE7.jpg",
+          "role": "A",
+          "chain_index": 0
+        },
+        "correct_option": {
+          "path": "memory_datasets/Brady2008Objects/Abedspringsam.jpg",
+          "name": "Abedspringsam.jpg",
+          "role": "C",
+          "chain_index": 0
+        },
+        "foil_option": {
+          "path": "memory_datasets/Brady2008Objects/ATUNFORK2.jpg",
+          "name": "ATUNFORK2.jpg",
+          "role": "C",
+          "chain_index": 1
+        }
+      }
+    },
+    {
+      "trial": 23,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.6224593241608072,
+        "2": 0.3775406758391929
+      },
+      "choice_mass": 0.9967544674873352,
+      "top_tokens": [
+        [
+          "1",
+          0.6204
+        ],
+        [
+          "2",
+          0.3763
+        ],
+        [
+          "3",
+          0.0022
+        ],
+        [
+          "<|im_end|>",
+          0.0005
+        ],
+        [
+          "4",
+          0.0002
+        ]
+      ],
+      "free_response": "Based on the analysis of the visual content, here is the logical deduction:\n\n- The **cue image** is a blue electric scooter.\n- **Image 1** is a set of metal measuring spoons.\n- **Image 2** is a human foot.\n\nTo determine the connection, we must look for a hidden link between the scooter and either the spoons or the foot.\n\n- There is no direct or obvious connection between the scooter and the measuring spoons. They",
+      "metadata": {
+        "chain_index": 0,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/scooter.jpg",
+          "name": "scooter.jpg",
+          "role": "A",
+          "chain_index": 0
+        },
+        "correct_option": {
+          "path": "memory_datasets/Brady2008Objects/Ameasuringsp5.jpg",
+          "name": "Ameasuringsp5.jpg",
+          "role": "C",
+          "chain_index": 0
+        },
+        "foil_option": {
+          "path": "memory_datasets/Brady2008Objects/Apersonsfoot.jpg",
+          "name": "Apersonsfoot.jpg",
+          "role": "C",
+          "chain_index": 1
+        }
+      }
+    },
+    {
+      "trial": 24,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.5621764818728628,
+        "2": 0.4378235181271371
+      },
+      "choice_mass": 0.9951782822608948,
+      "top_tokens": [
+        [
+          "1",
+          0.5595
+        ],
+        [
+          "2",
+          0.4357
+        ],
+        [
+          "3",
+          0.0038
+        ],
+        [
+          "<|im_end|>",
+          0.0005
+        ],
+        [
+          "4",
+          0.0003
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 1,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/Ahotwaterbot2.jpg",
+          "name": "Ahotwaterbot2.jpg",
+          "role": "A",
+          "chain_index": 1
+        },
+        "correct_option": {
+          "path": "memory_datasets/Brady2008Objects/timemagazine.jpg",
+          "name": "timemagazine.jpg",
+          "role": "C",
+          "chain_index": 1
+        },
+        "foil_option": {
+          "path": "memory_datasets/Brady2008Objects/AFOUNTAI5.jpg",
+          "name": "AFOUNTAI5.jpg",
+          "role": "C",
+          "chain_index": 0
+        }
+      }
+    },
+    {
+      "trial": 25,
+      "target": 2,
+      "reported": 1,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.5312093608856875,
+        "2": 0.46879063911431257
+      },
+      "choice_mass": 0.9975039660930634,
+      "top_tokens": [
+        [
+          "1",
+          0.5299
+        ],
+        [
+          "2",
+          0.4676
+        ],
+        [
+          "3",
+          0.0015
+        ],
+        [
+          "<|im_end|>",
+          0.0006
+        ],
+        [
+          "4",
+          0.0002
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 1,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/Abikepedalar2.jpg",
+          "name": "Abikepedalar2.jpg",
+          "role": "A",
+          "chain_index": 1
+        },
+        "correct_option": {
+          "path": "memory_datasets/Brady2008Objects/ABEARIN28.jpg",
+          "name": "ABEARIN28.jpg",
+          "role": "C",
+          "chain_index": 1
+        },
+        "foil_option": {
+          "path": "memory_datasets/Brady2008Objects/A_flower.jpg",
+          "name": "A_flower.jpg",
+          "role": "C",
+          "chain_index": 0
+        }
+      }
+    },
+    {
+      "trial": 26,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.5621764941741123,
+        "2": 0.43782350582588764
+      },
+      "choice_mass": 0.9959876537322998,
+      "top_tokens": [
+        [
+          "1",
+          0.5599
+        ],
+        [
+          "2",
+          0.4361
+        ],
+        [
+          "3",
+          0.0029
+        ],
+        [
+          "<|im_end|>",
+          0.0005
+        ],
+        [
+          "4",
+          0.0004
+        ]
+      ],
+      "free_response": "Based on the analysis of the visual content, here is the reasoning for the connection:\n\n- The cue image is a gold, glittery mask with purple antennae.\n- Image 1 is a modern, minimalist speaker.\n- Image 2 is a square, layered sponge.\n\nThere is no direct visual similarity between the cue image and either of the other two images. However, the cue image is a type of costume or accessory, which is often used for parties, celebrations, or",
+      "metadata": {
+        "chain_index": 0,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/8076304.thl.jpg",
+          "name": "8076304.thl.jpg",
+          "role": "A",
+          "chain_index": 0
+        },
+        "correct_option": {
+          "path": "memory_datasets/Brady2008Objects/8020414.thl.jpg",
+          "name": "8020414.thl.jpg",
+          "role": "C",
+          "chain_index": 0
+        },
+        "foil_option": {
+          "path": "memory_datasets/Brady2008Objects/candy3.jpg",
+          "name": "candy3.jpg",
+          "role": "C",
+          "chain_index": 1
+        }
+      }
+    },
+    {
+      "trial": 27,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.5621765094545588,
+        "2": 0.4378234905454413
+      },
+      "choice_mass": 0.993489682674408,
+      "top_tokens": [
+        [
+          "1",
+          0.5585
+        ],
+        [
+          "2",
+          0.435
+        ],
+        [
+          "3",
+          0.0055
+        ],
+        [
+          "<|im_end|>",
+          0.0004
+        ],
+        [
+          "4",
+          0.0004
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 1,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/AROBES4.jpg",
+          "name": "AROBES4.jpg",
+          "role": "A",
+          "chain_index": 1
+        },
+        "correct_option": {
+          "path": "memory_datasets/Brady2008Objects/ACASTLE16.jpg",
+          "name": "ACASTLE16.jpg",
+          "role": "C",
+          "chain_index": 1
+        },
+        "foil_option": {
+          "path": "memory_datasets/Brady2008Objects/ASHOWCAP.jpg",
+          "name": "ASHOWCAP.jpg",
+          "role": "C",
+          "chain_index": 0
+        }
+      }
+    },
+    {
+      "trial": 28,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.622459334519094,
+        "2": 0.37754066548090603
+      },
+      "choice_mass": 0.9975488483905792,
+      "top_tokens": [
+        [
+          "1",
+          0.6209
+        ],
+        [
+          "2",
+          0.3766
+        ],
+        [
+          "3",
+          0.0015
+        ],
+        [
+          "<|im_end|>",
+          0.0003
+        ],
+        [
+          "4",
+          0.0002
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 0,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/Ashark7.jpg",
+          "name": "Ashark7.jpg",
+          "role": "A",
+          "chain_index": 0
+        },
+        "correct_option": {
+          "path": "memory_datasets/Brady2008Objects/Achair618.jpg",
+          "name": "Achair618.jpg",
+          "role": "C",
+          "chain_index": 0
+        },
+        "foil_option": {
+          "path": "memory_datasets/Brady2008Objects/ADINGHY.jpg",
+          "name": "ADINGHY.jpg",
+          "role": "C",
+          "chain_index": 1
+        }
+      }
+    },
+    {
+      "trial": 29,
+      "target": 2,
+      "reported": 1,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.5312093623227008,
+        "2": 0.46879063767729917
+      },
+      "choice_mass": 0.996485024690628,
+      "top_tokens": [
+        [
+          "1",
+          0.5293
+        ],
+        [
+          "2",
+          0.4671
+        ],
+        [
+          "3",
+          0.0025
+        ],
+        [
+          "<|im_end|>",
+          0.0005
+        ],
+        [
+          "4",
+          0.0002
+        ]
+      ],
+      "free_response": "Based on the analysis of the visual content:\n\n- The **cue image** is a folded orange napkin.\n- **Image 1** is a silver thimble, which is a kitchen utensil.\n- **Image 2** is a beige pith helmet with a plaid strap, which is a piece of outdoor or safari gear.\n\nThe connection between the cue image (napkin) and Image 1 (thimble) is that both are items found in",
+      "metadata": {
+        "chain_index": 1,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/ANAPKIN4.jpg",
+          "name": "ANAPKIN4.jpg",
+          "role": "A",
+          "chain_index": 1
+        },
+        "correct_option": {
+          "path": "memory_datasets/Brady2008Objects/26424075.thl.jpg",
+          "name": "26424075.thl.jpg",
+          "role": "C",
+          "chain_index": 1
+        },
+        "foil_option": {
+          "path": "memory_datasets/Brady2008Objects/Athimble2.jpg",
+          "name": "Athimble2.jpg",
+          "role": "C",
+          "chain_index": 0
+        }
+      }
+    },
+    {
+      "trial": 30,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.5,
+        "2": 0.5
+      },
+      "choice_mass": 0.9958403706550598,
+      "top_tokens": [
+        [
+          "2",
+          0.4979
+        ],
+        [
+          "1",
+          0.4979
+        ],
+        [
+          "3",
+          0.0034
+        ],
+        [
+          "<|im_end|>",
+          0.0004
+        ],
+        [
+          "4",
+          0.0002
+        ]
+      ],
+      "free_response": "Based on the analysis of the visual content, here is the logical deduction:\n\n- The **cue image** is an igloo, which is a structure made of blocks.\n- **Image 1** is a blue glass vase.\n- **Image 2** is a metal scoop.\n\nThe connection between the igloo and the other two items is not direct. The igloo is a building, while the vase and the scoop are objects. However, the igloo is a structure",
+      "metadata": {
+        "chain_index": 1,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/igloo.jpg",
+          "name": "igloo.jpg",
+          "role": "A",
+          "chain_index": 1
+        },
+        "correct_option": {
+          "path": "memory_datasets/Brady2008Objects/ABLUBLOTT.jpg",
+          "name": "ABLUBLOTT.jpg",
+          "role": "C",
+          "chain_index": 1
+        },
+        "foil_option": {
+          "path": "memory_datasets/Brady2008Objects/Aspoonofsuga2.jpg",
+          "name": "Aspoonofsuga2.jpg",
+          "role": "C",
+          "chain_index": 0
+        }
+      }
+    },
+    {
+      "trial": 31,
+      "target": 2,
+      "reported": 1,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.5,
+        "2": 0.5
+      },
+      "choice_mass": 0.9950072765350342,
+      "top_tokens": [
+        [
+          "2",
+          0.4975
+        ],
+        [
+          "1",
+          0.4975
+        ],
+        [
+          "3",
+          0.0038
+        ],
+        [
+          "<|im_end|>",
+          0.0005
+        ],
+        [
+          "4",
+          0.0005
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 1,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/Acampingtoolk.jpg",
+          "name": "Acampingtoolk.jpg",
+          "role": "A",
+          "chain_index": 1
+        },
+        "correct_option": {
+          "path": "memory_datasets/Brady2008Objects/26374605.thl.jpg",
+          "name": "26374605.thl.jpg",
+          "role": "C",
+          "chain_index": 1
+        },
+        "foil_option": {
+          "path": "memory_datasets/Brady2008Objects/ABELL7.jpg",
+          "name": "ABELL7.jpg",
+          "role": "C",
+          "chain_index": 0
+        }
+      }
+    },
+    {
+      "trial": 32,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.5621765089308898,
+        "2": 0.43782349106911017
+      },
+      "choice_mass": 0.9961309731006622,
+      "top_tokens": [
+        [
+          "1",
+          0.56
+        ],
+        [
+          "2",
+          0.4361
+        ],
+        [
+          "3",
+          0.0026
+        ],
+        [
+          "<|im_end|>",
+          0.0005
+        ],
+        [
+          "4",
+          0.0004
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 0,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/ARAILLIGH.jpg",
+          "name": "ARAILLIGH.jpg",
+          "role": "A",
+          "chain_index": 0
+        },
+        "correct_option": {
+          "path": "memory_datasets/Brady2008Objects/Aelectricgri3.jpg",
+          "name": "Aelectricgri3.jpg",
+          "role": "C",
+          "chain_index": 0
+        },
+        "foil_option": {
+          "path": "memory_datasets/Brady2008Objects/cowboywagon.jpg",
+          "name": "cowboywagon.jpg",
+          "role": "C",
+          "chain_index": 1
+        }
+      }
+    },
+    {
+      "trial": 33,
+      "target": 2,
+      "reported": 1,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.6513548472301335,
+        "2": 0.34864515276986646
+      },
+      "choice_mass": 0.9983220994472504,
+      "top_tokens": [
+        [
+          "1",
+          0.6503
+        ],
+        [
+          "2",
+          0.3481
+        ],
+        [
+          "3",
+          0.0008
+        ],
+        [
+          "<|im_end|>",
+          0.0006
+        ],
+        [
+          "4",
+          0.0001
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 0,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/labyrinthe.jpg",
+          "name": "labyrinthe.jpg",
+          "role": "A",
+          "chain_index": 0
+        },
+        "correct_option": {
+          "path": "memory_datasets/Brady2008Objects/ABRAIN3.jpg",
+          "name": "ABRAIN3.jpg",
+          "role": "C",
+          "chain_index": 0
+        },
+        "foil_option": {
+          "path": "memory_datasets/Brady2008Objects/Abackpack11.jpg",
+          "name": "Abackpack11.jpg",
+          "role": "C",
+          "chain_index": 1
+        }
+      }
+    },
+    {
+      "trial": 34,
+      "target": 2,
+      "reported": 1,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.5926665759016478,
+        "2": 0.40733342409835216
+      },
+      "choice_mass": 0.9948880970478058,
+      "top_tokens": [
+        [
+          "1",
+          0.5896
+        ],
+        [
+          "2",
+          0.4053
+        ],
+        [
+          "3",
+          0.0035
+        ],
+        [
+          "<|im_end|>",
+          0.0005
+        ],
+        [
+          "4",
+          0.0005
+        ]
+      ],
+      "free_response": "Based on the analysis of the visual content, here is the reasoning for the connection:\n\n- The cue image is a roll of Euro coins.\n- Image 1 is a dark blue cassette tape recorder.\n- Image 2 is a wooden desk with a computer setup.\n\nThe connection between the cue image (coins) and Image 1 (tape recorder) is indirect. Both are items that were commonly used for storing information or media in the past, before digital storage became the standard.",
+      "metadata": {
+        "chain_index": 0,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/26434233.thl.jpg",
+          "name": "26434233.thl.jpg",
+          "role": "A",
+          "chain_index": 0
+        },
+        "correct_option": {
+          "path": "memory_datasets/Brady2008Objects/Atoyhomeoffi4.jpg",
+          "name": "Atoyhomeoffi4.jpg",
+          "role": "C",
+          "chain_index": 0
+        },
+        "foil_option": {
+          "path": "memory_datasets/Brady2008Objects/Ataperecorde4.jpg",
+          "name": "Ataperecorde4.jpg",
+          "role": "C",
+          "chain_index": 1
+        }
+      }
+    },
+    {
+      "trial": 35,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.6791786813516664,
+        "2": 0.32082131864833363
+      },
+      "choice_mass": 0.9956485629081726,
+      "top_tokens": [
+        [
+          "1",
+          0.6762
+        ],
+        [
+          "2",
+          0.3194
+        ],
+        [
+          "3",
+          0.0028
+        ],
+        [
+          "<|im_end|>",
+          0.0006
+        ],
+        [
+          "4",
+          0.0005
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 0,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/ACOATHA44.jpg",
+          "name": "ACOATHA44.jpg",
+          "role": "A",
+          "chain_index": 0
+        },
+        "correct_option": {
+          "path": "memory_datasets/Brady2008Objects/changepurse03.jpg",
+          "name": "changepurse03.jpg",
+          "role": "C",
+          "chain_index": 0
+        },
+        "foil_option": {
+          "path": "memory_datasets/Brady2008Objects/ALINTREMO.jpg",
+          "name": "ALINTREMO.jpg",
+          "role": "C",
+          "chain_index": 1
+        }
+      }
+    },
+    {
+      "trial": 36,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.5926665971471695,
+        "2": 0.40733340285283043
+      },
+      "choice_mass": 0.9977048337459564,
+      "top_tokens": [
+        [
+          "1",
+          0.5913
+        ],
+        [
+          "2",
+          0.4064
+        ],
+        [
+          "3",
+          0.0015
+        ],
+        [
+          "<|im_end|>",
+          0.0003
+        ],
+        [
+          "4",
+          0.0002
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 0,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/Aplastichousi.jpg",
+          "name": "Aplastichousi.jpg",
+          "role": "A",
+          "chain_index": 0
+        },
+        "correct_option": {
+          "path": "memory_datasets/Brady2008Objects/neckrest.jpg",
+          "name": "neckrest.jpg",
+          "role": "C",
+          "chain_index": 0
+        },
+        "foil_option": {
+          "path": "memory_datasets/Brady2008Objects/26372669.thl.jpg",
+          "name": "26372669.thl.jpg",
+          "role": "C",
+          "chain_index": 1
+        }
+      }
+    },
+    {
+      "trial": 37,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.6224593189620327,
+        "2": 0.37754068103796734
+      },
+      "choice_mass": 0.99616739153862,
+      "top_tokens": [
+        [
+          "1",
+          0.6201
+        ],
+        [
+          "2",
+          0.3761
+        ],
+        [
+          "3",
+          0.0017
+        ],
+        [
+          "<|im_end|>",
+          0.0012
+        ],
+        [
+          "4",
+          0.0003
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 0,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/ASHAKER2.jpg",
+          "name": "ASHAKER2.jpg",
+          "role": "A",
+          "chain_index": 0
+        },
+        "correct_option": {
+          "path": "memory_datasets/Brady2008Objects/26431734.thl.jpg",
+          "name": "26431734.thl.jpg",
+          "role": "C",
+          "chain_index": 0
+        },
+        "foil_option": {
+          "path": "memory_datasets/Brady2008Objects/AGLASSEY5.jpg",
+          "name": "AGLASSEY5.jpg",
+          "role": "C",
+          "chain_index": 1
+        }
+      }
+    },
+    {
+      "trial": 38,
+      "target": 2,
+      "reported": 1,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.5312093627308796,
+        "2": 0.46879063726912035
+      },
+      "choice_mass": 0.9941803216934204,
+      "top_tokens": [
+        [
+          "1",
+          0.5281
+        ],
+        [
+          "2",
+          0.4661
+        ],
+        [
+          "3",
+          0.004
+        ],
+        [
+          "<|im_end|>",
+          0.0009
+        ],
+        [
+          "4",
+          0.0005
+        ]
+      ],
+      "free_response": "Based on the analysis of the visual content, here is the reasoning for the connection:\n\n- The **cue image** is an eyebrow pencil.\n- **Image 1** is a plate of pancakes with syrup and butter.\n- **Image 2** is a vintage film projector.\n\nThere is no direct visual similarity between the eyebrow pencil and either of the other two images. However, the connection is indirect. The eyebrow pencil is a tool used for applying makeup, which is typically done",
+      "metadata": {
+        "chain_index": 0,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/makeupcrayon.jpg",
+          "name": "makeupcrayon.jpg",
+          "role": "A",
+          "chain_index": 0
+        },
+        "correct_option": {
+          "path": "memory_datasets/Brady2008Objects/26421538.thl.jpg",
+          "name": "26421538.thl.jpg",
+          "role": "C",
+          "chain_index": 0
+        },
+        "foil_option": {
+          "path": "memory_datasets/Brady2008Objects/APANCAKE3.jpg",
+          "name": "APANCAKE3.jpg",
+          "role": "C",
+          "chain_index": 1
+        }
+      }
+    },
+    {
+      "trial": 39,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.5,
+        "2": 0.5
+      },
+      "choice_mass": 0.9949584603309631,
+      "top_tokens": [
+        [
+          "2",
+          0.4975
+        ],
+        [
+          "1",
+          0.4975
+        ],
+        [
+          "3",
+          0.0038
+        ],
+        [
+          "<|im_end|>",
+          0.0007
+        ],
+        [
+          "4",
+          0.0002
+        ]
+      ],
+      "free_response": "Based on the analysis of the provided images, here is the logical deduction:\n\n1.  **Analyze the Cue Image:** The cue image is a modern, minimalist speaker. Its key features are its simple, rounded shape, a two-tone color scheme (grey top, white bottom), and a small, central speaker grille.\n\n2.  **Analyze Image 1:** This image shows an ornate, silver-colored candelabra with multiple arms and candle holders. It is a complex",
+      "metadata": {
+        "chain_index": 1,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/8020414.thl.jpg",
+          "name": "8020414.thl.jpg",
+          "role": "A",
+          "chain_index": 1
+        },
+        "correct_option": {
+          "path": "memory_datasets/Brady2008Objects/Acandlehold17.jpg",
+          "name": "Acandlehold17.jpg",
+          "role": "C",
+          "chain_index": 1
+        },
+        "foil_option": {
+          "path": "memory_datasets/Brady2008Objects/ABLACSUI3.jpg",
+          "name": "ABLACSUI3.jpg",
+          "role": "C",
+          "chain_index": 0
+        }
+      }
+    },
+    {
+      "trial": 40,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.6224593323416675,
+        "2": 0.37754066765833255
+      },
+      "choice_mass": 0.9962899386882782,
+      "top_tokens": [
+        [
+          "1",
+          0.6201
+        ],
+        [
+          "2",
+          0.3761
+        ],
+        [
+          "3",
+          0.0022
+        ],
+        [
+          "<|im_end|>",
+          0.0006
+        ],
+        [
+          "4",
+          0.0004
+        ]
+      ],
+      "free_response": "Based on the analysis of the visual content, here is the reasoning for the connection:\n\n- The cue image is a red pickup truck.\n- Image 1 shows a pile of rubber bands.\n- Image 2 shows a white and grey speaker.\n\nThere is no direct visual link between the truck and either of the other two items. However, the truck is a vehicle, and rubber bands are commonly used to secure cargo in a truck bed. Therefore, the connection is that the truck",
+      "metadata": {
+        "chain_index": 0,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/A1991CHE7.jpg",
+          "name": "A1991CHE7.jpg",
+          "role": "A",
+          "chain_index": 0
+        },
+        "correct_option": {
+          "path": "memory_datasets/Brady2008Objects/bands-a.jpg",
+          "name": "bands-a.jpg",
+          "role": "C",
+          "chain_index": 0
+        },
+        "foil_option": {
+          "path": "memory_datasets/Brady2008Objects/8020414.thl.jpg",
+          "name": "8020414.thl.jpg",
+          "role": "C",
+          "chain_index": 1
+        }
+      }
+    },
+    {
+      "trial": 41,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.5312093847551662,
+        "2": 0.4687906152448338
+      },
+      "choice_mass": 0.9924263954162598,
+      "top_tokens": [
+        [
+          "1",
+          0.5272
+        ],
+        [
+          "2",
+          0.4652
+        ],
+        [
+          "3",
+          0.0059
+        ],
+        [
+          "<|im_end|>",
+          0.0007
+        ],
+        [
+          "4",
+          0.0005
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 1,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/26554880.thl.jpg",
+          "name": "26554880.thl.jpg",
+          "role": "A",
+          "chain_index": 1
+        },
+        "correct_option": {
+          "path": "memory_datasets/Brady2008Objects/26429123.thl.jpg",
+          "name": "26429123.thl.jpg",
+          "role": "C",
+          "chain_index": 1
+        },
+        "foil_option": {
+          "path": "memory_datasets/Brady2008Objects/barbwirecoil.jpg",
+          "name": "barbwirecoil.jpg",
+          "role": "C",
+          "chain_index": 0
+        }
+      }
+    },
+    {
+      "trial": 42,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.65135486443319,
+        "2": 0.3486451355668099
+      },
+      "choice_mass": 0.993823230266571,
+      "top_tokens": [
+        [
+          "1",
+          0.6473
+        ],
+        [
+          "2",
+          0.3465
+        ],
+        [
+          "3",
+          0.0044
+        ],
+        [
+          "4",
+          0.0006
+        ],
+        [
+          "0",
+          0.0005
+        ]
+      ],
+      "free_response": "Based on the analysis of the visual content:\n\n- The **cue image** is a red plastic toy that resembles a small airplane or a helicopter.\n- **Image 1** is a KitchenAid stand mixer, which is a kitchen appliance.\n- **Image 2** is a pink \"I'm 4\" rosette, a party decoration.\n\nThere is no direct visual or functional connection between the red toy and either the mixer or the rosette. However,",
+      "metadata": {
+        "chain_index": 0,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/Atoyhelicopte.jpg",
+          "name": "Atoyhelicopte.jpg",
+          "role": "A",
+          "chain_index": 0
+        },
+        "correct_option": {
+          "path": "memory_datasets/Brady2008Objects/mixer.jpg",
+          "name": "mixer.jpg",
+          "role": "C",
+          "chain_index": 0
+        },
+        "foil_option": {
+          "path": "memory_datasets/Brady2008Objects/Aim4ribbo.jpg",
+          "name": "Aim4ribbo.jpg",
+          "role": "C",
+          "chain_index": 1
+        }
+      }
+    },
+    {
+      "trial": 43,
+      "target": 2,
+      "reported": 1,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.5926665759990043,
+        "2": 0.40733342400099576
+      },
+      "choice_mass": 0.9922311305999756,
+      "top_tokens": [
+        [
+          "1",
+          0.5881
+        ],
+        [
+          "2",
+          0.4042
+        ],
+        [
+          "3",
+          0.0065
+        ],
+        [
+          "<|im_end|>",
+          0.0005
+        ],
+        [
+          "4",
+          0.0005
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 1,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/AMIXER1.jpg",
+          "name": "AMIXER1.jpg",
+          "role": "A",
+          "chain_index": 1
+        },
+        "correct_option": {
+          "path": "memory_datasets/Brady2008Objects/AWATERJU3.jpg",
+          "name": "AWATERJU3.jpg",
+          "role": "C",
+          "chain_index": 1
+        },
+        "foil_option": {
+          "path": "memory_datasets/Brady2008Objects/Athermos7.jpg",
+          "name": "Athermos7.jpg",
+          "role": "C",
+          "chain_index": 0
+        }
+      }
+    },
+    {
+      "trial": 44,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.62245934182032,
+        "2": 0.37754065817967997
+      },
+      "choice_mass": 0.997462272644043,
+      "top_tokens": [
+        [
+          "1",
+          0.6209
+        ],
+        [
+          "2",
+          0.3766
+        ],
+        [
+          "3",
+          0.0014
+        ],
+        [
+          "<|im_end|>",
+          0.0006
+        ],
+        [
+          "4",
+          0.0002
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 0,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/Awindmill3.jpg",
+          "name": "Awindmill3.jpg",
+          "role": "A",
+          "chain_index": 0
+        },
+        "correct_option": {
+          "path": "memory_datasets/Brady2008Objects/36411021.thl.jpg",
+          "name": "36411021.thl.jpg",
+          "role": "C",
+          "chain_index": 0
+        },
+        "foil_option": {
+          "path": "memory_datasets/Brady2008Objects/Aancientston3.jpg",
+          "name": "Aancientston3.jpg",
+          "role": "C",
+          "chain_index": 1
+        }
+      }
+    },
+    {
+      "trial": 45,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.5312093656111777,
+        "2": 0.4687906343888223
+      },
+      "choice_mass": 0.9957176446914673,
+      "top_tokens": [
+        [
+          "1",
+          0.5289
+        ],
+        [
+          "2",
+          0.4668
+        ],
+        [
+          "3",
+          0.0031
+        ],
+        [
+          "<|im_end|>",
+          0.0006
+        ],
+        [
+          "4",
+          0.0003
+        ]
+      ],
+      "free_response": "Based on the analysis of the visual content, here is the logical deduction:\n\n- The **cue image** is a red yo-yo.\n- **Image 1** is a red thermos.\n- **Image 2** is a pile of red Lego bricks.\n\nThe connection between the yo-yo and the other two images is not direct. However, the yo-yo is a toy, and the Lego bricks are also toys. The thermos is a kitchen appliance.",
+      "metadata": {
+        "chain_index": 1,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/26418207.thl.jpg",
+          "name": "26418207.thl.jpg",
+          "role": "A",
+          "chain_index": 1
+        },
+        "correct_option": {
+          "path": "memory_datasets/Brady2008Objects/Ajug158.jpg",
+          "name": "Ajug158.jpg",
+          "role": "C",
+          "chain_index": 1
+        },
+        "foil_option": {
+          "path": "memory_datasets/Brady2008Objects/legoblocks.jpg",
+          "name": "legoblocks.jpg",
+          "role": "C",
+          "chain_index": 0
+        }
+      }
+    },
+    {
+      "trial": 46,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.6513548448712205,
+        "2": 0.3486451551287794
+      },
+      "choice_mass": 0.9935780167579651,
+      "top_tokens": [
+        [
+          "1",
+          0.6472
+        ],
+        [
+          "2",
+          0.3464
+        ],
+        [
+          "3",
+          0.0049
+        ],
+        [
+          "4",
+          0.0005
+        ],
+        [
+          "<|im_end|>",
+          0.0004
+        ]
+      ],
+      "free_response": "Based on the analysis of the visual content, here is the reasoning for the connection:\n\n- The cue image (Image 1) shows a man in a classic vampire costume, complete with a black cape, white shirt, and black trousers.\n- Image 2 shows a pair of white, lace-up baby shoes.\n- The connection between these two images is not direct or obvious. However, both images are associated with the theme of a \"little\" or \"young\" figure. The",
+      "metadata": {
+        "chain_index": 0,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/vampire.jpg",
+          "name": "vampire.jpg",
+          "role": "A",
+          "chain_index": 0
+        },
+        "correct_option": {
+          "path": "memory_datasets/Brady2008Objects/gytsl9.jpg",
+          "name": "gytsl9.jpg",
+          "role": "C",
+          "chain_index": 0
+        },
+        "foil_option": {
+          "path": "memory_datasets/Brady2008Objects/Abooties4.jpg",
+          "name": "Abooties4.jpg",
+          "role": "C",
+          "chain_index": 1
+        }
+      }
+    },
+    {
+      "trial": 47,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.5312093878827131,
+        "2": 0.4687906121172869
+      },
+      "choice_mass": 0.9938328862190247,
+      "top_tokens": [
+        [
+          "1",
+          0.5279
+        ],
+        [
+          "2",
+          0.4659
+        ],
+        [
+          "3",
+          0.0052
+        ],
+        [
+          "<|im_end|>",
+          0.0004
+        ],
+        [
+          "4",
+          0.0003
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 1,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/Abutterflynet.jpg",
+          "name": "Abutterflynet.jpg",
+          "role": "A",
+          "chain_index": 1
+        },
+        "correct_option": {
+          "path": "memory_datasets/Brady2008Objects/AMICRO67.jpg",
+          "name": "AMICRO67.jpg",
+          "role": "C",
+          "chain_index": 1
+        },
+        "foil_option": {
+          "path": "memory_datasets/Brady2008Objects/APAPYRUS.jpg",
+          "name": "APAPYRUS.jpg",
+          "role": "C",
+          "chain_index": 0
+        }
+      }
+    },
+    {
+      "trial": 48,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.5312093707731338,
+        "2": 0.46879062922686615
+      },
+      "choice_mass": 0.9975404143333435,
+      "top_tokens": [
+        [
+          "1",
+          0.5299
+        ],
+        [
+          "2",
+          0.4676
+        ],
+        [
+          "3",
+          0.0017
+        ],
+        [
+          "<|im_end|>",
+          0.0004
+        ],
+        [
+          "4",
+          0.0001
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 0,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/ARUSSDO13.jpg",
+          "name": "ARUSSDO13.jpg",
+          "role": "A",
+          "chain_index": 0
+        },
+        "correct_option": {
+          "path": "memory_datasets/Brady2008Objects/26466258.thl.jpg",
+          "name": "26466258.thl.jpg",
+          "role": "C",
+          "chain_index": 0
+        },
+        "foil_option": {
+          "path": "memory_datasets/Brady2008Objects/22856784.thl.jpg",
+          "name": "22856784.thl.jpg",
+          "role": "C",
+          "chain_index": 1
+        }
+      }
+    },
+    {
+      "trial": 49,
+      "target": 2,
+      "reported": 1,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.531209384644383,
+        "2": 0.46879061535561695
+      },
+      "choice_mass": 0.9965740740299225,
+      "top_tokens": [
+        [
+          "1",
+          0.5294
+        ],
+        [
+          "2",
+          0.4672
+        ],
+        [
+          "3",
+          0.0022
+        ],
+        [
+          "<|im_end|>",
+          0.0008
+        ],
+        [
+          "4",
+          0.0003
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 1,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/Akitchensinka.jpg",
+          "name": "Akitchensinka.jpg",
+          "role": "A",
+          "chain_index": 1
+        },
+        "correct_option": {
+          "path": "memory_datasets/Brady2008Objects/ASHRIMP3.jpg",
+          "name": "ASHRIMP3.jpg",
+          "role": "C",
+          "chain_index": 1
+        },
+        "foil_option": {
+          "path": "memory_datasets/Brady2008Objects/ACOFGRIN2.jpg",
+          "name": "ACOFGRIN2.jpg",
+          "role": "C",
+          "chain_index": 0
+        }
+      }
+    }
+  ],
+  "metrics": {
+    "accuracy": 0.58,
+    "n_correct": 29,
+    "total": 50,
+    "free_text_bare_digit": 0.54,
+    "mean_p_chosen": 0.5669600268772645,
+    "mean_choice_mass": 0.9951911967992783,
+    "frac_low_mass": 0.0,
+    "response_distribution": {
+      "1": 47,
+      "2": 3
+    }
+  }
+}
