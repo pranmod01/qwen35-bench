@@ -11,7 +11,8 @@
 #
 #     X="--partition=burst --exclude=ins082,ins091 --time=48:00:00 --export=ALL,PYTORCH_ALLOC_CONF=expandable_segments:True"
 #     sbatch $X --gres=gpu:A6000:1 scripts/bench.sbatch configs/tokens/full_L64.yaml --model qwen3.5-0.8b
-#     sbatch $X --gres=gpu:A6000:2 --mem=96G scripts/bench.sbatch configs/tokens/full_L64.yaml --model qwen3.5-2b  (also 4b)
+#     sbatch $X --gres=gpu:2 --mem=96G scripts/bench.sbatch configs/tokens/full_L64.yaml --model qwen3.5-2b  (4b: --mem=128G)
+#     (gpu:2 = any 2 burst cards, all >= 48 GB; A6000 nodes are mostly owner partition pmg1. Exclude ins046,ins047,ins058.)
 #     sbatch $X --gres=gpu:A6000:3 --mem=128G scripts/bench.sbatch configs/tokens/full_L64.yaml --model qwen3.5-9b
 
 run_name: tokens_full
