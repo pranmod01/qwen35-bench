@@ -3,7 +3,7 @@ import sys
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).parent.parent))
-from src.stimuli import BradyDataset, CuedRecallImageNetDataset, DirectoryDataset, ThingsDataset
+from src.stimuli import BradyDataset, CuedRecallImageNetDataset, DirectoryDataset, ImageNetConceptsDataset, ThingsDataset
 
 
 CUED_RECALL_IMAGENET = "cued-recall-imagenet"
@@ -201,6 +201,12 @@ class AFCRecognitionTask(RecognitionTaskBase):
             self.dataset = CuedRecallImageNetDataset(
                 n_categories=n_cats, exemplars_per_category=exemplars
             )
+        elif dataset_name == "imagenet":
+            # One image per concept: no exemplar or state foils, and the standard 2n-item novel mode is
+            # not ported, since it tests the first studied item only (see _get_pairs).
+            if not single_foil:
+                raise ValueError("imagenet supports single_foil novel foils only")
+            self.dataset = ImageNetConceptsDataset()
         else:
             self.dataset = BradyDataset(type="Objects", source=source, repo_id=repo_id)
 
@@ -221,9 +227,11 @@ class AFCRecognitionTask(RecognitionTaskBase):
                 )
             return pairs
 
-        if self.single_foil and self.dataset_name in ("things", "Brady2008"):
+        if self.single_foil and self.dataset_name in ("things", "Brady2008", "imagenet"):
             if self.dataset_name == "things":
                 ds, get = self.dataset, (lambda i: self.dataset.get_image(i, 0))
+            elif self.dataset_name == "imagenet":
+                ds, get = self.dataset, self.dataset.get_image
             else:
                 ds = BradyDataset(type="Objects", source=self.source, repo_id=self.repo_id)
                 get = ds.get_image

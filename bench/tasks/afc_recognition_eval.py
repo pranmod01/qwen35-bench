@@ -22,7 +22,8 @@ NAME = "afc_recognition"
 # things has no state foils; recombined foils (two studied halves joined) exist only for token items,
 # which in turn have no exemplar or state foils.
 UNSUPPORTED = {("things", "state"), ("Brady2008", "recombined"), ("things", "recombined"),
-               ("tokens", "exemplar"), ("tokens", "state")}
+               ("tokens", "exemplar"), ("tokens", "state"),
+               ("imagenet", "exemplar"), ("imagenet", "state"), ("imagenet", "recombined")}
 
 # Novel foils use 2 distinct items per studied image. Brady exemplar/state have 100 pairs, and the
 # task silently truncates past that, so the runner refuses instead.
@@ -36,7 +37,9 @@ MAX_N_IMAGES = {
 
 
 # With `single_foil` (novel only) an episode draws n + 1 distinct items rather than 2n.
-SINGLE_FOIL_MAX_N_IMAGES = {"Brady2008": 2399, "things": 1853}
+# imagenet: the 3,808 concepts in concepts.json, less the foil. Context binds first, near 3,570 at 66 tokens
+# an image with ~10% headroom; nothing checks it, so configs stop at 3,500.
+SINGLE_FOIL_MAX_N_IMAGES = {"Brady2008": 2399, "things": 1853, "imagenet": 3807}
 
 
 def max_n_images(condition):
@@ -46,6 +49,8 @@ def max_n_images(condition):
         return token_stimuli.max_items(condition["token_pool"], condition["item_length"]) - extra
     if condition.get("single_foil"):
         return SINGLE_FOIL_MAX_N_IMAGES[condition["dataset"]]
+    if condition["dataset"] == "imagenet":
+        raise ValueError("imagenet needs `single_foil: true` (one image per concept)")
     return MAX_N_IMAGES[(condition["dataset"], condition["foil_type"])]
 
 

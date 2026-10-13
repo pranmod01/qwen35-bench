@@ -19,7 +19,8 @@ from tasks.serial_order_memory import AFCSerialOrderMemoryTask
 
 NAME = "serial_order"
 
-DATASET_SIZES = {"Brady2008": 2400, "things": 1854}
+# imagenet: the concepts in memory_datasets/ImageNet21k_w21_256/concepts.json; update if that list changes.
+DATASET_SIZES = {"Brady2008": 2400, "things": 1854, "imagenet": 3808}
 
 
 def expand_conditions(task_cfg):

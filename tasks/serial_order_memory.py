@@ -5,7 +5,7 @@ from itertools import combinations
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).parent.parent))
-from src.stimuli import BradyDataset, DirectoryDataset, ThingsDataset
+from src.stimuli import BradyDataset, DirectoryDataset, ImageNetConceptsDataset, ThingsDataset
 
 
 def lag_bin(serial_lag):
@@ -65,6 +65,12 @@ class SerialOrderMemoryBase:
             return DirectoryDataset(self.image_dir)
         if self.dataset_name == "Brady2008":
             return BradyDataset(type="Objects", source=self.source, repo_id=self.repo_id)
+        if self.dataset_name == "imagenet":
+            dataset = ImageNetConceptsDataset()
+            # _sample_study_items would otherwise shorten the list silently.
+            if self.n_images > len(dataset):
+                raise ValueError(f"imagenet has {len(dataset)} concepts; asked for {self.n_images}")
+            return dataset
         k = self.exemplars_per_concept
         if k > 1:
             return ThingsDataset(n_categories=math.ceil(self.n_images / k), exemplars_per_category=k)

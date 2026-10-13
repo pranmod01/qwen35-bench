@@ -1,0 +1,50 @@
+# Recognition with `single_foil`, ImageNet (2026-10-11). Same design, prompt and reading rule as
+# configs/recognition_single_foil_{brady,things256}.yaml, and the same run_name so plots combine them.
+# The n grid continues past THINGS' 1,853 limit, which is the point of this dataset.
+#
+# Stimuli: memory_datasets/ImageNet21k_w21_256, one 256x256 center crop (66 tokens) per concept for the 3,808
+# mutually distinct ImageNet-21k concepts in concepts.json (scripts/select_imagenet_concepts.py: leaves only,
+# physical WordNet domains, one per parent; built by scripts/build_imagenet_stimuli.py from shards 0-25).
+# One image per concept, so `single_foil` novel foils only. The crops are already 256 px, so `-img256`
+# changes nothing about the prompt; the names match the THINGS-256 runs so plots group them by model size.
+#
+# Stops at 3,500: the dataset allows 3,807, but n=3,500 is ~231k of the 262k-token context (88%) and nothing
+# detects an overflow. Hardware is set by configs/imagenet_preflight.yaml; do not submit before it passes.
+
+run_name: recognition_single_foil
+
+output_dir: results
+
+seeds: [0, 1]
+
+models:
+  - name: qwen3.5-0.8b-img256
+    model_id: Qwen/Qwen3.5-0.8B
+    max_image_size: 256
+    max_new_tokens: 100
+  - name: qwen3.5-2b-img256
+    model_id: Qwen/Qwen3.5-2B
+    max_image_size: 256
+    max_new_tokens: 100
+  - name: qwen3.5-4b-img256
+    model_id: Qwen/Qwen3.5-4B
+    max_image_size: 256
+    max_new_tokens: 100
+  - name: qwen3.5-9b-img256
+    model_id: Qwen/Qwen3.5-9B
+    max_image_size: 256
+    max_new_tokens: 100
+  - name: qwen3.5-27b-img256
+    model_id: Qwen/Qwen3.5-27B
+    max_image_size: 256
+    max_new_tokens: 100
+    device_map: auto
+
+tasks:
+  - task: afc_recognition
+    prompts: [original]
+    datasets: [imagenet]
+    foil_types: [novel]
+    single_foil: true
+    n_images: [1, 5, 25, 100, 250, 500, 1000, 1500, 2000, 2500, 3000, 3500]
+    n_trials: 50

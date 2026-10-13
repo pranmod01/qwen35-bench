@@ -35,6 +35,28 @@ class DirectoryDataset():
         return {"path": str(self.image_paths[index]), "name": self.image_paths[index].name}
 
 
+class ImageNetConceptsDataset:
+    """One 256 px center crop per mutually distinct ImageNet-21k concept, as listed in concepts.json.
+
+    Built by scripts/build_imagenet_stimuli.py and selected by scripts/select_imagenet_concepts.py; the
+    directory holds crops for every class, but only the selected concepts are items here. One image per
+    concept, so only novel foils exist.
+    """
+    def __init__(self, root='memory_datasets/ImageNet21k_w21_256'):
+        self.root = Path(root)
+        self.concepts = json.loads((self.root / "concepts.json").read_text())["concepts"]
+
+    def __len__(self):
+        return len(self.concepts)
+
+    def get_image(self, index, exemplar_index=0):
+        return Image.open(self.root / f"{self.concepts[index]['wnid']}.jpg").convert("RGB")
+
+    def get_metadata(self, index, exemplar_index=0):
+        c = self.concepts[index]
+        return {"wnid": c["wnid"], "category": c["lemma"].split(",")[0], "domain": c["domain"], "category_id": index}
+
+
 class ThingsDataset:
     """Gets images from a local THINGS install when available, else via Hugging Face."""
     def __init__(

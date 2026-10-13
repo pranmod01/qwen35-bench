@@ -1,0 +1,54 @@
+# Preflight for the ImageNet runs (2026-10-11): one trial at the largest list, n=3,500 (~231k tokens), per
+# task, to get peak GPU memory, time per trial and a sane raw_response before the full runs are submitted.
+# Results go to their own run_name and are not part of the final set.
+#
+# Expected from earlier runs: the 0.8B ran 3,601 Brady images in 38 GB, so it fits one 48 GB card. The 4B ran
+# out of memory at 3,500 on an A6000 (2026-09-21, before expandable_segments), so 2B and up may need 80 GB+;
+# RTX PRO 6000 nodes crashed near 238k tokens, close to this prompt. Start with the 0.8B:
+#
+#     sbatch --exclude=ins058,ins082,ins091 --export=ALL,PYTORCH_ALLOC_CONF=expandable_segments:True \
+#            scripts/bench.sbatch configs/imagenet_preflight.yaml --model qwen3.5-0.8b-img256
+
+run_name: imagenet_preflight
+
+output_dir: results
+
+seeds: [0]
+
+models:
+  - name: qwen3.5-0.8b-img256
+    model_id: Qwen/Qwen3.5-0.8B
+    max_image_size: 256
+    max_new_tokens: 100
+  - name: qwen3.5-2b-img256
+    model_id: Qwen/Qwen3.5-2B
+    max_image_size: 256
+    max_new_tokens: 100
+  - name: qwen3.5-4b-img256
+    model_id: Qwen/Qwen3.5-4B
+    max_image_size: 256
+    max_new_tokens: 100
+  - name: qwen3.5-9b-img256
+    model_id: Qwen/Qwen3.5-9B
+    max_image_size: 256
+    max_new_tokens: 100
+  - name: qwen3.5-27b-img256
+    model_id: Qwen/Qwen3.5-27B
+    max_image_size: 256
+    max_new_tokens: 100
+    device_map: auto
+
+tasks:
+  - task: afc_recognition
+    prompts: [original]
+    datasets: [imagenet]
+    foil_types: [novel]
+    single_foil: true
+    n_images: [3500]
+    n_trials: 1
+  - task: serial_order
+    prompts: [original]
+    counterbalance: true
+    datasets: [imagenet]
+    n_images: [3500]
+    n_trials: 1

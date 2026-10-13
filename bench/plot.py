@@ -29,14 +29,14 @@ MODELS = [
 
 # (task, row filter, datasets, title). Restricted to the tasks every model size has (Open Item 24).
 TASKS = [
-    ("afc_recognition", {"foil_type": "novel", "prompt": "original"}, ["Brady2008", "things"],
+    ("afc_recognition", {"foil_type": "novel", "prompt": "original"}, ["Brady2008", "things", "imagenet"],
      "2AFC — Novel"),
-    ("serial_order", {"prompt": "original"}, ["Brady2008", "things"],
+    ("serial_order", {"prompt": "original"}, ["Brady2008", "things", "imagenet"],
      "Serial AFC"),
     ("paired_associates", {"prompt": "sandwich"}, ["Brady2008", "things"],
      "PAM (image-word)"),
 ]
-DATASET_LABELS = {"Brady2008": "Brady2008", "things": "Things", "": ""}
+DATASET_LABELS = {"Brady2008": "Brady2008", "things": "Things", "imagenet": "ImageNet", "": ""}
 
 # Serial order split by the correct answer, one figure per split (Open Item 25).
 HIT_SPLITS = [
