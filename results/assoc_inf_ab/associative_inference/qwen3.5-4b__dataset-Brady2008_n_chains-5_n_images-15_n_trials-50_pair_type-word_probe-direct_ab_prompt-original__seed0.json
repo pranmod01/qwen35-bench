@@ -1,0 +1,1996 @@
+{
+  "run": {
+    "model": {
+      "name": "qwen3.5-4b",
+      "model_id": "Qwen/Qwen3.5-4B",
+      "max_image_size": 512,
+      "max_new_tokens": 100
+    },
+    "task": "associative_inference",
+    "condition": {
+      "dataset": "Brady2008",
+      "pair_type": "word",
+      "probe": "direct_ab",
+      "n_chains": 5,
+      "n_images": 15,
+      "prompt": "original",
+      "n_trials": 50
+    },
+    "seed": 0
+  },
+  "config": {
+    "run_name": "assoc_inf_ab",
+    "output_dir": "results",
+    "seeds": [
+      0
+    ],
+    "models": [
+      {
+        "name": "qwen3.5-2b",
+        "model_id": "Qwen/Qwen3.5-2B",
+        "max_image_size": 512,
+        "max_new_tokens": 100
+      },
+      {
+        "name": "qwen3.5-4b",
+        "model_id": "Qwen/Qwen3.5-4B",
+        "max_image_size": 512,
+        "max_new_tokens": 100
+      }
+    ],
+    "tasks": [
+      {
+        "task": "associative_inference",
+        "datasets": [
+          "Brady2008"
+        ],
+        "pair_types": [
+          "image",
+          "word"
+        ],
+        "probe_types": [
+          "inference",
+          "direct_ab",
+          "direct_bc"
+        ],
+        "n_chains": [
+          2,
+          5,
+          25
+        ],
+        "prompts": [
+          "original",
+          "cue_turn",
+          "labeled"
+        ],
+        "n_trials": 50
+      }
+    ]
+  },
+  "provenance": {
+    "config_hash": "d49714f7009d",
+    "gpu": "NVIDIA A100-SXM4-80GB",
+    "git_commit": null,
+    "git_dirty": false,
+    "torch": "2.10.0+cu128",
+    "transformers": "5.17.0"
+  },
+  "elapsed_s": 193.7,
+  "peak_gpu_gb": 9.42,
+  "error": null,
+  "trials": [
+    {
+      "trial": 0,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.7772998615845219,
+        "2": 0.22270013841547814
+      },
+      "choice_mass": 0.9775102138519287,
+      "top_tokens": [
+        [
+          "1",
+          0.7598
+        ],
+        [
+          "2",
+          0.2177
+        ],
+        [
+          "3",
+          0.0108
+        ],
+        [
+          " ",
+          0.004
+        ],
+        [
+          "<|im_end|>",
+          0.0024
+        ]
+      ],
+      "free_response": "To determine the correct pair, let's analyze the connections provided in the prompt.\n\n- The word \"COACH\" is the cue.\n- The prompt establishes a chain of connections:\n    - `COACH` is connected to `ANTLER`.\n    - `ANTLER` is connected to `LEASH` (the dog leash image).\n    - `LEASH` is connected to `MAILBOX`.\n    - `MAILBOX` is connected to `PROFESS",
+      "metadata": {
+        "chain_index": 4,
+        "foil_chain_index": 0
+      }
+    },
+    {
+      "trial": 1,
+      "target": 2,
+      "reported": 2,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.24508501707018446,
+        "2": 0.7549149829298155
+      },
+      "choice_mass": 0.989982470870018,
+      "top_tokens": [
+        [
+          "2",
+          0.7474
+        ],
+        [
+          "1",
+          0.2426
+        ],
+        [
+          "3",
+          0.0065
+        ],
+        [
+          " ",
+          0.0016
+        ],
+        [
+          "0",
+          0.0006
+        ]
+      ],
+      "free_response": "To determine the correct pair, let's analyze the connections provided in the prompt.\n\n- The prompt establishes a chain of connections:\n  - `DECK` is paired with the image of the **deck** (the wooden tree).\n  - `PERMIT` is paired with the image of the **permit** box (the red case).\n  - `LIGHTER` is paired with the image of the **lighter** (the ham).\n  - `OZONE`",
+      "metadata": {
+        "chain_index": 1,
+        "foil_chain_index": 2
+      }
+    },
+    {
+      "trial": 2,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.754914991742348,
+        "2": 0.24508500825765206
+      },
+      "choice_mass": 0.9939879477024078,
+      "top_tokens": [
+        [
+          "1",
+          0.7504
+        ],
+        [
+          "2",
+          0.2436
+        ],
+        [
+          "<|im_end|>",
+          0.0021
+        ],
+        [
+          " ",
+          0.0016
+        ],
+        [
+          "3",
+          0.0013
+        ]
+      ],
+      "free_response": "1",
+      "metadata": {
+        "chain_index": 3,
+        "foil_chain_index": 2
+      }
+    },
+    {
+      "trial": 3,
+      "target": 2,
+      "reported": 2,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.4378235070192162,
+        "2": 0.5621764929807839
+      },
+      "choice_mass": 0.9925408959388733,
+      "top_tokens": [
+        [
+          "2",
+          0.558
+        ],
+        [
+          "1",
+          0.4346
+        ],
+        [
+          "3",
+          0.0026
+        ],
+        [
+          "<|im_end|>",
+          0.0026
+        ],
+        [
+          " ",
+          0.001
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 2,
+        "foil_chain_index": 4
+      }
+    },
+    {
+      "trial": 4,
+      "target": 2,
+      "reported": 1,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.6513548644401795,
+        "2": 0.3486451355598205
+      },
+      "choice_mass": 0.9666520059108734,
+      "top_tokens": [
+        [
+          "1",
+          0.6296
+        ],
+        [
+          "2",
+          0.337
+        ],
+        [
+          "3",
+          0.0168
+        ],
+        [
+          "4",
+          0.009
+        ],
+        [
+          "<|im_end|>",
+          0.0033
+        ]
+      ],
+      "free_response": "To determine the correct pair, we need to analyze the connections provided in the prompt.\n\n- The prompt establishes a chain of connections:\n  - Image 1 (blue glass object) is paired with Image 2 (air filter).\n  - Image 2 (air filter) is paired with Image 3 (magnifying loupe).\n  - Image 3 (magnifying loupe) is paired with Image 4 (barometer).\n  - Image 4",
+      "metadata": {
+        "chain_index": 2,
+        "foil_chain_index": 3
+      }
+    },
+    {
+      "trial": 5,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.7981867742800479,
+        "2": 0.20181322571995203
+      },
+      "choice_mass": 0.9948233067989349,
+      "top_tokens": [
+        [
+          "1",
+          0.7941
+        ],
+        [
+          "2",
+          0.2008
+        ],
+        [
+          " ",
+          0.0017
+        ],
+        [
+          "3",
+          0.0011
+        ],
+        [
+          "<|im_end|>",
+          0.0007
+        ]
+      ],
+      "free_response": "1",
+      "metadata": {
+        "chain_index": 2,
+        "foil_chain_index": 4
+      }
+    },
+    {
+      "trial": 6,
+      "target": 2,
+      "reported": 2,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.29421497430987964,
+        "2": 0.7057850256901204
+      },
+      "choice_mass": 0.9889417588710785,
+      "top_tokens": [
+        [
+          "2",
+          0.698
+        ],
+        [
+          "1",
+          0.291
+        ],
+        [
+          "3",
+          0.0053
+        ],
+        [
+          " ",
+          0.0037
+        ],
+        [
+          "<|im_end|>",
+          0.0006
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 2,
+        "foil_chain_index": 0
+      }
+    },
+    {
+      "trial": 7,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.6513548576542262,
+        "2": 0.3486451423457738
+      },
+      "choice_mass": 0.993815004825592,
+      "top_tokens": [
+        [
+          "1",
+          0.6473
+        ],
+        [
+          "2",
+          0.3465
+        ],
+        [
+          "3",
+          0.003
+        ],
+        [
+          "<|im_end|>",
+          0.001
+        ],
+        [
+          " ",
+          0.0008
+        ]
+      ],
+      "free_response": "To determine the correct pair, we need to look at the connections established in the prompt.\n\n- The word \"PASTA\" is linked to the image of the treasure chest.\n- The word \"SNOB\" is linked to the image of the bread rolls.\n- The word \"VIOLIN\" is linked to the image of the paintbrush.\n- The word \"PRIEST\" is linked to the image of the paper tray.\n- The word \"GULL",
+      "metadata": {
+        "chain_index": 3,
+        "foil_chain_index": 0
+      }
+    },
+    {
+      "trial": 8,
+      "target": 2,
+      "reported": 1,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.8354835475585138,
+        "2": 0.16451645244148616
+      },
+      "choice_mass": 0.9843754321336746,
+      "top_tokens": [
+        [
+          "1",
+          0.8224
+        ],
+        [
+          "2",
+          0.1619
+        ],
+        [
+          "3",
+          0.0133
+        ],
+        [
+          " ",
+          0.0007
+        ],
+        [
+          "<|im_end|>",
+          0.0005
+        ]
+      ],
+      "free_response": "To determine the correct pair, let's analyze the connections provided in the prompt.\n\n- The prompt establishes a chain of connections:\n  - `CHILD` is paired with the image of the **apple clock**.\n  - `PERSON` is paired with the image of the **goldfish**.\n  - `BUTTON` is paired with the image of the **windmill**.\n  - `CONSUMER` is paired with the image of the **pill**.\n\n- The cue image is",
+      "metadata": {
+        "chain_index": 1,
+        "foil_chain_index": 4
+      }
+    },
+    {
+      "trial": 9,
+      "target": 2,
+      "reported": 2,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.4378235036716354,
+        "2": 0.5621764963283646
+      },
+      "choice_mass": 0.9848242998123169,
+      "top_tokens": [
+        [
+          "2",
+          0.5536
+        ],
+        [
+          "1",
+          0.4312
+        ],
+        [
+          "3",
+          0.007
+        ],
+        [
+          "<|im_end|>",
+          0.0033
+        ],
+        [
+          " ",
+          0.0017
+        ]
+      ],
+      "free_response": "To determine the correct pair, we need to analyze the connections established in the prompt.\n\n- The prompt provides a set of image-word pairs and then asks us to find the connection for a new cue image.\n- The key is to understand the relationship between the words and the images they are paired with.\n- Let's break down the given pairs:\n    - **PEARL** is paired with the image of a **fish tank**. A fish tank often contains decorative tiles or is associated",
+      "metadata": {
+        "chain_index": 2,
+        "foil_chain_index": 1
+      }
+    },
+    {
+      "trial": 10,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.8354835479623598,
+        "2": 0.1645164520376402
+      },
+      "choice_mass": 0.9872431457042694,
+      "top_tokens": [
+        [
+          "1",
+          0.8248
+        ],
+        [
+          "2",
+          0.1624
+        ],
+        [
+          "3",
+          0.0056
+        ],
+        [
+          " ",
+          0.0023
+        ],
+        [
+          "4",
+          0.0011
+        ]
+      ],
+      "free_response": "To determine the correct pair, we need to look at the word associated with the cue image.\n\n- The cue image is a bottle of wine in a wooden barrel.\n- The word provided for this image is \"GLASS\".\n- We need to find which of the two options is related to the word \"GLASS\".\n\nLet's examine the options:\n- Option 1: A gift basket containing a book titled \"Roman Baths\" and \"Bath Saclets\". This is",
+      "metadata": {
+        "chain_index": 3,
+        "foil_chain_index": 2
+      }
+    },
+    {
+      "trial": 11,
+      "target": 2,
+      "reported": 1,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.9241418215949697,
+        "2": 0.07585817840503026
+      },
+      "choice_mass": 0.9890061169862747,
+      "top_tokens": [
+        [
+          "1",
+          0.914
+        ],
+        [
+          "2",
+          0.075
+        ],
+        [
+          "3",
+          0.0054
+        ],
+        [
+          "0",
+          0.0012
+        ],
+        [
+          "<|im_end|>",
+          0.0009
+        ]
+      ],
+      "free_response": "To determine the correct pair, let's analyze the connections provided in the prompt.\n\n- The word \"AIRPLANE\" is paired with the image of the armillary sphere (Image 2).\n- The word \"SHIP\" is paired with the image of the boombox (Image 3).\n- The word \"DORM\" is paired with the image of the bed (Image 1).\n- The word \"PENNY\" is paired with the image of the TIME magazine cover",
+      "metadata": {
+        "chain_index": 4,
+        "foil_chain_index": 1
+      }
+    },
+    {
+      "trial": 12,
+      "target": 2,
+      "reported": 1,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.5926665906312076,
+        "2": 0.40733340936879237
+      },
+      "choice_mass": 0.9903344511985779,
+      "top_tokens": [
+        [
+          "1",
+          0.5869
+        ],
+        [
+          "2",
+          0.4034
+        ],
+        [
+          "3",
+          0.0051
+        ],
+        [
+          " ",
+          0.0019
+        ],
+        [
+          "<|im_end|>",
+          0.0009
+        ]
+      ],
+      "free_response": "To determine the correct pair, we must first identify the connection between the cue image and the provided options.\n\n- The cue image is a stag, a male deer.\n- The word associated with the stag in the initial sequence is \"SALT\".\n- The connection is that a stag is a type of deer, and a salt lick is a place where animals, including deer, go to eat salt.\n\nNow let's examine the options:\n- Image 1 is a metal loaf",
+      "metadata": {
+        "chain_index": 4,
+        "foil_chain_index": 3
+      }
+    },
+    {
+      "trial": 13,
+      "target": 2,
+      "reported": 2,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.3775406775499729,
+        "2": 0.6224593224500271
+      },
+      "choice_mass": 0.972427099943161,
+      "top_tokens": [
+        [
+          "2",
+          0.6053
+        ],
+        [
+          "1",
+          0.3671
+        ],
+        [
+          "3",
+          0.0235
+        ],
+        [
+          " ",
+          0.0013
+        ],
+        [
+          "0",
+          0.0007
+        ]
+      ],
+      "free_response": "To determine the correct pair, we need to look at the connections established in the prompt.\n\n- The prompt provides a sequence of image-word pairs.\n- It then presents a \"BC pair\" test, where a word is given, and you must identify which of two images is its partner.\n- The word given for the test is \"DIVER\".\n- In the initial sequence, the image of the gorilla is paired with the word \"DIVER\".\n- The test asks",
+      "metadata": {
+        "chain_index": 1,
+        "foil_chain_index": 0
+      }
+    },
+    {
+      "trial": 14,
+      "target": 1,
+      "reported": 2,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.34864515497001314,
+        "2": 0.6513548450299869
+      },
+      "choice_mass": 0.9929564893245697,
+      "top_tokens": [
+        [
+          "2",
+          0.6468
+        ],
+        [
+          "1",
+          0.3462
+        ],
+        [
+          " ",
+          0.0026
+        ],
+        [
+          "3",
+          0.0016
+        ],
+        [
+          "<|im_end|>",
+          0.0009
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 0,
+        "foil_chain_index": 2
+      }
+    },
+    {
+      "trial": 15,
+      "target": 1,
+      "reported": 2,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.3775406651500823,
+        "2": 0.6224593348499178
+      },
+      "choice_mass": 0.9901458024978638,
+      "top_tokens": [
+        [
+          "2",
+          0.6163
+        ],
+        [
+          "1",
+          0.3738
+        ],
+        [
+          " ",
+          0.0047
+        ],
+        [
+          "<|im_end|>",
+          0.0016
+        ],
+        [
+          "3",
+          0.0013
+        ]
+      ],
+      "free_response": "To determine the correct pair, we need to look for a hidden connection between the cue image and the options.\n\n- **Cue Image:** A decorative wire basket with a Christmas theme, featuring red birds, holly leaves, and snowflakes.\n- **Option 1:** A blue and red plastic organizer tray.\n- **Option 2:** A blue plastic ruler.\n\nThe connection is based on the color scheme. The primary colors of the Christmas-themed basket are red and green",
+      "metadata": {
+        "chain_index": 0,
+        "foil_chain_index": 3
+      }
+    },
+    {
+      "trial": 16,
+      "target": 2,
+      "reported": 1,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.5312093844407353,
+        "2": 0.4687906155592647
+      },
+      "choice_mass": 0.9871447682380676,
+      "top_tokens": [
+        [
+          "1",
+          0.5244
+        ],
+        [
+          "2",
+          0.4628
+        ],
+        [
+          "3",
+          0.0085
+        ],
+        [
+          " ",
+          0.0015
+        ],
+        [
+          "<|im_end|>",
+          0.001
+        ]
+      ],
+      "free_response": "To determine the correct pair, we need to find the hidden connection between the cue image and the options.\n\n- The cue image is a **pipe wrench**, which is a type of hand tool used for gripping and turning pipes.\n- The word associated with the pipe wrench is **GRATE**.\n- A \"grate\" is a tool used for sharpening, often for sharpening tools like chisels or plane blades.\n- The connection is that both a pipe wrench and a",
+      "metadata": {
+        "chain_index": 3,
+        "foil_chain_index": 2
+      }
+    },
+    {
+      "trial": 17,
+      "target": 2,
+      "reported": 2,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.24508501305145644,
+        "2": 0.7549149869485435
+      },
+      "choice_mass": 0.9825105965137482,
+      "top_tokens": [
+        [
+          "2",
+          0.7417
+        ],
+        [
+          "1",
+          0.2408
+        ],
+        [
+          "3",
+          0.0093
+        ],
+        [
+          " ",
+          0.0044
+        ],
+        [
+          "4",
+          0.0014
+        ]
+      ],
+      "free_response": "To determine the correct pair, let's analyze the connections provided in the prompt.\n\n- The cue image is a book with a bottle of \"Lieutenant\" brand liquor inside it.\n- The prompt establishes a connection between the word \"LIEUTENANT\" and the image of the cello.\n- It also establishes a connection between the word \"TANGERINE\" and the image of the Ewok.\n- The image of the Ewok is holding a stick, which is",
+      "metadata": {
+        "chain_index": 1,
+        "foil_chain_index": 2
+      }
+    },
+    {
+      "trial": 18,
+      "target": 2,
+      "reported": 1,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.6513548549565457,
+        "2": 0.3486451450434544
+      },
+      "choice_mass": 0.9893615543842316,
+      "top_tokens": [
+        [
+          "1",
+          0.6444
+        ],
+        [
+          "2",
+          0.3449
+        ],
+        [
+          "3",
+          0.0034
+        ],
+        [
+          " ",
+          0.0034
+        ],
+        [
+          "<|im_end|>",
+          0.001
+        ]
+      ],
+      "free_response": "To determine the correct pair, we need to look for a hidden connection between the cue image and the options.\n\n- The cue image is a grinding wheel, a tool used for cutting, shaping, or polishing materials.\n- The first option is a pirate flag. There is no direct functional or thematic link between a grinding wheel and a pirate flag.\n- The second option is a red rose. While there is no direct functional link, the word \"rose\" can be associated with the phrase",
+      "metadata": {
+        "chain_index": 2,
+        "foil_chain_index": 3
+      }
+    },
+    {
+      "trial": 19,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.6224593154657766,
+        "2": 0.37754068453422335
+      },
+      "choice_mass": 0.9815284013748169,
+      "top_tokens": [
+        [
+          "1",
+          0.611
+        ],
+        [
+          "2",
+          0.3706
+        ],
+        [
+          "3",
+          0.0087
+        ],
+        [
+          "0",
+          0.0028
+        ],
+        [
+          " ",
+          0.0022
+        ]
+      ],
+      "free_response": "To determine the correct pair, we need to analyze the connections established in the prompt.\n\n- The word \"GERM\" is the cue.\n- The image of the radish is the target.\n- We need to find which of the two options (1 or 2) was part of a pair with the radish.\n\nLet's trace the connections:\n- The radish image is paired with the carabiner (image 8). This connection is established by the word",
+      "metadata": {
+        "chain_index": 3,
+        "foil_chain_index": 0
+      }
+    },
+    {
+      "trial": 20,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.5621764954083841,
+        "2": 0.43782350459161584
+      },
+      "choice_mass": 0.9889785647392273,
+      "top_tokens": [
+        [
+          "1",
+          0.556
+        ],
+        [
+          "2",
+          0.433
+        ],
+        [
+          "3",
+          0.0042
+        ],
+        [
+          "<|im_end|>",
+          0.0023
+        ],
+        [
+          " ",
+          0.0023
+        ]
+      ],
+      "free_response": "1",
+      "metadata": {
+        "chain_index": 2,
+        "foil_chain_index": 0
+      }
+    },
+    {
+      "trial": 21,
+      "target": 1,
+      "reported": 2,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.24508500698763408,
+        "2": 0.754914993012366
+      },
+      "choice_mass": 0.9905056953430176,
+      "top_tokens": [
+        [
+          "2",
+          0.7477
+        ],
+        [
+          "1",
+          0.2428
+        ],
+        [
+          "3",
+          0.0057
+        ],
+        [
+          " ",
+          0.0014
+        ],
+        [
+          "<|im_end|>",
+          0.0006
+        ]
+      ],
+      "free_response": "To determine the correct pair, let's analyze the connections provided in the prompt.\n\n- The prompt establishes a chain of connections:\n  - Image 1 (Pan flute) is paired with Image 2 (Gum).\n  - Image 2 (Gum) is paired with Image 3 (Hat).\n  - Image 3 (Hat) is paired with Image 4 (Wind turbine).\n  - Image 4 (Wind turbine) is paired with Image 5",
+      "metadata": {
+        "chain_index": 0,
+        "foil_chain_index": 2
+      }
+    },
+    {
+      "trial": 22,
+      "target": 2,
+      "reported": 2,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.4687906269260131,
+        "2": 0.531209373073987
+      },
+      "choice_mass": 0.992920458316803,
+      "top_tokens": [
+        [
+          "2",
+          0.5274
+        ],
+        [
+          "1",
+          0.4655
+        ],
+        [
+          "3",
+          0.0028
+        ],
+        [
+          " ",
+          0.0022
+        ],
+        [
+          "<|im_end|>",
+          0.001
+        ]
+      ],
+      "free_response": "To determine the correct pair, we need to analyze the connections established in the prompt.\n\n- The word \"ROOM\" is paired with the image of the mask.\n- The word \"PEDAL\" is paired with the image of the peeler.\n- The word \"SHEET\" is paired with the image of the tape dispenser.\n- The word \"ASTEROID\" is paired with the image of the pill bottle.\n- The word \"HELICOPTER\" is paired",
+      "metadata": {
+        "chain_index": 1,
+        "foil_chain_index": 3
+      }
+    },
+    {
+      "trial": 23,
+      "target": 1,
+      "reported": 2,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.43782350426421285,
+        "2": 0.5621764957357871
+      },
+      "choice_mass": 0.9718503654003143,
+      "top_tokens": [
+        [
+          "2",
+          0.5464
+        ],
+        [
+          "1",
+          0.4255
+        ],
+        [
+          "3",
+          0.0212
+        ],
+        [
+          " ",
+          0.0032
+        ],
+        [
+          "0",
+          0.0015
+        ]
+      ],
+      "free_response": "To determine the correct pair, we need to analyze the connections established in the initial sequence.\n\n- The word \"SWAN\" is paired with the image of the silo.\n- The word \"INCENSE\" is paired with the image of the paint palette.\n- The word \"NOMAD\" is paired with the image of the litter box.\n- The word \"ESCALATOR\" is paired with the image of the keyboard key.\n\nThe cue image is a glassbl",
+      "metadata": {
+        "chain_index": 1,
+        "foil_chain_index": 3
+      }
+    },
+    {
+      "trial": 24,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.5621764984838569,
+        "2": 0.43782350151614313
+      },
+      "choice_mass": 0.9900473952293396,
+      "top_tokens": [
+        [
+          "1",
+          0.5566
+        ],
+        [
+          "2",
+          0.4335
+        ],
+        [
+          "3",
+          0.0038
+        ],
+        [
+          " ",
+          0.002
+        ],
+        [
+          "<|im_end|>",
+          0.0018
+        ]
+      ],
+      "free_response": "1",
+      "metadata": {
+        "chain_index": 2,
+        "foil_chain_index": 0
+      }
+    },
+    {
+      "trial": 25,
+      "target": 2,
+      "reported": 1,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.5312093684447757,
+        "2": 0.46879063155522427
+      },
+      "choice_mass": 0.9901943206787109,
+      "top_tokens": [
+        [
+          "1",
+          0.526
+        ],
+        [
+          "2",
+          0.4642
+        ],
+        [
+          " ",
+          0.0035
+        ],
+        [
+          "3",
+          0.0031
+        ],
+        [
+          "<|im_end|>",
+          0.0011
+        ]
+      ],
+      "free_response": "To determine the correct pair, we need to look at the connections established in the prompt.\n\n- The word \"LILY\" is the cue.\n- In the provided sequence, the word \"LILY\" is paired with the image of the doll.\n- The doll is, in turn, paired with the word \"PLANT\".\n- The word \"PLANT\" is paired with the image of the golden birdcage.\n- The word \"BIRD\" (",
+      "metadata": {
+        "chain_index": 3,
+        "foil_chain_index": 2
+      }
+    },
+    {
+      "trial": 26,
+      "target": 1,
+      "reported": 2,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.29421498155121867,
+        "2": 0.7057850184487813
+      },
+      "choice_mass": 0.9906332492828369,
+      "top_tokens": [
+        [
+          "2",
+          0.6992
+        ],
+        [
+          "1",
+          0.2915
+        ],
+        [
+          "3",
+          0.0029
+        ],
+        [
+          " ",
+          0.0025
+        ],
+        [
+          "0",
+          0.0017
+        ]
+      ],
+      "free_response": "To determine the correct pair, we need to look for a hidden connection between the cue image and the options provided.\n\n- **Cue Image:** A toy barn and silo set.\n- **Option 1:** An air hockey table.\n- **Option 2:** A small, brown leather pouch or bag.\n\nThe connection is based on the word \"SECRETARY\".\n\n- The word \"SECRETARY\" can be broken down into two parts: \"SECRE\" and \"",
+      "metadata": {
+        "chain_index": 0,
+        "foil_chain_index": 4
+      }
+    },
+    {
+      "trial": 27,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.5,
+        "2": 0.5
+      },
+      "choice_mass": 0.9940478801727295,
+      "top_tokens": [
+        [
+          "2",
+          0.497
+        ],
+        [
+          "1",
+          0.497
+        ],
+        [
+          "3",
+          0.0026
+        ],
+        [
+          " ",
+          0.0012
+        ],
+        [
+          "<|im_end|>",
+          0.001
+        ]
+      ],
+      "free_response": "To determine the correct pair, let's analyze the connections provided in the prompt.\n\n- The word \"SHEET\" is the cue.\n- The image paired with \"SHEET\" is the one labeled \"KLEENEX\".\n- The image labeled \"KLEENEX\" is the silver spray bottle.\n- The image labeled \"SUGAR\" is the portable gas stove.\n- The image labeled \"CHEERLEADER\" is the multi-tool.",
+      "metadata": {
+        "chain_index": 2,
+        "foil_chain_index": 1
+      }
+    },
+    {
+      "trial": 28,
+      "target": 1,
+      "reported": 2,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.22270013739116634,
+        "2": 0.7772998626088337
+      },
+      "choice_mass": 0.9948411881923676,
+      "top_tokens": [
+        [
+          "2",
+          0.7733
+        ],
+        [
+          "1",
+          0.2216
+        ],
+        [
+          "3",
+          0.0022
+        ],
+        [
+          " ",
+          0.0017
+        ],
+        [
+          "0",
+          0.0003
+        ]
+      ],
+      "free_response": "To determine the correct pair, we need to look for a hidden connection between the cue image and the options.\n\n- The cue image is a wooden kitchen island.\n- The word associated with the first option (image 1) is \"PIANO\".\n- The word associated with the second option (image 2) is \"SECRETARY\".\n\nThe connection is based on the function of the furniture. A kitchen island is a piece of furniture used for food preparation and serving, which is",
+      "metadata": {
+        "chain_index": 0,
+        "foil_chain_index": 2
+      }
+    },
+    {
+      "trial": 29,
+      "target": 1,
+      "reported": 2,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.1192029150954436,
+        "2": 0.8807970849045564
+      },
+      "choice_mass": 0.9939889013767242,
+      "top_tokens": [
+        [
+          "2",
+          0.8755
+        ],
+        [
+          "1",
+          0.1185
+        ],
+        [
+          "3",
+          0.0022
+        ],
+        [
+          " ",
+          0.0019
+        ],
+        [
+          "<|im_end|>",
+          0.0007
+        ]
+      ],
+      "free_response": "To determine the correct pair, we need to analyze the connections established in the initial sequence.\n\n- The word \"HURRICANE\" is the cue.\n- We must find the item that was paired with \"HURRICANE\" in the first set of pairs.\n- Looking at the first sequence, the word \"HURRICANE\" is paired with the image of the red, floral-decorated metal box. This is the fourth image in the sequence.\n- Now",
+      "metadata": {
+        "chain_index": 3,
+        "foil_chain_index": 1
+      }
+    },
+    {
+      "trial": 30,
+      "target": 2,
+      "reported": 2,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.24508501889462894,
+        "2": 0.754914981105371
+      },
+      "choice_mass": 0.9936891943216324,
+      "top_tokens": [
+        [
+          "2",
+          0.7502
+        ],
+        [
+          "1",
+          0.2435
+        ],
+        [
+          "3",
+          0.0024
+        ],
+        [
+          " ",
+          0.0014
+        ],
+        [
+          "0",
+          0.0007
+        ]
+      ],
+      "free_response": "To determine the correct pair, we need to analyze the connections established in the initial sequence.\n\n- The word \"BUILDER\" is associated with the image of the ice axe.\n- The word \"PROFESSIONAL\" is associated with the image of the silver external hard drive.\n- The word \"LETTER\" is associated with the image of the binder.\n- The word \"ICE\" is associated with the image of the flexible duct.\n- The word \"FOOT\"",
+      "metadata": {
+        "chain_index": 4,
+        "foil_chain_index": 2
+      }
+    },
+    {
+      "trial": 31,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.5926665870474229,
+        "2": 0.40733341295257713
+      },
+      "choice_mass": 0.9921724796295166,
+      "top_tokens": [
+        [
+          "1",
+          0.588
+        ],
+        [
+          "2",
+          0.4041
+        ],
+        [
+          "3",
+          0.0045
+        ],
+        [
+          " ",
+          0.0017
+        ],
+        [
+          "4",
+          0.0006
+        ]
+      ],
+      "free_response": "1",
+      "metadata": {
+        "chain_index": 2,
+        "foil_chain_index": 3
+      }
+    },
+    {
+      "trial": 32,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.6224593258689842,
+        "2": 0.3775406741310158
+      },
+      "choice_mass": 0.9925630986690521,
+      "top_tokens": [
+        [
+          "1",
+          0.6178
+        ],
+        [
+          "2",
+          0.3747
+        ],
+        [
+          "3",
+          0.0032
+        ],
+        [
+          " ",
+          0.0017
+        ],
+        [
+          "0",
+          0.0006
+        ]
+      ],
+      "free_response": "To determine the correct pair, we need to analyze the connections established in the initial sequence.\n\n- The word \"TIMBER\" is the final cue.\n- In the first sequence, we are given several pairs of images and words.\n We can trace the connections:\n - The word \"ATMOSPHERE\" is connected to the blue office chair (Image 2).\n - The word \"GROOM\" is connected to the gumball machine (Image 4).\n -",
+      "metadata": {
+        "chain_index": 4,
+        "foil_chain_index": 0
+      }
+    },
+    {
+      "trial": 33,
+      "target": 2,
+      "reported": 2,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.3208212986457791,
+        "2": 0.6791787013542209
+      },
+      "choice_mass": 0.9957787692546844,
+      "top_tokens": [
+        [
+          "2",
+          0.6763
+        ],
+        [
+          "1",
+          0.3195
+        ],
+        [
+          " ",
+          0.0013
+        ],
+        [
+          "<|im_end|>",
+          0.0008
+        ],
+        [
+          "3",
+          0.0008
+        ]
+      ],
+      "free_response": "To determine the correct pair, we must first identify the hidden connection between the cue image and the potential answers.\n\n- **Cue Image Analysis:** The image shows a red tray containing three dice and a black rectangular object. The black object is a dice cup, used to hold and shake dice during a game. Therefore, the primary function of the black object is to contain the dice.\n\n- **Potential Pair 1 Analysis:** This image displays a burlap sack with the text \"HER",
+      "metadata": {
+        "chain_index": 0,
+        "foil_chain_index": 2
+      }
+    },
+    {
+      "trial": 34,
+      "target": 2,
+      "reported": 2,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.37754065286282595,
+        "2": 0.622459347137174
+      },
+      "choice_mass": 0.9925802052021027,
+      "top_tokens": [
+        [
+          "2",
+          0.6178
+        ],
+        [
+          "1",
+          0.3747
+        ],
+        [
+          "<|im_end|>",
+          0.0029
+        ],
+        [
+          " ",
+          0.0022
+        ],
+        [
+          "3",
+          0.0014
+        ]
+      ],
+      "free_response": "To determine the correct pair, we need to look at the connections established in the initial sequence.\n\n- The cue image is the antique cash register.\n- In the first set of pairs, the cash register is paired with the hammer.\n- In the second set of pairs (labeled BC pair), the hammer is paired with the word \"VAMPIRE\".\n- The question asks which of the two new images was paired with the cue image (the cash register).\n- Based",
+      "metadata": {
+        "chain_index": 1,
+        "foil_chain_index": 4
+      }
+    },
+    {
+      "trial": 35,
+      "target": 2,
+      "reported": 2,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.3775406707921024,
+        "2": 0.6224593292078976
+      },
+      "choice_mass": 0.9924485683441162,
+      "top_tokens": [
+        [
+          "2",
+          0.6178
+        ],
+        [
+          "1",
+          0.3747
+        ],
+        [
+          "3",
+          0.0032
+        ],
+        [
+          " ",
+          0.0015
+        ],
+        [
+          "0",
+          0.001
+        ]
+      ],
+      "free_response": "To determine the correct pair, let's analyze the connections established in the prompt.\n\n- The word \"CASH\" is paired with the image of the money jar.\n- The word \"DANDELION\" is paired with the image of the cactus arrangement.\n- The word \"BISCUIT\" is paired with the image of the celery.\n- The word \"DISC\" is paired with the image of the bench.\n\nThe cue image is a ring. The",
+      "metadata": {
+        "chain_index": 0,
+        "foil_chain_index": 3
+      }
+    },
+    {
+      "trial": 36,
+      "target": 2,
+      "reported": 2,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.46879062029282714,
+        "2": 0.5312093797071729
+      },
+      "choice_mass": 0.9724019765853882,
+      "top_tokens": [
+        [
+          "2",
+          0.5165
+        ],
+        [
+          "1",
+          0.4559
+        ],
+        [
+          "3",
+          0.02
+        ],
+        [
+          " ",
+          0.0027
+        ],
+        [
+          "4",
+          0.0015
+        ]
+      ],
+      "free_response": "To determine the correct pair, let's analyze the connections provided in the prompt.\n\n- The prompt establishes a chain of connections:\n  - `CRACKER` is paired with `FIST`.\n  - `FIST` is paired with `ANTLER`.\n  - `ANTLER` is paired with `JEWEL`.\n  - `JEWEL` is paired with the image of the dog (Cavalier King Charles Spaniel).\n\n- The cue image",
+      "metadata": {
+        "chain_index": 4,
+        "foil_chain_index": 1
+      }
+    },
+    {
+      "trial": 37,
+      "target": 1,
+      "reported": 2,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.4073333934868844,
+        "2": 0.5926666065131155
+      },
+      "choice_mass": 0.9763420820236206,
+      "top_tokens": [
+        [
+          "2",
+          0.5786
+        ],
+        [
+          "1",
+          0.3977
+        ],
+        [
+          "3",
+          0.0154
+        ],
+        [
+          " ",
+          0.0021
+        ],
+        [
+          "0",
+          0.0021
+        ]
+      ],
+      "free_response": "To determine the correct pair, we need to analyze the connections established in the initial sequence.\n\n- The word \"APPLE\" is paired with the image of the apple slice (Image 1).\n- The word \"EMPLOYER\" is paired with the image of the drum (Image 2).\n- The word \"CLAW\" is paired with the image of the ladle (Image 3).\n- The word \"RUST\" is paired with the image of the thermostat (",
+      "metadata": {
+        "chain_index": 1,
+        "foil_chain_index": 4
+      }
+    },
+    {
+      "trial": 38,
+      "target": 2,
+      "reported": 1,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.7310585411106174,
+        "2": 0.2689414588893826
+      },
+      "choice_mass": 0.9966055750846863,
+      "top_tokens": [
+        [
+          "1",
+          0.7286
+        ],
+        [
+          "2",
+          0.268
+        ],
+        [
+          "3",
+          0.0012
+        ],
+        [
+          " ",
+          0.0009
+        ],
+        [
+          "0",
+          0.0003
+        ]
+      ],
+      "free_response": "To determine the correct pair, we need to look at the connections established in the prompt.\n\n- The word \"TELEPHONE\" is the cue.\n- The prompt shows a sequence of connections:\n    - `SILK` is connected to `PICKLE`.\n    - `PICKLE` is connected to `TEAM`.\n    - `TEAM` is connected to `TRIBE`.\n    - `TRIBE` is connected to `TELEPHONE`.",
+      "metadata": {
+        "chain_index": 1,
+        "foil_chain_index": 3
+      }
+    },
+    {
+      "trial": 39,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.7549149828833652,
+        "2": 0.24508501711663483
+      },
+      "choice_mass": 0.9929589331150055,
+      "top_tokens": [
+        [
+          "1",
+          0.7496
+        ],
+        [
+          "2",
+          0.2434
+        ],
+        [
+          "3",
+          0.0039
+        ],
+        [
+          " ",
+          0.0014
+        ],
+        [
+          "<|im_end|>",
+          0.0007
+        ]
+      ],
+      "free_response": "To determine the correct pair, let's analyze the connections provided in the prompt.\n\n- The cue image is a red toolbox.\n- In the initial sequence, this red toolbox is shown in an \"(AB pair)\".\n- Later, the word \"HUT\" is presented in a \"(BC pair)\".\n- The image paired with the word \"HUT\" is the cylindrical tea canister.\n- This establishes a connection: Red Toolbox -> Tea Canister.\n- The question asks",
+      "metadata": {
+        "chain_index": 4,
+        "foil_chain_index": 3
+      }
+    },
+    {
+      "trial": 40,
+      "target": 1,
+      "reported": 2,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.2227001423427962,
+        "2": 0.7772998576572038
+      },
+      "choice_mass": 0.994141474366188,
+      "top_tokens": [
+        [
+          "2",
+          0.7727
+        ],
+        [
+          "1",
+          0.2214
+        ],
+        [
+          " ",
+          0.0025
+        ],
+        [
+          "3",
+          0.0019
+        ],
+        [
+          "<|im_end|>",
+          0.0008
+        ]
+      ],
+      "free_response": "To determine the correct pair, we must first identify the hidden connection between the cue image and the potential answers.\n\n-   **Cue Image Analysis:** The cue image is a wooden lectern or pulpit. This piece of furniture is commonly found in places like churches, schools, or auditoriums.\n-   **Word Association:** The word \"COLUMN\" is associated with the cue image because a pulpit is often supported by a column, or the structure itself can be described as column-like",
+      "metadata": {
+        "chain_index": 0,
+        "foil_chain_index": 1
+      }
+    },
+    {
+      "trial": 41,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.7057850408303914,
+        "2": 0.2942149591696086
+      },
+      "choice_mass": 0.9942479133605957,
+      "top_tokens": [
+        [
+          "1",
+          0.7017
+        ],
+        [
+          "2",
+          0.2925
+        ],
+        [
+          " ",
+          0.002
+        ],
+        [
+          "3",
+          0.0017
+        ],
+        [
+          "<|im_end|>",
+          0.0006
+        ]
+      ],
+      "free_response": "1",
+      "metadata": {
+        "chain_index": 3,
+        "foil_chain_index": 0
+      }
+    },
+    {
+      "trial": 42,
+      "target": 2,
+      "reported": 1,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.8807970805431373,
+        "2": 0.11920291945686273
+      },
+      "choice_mass": 0.9827633276581764,
+      "top_tokens": [
+        [
+          "1",
+          0.8656
+        ],
+        [
+          "2",
+          0.1171
+        ],
+        [
+          "3",
+          0.0096
+        ],
+        [
+          " ",
+          0.0024
+        ],
+        [
+          "4",
+          0.0012
+        ]
+      ],
+      "free_response": "To determine the correct pair, let's analyze the connections provided in the prompt.\n\n- The word \"BEER\" is given as a cue.\n- The prompt establishes a chain of connections:\n    - `BUTCHER` is connected to `BC pair`.\n    - `BC pair` is connected to `TOAD`.\n    - `TOAD` is connected to `BRUNETTE`.\n    - `BRUNETTE` is connected to `MATTRESS",
+      "metadata": {
+        "chain_index": 4,
+        "foil_chain_index": 0
+      }
+    },
+    {
+      "trial": 43,
+      "target": 1,
+      "reported": 2,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.3208213047137094,
+        "2": 0.6791786952862906
+      },
+      "choice_mass": 0.987175852060318,
+      "top_tokens": [
+        [
+          "2",
+          0.6705
+        ],
+        [
+          "1",
+          0.3167
+        ],
+        [
+          "3",
+          0.0058
+        ],
+        [
+          " ",
+          0.0035
+        ],
+        [
+          "<|im_end|>",
+          0.0011
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 2,
+        "foil_chain_index": 0
+      }
+    },
+    {
+      "trial": 44,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.5621765172471385,
+        "2": 0.43782348275286154
+      },
+      "choice_mass": 0.9180767834186554,
+      "top_tokens": [
+        [
+          "1",
+          0.5161
+        ],
+        [
+          "2",
+          0.402
+        ],
+        [
+          "3",
+          0.0544
+        ],
+        [
+          "4",
+          0.0107
+        ],
+        [
+          "0",
+          0.0039
+        ]
+      ],
+      "free_response": "To determine the correct pair, we need to analyze the hidden connections between the items in the provided pairs.\n\n- The first image is a jet ski.\n- The second image is a notepad.\n- The third image is a chalkboard.\n- The fourth image is a jukebox.\n- The fifth image is a party popper.\n- The sixth image is a domino.\n- The seventh image is a model ship.\n- The eighth image is a portable",
+      "metadata": {
+        "chain_index": 1,
+        "foil_chain_index": 0
+      }
+    },
+    {
+      "trial": 45,
+      "target": 2,
+      "reported": 1,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.6224593146062164,
+        "2": 0.3775406853937836
+      },
+      "choice_mass": 0.9838168919086456,
+      "top_tokens": [
+        [
+          "1",
+          0.6124
+        ],
+        [
+          "2",
+          0.3714
+        ],
+        [
+          "3",
+          0.0077
+        ],
+        [
+          " ",
+          0.0028
+        ],
+        [
+          "<|im_end|>",
+          0.0019
+        ]
+      ],
+      "free_response": "1",
+      "metadata": {
+        "chain_index": 2,
+        "foil_chain_index": 0
+      }
+    },
+    {
+      "trial": 46,
+      "target": 1,
+      "reported": 2,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.4073334054681841,
+        "2": 0.5926665945318159
+      },
+      "choice_mass": 0.9813626706600189,
+      "top_tokens": [
+        [
+          "2",
+          0.5816
+        ],
+        [
+          "1",
+          0.3997
+        ],
+        [
+          "3",
+          0.0137
+        ],
+        [
+          " ",
+          0.0016
+        ],
+        [
+          "0",
+          0.0012
+        ]
+      ],
+      "free_response": "To determine the correct pair, let's analyze the connections provided in the prompt.\n\n- The word \"PANTS\" is the cue.\n- The word \"BOARD\" is paired with the image of the heater.\n- The word \"CEREAL\" is paired with the image of the skull.\n- The word \"SHELF\" is paired with the image of the soup.\n- The word \"MARSH\" is paired with the image of the Christmas tree.\n\nThe",
+      "metadata": {
+        "chain_index": 0,
+        "foil_chain_index": 1
+      }
+    },
+    {
+      "trial": 47,
+      "target": 2,
+      "reported": 2,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.4687906206688091,
+        "2": 0.531209379331191
+      },
+      "choice_mass": 0.9828019738197327,
+      "top_tokens": [
+        [
+          "2",
+          0.5221
+        ],
+        [
+          "1",
+          0.4607
+        ],
+        [
+          "3",
+          0.0084
+        ],
+        [
+          " ",
+          0.0024
+        ],
+        [
+          "<|im_end|>",
+          0.0021
+        ]
+      ],
+      "free_response": "To determine the correct pair, we need to analyze the connections provided in the prompt.\n\n- The prompt establishes a connection between the word \"BRIDE\" and the image of the wedding figurine.\n- It then establishes a connection between the word \"MUMMY\" and the image of the spiral staircase.\n- The word \"MUMMY\" is a homophone for \"MOMMY\".\n- The word \"BRIDE\" is a homophone for \"Bride\" (the person",
+      "metadata": {
+        "chain_index": 2,
+        "foil_chain_index": 0
+      }
+    },
+    {
+      "trial": 48,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.5926665924474999,
+        "2": 0.40733340755250014
+      },
+      "choice_mass": 0.9864617884159088,
+      "top_tokens": [
+        [
+          "1",
+          0.5846
+        ],
+        [
+          "2",
+          0.4018
+        ],
+        [
+          "3",
+          0.0083
+        ],
+        [
+          " ",
+          0.0021
+        ],
+        [
+          "<|im_end|>",
+          0.0011
+        ]
+      ],
+      "free_response": "To determine the correct pair, let's analyze the connections provided in the prompt.\n\n- The word **SAUSAGE** is paired with the image of the **soup can**.\n- The word **BACKBONE** is paired with the image of the **walker**.\n- The word **SKELETON** is paired with the image of the **toaster**.\n- The word **PIER** is paired with the image of the **furniture set**.\n\nThe cue image is",
+      "metadata": {
+        "chain_index": 4,
+        "foil_chain_index": 0
+      }
+    },
+    {
+      "trial": 49,
+      "target": 2,
+      "reported": 2,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.2689414269491785,
+        "2": 0.7310585730508216
+      },
+      "choice_mass": 0.9917179346084595,
+      "top_tokens": [
+        [
+          "2",
+          0.725
+        ],
+        [
+          "1",
+          0.2667
+        ],
+        [
+          "3",
+          0.0043
+        ],
+        [
+          " ",
+          0.0016
+        ],
+        [
+          "4",
+          0.0008
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 2,
+        "foil_chain_index": 3
+      }
+    }
+  ],
+  "metrics": {
+    "accuracy": 0.58,
+    "n_correct": 29,
+    "total": 50,
+    "free_text_bare_digit": 0.24,
+    "mean_p_chosen": 0.6681836503421473,
+    "mean_choice_mass": 0.986564545482397,
+    "frac_low_mass": 0.0,
+    "response_distribution": {
+      "1": 25,
+      "2": 25
+    }
+  }
+}

@@ -1,0 +1,1996 @@
+{
+  "run": {
+    "model": {
+      "name": "qwen3.5-2b",
+      "model_id": "Qwen/Qwen3.5-2B",
+      "max_image_size": 512,
+      "max_new_tokens": 100
+    },
+    "task": "associative_inference",
+    "condition": {
+      "dataset": "Brady2008",
+      "pair_type": "word",
+      "probe": "direct_bc",
+      "n_chains": 25,
+      "n_images": 75,
+      "prompt": "original",
+      "n_trials": 50
+    },
+    "seed": 0
+  },
+  "config": {
+    "run_name": "assoc_inf_ab",
+    "output_dir": "results",
+    "seeds": [
+      0
+    ],
+    "models": [
+      {
+        "name": "qwen3.5-2b",
+        "model_id": "Qwen/Qwen3.5-2B",
+        "max_image_size": 512,
+        "max_new_tokens": 100
+      },
+      {
+        "name": "qwen3.5-4b",
+        "model_id": "Qwen/Qwen3.5-4B",
+        "max_image_size": 512,
+        "max_new_tokens": 100
+      }
+    ],
+    "tasks": [
+      {
+        "task": "associative_inference",
+        "datasets": [
+          "Brady2008"
+        ],
+        "pair_types": [
+          "image",
+          "word"
+        ],
+        "probe_types": [
+          "inference",
+          "direct_ab",
+          "direct_bc"
+        ],
+        "n_chains": [
+          2,
+          5,
+          25
+        ],
+        "prompts": [
+          "original",
+          "cue_turn",
+          "labeled"
+        ],
+        "n_trials": 50
+      }
+    ]
+  },
+  "provenance": {
+    "config_hash": "d49714f7009d",
+    "gpu": "NVIDIA A100-SXM4-80GB",
+    "git_commit": null,
+    "git_dirty": false,
+    "torch": "2.10.0+cu128",
+    "transformers": "5.17.0"
+  },
+  "elapsed_s": 231.4,
+  "peak_gpu_gb": 5.41,
+  "error": null,
+  "trials": [
+    {
+      "trial": 0,
+      "target": 2,
+      "reported": 2,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.407333397025523,
+        "2": 0.5926666029744769
+      },
+      "choice_mass": 0.9991475045681,
+      "top_tokens": [
+        [
+          "2",
+          0.5922
+        ],
+        [
+          "1",
+          0.407
+        ],
+        [
+          "3",
+          0.0003
+        ],
+        [
+          "0",
+          0.0002
+        ],
+        [
+          "<|im_end|>",
+          0.0002
+        ]
+      ],
+      "free_response": "Based on the provided list of pairs, the image of the salami (which corresponds to the cue image) is paired with the word **BLOUSE**.\n\nTherefore, the correct digit is:\n2",
+      "metadata": {
+        "chain_index": 18,
+        "foil_chain_index": 22
+      }
+    },
+    {
+      "trial": 1,
+      "target": 2,
+      "reported": 2,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.24508501499030352,
+        "2": 0.7549149850096964
+      },
+      "choice_mass": 0.9978555887937546,
+      "top_tokens": [
+        [
+          "2",
+          0.7533
+        ],
+        [
+          "1",
+          0.2446
+        ],
+        [
+          "3",
+          0.0009
+        ],
+        [
+          "0",
+          0.0005
+        ],
+        [
+          "4",
+          0.0003
+        ]
+      ],
+      "free_response": "Based on the provided list of pairs, the image showing the folded yellow and black striped fabric is paired with the word **CAN**.\n\nTherefore, the correct digit is:\n2",
+      "metadata": {
+        "chain_index": 6,
+        "foil_chain_index": 7
+      }
+    },
+    {
+      "trial": 2,
+      "target": 1,
+      "reported": 2,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.4687906124639804,
+        "2": 0.5312093875360195
+      },
+      "choice_mass": 0.985041469335556,
+      "top_tokens": [
+        [
+          "2",
+          0.5233
+        ],
+        [
+          "1",
+          0.4618
+        ],
+        [
+          "3",
+          0.0096
+        ],
+        [
+          "4",
+          0.0031
+        ],
+        [
+          "0",
+          0.0007
+        ]
+      ],
+      "free_response": "Based on the provided images and the cue image, here is the analysis:\n\n- The cue image shows a Bloody Mary cocktail garnished with a celery stalk.\n- In the list of pairs, the image of the Bloody Mary is paired with the word **KEYBOARD**.\n- The image of the hammock is paired with the word **OX**.\n\nTherefore, the word paired with the cue image is KEYBOARD.\n\n1",
+      "metadata": {
+        "chain_index": 15,
+        "foil_chain_index": 11
+      }
+    },
+    {
+      "trial": 3,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.6513548547886743,
+        "2": 0.3486451452113257
+      },
+      "choice_mass": 0.9977776110172272,
+      "top_tokens": [
+        [
+          "1",
+          0.6499
+        ],
+        [
+          "2",
+          0.3479
+        ],
+        [
+          "3",
+          0.0009
+        ],
+        [
+          "<|im_end|>",
+          0.0005
+        ],
+        [
+          "0",
+          0.0004
+        ]
+      ],
+      "free_response": "Based on the provided list of pairs, the image of the telephone (cue image) is paired with the word **WITNESS**.\n\nThe other word, DOORBELL, is paired with a different image (a small black box).\n\nTherefore, the correct digit is 1.",
+      "metadata": {
+        "chain_index": 10,
+        "foil_chain_index": 21
+      }
+    },
+    {
+      "trial": 4,
+      "target": 2,
+      "reported": 2,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.3486451400951351,
+        "2": 0.651354859904865
+      },
+      "choice_mass": 0.9985954165458679,
+      "top_tokens": [
+        [
+          "2",
+          0.6504
+        ],
+        [
+          "1",
+          0.3482
+        ],
+        [
+          "3",
+          0.0006
+        ],
+        [
+          "<|im_end|>",
+          0.0003
+        ],
+        [
+          "0",
+          0.0002
+        ]
+      ],
+      "free_response": "Based on the provided list of pairs, let's identify the correct word for the cue image.\n\n1.  **Analyze the cue image:** The image shows a black, rectangular object with a clear window on top displaying a date stamp (\"16 SEP. 1999\"). Below the window, there is a slot where stamps are inserted. This is a manual stamping device.\n2.  **Evaluate the options:**\n    -   **CELLO:** A musical instrument",
+      "metadata": {
+        "chain_index": 21,
+        "foil_chain_index": 11
+      }
+    },
+    {
+      "trial": 5,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.5312093828925225,
+        "2": 0.4687906171074775
+      },
+      "choice_mass": 0.996668666601181,
+      "top_tokens": [
+        [
+          "1",
+          0.5294
+        ],
+        [
+          "2",
+          0.4672
+        ],
+        [
+          "3",
+          0.0013
+        ],
+        [
+          "0",
+          0.0006
+        ],
+        [
+          "4",
+          0.0005
+        ]
+      ],
+      "free_response": "Based on the provided list of pairs, the image of the wooden flute (which corresponds to the cue image) is paired with the word **GUITAR**.\n\nTherefore, the correct digit is:\n1",
+      "metadata": {
+        "chain_index": 8,
+        "foil_chain_index": 15
+      }
+    },
+    {
+      "trial": 6,
+      "target": 2,
+      "reported": 2,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.32082130477576426,
+        "2": 0.6791786952242357
+      },
+      "choice_mass": 0.9982373714447021,
+      "top_tokens": [
+        [
+          "2",
+          0.678
+        ],
+        [
+          "1",
+          0.3203
+        ],
+        [
+          "3",
+          0.0008
+        ],
+        [
+          "0",
+          0.0004
+        ],
+        [
+          "<|im_end|>",
+          0.0002
+        ]
+      ],
+      "free_response": "Based on the provided list of pairs, the image of the camel is paired with the word **CAFETERIA**.\n\nTherefore, the correct digit is:\n2",
+      "metadata": {
+        "chain_index": 9,
+        "foil_chain_index": 2
+      }
+    },
+    {
+      "trial": 7,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.5,
+        "2": 0.5
+      },
+      "choice_mass": 0.9982220530509949,
+      "top_tokens": [
+        [
+          "2",
+          0.4991
+        ],
+        [
+          "1",
+          0.4991
+        ],
+        [
+          "3",
+          0.0008
+        ],
+        [
+          "<|im_end|>",
+          0.0003
+        ],
+        [
+          "4",
+          0.0003
+        ]
+      ],
+      "free_response": "Based on the provided image and the list of pairs, the image shows a CPR mask.\n\n- The word **OPERATOR** is paired with the image of a yellow toy taxi.\n- The word **LAMP** is paired with the image of a wooden cactus.\n\nTherefore, the word paired with the cue image is OPERATOR.\n\n1",
+      "metadata": {
+        "chain_index": 15,
+        "foil_chain_index": 1
+      }
+    },
+    {
+      "trial": 8,
+      "target": 2,
+      "reported": 2,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.2689414410005252,
+        "2": 0.7310585589994748
+      },
+      "choice_mass": 0.9956089854240417,
+      "top_tokens": [
+        [
+          "2",
+          0.7278
+        ],
+        [
+          "1",
+          0.2678
+        ],
+        [
+          "3",
+          0.0018
+        ],
+        [
+          "0",
+          0.0016
+        ],
+        [
+          "4",
+          0.0005
+        ]
+      ],
+      "free_response": "Based on the provided images, the cue image (the temple) is paired with the word **ODD** in the list.\n\nTherefore, the correct choice is:\n1. ENGINE\n2. OATMEAL\n\nThe answer is: 2",
+      "metadata": {
+        "chain_index": 21,
+        "foil_chain_index": 4
+      }
+    },
+    {
+      "trial": 9,
+      "target": 2,
+      "reported": 1,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.5,
+        "2": 0.5
+      },
+      "choice_mass": 0.9982506632804871,
+      "top_tokens": [
+        [
+          "2",
+          0.4991
+        ],
+        [
+          "1",
+          0.4991
+        ],
+        [
+          "3",
+          0.0009
+        ],
+        [
+          "<|im_end|>",
+          0.0003
+        ],
+        [
+          "0",
+          0.0002
+        ]
+      ],
+      "free_response": "Based on the provided image and the list of pairs, the image shows a black lanyard with a silver clip.\n\n- **SOCKET** is paired with a black flag featuring a skull and crossbones.\n- **PELICAN** is paired with a pink high-heeled shoe.\n\nThe image does not match either of these pairs. However, looking at the list of words provided in the prompt, there is a word \"LANYARD\" which is not explicitly listed in the options",
+      "metadata": {
+        "chain_index": 11,
+        "foil_chain_index": 5
+      }
+    },
+    {
+      "trial": 10,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.6791786773445877,
+        "2": 0.32082132265541236
+      },
+      "choice_mass": 0.9993201792240143,
+      "top_tokens": [
+        [
+          "1",
+          0.6787
+        ],
+        [
+          "2",
+          0.3206
+        ],
+        [
+          "3",
+          0.0002
+        ],
+        [
+          "<|im_end|>",
+          0.0002
+        ],
+        [
+          "0",
+          0.0001
+        ]
+      ],
+      "free_response": "Based on the provided image and the list of pairs, the cue image shows a standard electrical circuit breaker.\n\n- The word **BEAVER** is paired with the image of a beaver figurine.\n- The word **GLACIER** is paired with the image of a blue geode (a type of agate).\n\nTherefore, the word paired with the cue image is BEAVER.\n\n1",
+      "metadata": {
+        "chain_index": 12,
+        "foil_chain_index": 10
+      }
+    },
+    {
+      "trial": 11,
+      "target": 2,
+      "reported": 2,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.4378235022904975,
+        "2": 0.5621764977095025
+      },
+      "choice_mass": 0.99607914686203,
+      "top_tokens": [
+        [
+          "2",
+          0.56
+        ],
+        [
+          "1",
+          0.4361
+        ],
+        [
+          "3",
+          0.002
+        ],
+        [
+          "0",
+          0.0007
+        ],
+        [
+          "4",
+          0.0004
+        ]
+      ],
+      "free_response": "Based on the provided list of pairs, the image of the yellow fruit (which appears to be a passion fruit) is paired with the word **RUG**.\n\nThe other word, CASH, is paired with a blue car.\n\nTherefore, the correct digit is:\n2",
+      "metadata": {
+        "chain_index": 16,
+        "foil_chain_index": 24
+      }
+    },
+    {
+      "trial": 12,
+      "target": 2,
+      "reported": 2,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.4073334062176751,
+        "2": 0.5926665937823249
+      },
+      "choice_mass": 0.9922611713409424,
+      "top_tokens": [
+        [
+          "2",
+          0.5881
+        ],
+        [
+          "1",
+          0.4042
+        ],
+        [
+          "3",
+          0.0058
+        ],
+        [
+          "4",
+          0.0008
+        ],
+        [
+          "0",
+          0.0007
+        ]
+      ],
+      "free_response": "Based on the provided list of pairs, the image of the dresser (the cue image) is paired with the word **SCAPEGOAT**.\n\nTherefore, the correct digit is:\n2",
+      "metadata": {
+        "chain_index": 18,
+        "foil_chain_index": 12
+      }
+    },
+    {
+      "trial": 13,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.5312093703783256,
+        "2": 0.4687906296216744
+      },
+      "choice_mass": 0.9958115518093109,
+      "top_tokens": [
+        [
+          "1",
+          0.529
+        ],
+        [
+          "2",
+          0.4668
+        ],
+        [
+          "3",
+          0.0024
+        ],
+        [
+          "4",
+          0.0006
+        ],
+        [
+          "0",
+          0.0005
+        ]
+      ],
+      "free_response": "1",
+      "metadata": {
+        "chain_index": 5,
+        "foil_chain_index": 23
+      }
+    },
+    {
+      "trial": 14,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.6224593231323625,
+        "2": 0.3775406768676374
+      },
+      "choice_mass": 0.998647004365921,
+      "top_tokens": [
+        [
+          "1",
+          0.6216
+        ],
+        [
+          "2",
+          0.377
+        ],
+        [
+          "3",
+          0.0005
+        ],
+        [
+          "0",
+          0.0003
+        ],
+        [
+          "<|im_end|>",
+          0.0003
+        ]
+      ],
+      "free_response": "Based on the provided image and the list of words, the cue image shows a purple party blower.\n\n- The word **COBBLER** is paired with the image of the yellow wood chipper.\n- The word **ROBOT** is paired with the image of the pink plush toy.\n\nTherefore, the word paired with the cue image is COBBLER.\n\n1",
+      "metadata": {
+        "chain_index": 1,
+        "foil_chain_index": 8
+      }
+    },
+    {
+      "trial": 15,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.59266659923672,
+        "2": 0.40733340076327995
+      },
+      "choice_mass": 0.9982732534408569,
+      "top_tokens": [
+        [
+          "1",
+          0.5916
+        ],
+        [
+          "2",
+          0.4066
+        ],
+        [
+          "3",
+          0.0008
+        ],
+        [
+          "0",
+          0.0004
+        ],
+        [
+          "<|im_end|>",
+          0.0002
+        ]
+      ],
+      "free_response": "Based on the provided images, the cue image (the yellow crane) is paired with the word **YARD** in the list.\n\n1. CHAMPAGNE\n2. YARD\n\nThe correct answer is 2.",
+      "metadata": {
+        "chain_index": 0,
+        "foil_chain_index": 22
+      }
+    },
+    {
+      "trial": 16,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.5621764981781857,
+        "2": 0.4378235018218143
+      },
+      "choice_mass": 0.9988558292388916,
+      "top_tokens": [
+        [
+          "1",
+          0.5615
+        ],
+        [
+          "2",
+          0.4373
+        ],
+        [
+          "3",
+          0.0004
+        ],
+        [
+          "<|im_end|>",
+          0.0003
+        ],
+        [
+          "0",
+          0.0002
+        ]
+      ],
+      "free_response": "Based on the provided list of pairs, the image of the white doorbell camera (the cue image) is paired with the word **NOTE**.\n\nTherefore, the correct digit is:\n2",
+      "metadata": {
+        "chain_index": 21,
+        "foil_chain_index": 15
+      }
+    },
+    {
+      "trial": 17,
+      "target": 1,
+      "reported": 2,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.3775406660174089,
+        "2": 0.6224593339825911
+      },
+      "choice_mass": 0.998187929391861,
+      "top_tokens": [
+        [
+          "2",
+          0.6213
+        ],
+        [
+          "1",
+          0.3769
+        ],
+        [
+          "3",
+          0.0009
+        ],
+        [
+          "<|im_end|>",
+          0.0003
+        ],
+        [
+          "0",
+          0.0002
+        ]
+      ],
+      "free_response": "Based on the provided list of pairs, the image showing a black circular object with clips (which appears to be a lid or a specific type of container) is paired with the word **CHIP**.\n\nThe other word, AUTOMOBILE, is paired with a different image (a black tool with a spring and blue handle).\n\nTherefore, the correct word is CHIP.\n\n1",
+      "metadata": {
+        "chain_index": 4,
+        "foil_chain_index": 21
+      }
+    },
+    {
+      "trial": 18,
+      "target": 2,
+      "reported": 1,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.592666588342813,
+        "2": 0.40733341165718695
+      },
+      "choice_mass": 0.99818155169487,
+      "top_tokens": [
+        [
+          "1",
+          0.5916
+        ],
+        [
+          "2",
+          0.4066
+        ],
+        [
+          "3",
+          0.0008
+        ],
+        [
+          "<|im_end|>",
+          0.0004
+        ],
+        [
+          "4",
+          0.0002
+        ]
+      ],
+      "free_response": "Based on the provided image and the list of pairs, the image shows a pair of blue exercise step platforms.\n\n- The word **QUARTER** is paired with the image of the red and white lighthouse.\n- The word **CITRUS** is paired with the image of the orange and red fishing lure.\n\nTherefore, the word paired with the cue image is QUARTER.\n\n1",
+      "metadata": {
+        "chain_index": 10,
+        "foil_chain_index": 8
+      }
+    },
+    {
+      "trial": 19,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.8354835485964577,
+        "2": 0.1645164514035423
+      },
+      "choice_mass": 0.9991752952337265,
+      "top_tokens": [
+        [
+          "1",
+          0.8348
+        ],
+        [
+          "2",
+          0.1644
+        ],
+        [
+          "<|im_end|>",
+          0.0003
+        ],
+        [
+          "3",
+          0.0001
+        ],
+        [
+          "0",
+          0.0001
+        ]
+      ],
+      "free_response": "Based on the provided image and the list of pairs, the image shows a vintage fishing reel.\n\n- The word **STAKE** is paired with the image of a fishing reel.\n- The word **VILLAIN** is paired with the image of a statue of a man in ancient Egyptian attire.\n\nTherefore, the correct word paired with the cue image is STAKE.\n\n1",
+      "metadata": {
+        "chain_index": 22,
+        "foil_chain_index": 12
+      }
+    },
+    {
+      "trial": 20,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.5312093704169054,
+        "2": 0.4687906295830946
+      },
+      "choice_mass": 0.9984027147293091,
+      "top_tokens": [
+        [
+          "1",
+          0.5304
+        ],
+        [
+          "2",
+          0.468
+        ],
+        [
+          "3",
+          0.0008
+        ],
+        [
+          "<|im_end|>",
+          0.0003
+        ],
+        [
+          "0",
+          0.0002
+        ]
+      ],
+      "free_response": "Based on the provided list of pairs, let's identify the correct match for the cue image.\n\n1.  **Analyze the cue image:** The image shows a grey electrical meter with a dial and a boxy housing.\n2.  **Review the pairs:**\n    -   **SPIDER:** The image for SPIDER is a white hard hat with yellow ear protection. This does not match the cue image.\n    -   **RUST:** The image for RUST is",
+      "metadata": {
+        "chain_index": 11,
+        "foil_chain_index": 17
+      }
+    },
+    {
+      "trial": 21,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.5621764899953324,
+        "2": 0.4378235100046676
+      },
+      "choice_mass": 0.9983469247817993,
+      "top_tokens": [
+        [
+          "1",
+          0.5612
+        ],
+        [
+          "2",
+          0.4371
+        ],
+        [
+          "3",
+          0.0007
+        ],
+        [
+          "0",
+          0.0004
+        ],
+        [
+          "<|im_end|>",
+          0.0003
+        ]
+      ],
+      "free_response": "Based on the provided images, the cue image shows a black lanyard with a silver clasp.\n\n- The word **CELERY** is paired with an orange life vest.\n- The word **COMPUTER** is paired with a pumpkin-shaped cookie cutter.\n\nNeither of these words is paired with the lanyard. Therefore, the correct answer is 1.",
+      "metadata": {
+        "chain_index": 2,
+        "foil_chain_index": 5
+      }
+    },
+    {
+      "trial": 22,
+      "target": 2,
+      "reported": 2,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.40733339271235425,
+        "2": 0.5926666072876458
+      },
+      "choice_mass": 0.9977769255638123,
+      "top_tokens": [
+        [
+          "2",
+          0.5913
+        ],
+        [
+          "1",
+          0.4064
+        ],
+        [
+          "3",
+          0.0011
+        ],
+        [
+          "0",
+          0.0005
+        ],
+        [
+          "4",
+          0.0003
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 4,
+        "foil_chain_index": 9
+      }
+    },
+    {
+      "trial": 23,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.5312093838980682,
+        "2": 0.4687906161019318
+      },
+      "choice_mass": 0.9950882494449615,
+      "top_tokens": [
+        [
+          "1",
+          0.5286
+        ],
+        [
+          "2",
+          0.4665
+        ],
+        [
+          "3",
+          0.0036
+        ],
+        [
+          "4",
+          0.0005
+        ],
+        [
+          "0",
+          0.0004
+        ]
+      ],
+      "free_response": "Based on the provided image and the list of words, here is the analysis:\n\n- The cue image shows a multi-tiered white cake with a wedding topper on top.\n- The word \"SHORTS\" is not related to a cake.\n- The word \"CASH\" is not related to a cake.\n\nSince neither of the provided options is a direct match for the image, and the question asks to choose between two specific words, we must re-evaluate the context.",
+      "metadata": {
+        "chain_index": 5,
+        "foil_chain_index": 12
+      }
+    },
+    {
+      "trial": 24,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.531209379809726,
+        "2": 0.46879062019027395
+      },
+      "choice_mass": 0.9984501600265503,
+      "top_tokens": [
+        [
+          "1",
+          0.5304
+        ],
+        [
+          "2",
+          0.4681
+        ],
+        [
+          "3",
+          0.0007
+        ],
+        [
+          "0",
+          0.0003
+        ],
+        [
+          "<|im_end|>",
+          0.0002
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 10,
+        "foil_chain_index": 1
+      }
+    },
+    {
+      "trial": 25,
+      "target": 1,
+      "reported": 2,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.468790633515456,
+        "2": 0.531209366484544
+      },
+      "choice_mass": 0.9963578879833221,
+      "top_tokens": [
+        [
+          "2",
+          0.5293
+        ],
+        [
+          "1",
+          0.4671
+        ],
+        [
+          "3",
+          0.0019
+        ],
+        [
+          "0",
+          0.001
+        ],
+        [
+          "<|im_end|>",
+          0.0002
+        ]
+      ],
+      "free_response": "Based on the provided image and the list of pairs, the cue image shows two stone tablets with Hebrew text. These are the Tablets of the Law (or Ten Commandments).\n\nLooking at the list of pairs, the word \"TOWEL\" is paired with the image of a blue cloth item, which is not the same as the stone tablets. The word \"COAL\" is paired with a green bean.\n\nTherefore, neither of the provided options is the correct pair for the cue image",
+      "metadata": {
+        "chain_index": 23,
+        "foil_chain_index": 13
+      }
+    },
+    {
+      "trial": 26,
+      "target": 1,
+      "reported": 2,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.4378235070005383,
+        "2": 0.5621764929994617
+      },
+      "choice_mass": 0.9946079552173615,
+      "top_tokens": [
+        [
+          "2",
+          0.5591
+        ],
+        [
+          "1",
+          0.4355
+        ],
+        [
+          "3",
+          0.0029
+        ],
+        [
+          "4",
+          0.0012
+        ],
+        [
+          "0",
+          0.0007
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 24,
+        "foil_chain_index": 0
+      }
+    },
+    {
+      "trial": 27,
+      "target": 1,
+      "reported": 2,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.46879062449654524,
+        "2": 0.5312093755034548
+      },
+      "choice_mass": 0.9952265024185181,
+      "top_tokens": [
+        [
+          "2",
+          0.5287
+        ],
+        [
+          "1",
+          0.4666
+        ],
+        [
+          "3",
+          0.0031
+        ],
+        [
+          "4",
+          0.0005
+        ],
+        [
+          "0",
+          0.0004
+        ]
+      ],
+      "free_response": "Based on the provided list of pairs, the image of the folding screen (which matches the cue image) is paired with the word **MINT**.\n\nThe other word, SPIDER, is paired with the image of the red and white beaded hat.\n\nTherefore, the correct digit is 1.\n\n1",
+      "metadata": {
+        "chain_index": 9,
+        "foil_chain_index": 7
+      }
+    },
+    {
+      "trial": 28,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.5,
+        "2": 0.5
+      },
+      "choice_mass": 0.9992150068283081,
+      "top_tokens": [
+        [
+          "1",
+          0.4996
+        ],
+        [
+          "2",
+          0.4996
+        ],
+        [
+          "3",
+          0.0002
+        ],
+        [
+          "0",
+          0.0002
+        ],
+        [
+          "<|im_end|>",
+          0.0002
+        ]
+      ],
+      "free_response": "Based on the provided images and the list of words, let's identify the correct pair.\n\n- The cue image shows a bicycle gear shifter.\n- In the list of words, the word **OUTFIT** is paired with the image of the blue plastic case with compartments.\n- The word **CAVE** is paired with the image of the black circular object with clips.\n\nTherefore, the word paired with the cue image is OUTFIT.\n\n1",
+      "metadata": {
+        "chain_index": 1,
+        "foil_chain_index": 18
+      }
+    },
+    {
+      "trial": 29,
+      "target": 1,
+      "reported": 2,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.18242552098920686,
+        "2": 0.8175744790107932
+      },
+      "choice_mass": 0.9980009198188782,
+      "top_tokens": [
+        [
+          "2",
+          0.8159
+        ],
+        [
+          "1",
+          0.1821
+        ],
+        [
+          "3",
+          0.001
+        ],
+        [
+          "0",
+          0.0003
+        ],
+        [
+          "4",
+          0.0003
+        ]
+      ],
+      "free_response": "Based on the provided list of pairs, the image of the brass horn (which looks like a trumpet or bugle) is paired with the word **FLESH**.\n\nTherefore, the correct digit is:\n2",
+      "metadata": {
+        "chain_index": 14,
+        "foil_chain_index": 21
+      }
+    },
+    {
+      "trial": 30,
+      "target": 2,
+      "reported": 2,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.29421497331271435,
+        "2": 0.7057850266872856
+      },
+      "choice_mass": 0.9980661571025848,
+      "top_tokens": [
+        [
+          "2",
+          0.7044
+        ],
+        [
+          "1",
+          0.2936
+        ],
+        [
+          "3",
+          0.0009
+        ],
+        [
+          "<|im_end|>",
+          0.0004
+        ],
+        [
+          "4",
+          0.0002
+        ]
+      ],
+      "free_response": "Based on the provided list of pairs, the image of the silver webcam is paired with the word **CHAMPAGNE**.\n\nThe other word, MISSILE, is paired with the image of the blue missile.\n\nTherefore, the correct digit is 2.\n\n2",
+      "metadata": {
+        "chain_index": 18,
+        "foil_chain_index": 11
+      }
+    },
+    {
+      "trial": 31,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.5312093763240462,
+        "2": 0.4687906236759538
+      },
+      "choice_mass": 0.9950173497200012,
+      "top_tokens": [
+        [
+          "1",
+          0.5286
+        ],
+        [
+          "2",
+          0.4665
+        ],
+        [
+          "3",
+          0.0031
+        ],
+        [
+          "4",
+          0.0009
+        ],
+        [
+          "0",
+          0.0005
+        ]
+      ],
+      "free_response": "Based on the provided list of pairs, the image of the blue barrel (the cue image) is paired with the word **DUGHNUT**.\n\nTherefore, the correct digit is:\n1",
+      "metadata": {
+        "chain_index": 9,
+        "foil_chain_index": 11
+      }
+    },
+    {
+      "trial": 32,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.5312093680686815,
+        "2": 0.4687906319313185
+      },
+      "choice_mass": 0.9983679354190826,
+      "top_tokens": [
+        [
+          "1",
+          0.5303
+        ],
+        [
+          "2",
+          0.468
+        ],
+        [
+          "3",
+          0.0008
+        ],
+        [
+          "0",
+          0.0003
+        ],
+        [
+          "<|im_end|>",
+          0.0002
+        ]
+      ],
+      "free_response": "Based on the provided image and the list of pairs, the image shows a muscular man in a blue swimsuit.\n\n- The word **MOSQUITO** is paired with the image of a mosquito.\n- The word **FINGERNAIL** is paired with the image of a fingernail.\n\nTherefore, the word paired with the cue image is MOSQUITO.\n\n1",
+      "metadata": {
+        "chain_index": 22,
+        "foil_chain_index": 19
+      }
+    },
+    {
+      "trial": 33,
+      "target": 2,
+      "reported": 2,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.294214975168644,
+        "2": 0.7057850248313561
+      },
+      "choice_mass": 0.9982632696628571,
+      "top_tokens": [
+        [
+          "2",
+          0.7046
+        ],
+        [
+          "1",
+          0.2937
+        ],
+        [
+          "3",
+          0.0007
+        ],
+        [
+          "0",
+          0.0005
+        ],
+        [
+          "4",
+          0.0002
+        ]
+      ],
+      "free_response": "Based on the provided list of pairs, the image of the lawnmower (the cue image) is paired with the word **CASKET**.\n\nTherefore, the correct digit is:\n2",
+      "metadata": {
+        "chain_index": 3,
+        "foil_chain_index": 7
+      }
+    },
+    {
+      "trial": 34,
+      "target": 2,
+      "reported": 1,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.5,
+        "2": 0.5
+      },
+      "choice_mass": 0.9965420365333557,
+      "top_tokens": [
+        [
+          "1",
+          0.4983
+        ],
+        [
+          "2",
+          0.4983
+        ],
+        [
+          "3",
+          0.0018
+        ],
+        [
+          "0",
+          0.0008
+        ],
+        [
+          "4",
+          0.0004
+        ]
+      ],
+      "free_response": "Based on the provided image and the list of pairs, let's identify the correct connection.\n\n- The cue image shows a statue of a knight in armor holding a spear.\n- We need to find which of the given words is associated with this image.\n\nLet's examine the pairs:\n- **STAGE**: This word is paired with a stage prop (the black prop with the golden figure).\n- **SQUID**: This word is paired with a blue, flower-shaped button",
+      "metadata": {
+        "chain_index": 6,
+        "foil_chain_index": 15
+      }
+    },
+    {
+      "trial": 35,
+      "target": 2,
+      "reported": 1,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.5621765011703477,
+        "2": 0.43782349882965227
+      },
+      "choice_mass": 0.9986923336982727,
+      "top_tokens": [
+        [
+          "1",
+          0.5614
+        ],
+        [
+          "2",
+          0.4373
+        ],
+        [
+          "3",
+          0.0005
+        ],
+        [
+          "0",
+          0.0004
+        ],
+        [
+          "4",
+          0.0001
+        ]
+      ],
+      "free_response": "Based on the provided image and word pairs, the cue image shows a lion's head.\n\n- The word **NOVEL** is paired with the image of a squirrel (Image 10).\n- The word **PILLOW** is paired with the image of a rolled-up pink towel (Image 15).\n\nTherefore, the word paired with the lion's head image is PILLOW.\n\n2",
+      "metadata": {
+        "chain_index": 1,
+        "foil_chain_index": 10
+      }
+    },
+    {
+      "trial": 36,
+      "target": 2,
+      "reported": 1,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.5312093714276891,
+        "2": 0.46879062857231085
+      },
+      "choice_mass": 0.9959748089313507,
+      "top_tokens": [
+        [
+          "1",
+          0.5291
+        ],
+        [
+          "2",
+          0.4669
+        ],
+        [
+          "3",
+          0.0022
+        ],
+        [
+          "4",
+          0.0005
+        ],
+        [
+          "0",
+          0.0005
+        ]
+      ],
+      "free_response": "Based on the provided image and the list of pairs, the image shows a street lamp with a sign that reads \"Le Bourse\".\n\nLooking at the list of pairs:\n- The pair (AB pair) containing the image of the street lamp is:\n  (AB pair)\n  [Image of street lamp]\n  [Image of a pillow]\n  [Image of a car arcade cabinet]\n  [Image of a framed Mona Lisa]\n  [Image of a",
+      "metadata": {
+        "chain_index": 19,
+        "foil_chain_index": 4
+      }
+    },
+    {
+      "trial": 37,
+      "target": 2,
+      "reported": 1,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.5312093834299774,
+        "2": 0.4687906165700226
+      },
+      "choice_mass": 0.9979429841041565,
+      "top_tokens": [
+        [
+          "1",
+          0.5301
+        ],
+        [
+          "2",
+          0.4678
+        ],
+        [
+          "3",
+          0.0012
+        ],
+        [
+          "0",
+          0.0003
+        ],
+        [
+          "4",
+          0.0002
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 6,
+        "foil_chain_index": 24
+      }
+    },
+    {
+      "trial": 38,
+      "target": 2,
+      "reported": 1,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.5926665826104619,
+        "2": 0.40733341738953804
+      },
+      "choice_mass": 0.9965283870697021,
+      "top_tokens": [
+        [
+          "1",
+          0.5906
+        ],
+        [
+          "2",
+          0.4059
+        ],
+        [
+          "3",
+          0.0021
+        ],
+        [
+          "<|im_end|>",
+          0.0005
+        ],
+        [
+          "4",
+          0.0003
+        ]
+      ],
+      "free_response": "Based on the provided images, let's analyze the connections:\n\n- The cue image shows a brown wooden rack with green pegs. This is a **peg rack**.\n- The word **CAPE** is paired with the image of a wooden birdhouse.\n- The word **TRICYCLE** is paired with the image of a black folding stool.\n\nNeither of the words \"CAPE\" nor \"TRICYCLE\" is paired with the peg rack image.\n\nHowever, looking at the",
+      "metadata": {
+        "chain_index": 6,
+        "foil_chain_index": 10
+      }
+    },
+    {
+      "trial": 39,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.5312093880350975,
+        "2": 0.46879061196490246
+      },
+      "choice_mass": 0.9970471262931824,
+      "top_tokens": [
+        [
+          "1",
+          0.5296
+        ],
+        [
+          "2",
+          0.4674
+        ],
+        [
+          "3",
+          0.0019
+        ],
+        [
+          "0",
+          0.0003
+        ],
+        [
+          "<|im_end|>",
+          0.0003
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 17,
+        "foil_chain_index": 14
+      }
+    },
+    {
+      "trial": 40,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.6791786812171245,
+        "2": 0.32082131878287545
+      },
+      "choice_mass": 0.998584657907486,
+      "top_tokens": [
+        [
+          "1",
+          0.6782
+        ],
+        [
+          "2",
+          0.3204
+        ],
+        [
+          "3",
+          0.0006
+        ],
+        [
+          "0",
+          0.0003
+        ],
+        [
+          "<|im_end|>",
+          0.0002
+        ]
+      ],
+      "free_response": "Based on the provided image and the list of pairs, the cue image shows a yellow and black electronic device with a power cord.\n\n- The word **COCKTAIL** is paired with a jar of red sauce.\n- The word **ANKLE** is paired with a cartoon character.\n\nTherefore, the correct word paired with the cue image is COCKTAIL.\n\n1",
+      "metadata": {
+        "chain_index": 2,
+        "foil_chain_index": 3
+      }
+    },
+    {
+      "trial": 41,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.592666601598702,
+        "2": 0.407333398401298
+      },
+      "choice_mass": 0.9984800219535828,
+      "top_tokens": [
+        [
+          "1",
+          0.5918
+        ],
+        [
+          "2",
+          0.4067
+        ],
+        [
+          "3",
+          0.0006
+        ],
+        [
+          "<|im_end|>",
+          0.0003
+        ],
+        [
+          "0",
+          0.0003
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 13,
+        "foil_chain_index": 2
+      }
+    },
+    {
+      "trial": 42,
+      "target": 2,
+      "reported": 2,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.26894143689568956,
+        "2": 0.7310585631043104
+      },
+      "choice_mass": 0.9992118775844574,
+      "top_tokens": [
+        [
+          "2",
+          0.7305
+        ],
+        [
+          "1",
+          0.2687
+        ],
+        [
+          "3",
+          0.0003
+        ],
+        [
+          "<|im_end|>",
+          0.0002
+        ],
+        [
+          "0",
+          0.0001
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 16,
+        "foil_chain_index": 1
+      }
+    },
+    {
+      "trial": 43,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.5312093842082247,
+        "2": 0.4687906157917752
+      },
+      "choice_mass": 0.9978703856468201,
+      "top_tokens": [
+        [
+          "1",
+          0.5301
+        ],
+        [
+          "2",
+          0.4678
+        ],
+        [
+          "3",
+          0.0009
+        ],
+        [
+          "0",
+          0.0004
+        ],
+        [
+          "<|im_end|>",
+          0.0004
+        ]
+      ],
+      "free_response": "Based on the provided image and the list of pairs, the cue image shows a fish.\n\n- The word **NEWSPAPER** is paired with the image of a newspaper.\n- The word **SKILLET** is paired with the image of a dessert sundae.\n\nTherefore, the word paired with the cue image is NEWSPAPER.\n\n1",
+      "metadata": {
+        "chain_index": 11,
+        "foil_chain_index": 2
+      }
+    },
+    {
+      "trial": 44,
+      "target": 1,
+      "reported": 2,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.46879063476319105,
+        "2": 0.531209365236809
+      },
+      "choice_mass": 0.9976107776165009,
+      "top_tokens": [
+        [
+          "2",
+          0.5299
+        ],
+        [
+          "1",
+          0.4677
+        ],
+        [
+          "3",
+          0.0015
+        ],
+        [
+          "<|im_end|>",
+          0.0003
+        ],
+        [
+          "0",
+          0.0002
+        ]
+      ],
+      "free_response": "Based on the provided images, let's analyze the connection between the cue image and the given words.\n\n1.  **Analyze the Cue Image:** The image shows a small, blue, transparent house-shaped object. It appears to be a decorative item, possibly a miniature house or a piece of furniture.\n\n2.  **Analyze the Word Pairs:** We need to find which of the two words, \"STREAM\" or \"COMPUTER\", is associated with this image.",
+      "metadata": {
+        "chain_index": 7,
+        "foil_chain_index": 21
+      }
+    },
+    {
+      "trial": 45,
+      "target": 2,
+      "reported": 2,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.4073334024534279,
+        "2": 0.592666597546572
+      },
+      "choice_mass": 0.9951340556144714,
+      "top_tokens": [
+        [
+          "2",
+          0.5898
+        ],
+        [
+          "1",
+          0.4054
+        ],
+        [
+          "3",
+          0.0035
+        ],
+        [
+          "4",
+          0.0007
+        ],
+        [
+          "0",
+          0.0003
+        ]
+      ],
+      "free_response": "Based on the provided image and the list of words, the cue image shows a \"Happy Birthday\" decoration.\n\n- The word **STATUE** is paired with a panda plush toy.\n- The word **DIRT** is paired with a small gardening trowel.\n\nNeither of these words is paired with the \"Happy Birthday\" image. However, looking at the list of words provided in the prompt, there is no \"Happy Birthday\" word. The question asks to choose between \"",
+      "metadata": {
+        "chain_index": 20,
+        "foil_chain_index": 9
+      }
+    },
+    {
+      "trial": 46,
+      "target": 2,
+      "reported": 1,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.5312093755564494,
+        "2": 0.4687906244435506
+      },
+      "choice_mass": 0.9986895024776459,
+      "top_tokens": [
+        [
+          "1",
+          0.5305
+        ],
+        [
+          "2",
+          0.4682
+        ],
+        [
+          "3",
+          0.0005
+        ],
+        [
+          "0",
+          0.0003
+        ],
+        [
+          "<|im_end|>",
+          0.0003
+        ]
+      ],
+      "free_response": "Based on the provided image and the list of pairs, let's analyze the connections:\n\n- The cue image shows a green circular rug with a pattern of flowers.\n- The word **NOOSE** is paired with the image of a red and black horse trailer.\n- The word **SUGAR** is paired with the image of a police helmet.\n\nNeither of these words is paired with the rug.\n\nTherefore, the correct answer is:\n\n1",
+      "metadata": {
+        "chain_index": 1,
+        "foil_chain_index": 22
+      }
+    },
+    {
+      "trial": 47,
+      "target": 2,
+      "reported": 2,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.4378234868704859,
+        "2": 0.5621765131295141
+      },
+      "choice_mass": 0.9967600107192993,
+      "top_tokens": [
+        [
+          "2",
+          0.5604
+        ],
+        [
+          "1",
+          0.4364
+        ],
+        [
+          "3",
+          0.002
+        ],
+        [
+          "4",
+          0.0004
+        ],
+        [
+          "<|im_end|>",
+          0.0003
+        ]
+      ],
+      "free_response": "Based on the provided image and the list of pairs, the image shows a baby bottle.\n\n- The word **SAP** is paired with the image of a dolphin.\n- The word **MEDICINE** is paired with the image of a baby bottle.\n\nTherefore, the word paired with the cue image is MEDICINE.\n\n2",
+      "metadata": {
+        "chain_index": 11,
+        "foil_chain_index": 2
+      }
+    },
+    {
+      "trial": 48,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.5,
+        "2": 0.5
+      },
+      "choice_mass": 0.9982082843780518,
+      "top_tokens": [
+        [
+          "2",
+          0.4991
+        ],
+        [
+          "1",
+          0.4991
+        ],
+        [
+          "3",
+          0.001
+        ],
+        [
+          "<|im_end|>",
+          0.0002
+        ],
+        [
+          "4",
+          0.0002
+        ]
+      ],
+      "free_response": "Based on the provided list of pairs, let's identify the correct answer.\n\n1.  **Analyze the cue image:** The image shows a white plastic bottle with a blue cap. The label on the bottle reads \"NAME: SISTER\".\n2.  **Evaluate the options:**\n    -   **CAKE:** This word is paired with a plate of French toast in the image.\n    -   **CLIFF:** This word is paired with a green trash bin in the",
+      "metadata": {
+        "chain_index": 18,
+        "foil_chain_index": 2
+      }
+    },
+    {
+      "trial": 49,
+      "target": 2,
+      "reported": 2,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.46879062876230965,
+        "2": 0.5312093712376904
+      },
+      "choice_mass": 0.9977352023124695,
+      "top_tokens": [
+        [
+          "2",
+          0.53
+        ],
+        [
+          "1",
+          0.4677
+        ],
+        [
+          "3",
+          0.0015
+        ],
+        [
+          "0",
+          0.0003
+        ],
+        [
+          "4",
+          0.0001
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 10,
+        "foil_chain_index": 11
+      }
+    }
+  ],
+  "metrics": {
+    "accuracy": 0.7,
+    "n_correct": 35,
+    "total": 50,
+    "free_text_bare_digit": 0.18,
+    "mean_p_chosen": 0.5902355155768021,
+    "mean_choice_mass": 0.9972479730844498,
+    "frac_low_mass": 0.0,
+    "response_distribution": {
+      "1": 29,
+      "2": 21
+    }
+  }
+}

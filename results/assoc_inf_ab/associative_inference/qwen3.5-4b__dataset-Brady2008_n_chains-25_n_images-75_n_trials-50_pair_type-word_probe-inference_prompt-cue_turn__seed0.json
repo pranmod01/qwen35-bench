@@ -1,0 +1,2646 @@
+{
+  "run": {
+    "model": {
+      "name": "qwen3.5-4b",
+      "model_id": "Qwen/Qwen3.5-4B",
+      "max_image_size": 512,
+      "max_new_tokens": 100
+    },
+    "task": "associative_inference",
+    "condition": {
+      "dataset": "Brady2008",
+      "pair_type": "word",
+      "probe": "inference",
+      "n_chains": 25,
+      "n_images": 75,
+      "prompt": "cue_turn",
+      "n_trials": 50
+    },
+    "seed": 0
+  },
+  "config": {
+    "run_name": "assoc_inf_ab",
+    "output_dir": "results",
+    "seeds": [
+      0
+    ],
+    "models": [
+      {
+        "name": "qwen3.5-2b",
+        "model_id": "Qwen/Qwen3.5-2B",
+        "max_image_size": 512,
+        "max_new_tokens": 100
+      },
+      {
+        "name": "qwen3.5-4b",
+        "model_id": "Qwen/Qwen3.5-4B",
+        "max_image_size": 512,
+        "max_new_tokens": 100
+      }
+    ],
+    "tasks": [
+      {
+        "task": "associative_inference",
+        "datasets": [
+          "Brady2008"
+        ],
+        "pair_types": [
+          "image",
+          "word"
+        ],
+        "probe_types": [
+          "inference",
+          "direct_ab",
+          "direct_bc"
+        ],
+        "n_chains": [
+          2,
+          5,
+          25
+        ],
+        "prompts": [
+          "original",
+          "cue_turn",
+          "labeled"
+        ],
+        "n_trials": 50
+      }
+    ]
+  },
+  "provenance": {
+    "config_hash": "d49714f7009d",
+    "gpu": "NVIDIA A100-SXM4-80GB",
+    "git_commit": null,
+    "git_dirty": false,
+    "torch": "2.10.0+cu128",
+    "transformers": "5.17.0"
+  },
+  "elapsed_s": 326.3,
+  "peak_gpu_gb": 10.25,
+  "error": null,
+  "trials": [
+    {
+      "trial": 0,
+      "target": 1,
+      "reported": 2,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.3208213036831648,
+        "2": 0.6791786963168353
+      },
+      "choice_mass": 0.9905183613300323,
+      "top_tokens": [
+        [
+          "2",
+          0.6727
+        ],
+        [
+          "1",
+          0.3178
+        ],
+        [
+          " ",
+          0.0075
+        ],
+        [
+          "3",
+          0.0008
+        ],
+        [
+          "<|im_end|>",
+          0.0003
+        ]
+      ],
+      "free_response": "To solve this, we need to find the indirect connection between the cue image and each of the two words.\n\n- **Cue Image:** The image is a framed painting of a landscape, specifically a river scene with trees in autumn colors.\n\n- **Word 1: BLOUSE**\n    - A direct association could be the color of the shirt in the painting, which is a reddish-pink.\n    - A more indirect association is the word \"chart.\" A blouse",
+      "metadata": {
+        "chain_index": 18,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/Aframedpainti.jpg",
+          "name": "Aframedpainti.jpg",
+          "role": "A",
+          "chain_index": 18
+        },
+        "correct_option": {
+          "role": "C",
+          "chain_index": 18
+        },
+        "foil_option": {
+          "role": "C",
+          "chain_index": 10
+        }
+      }
+    },
+    {
+      "trial": 1,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.5312093639952528,
+        "2": 0.4687906360047472
+      },
+      "choice_mass": 0.9962968528270721,
+      "top_tokens": [
+        [
+          "1",
+          0.5292
+        ],
+        [
+          "2",
+          0.4671
+        ],
+        [
+          " ",
+          0.0025
+        ],
+        [
+          "3",
+          0.0005
+        ],
+        [
+          " (",
+          0.0001
+        ]
+      ],
+      "free_response": "To determine the correct answer, we must first identify the hidden connections between the items in the pairs and then find the word that is indirectly associated with the cue image.\n\n- **Step 1: Analyze the connections in the pairs.**\nThe pairs are constructed based on a hidden word or concept. Let's trace the connections:\n- `POCKET` connects to the tool belt, which connects to the hammer.\n- `STAPLE` connects to the stapler, which connects",
+      "metadata": {
+        "chain_index": 6,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/ACLSIGN2.jpg",
+          "name": "ACLSIGN2.jpg",
+          "role": "A",
+          "chain_index": 6
+        },
+        "correct_option": {
+          "role": "C",
+          "chain_index": 6
+        },
+        "foil_option": {
+          "role": "C",
+          "chain_index": 7
+        }
+      }
+    },
+    {
+      "trial": 2,
+      "target": 2,
+      "reported": 2,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.4378235140255829,
+        "2": 0.562176485974417
+      },
+      "choice_mass": 0.9918342530727386,
+      "top_tokens": [
+        [
+          "2",
+          0.5576
+        ],
+        [
+          "1",
+          0.4342
+        ],
+        [
+          " ",
+          0.0055
+        ],
+        [
+          "3",
+          0.0012
+        ],
+        [
+          " (",
+          0.0005
+        ]
+      ],
+      "free_response": "To determine the indirect association, let's look at the connections in the chain:\n\n- The word **GEM** is associated with the image of a locket (a container for a gem).\n- The word **KEYBOARD** is associated with the image of a toy computer desk.\n- The cue image is of Kermit the Frog.\n- In the provided pairs, the word **FIELD** is associated with the image of a Bloody Mary cocktail.\n- The word **KEY",
+      "metadata": {
+        "chain_index": 15,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/kermitthefrog.jpg",
+          "name": "kermitthefrog.jpg",
+          "role": "A",
+          "chain_index": 15
+        },
+        "correct_option": {
+          "role": "C",
+          "chain_index": 15
+        },
+        "foil_option": {
+          "role": "C",
+          "chain_index": 10
+        }
+      }
+    },
+    {
+      "trial": 3,
+      "target": 2,
+      "reported": 1,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.5312093817407849,
+        "2": 0.46879061825921503
+      },
+      "choice_mass": 0.9938431084156036,
+      "top_tokens": [
+        [
+          "1",
+          0.5279
+        ],
+        [
+          "2",
+          0.4659
+        ],
+        [
+          " ",
+          0.0046
+        ],
+        [
+          "3",
+          0.0006
+        ],
+        [
+          " (",
+          0.0002
+        ]
+      ],
+      "free_response": "To solve this, we need to find the hidden connections between the words and images.\n\n- The cue image is a stick of butter.\n- The word 'BUTTER' is associated with the image.\n- The word 'BUTTER' is also associated with the word 'VEAL' (as in 'veal butter').\n- The word 'VEAL' is associated with the word 'Ox' (as in 'veal' comes from the Latin for 'ox').",
+      "metadata": {
+        "chain_index": 10,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/butter03.jpg",
+          "name": "butter03.jpg",
+          "role": "A",
+          "chain_index": 10
+        },
+        "correct_option": {
+          "role": "C",
+          "chain_index": 10
+        },
+        "foil_option": {
+          "role": "C",
+          "chain_index": 4
+        }
+      }
+    },
+    {
+      "trial": 4,
+      "target": 2,
+      "reported": 1,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.56217651133228,
+        "2": 0.43782348866772003
+      },
+      "choice_mass": 0.9896548688411713,
+      "top_tokens": [
+        [
+          "1",
+          0.5564
+        ],
+        [
+          "2",
+          0.4333
+        ],
+        [
+          " ",
+          0.0079
+        ],
+        [
+          "3",
+          0.0012
+        ],
+        [
+          "0",
+          0.0002
+        ]
+      ],
+      "free_response": "To solve this, we need to find the indirect connection between the cue image and each of the two words.\n\n- **Cue Image:** The image is a famous painting, the *Mona Lisa* by Leonardo da Vinci.\n- **Word 1: HOUSE**\n- **Word 2: POT**\n\nLet's trace the connections for each word:\n\n- **Connection for HOUSE:**\n    - The *Mona Lisa* is housed in the Louvre Museum in Paris",
+      "metadata": {
+        "chain_index": 21,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/monalisa.jpg",
+          "name": "monalisa.jpg",
+          "role": "A",
+          "chain_index": 21
+        },
+        "correct_option": {
+          "role": "C",
+          "chain_index": 21
+        },
+        "foil_option": {
+          "role": "C",
+          "chain_index": 20
+        }
+      }
+    },
+    {
+      "trial": 5,
+      "target": 1,
+      "reported": 2,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.4687906239386031,
+        "2": 0.531209376061397
+      },
+      "choice_mass": 0.9913428425788879,
+      "top_tokens": [
+        [
+          "2",
+          0.5266
+        ],
+        [
+          "1",
+          0.4647
+        ],
+        [
+          " ",
+          0.0066
+        ],
+        [
+          "<|im_end|>",
+          0.0006
+        ],
+        [
+          "3",
+          0.0004
+        ]
+      ],
+      "free_response": "To solve this, we need to find the hidden connection between the cue image and the two options.\n\n- The cue image is a wooden lectern or pulpit, a piece of furniture used for speaking.\n- Let's examine the options and their associated images from the provided pairs.\n- Option 1, GUITAR, is associated with the image of a balalaika, a stringed musical instrument.\n- Option 2, CACTUS, is associated with the image",
+      "metadata": {
+        "chain_index": 8,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/Apedestal3.jpg",
+          "name": "Apedestal3.jpg",
+          "role": "A",
+          "chain_index": 8
+        },
+        "correct_option": {
+          "role": "C",
+          "chain_index": 8
+        },
+        "foil_option": {
+          "role": "C",
+          "chain_index": 24
+        }
+      }
+    },
+    {
+      "trial": 6,
+      "target": 2,
+      "reported": 1,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.6224593348586495,
+        "2": 0.3775406651413505
+      },
+      "choice_mass": 0.9927880167961121,
+      "top_tokens": [
+        [
+          "1",
+          0.618
+        ],
+        [
+          "2",
+          0.3748
+        ],
+        [
+          " ",
+          0.0053
+        ],
+        [
+          "<|im_end|>",
+          0.0006
+        ],
+        [
+          "3",
+          0.0005
+        ]
+      ],
+      "free_response": "To solve this, we need to find the hidden connection between the cue image and the target words.\n\n- **Cue Image:** The image shows a paper cutter, a tool used for cutting paper.\n- **Target Words:** We are choosing between 'NOTE' and 'CAFETERIA'.\n- **Connecting the Dots:**\n    - A paper cutter is a tool used to cut paper.\n    - A 'NOTE' is written on paper.\n    - Therefore, the",
+      "metadata": {
+        "chain_index": 9,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/23057742.thl.jpg",
+          "name": "23057742.thl.jpg",
+          "role": "A",
+          "chain_index": 9
+        },
+        "correct_option": {
+          "role": "C",
+          "chain_index": 9
+        },
+        "foil_option": {
+          "role": "C",
+          "chain_index": 21
+        }
+      }
+    },
+    {
+      "trial": 7,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.5312093772867004,
+        "2": 0.4687906227132997
+      },
+      "choice_mass": 0.9917624890804291,
+      "top_tokens": [
+        [
+          "1",
+          0.5268
+        ],
+        [
+          "2",
+          0.4649
+        ],
+        [
+          " ",
+          0.0066
+        ],
+        [
+          "3",
+          0.0006
+        ],
+        [
+          "<|im_end|>",
+          0.0004
+        ]
+      ],
+      "free_response": "To solve this, we need to find the hidden connections between the words and the images.\n\n- The cue image is a **radiator**.\n- We are looking for an *indirect* association. This means we need to find a chain of connections.\n- Let's examine the two options:\n    - **1. OPERATOR**: An operator is a person who runs a machine. A radiator is a machine. So, an operator could operate a radiator. This is a direct",
+      "metadata": {
+        "chain_index": 15,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/AMAKEUPMI.jpg",
+          "name": "AMAKEUPMI.jpg",
+          "role": "A",
+          "chain_index": 15
+        },
+        "correct_option": {
+          "role": "C",
+          "chain_index": 15
+        },
+        "foil_option": {
+          "role": "C",
+          "chain_index": 23
+        }
+      }
+    },
+    {
+      "trial": 8,
+      "target": 2,
+      "reported": 1,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.5,
+        "2": 0.5
+      },
+      "choice_mass": 0.9938386082649231,
+      "top_tokens": [
+        [
+          "2",
+          0.4969
+        ],
+        [
+          "1",
+          0.4969
+        ],
+        [
+          " ",
+          0.0049
+        ],
+        [
+          "3",
+          0.0005
+        ],
+        [
+          "0",
+          0.0002
+        ]
+      ],
+      "free_response": "To solve this, we need to find the hidden connection between the cue image and the two options.\n\n- **Cue Image Analysis:** The image shows a wooden box containing a notepad with the words \"Shopping list\" written on it. The primary function of this object is to hold a list of items to be purchased.\n- **Option 1 Analysis:** The word is \"OFFICER\". An officer is a person in charge of a group or organization. There is no direct or",
+      "metadata": {
+        "chain_index": 21,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/Aboxofnotepa4.jpg",
+          "name": "Aboxofnotepa4.jpg",
+          "role": "A",
+          "chain_index": 21
+        },
+        "correct_option": {
+          "role": "C",
+          "chain_index": 21
+        },
+        "foil_option": {
+          "role": "C",
+          "chain_index": 20
+        }
+      }
+    },
+    {
+      "trial": 9,
+      "target": 2,
+      "reported": 2,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.4073334145347888,
+        "2": 0.5926665854652112
+      },
+      "choice_mass": 0.9943716526031494,
+      "top_tokens": [
+        [
+          "2",
+          0.5893
+        ],
+        [
+          "1",
+          0.405
+        ],
+        [
+          " ",
+          0.0045
+        ],
+        [
+          "3",
+          0.0005
+        ],
+        [
+          "<|im_end|>",
+          0.0002
+        ]
+      ],
+      "free_response": "1\nThe cue image is a paper shredder.\n- A **BROOK** is a small stream of water.\n- A **PELICAN** is a type of bird.\nThe word **BROOK** is indirectly associated with the image because paper shredders are often used in offices or homes near water sources (like a brook) for disposal, or the shredded paper can be used to create a \"paper brook\" in crafts.\nThere is no direct",
+      "metadata": {
+        "chain_index": 11,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/26433686.thl.jpg",
+          "name": "26433686.thl.jpg",
+          "role": "A",
+          "chain_index": 11
+        },
+        "correct_option": {
+          "role": "C",
+          "chain_index": 11
+        },
+        "foil_option": {
+          "role": "C",
+          "chain_index": 20
+        }
+      }
+    },
+    {
+      "trial": 10,
+      "target": 2,
+      "reported": 2,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.4073333953860343,
+        "2": 0.5926666046139657
+      },
+      "choice_mass": 0.9951285123825073,
+      "top_tokens": [
+        [
+          "2",
+          0.5898
+        ],
+        [
+          "1",
+          0.4053
+        ],
+        [
+          " ",
+          0.0024
+        ],
+        [
+          "<|im_end|>",
+          0.0011
+        ],
+        [
+          "3",
+          0.0006
+        ]
+      ],
+      "free_response": "To solve this, we need to find the hidden connection between the words and the images, and then see which word is indirectly related to the cue image (the hawk).\n\n- **The Connection:** The core connection is between the word and the image.\n- **BEAVER:** The image of the beaver head is directly associated with the word BEAVER.\n- **PARIS:** The image of the hawk is a type of bird of prey. The word PARIS is associated with",
+      "metadata": {
+        "chain_index": 12,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/Ahawk3.jpg",
+          "name": "Ahawk3.jpg",
+          "role": "A",
+          "chain_index": 12
+        },
+        "correct_option": {
+          "role": "C",
+          "chain_index": 12
+        },
+        "foil_option": {
+          "role": "C",
+          "chain_index": 22
+        }
+      }
+    },
+    {
+      "trial": 11,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.5,
+        "2": 0.5
+      },
+      "choice_mass": 0.9938077330589294,
+      "top_tokens": [
+        [
+          "2",
+          0.4969
+        ],
+        [
+          "1",
+          0.4969
+        ],
+        [
+          " ",
+          0.0043
+        ],
+        [
+          "3",
+          0.0008
+        ],
+        [
+          "0",
+          0.0003
+        ]
+      ],
+      "free_response": "To solve this, we need to find the hidden connection between the words and the cue image.\n\n- The cue image is a cast-iron pot, often used for cooking.\n- Let's examine the potential connections for each word:\n    - **RUG:** The first image in the sequence is a set of crocodile-themed bath items, which includes a rug. This is a direct association.\n    - **OBOE:** The word \"OBOE\" is associated with the image",
+      "metadata": {
+        "chain_index": 16,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/ABLAKPOT3.jpg",
+          "name": "ABLAKPOT3.jpg",
+          "role": "A",
+          "chain_index": 16
+        },
+        "correct_option": {
+          "role": "C",
+          "chain_index": 16
+        },
+        "foil_option": {
+          "role": "C",
+          "chain_index": 22
+        }
+      }
+    },
+    {
+      "trial": 12,
+      "target": 1,
+      "reported": 2,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.40733341620792735,
+        "2": 0.5926665837920726
+      },
+      "choice_mass": 0.9920371174812317,
+      "top_tokens": [
+        [
+          "2",
+          0.5879
+        ],
+        [
+          "1",
+          0.4041
+        ],
+        [
+          " ",
+          0.0065
+        ],
+        [
+          "3",
+          0.0004
+        ],
+        [
+          " (",
+          0.0002
+        ]
+      ],
+      "free_response": "To solve this, we need to find the hidden connection between the cue image and the target word, and then see which of the two options shares that connection.\n\n- **Cue Image Analysis:** The image shows a winter hat, specifically an ear flap hat or ushanka. This type of hat is traditionally associated with cold climates and the outdoors.\n\n- **Option 1: SCAPEGOAT**\n    - A scapegoat is an animal, specifically a goat, that is",
+      "metadata": {
+        "chain_index": 18,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/ATOQUE4.jpg",
+          "name": "ATOQUE4.jpg",
+          "role": "A",
+          "chain_index": 18
+        },
+        "correct_option": {
+          "role": "C",
+          "chain_index": 18
+        },
+        "foil_option": {
+          "role": "C",
+          "chain_index": 8
+        }
+      }
+    },
+    {
+      "trial": 13,
+      "target": 2,
+      "reported": 2,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.40733340730465173,
+        "2": 0.5926665926953483
+      },
+      "choice_mass": 0.9970190525054932,
+      "top_tokens": [
+        [
+          "2",
+          0.5909
+        ],
+        [
+          "1",
+          0.4061
+        ],
+        [
+          " ",
+          0.0017
+        ],
+        [
+          "3",
+          0.0007
+        ],
+        [
+          "0",
+          0.0002
+        ]
+      ],
+      "free_response": "To solve this, we need to find the indirect connection between the cue image and each word.\n\n- **Cue Image:** The image is of a vacuum tube, an electronic component used in older amplifiers and radios.\n- **Word 1: POLYESTER**\n- **Word 2: SIGN**\n\nLet's analyze the potential connections for each word.\n\n- **Connection with POLYESTER:**\n    - A vacuum tube is a component of an electronic device",
+      "metadata": {
+        "chain_index": 5,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/ATVLAMP.jpg",
+          "name": "ATVLAMP.jpg",
+          "role": "A",
+          "chain_index": 5
+        },
+        "correct_option": {
+          "role": "C",
+          "chain_index": 5
+        },
+        "foil_option": {
+          "role": "C",
+          "chain_index": 14
+        }
+      }
+    },
+    {
+      "trial": 14,
+      "target": 2,
+      "reported": 2,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.3486451468349816,
+        "2": 0.6513548531650184
+      },
+      "choice_mass": 0.9949280321598053,
+      "top_tokens": [
+        [
+          "2",
+          0.6481
+        ],
+        [
+          "1",
+          0.3469
+        ],
+        [
+          " ",
+          0.0039
+        ],
+        [
+          "3",
+          0.0005
+        ],
+        [
+          "0",
+          0.0001
+        ]
+      ],
+      "free_response": "To determine the correct answer, we must find the word that is indirectly associated with the cue image.\n The cue image is a toilet paper holder.\n Let's analyze the potential connections for each option:\n- **Option 1: LETTER**\n- A toilet paper holder is not directly associated with a letter.\n However, we can look for a chain of connections.\n In the provided pairs, the word \"LETTER\" is paired with a green clothespin.\n A clothespin",
+      "metadata": {
+        "chain_index": 1,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/ATOILROL2.jpg",
+          "name": "ATOILROL2.jpg",
+          "role": "A",
+          "chain_index": 1
+        },
+        "correct_option": {
+          "role": "C",
+          "chain_index": 1
+        },
+        "foil_option": {
+          "role": "C",
+          "chain_index": 13
+        }
+      }
+    },
+    {
+      "trial": 15,
+      "target": 2,
+      "reported": 2,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.4073333990047459,
+        "2": 0.592666600995254
+      },
+      "choice_mass": 0.9868847727775574,
+      "top_tokens": [
+        [
+          "2",
+          0.5849
+        ],
+        [
+          "1",
+          0.402
+        ],
+        [
+          " ",
+          0.0107
+        ],
+        [
+          "<|im_end|>",
+          0.001
+        ],
+        [
+          "3",
+          0.0003
+        ]
+      ],
+      "free_response": "To solve this, we need to find the hidden connection between the cue image and the two options.\n\n- **Cue Image:** The image shows a set of wooden shape-sorting blocks. These are toys designed to teach children about geometry and spatial reasoning.\n- **Option 1: BOAT**\n- **Option 2: CHAMPAGNE**\n\nLet's look for a connection for each word.\n\n- **Connection for 'BOAT':** The word \"boat\"",
+      "metadata": {
+        "chain_index": 0,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/22911500.thl.jpg",
+          "name": "22911500.thl.jpg",
+          "role": "A",
+          "chain_index": 0
+        },
+        "correct_option": {
+          "role": "C",
+          "chain_index": 0
+        },
+        "foil_option": {
+          "role": "C",
+          "chain_index": 8
+        }
+      }
+    },
+    {
+      "trial": 16,
+      "target": 1,
+      "reported": 2,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.4073334018024479,
+        "2": 0.5926665981975521
+      },
+      "choice_mass": 0.9944392144680023,
+      "top_tokens": [
+        [
+          "2",
+          0.5894
+        ],
+        [
+          "1",
+          0.4051
+        ],
+        [
+          " ",
+          0.0045
+        ],
+        [
+          "3",
+          0.0004
+        ],
+        [
+          "0",
+          0.0001
+        ]
+      ],
+      "free_response": "To solve this, we need to find the hidden connection between the cue image and one of the two words.\n\n- **Cue Image:** The image shows a knee brace or orthotic, a device used to support, align, or correct the knee joint.\n- **Word 1: GHETTO** A ghetto is a district in a city where a particular ethnic or religious group lives.\n- **Word 2: PEDESTRIAN** A pedestrian is a person who travels on",
+      "metadata": {
+        "chain_index": 21,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/26431205.thl.jpg",
+          "name": "26431205.thl.jpg",
+          "role": "A",
+          "chain_index": 21
+        },
+        "correct_option": {
+          "role": "C",
+          "chain_index": 21
+        },
+        "foil_option": {
+          "role": "C",
+          "chain_index": 12
+        }
+      }
+    },
+    {
+      "trial": 17,
+      "target": 1,
+      "reported": 2,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.40733339645384636,
+        "2": 0.5926666035461536
+      },
+      "choice_mass": 0.9924583733081818,
+      "top_tokens": [
+        [
+          "2",
+          0.5882
+        ],
+        [
+          "1",
+          0.4043
+        ],
+        [
+          " ",
+          0.0065
+        ],
+        [
+          "3",
+          0.0004
+        ],
+        [
+          "\n",
+          0.0001
+        ]
+      ],
+      "free_response": "1\nThe reasoning is as follows:\n- The cue image is an orange adhesive bandage.\n- The word \"AUTOMOBILE\" is associated with the word \"HAIL\" (as in hail damage to a car).\n- The word \"TOAST\" is associated with the word \"HAIL\" (as in a toast to someone).\n- Since both \"AUTOMOBILE\" and \"TOAST\" are linked to the same word, \"HAIL,\" they",
+      "metadata": {
+        "chain_index": 4,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/Abandage3.jpg",
+          "name": "Abandage3.jpg",
+          "role": "A",
+          "chain_index": 4
+        },
+        "correct_option": {
+          "role": "C",
+          "chain_index": 4
+        },
+        "foil_option": {
+          "role": "C",
+          "chain_index": 11
+        }
+      }
+    },
+    {
+      "trial": 18,
+      "target": 2,
+      "reported": 2,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.268941457233741,
+        "2": 0.7310585427662589
+      },
+      "choice_mass": 0.9969128668308258,
+      "top_tokens": [
+        [
+          "2",
+          0.7288
+        ],
+        [
+          "1",
+          0.2681
+        ],
+        [
+          " ",
+          0.0014
+        ],
+        [
+          "3",
+          0.0009
+        ],
+        [
+          "0",
+          0.0002
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 10,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/Abowloffruit4.jpg",
+          "name": "Abowloffruit4.jpg",
+          "role": "A",
+          "chain_index": 10
+        },
+        "correct_option": {
+          "role": "C",
+          "chain_index": 10
+        },
+        "foil_option": {
+          "role": "C",
+          "chain_index": 21
+        }
+      }
+    },
+    {
+      "trial": 19,
+      "target": 2,
+      "reported": 2,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.4073334070966907,
+        "2": 0.5926665929033093
+      },
+      "choice_mass": 0.9968670904636383,
+      "top_tokens": [
+        [
+          "2",
+          0.5908
+        ],
+        [
+          "1",
+          0.4061
+        ],
+        [
+          " ",
+          0.0024
+        ],
+        [
+          "3",
+          0.0004
+        ],
+        [
+          "0",
+          0.0001
+        ]
+      ],
+      "free_response": "To solve this, we need to find the hidden connections between the words and the images, and then link them to the cue image, a wooden flute.\n\n- **Cue Image:** A wooden flute.\n- **Word 1: FLOOR**\n    - Image associated with 'FLOOR': A walking aid for the elderly.\n    - Connection: A 'floor' is the surface one walks on. The image shows a device used for walking.\n- **Word 2",
+      "metadata": {
+        "chain_index": 22,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/AWOODENF3.jpg",
+          "name": "AWOODENF3.jpg",
+          "role": "A",
+          "chain_index": 22
+        },
+        "correct_option": {
+          "role": "C",
+          "chain_index": 22
+        },
+        "foil_option": {
+          "role": "C",
+          "chain_index": 8
+        }
+      }
+    },
+    {
+      "trial": 20,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.5,
+        "2": 0.5
+      },
+      "choice_mass": 0.9914880990982056,
+      "top_tokens": [
+        [
+          "2",
+          0.4957
+        ],
+        [
+          "1",
+          0.4957
+        ],
+        [
+          " ",
+          0.0071
+        ],
+        [
+          "3",
+          0.0005
+        ],
+        [
+          "<|im_end|>",
+          0.0003
+        ]
+      ],
+      "free_response": "To determine the correct answer, we need to find the indirect association for the cue image \"LIVESTOCK SCRUBBER\".\n\n- **Option 1: SPIDER**\n- **Option 2: TABLE**\n\nLet's analyze the potential connections:\n\n- **Connection between LIVESTOCK SCRUBBER and SPIDER:**\n  - A livestock scrubber is a tool used to clean animals, often by scrubbing them with a brush or sponge.\n  - The image of",
+      "metadata": {
+        "chain_index": 11,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/8019781.thl.jpg",
+          "name": "8019781.thl.jpg",
+          "role": "A",
+          "chain_index": 11
+        },
+        "correct_option": {
+          "role": "C",
+          "chain_index": 11
+        },
+        "foil_option": {
+          "role": "C",
+          "chain_index": 0
+        }
+      }
+    },
+    {
+      "trial": 21,
+      "target": 2,
+      "reported": 2,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.4687906165528596,
+        "2": 0.5312093834471404
+      },
+      "choice_mass": 0.9933574795722961,
+      "top_tokens": [
+        [
+          "2",
+          0.5277
+        ],
+        [
+          "1",
+          0.4657
+        ],
+        [
+          " ",
+          0.0052
+        ],
+        [
+          " CEL",
+          0.0004
+        ],
+        [
+          "3",
+          0.0003
+        ]
+      ],
+      "free_response": "To solve this, we need to find the hidden connection between the cue image and one of the two options.\n\n- **Cue Image:** The image is of a paintbrush.\n- **Option 1: FENCE**\n- **Option 2: CELERY**\n\nLet's analyze the potential connections:\n\n- **Connection between Paintbrush and FENCE:** A paintbrush is a tool used for painting. One could paint a fence. This is a direct, functional association.",
+      "metadata": {
+        "chain_index": 2,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/paintbrush03.jpg",
+          "name": "paintbrush03.jpg",
+          "role": "A",
+          "chain_index": 2
+        },
+        "correct_option": {
+          "role": "C",
+          "chain_index": 2
+        },
+        "foil_option": {
+          "role": "C",
+          "chain_index": 9
+        }
+      }
+    },
+    {
+      "trial": 22,
+      "target": 1,
+      "reported": 2,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.4073333941689564,
+        "2": 0.5926666058310436
+      },
+      "choice_mass": 0.9957683384418488,
+      "top_tokens": [
+        [
+          "2",
+          0.5902
+        ],
+        [
+          "1",
+          0.4056
+        ],
+        [
+          " ",
+          0.0031
+        ],
+        [
+          "3",
+          0.0005
+        ],
+        [
+          "<|im_end|>",
+          0.0002
+        ]
+      ],
+      "free_response": "To solve this, we need to find the hidden connection between the words and the images.\n\n- The first image is a loaf of bread in a pan.\n- The second image is a tarantula.\n- The word 'PUBLICATION' is associated with the bread image.\n- The word 'BEAST' is associated with the tarantula image.\n- The question asks which word is *indirectly* associated with the cue image (the bread).\n-",
+      "metadata": {
+        "chain_index": 4,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/Apizzadoughin.jpg",
+          "name": "Apizzadoughin.jpg",
+          "role": "A",
+          "chain_index": 4
+        },
+        "correct_option": {
+          "role": "C",
+          "chain_index": 4
+        },
+        "foil_option": {
+          "role": "C",
+          "chain_index": 5
+        }
+      }
+    },
+    {
+      "trial": 23,
+      "target": 1,
+      "reported": 2,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.46879061523370724,
+        "2": 0.5312093847662928
+      },
+      "choice_mass": 0.9954534769058228,
+      "top_tokens": [
+        [
+          "2",
+          0.5288
+        ],
+        [
+          "1",
+          0.4667
+        ],
+        [
+          " ",
+          0.0031
+        ],
+        [
+          "3",
+          0.0005
+        ],
+        [
+          " (",
+          0.0002
+        ]
+      ],
+      "free_response": "To solve this, we need to find the hidden connection between the cue image and the target words.\n\n- The cue image is a toy hammer.\n- We need to find a word that is indirectly associated with \"hammer\".\n- Let's examine the options:\n    - 1. SHORTS: This is a type of clothing.\n    - 2. DRESS: This is also a type of clothing.\n- Both words are related to clothing. The connection is likely",
+      "metadata": {
+        "chain_index": 5,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/26466347.thl.jpg",
+          "name": "26466347.thl.jpg",
+          "role": "A",
+          "chain_index": 5
+        },
+        "correct_option": {
+          "role": "C",
+          "chain_index": 5
+        },
+        "foil_option": {
+          "role": "C",
+          "chain_index": 8
+        }
+      }
+    },
+    {
+      "trial": 24,
+      "target": 2,
+      "reported": 2,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.2942149598979347,
+        "2": 0.7057850401020652
+      },
+      "choice_mass": 0.9961860775947571,
+      "top_tokens": [
+        [
+          "2",
+          0.7031
+        ],
+        [
+          "1",
+          0.2931
+        ],
+        [
+          " ",
+          0.0025
+        ],
+        [
+          "3",
+          0.0006
+        ],
+        [
+          "0",
+          0.0001
+        ]
+      ],
+      "free_response": "To solve this, we need to find the hidden connection between the cue image and one of the words.\n\n- The cue image is a **hole punch**.\n- Let's look for a connection between \"hole punch\" and the two options.\n- **Option 1: APARTMENT** - There is no direct or obvious connection between a hole punch and an apartment.\n- **Option 2: WHISTLE** - A hole punch is a tool used to create holes.",
+      "metadata": {
+        "chain_index": 10,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/Ametalpress.jpg",
+          "name": "Ametalpress.jpg",
+          "role": "A",
+          "chain_index": 10
+        },
+        "correct_option": {
+          "role": "C",
+          "chain_index": 10
+        },
+        "foil_option": {
+          "role": "C",
+          "chain_index": 20
+        }
+      }
+    },
+    {
+      "trial": 25,
+      "target": 2,
+      "reported": 2,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.4378235177843864,
+        "2": 0.5621764822156136
+      },
+      "choice_mass": 0.9911721348762512,
+      "top_tokens": [
+        [
+          "2",
+          0.5572
+        ],
+        [
+          "1",
+          0.434
+        ],
+        [
+          " ",
+          0.007
+        ],
+        [
+          "3",
+          0.0008
+        ],
+        [
+          "<|im_end|>",
+          0.0004
+        ]
+      ],
+      "free_response": "To solve this, we need to find the hidden connection between the cue image and the two words, then identify which word is part of that connection.\n\n- **Cue Image Analysis:** The image shows a thermometer, an instrument used to measure temperature.\n- **Word Association:** We need to find a common link between \"BUYER\" and \"TOWEL\" that relates to a thermometer.\n- **Evaluating the Options:**\n    - **BUYER:** A buyer is",
+      "metadata": {
+        "chain_index": 23,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/AMEATHER3.jpg",
+          "name": "AMEATHER3.jpg",
+          "role": "A",
+          "chain_index": 23
+        },
+        "correct_option": {
+          "role": "C",
+          "chain_index": 23
+        },
+        "foil_option": {
+          "role": "C",
+          "chain_index": 14
+        }
+      }
+    },
+    {
+      "trial": 26,
+      "target": 2,
+      "reported": 2,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.43782348221465556,
+        "2": 0.5621765177853444
+      },
+      "choice_mass": 0.9980526566505432,
+      "top_tokens": [
+        [
+          "2",
+          0.5611
+        ],
+        [
+          "1",
+          0.437
+        ],
+        [
+          " ",
+          0.0011
+        ],
+        [
+          "3",
+          0.0004
+        ],
+        [
+          "0",
+          0.0001
+        ]
+      ],
+      "free_response": "To solve this, we need to find the hidden connection between the words and the image.\n\n- The image is a grenade.\n- The word 'HAMMER' is associated with a grenade because a grenade is often thrown with a hammer or is thrown by a hammer.\n- The word 'ULCER' is associated with a grenade because a grenade can be used to treat an ulcer.\n- Therefore, the word 'HAMMER' is indirectly associated with the cue image.",
+      "metadata": {
+        "chain_index": 24,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/22824840.thl.jpg",
+          "name": "22824840.thl.jpg",
+          "role": "A",
+          "chain_index": 24
+        },
+        "correct_option": {
+          "role": "C",
+          "chain_index": 24
+        },
+        "foil_option": {
+          "role": "C",
+          "chain_index": 11
+        }
+      }
+    },
+    {
+      "trial": 27,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.5,
+        "2": 0.5
+      },
+      "choice_mass": 0.9954047203063965,
+      "top_tokens": [
+        [
+          "2",
+          0.4977
+        ],
+        [
+          "1",
+          0.4977
+        ],
+        [
+          " ",
+          0.003
+        ],
+        [
+          "3",
+          0.0007
+        ],
+        [
+          "0",
+          0.0003
+        ]
+      ],
+      "free_response": "To determine the correct answer, we need to find the word that is indirectly associated with the cue image.\n The cue image is a glass bottle with a cork stopper and a label that appears to have handwritten text on it.\n This style of bottle is often used for storing liquids like medicine, alcohol, or other chemicals.\n Let's analyze the options:\n- **1. MINT:** Mint is a flavor or a plant.\n While mint could be used to make a liquid (",
+      "metadata": {
+        "chain_index": 9,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/26370704.thl.jpg",
+          "name": "26370704.thl.jpg",
+          "role": "A",
+          "chain_index": 9
+        },
+        "correct_option": {
+          "role": "C",
+          "chain_index": 9
+        },
+        "foil_option": {
+          "role": "C",
+          "chain_index": 18
+        }
+      }
+    },
+    {
+      "trial": 28,
+      "target": 1,
+      "reported": 2,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.4687906297872599,
+        "2": 0.5312093702127402
+      },
+      "choice_mass": 0.9919107258319855,
+      "top_tokens": [
+        [
+          "2",
+          0.5269
+        ],
+        [
+          "1",
+          0.465
+        ],
+        [
+          " ",
+          0.0066
+        ],
+        [
+          "3",
+          0.0006
+        ],
+        [
+          "0",
+          0.0002
+        ]
+      ],
+      "free_response": "To solve this, we need to find the hidden connection between the cue image and one of the words.\n\n- The cue image is a rainbow-colored slinky.\n- Let's examine the potential connections for each word.\n- **SCALLOP:** A scallop is a type of shellfish. The word \"scallop\" can also refer to a decorative, curved edge, like the one on a piece of jewelry or a scallop shell. A slinky is a coiled",
+      "metadata": {
+        "chain_index": 1,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/Atoycoil.jpg",
+          "name": "Atoycoil.jpg",
+          "role": "A",
+          "chain_index": 1
+        },
+        "correct_option": {
+          "role": "C",
+          "chain_index": 1
+        },
+        "foil_option": {
+          "role": "C",
+          "chain_index": 23
+        }
+      }
+    },
+    {
+      "trial": 29,
+      "target": 1,
+      "reported": 2,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.2942149648350688,
+        "2": 0.7057850351649312
+      },
+      "choice_mass": 0.9979369342327118,
+      "top_tokens": [
+        [
+          "2",
+          0.7043
+        ],
+        [
+          "1",
+          0.2936
+        ],
+        [
+          "3",
+          0.0006
+        ],
+        [
+          " ",
+          0.0006
+        ],
+        [
+          "<|im_end|>",
+          0.0002
+        ]
+      ],
+      "free_response": "1. TWEEZERS",
+      "metadata": {
+        "chain_index": 14,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/beanbagchair.jpg",
+          "name": "beanbagchair.jpg",
+          "role": "A",
+          "chain_index": 14
+        },
+        "correct_option": {
+          "role": "C",
+          "chain_index": 14
+        },
+        "foil_option": {
+          "role": "C",
+          "chain_index": 10
+        }
+      }
+    },
+    {
+      "trial": 30,
+      "target": 2,
+      "reported": 1,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.5926665919880112,
+        "2": 0.40733340801198886
+      },
+      "choice_mass": 0.9944928288459778,
+      "top_tokens": [
+        [
+          "1",
+          0.5894
+        ],
+        [
+          "2",
+          0.4051
+        ],
+        [
+          " ",
+          0.0035
+        ],
+        [
+          "3",
+          0.0007
+        ],
+        [
+          "<|im_end|>",
+          0.0004
+        ]
+      ],
+      "free_response": "To determine the correct answer, we need to find the word that is indirectly associated with the cue image.\n\n- The cue image is a blue toilet brush.\n- We will now examine the potential answers and their connections to the cue image.\n- **1. LIPSTICK:** The word 'LIPSTICK' is associated with the image of the blue toilet brush through a chain of connections:\n    - Lipstick -> **LIP**\n    - Lip -> **L",
+      "metadata": {
+        "chain_index": 18,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/Afeatherdust2.jpg",
+          "name": "Afeatherdust2.jpg",
+          "role": "A",
+          "chain_index": 18
+        },
+        "correct_option": {
+          "role": "C",
+          "chain_index": 18
+        },
+        "foil_option": {
+          "role": "C",
+          "chain_index": 7
+        }
+      }
+    },
+    {
+      "trial": 31,
+      "target": 2,
+      "reported": 2,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.4378235174118607,
+        "2": 0.5621764825881393
+      },
+      "choice_mass": 0.9934186935424805,
+      "top_tokens": [
+        [
+          "2",
+          0.5585
+        ],
+        [
+          "1",
+          0.4349
+        ],
+        [
+          " ",
+          0.0055
+        ],
+        [
+          "3",
+          0.0004
+        ],
+        [
+          "<|im_end|>",
+          0.0002
+        ]
+      ],
+      "free_response": "1",
+      "metadata": {
+        "chain_index": 9,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/AALFALFA.jpg",
+          "name": "AALFALFA.jpg",
+          "role": "A",
+          "chain_index": 9
+        },
+        "correct_option": {
+          "role": "C",
+          "chain_index": 9
+        },
+        "foil_option": {
+          "role": "C",
+          "chain_index": 22
+        }
+      }
+    },
+    {
+      "trial": 32,
+      "target": 2,
+      "reported": 1,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.5621765045421234,
+        "2": 0.4378234954578765
+      },
+      "choice_mass": 0.9935379326343536,
+      "top_tokens": [
+        [
+          "1",
+          0.5585
+        ],
+        [
+          "2",
+          0.435
+        ],
+        [
+          " ",
+          0.0043
+        ],
+        [
+          "3",
+          0.0008
+        ],
+        [
+          " (",
+          0.0005
+        ]
+      ],
+      "free_response": "To solve this, we need to find the hidden connection between the cue image and the two options.\n\n- **Cue Image Analysis:** The image shows a classic black lamppost with a red street sign. The sign has text on it, but it's stylized and difficult to read clearly. However, the overall aesthetic is very reminiscent of a European city, particularly Paris.\n- **Option 1 Analysis:** The word is 'SUSPECT'.\n- **Option 2 Analysis",
+      "metadata": {
+        "chain_index": 22,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/Astreetlampwi.jpg",
+          "name": "Astreetlampwi.jpg",
+          "role": "A",
+          "chain_index": 22
+        },
+        "correct_option": {
+          "role": "C",
+          "chain_index": 22
+        },
+        "foil_option": {
+          "role": "C",
+          "chain_index": 9
+        }
+      }
+    },
+    {
+      "trial": 33,
+      "target": 2,
+      "reported": 1,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.5621765095978197,
+        "2": 0.4378234904021802
+      },
+      "choice_mass": 0.991054505109787,
+      "top_tokens": [
+        [
+          "1",
+          0.5571
+        ],
+        [
+          "2",
+          0.4339
+        ],
+        [
+          " ",
+          0.0048
+        ],
+        [
+          "3",
+          0.0014
+        ],
+        [
+          " (",
+          0.0009
+        ]
+      ],
+      "free_response": "To solve this, we need to find the hidden connection between the cue image and one of the two options.\n\n- **Cue Image:** The image shows a decorative serving tray.\n- **Option 1: LABYRINTH**\n- **Option 2: CASKET**\n\nLet's analyze the potential connections:\n\n- **Connection with LABYRINTH:** The word \"LABYRINTH\" is associated with the image of the tray.\n-",
+      "metadata": {
+        "chain_index": 3,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/Amatplate.jpg",
+          "name": "Amatplate.jpg",
+          "role": "A",
+          "chain_index": 3
+        },
+        "correct_option": {
+          "role": "C",
+          "chain_index": 3
+        },
+        "foil_option": {
+          "role": "C",
+          "chain_index": 2
+        }
+      }
+    },
+    {
+      "trial": 34,
+      "target": 2,
+      "reported": 1,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.5926666006302661,
+        "2": 0.40733339936973395
+      },
+      "choice_mass": 0.9919605553150177,
+      "top_tokens": [
+        [
+          "1",
+          0.5879
+        ],
+        [
+          "2",
+          0.4041
+        ],
+        [
+          " ",
+          0.0051
+        ],
+        [
+          " (",
+          0.0011
+        ],
+        [
+          "3",
+          0.0007
+        ]
+      ],
+      "free_response": "To solve this, we need to find the hidden connection between the cue image and one of the two options.\n\n- **Cue Image:** The image is of a dress form, also known as a mannequin. Its primary function is to be used for displaying clothes or for tailors and seamstresses to practice on.\n- **Option 1: LABYRINTH:** A labyrinth is a complex maze. There is no direct or indirect connection between a dress form and a",
+      "metadata": {
+        "chain_index": 6,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/ABUSTFOR7.jpg",
+          "name": "ABUSTFOR7.jpg",
+          "role": "A",
+          "chain_index": 6
+        },
+        "correct_option": {
+          "role": "C",
+          "chain_index": 6
+        },
+        "foil_option": {
+          "role": "C",
+          "chain_index": 9
+        }
+      }
+    },
+    {
+      "trial": 35,
+      "target": 2,
+      "reported": 2,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.4073334035173653,
+        "2": 0.5926665964826348
+      },
+      "choice_mass": 0.9888242781162262,
+      "top_tokens": [
+        [
+          "2",
+          0.586
+        ],
+        [
+          "1",
+          0.4028
+        ],
+        [
+          " ",
+          0.0095
+        ],
+        [
+          "3",
+          0.0005
+        ],
+        [
+          " (",
+          0.0004
+        ]
+      ],
+      "free_response": "To determine the correct answer, we need to find the word that is indirectly associated with the cue image.\n The cue image is a reusable shopping bag with a sun design.\n Let's analyze the potential connections for each option:\n- **BEARD:** This word is not directly or indirectly related to a shopping bag.\n\n- **PILLOW:** The word \"pillow\" is associated with the word \"receipt\" in the provided pairs.\n The word \"receipt\" is associated with",
+      "metadata": {
+        "chain_index": 1,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/Agiftbag20.jpg",
+          "name": "Agiftbag20.jpg",
+          "role": "A",
+          "chain_index": 1
+        },
+        "correct_option": {
+          "role": "C",
+          "chain_index": 1
+        },
+        "foil_option": {
+          "role": "C",
+          "chain_index": 9
+        }
+      }
+    },
+    {
+      "trial": 36,
+      "target": 1,
+      "reported": 2,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.46879062550943845,
+        "2": 0.5312093744905616
+      },
+      "choice_mass": 0.9919463992118835,
+      "top_tokens": [
+        [
+          "2",
+          0.5269
+        ],
+        [
+          "1",
+          0.465
+        ],
+        [
+          " ",
+          0.0059
+        ],
+        [
+          "3",
+          0.0008
+        ],
+        [
+          "0",
+          0.0003
+        ]
+      ],
+      "free_response": "To solve this, we must find the hidden connection between the cue image and the target words.\n\n- The cue image is a \"Final Clearance 50% off\" sign.\n- This sign is associated with sales, discounts, and clearance events.\n- We need to find which of the two options, COUGAR or MONKEY, has an indirect connection to this concept.\n\nLet's analyze the options:\n- **COUGAR:** A cougar is a type of wild",
+      "metadata": {
+        "chain_index": 19,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/26385058.thl.jpg",
+          "name": "26385058.thl.jpg",
+          "role": "A",
+          "chain_index": 19
+        },
+        "correct_option": {
+          "role": "C",
+          "chain_index": 19
+        },
+        "foil_option": {
+          "role": "C",
+          "chain_index": 12
+        }
+      }
+    },
+    {
+      "trial": 37,
+      "target": 2,
+      "reported": 2,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.164516450206839,
+        "2": 0.835483549793161
+      },
+      "choice_mass": 0.99466672539711,
+      "top_tokens": [
+        [
+          "2",
+          0.831
+        ],
+        [
+          "1",
+          0.1636
+        ],
+        [
+          " ",
+          0.0044
+        ],
+        [
+          "3",
+          0.0005
+        ],
+        [
+          "0",
+          0.0001
+        ]
+      ],
+      "free_response": "To determine the correct answer, we must find the word that is indirectly associated with the cue image.\n The cue image is a party popper, a device used to create a burst of confetti or streamers for celebration.\n Let's analyze the potential connections for each option:\n- **Option 1: CHAIN**\n- A party popper is not directly related to a chain.\n There is no common association between the two objects.\n\n- **Option 2: HO",
+      "metadata": {
+        "chain_index": 6,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/Anoismake.jpg",
+          "name": "Anoismake.jpg",
+          "role": "A",
+          "chain_index": 6
+        },
+        "correct_option": {
+          "role": "C",
+          "chain_index": 6
+        },
+        "foil_option": {
+          "role": "C",
+          "chain_index": 18
+        }
+      }
+    },
+    {
+      "trial": 38,
+      "target": 2,
+      "reported": 1,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.5,
+        "2": 0.5
+      },
+      "choice_mass": 0.9884982705116272,
+      "top_tokens": [
+        [
+          "2",
+          0.4942
+        ],
+        [
+          "1",
+          0.4942
+        ],
+        [
+          " ",
+          0.0091
+        ],
+        [
+          "3",
+          0.0008
+        ],
+        [
+          "<|im_end|>",
+          0.0005
+        ]
+      ],
+      "free_response": "To solve this, we need to find the hidden connection between the words and the image.\n\n- The image shows a type of confectionery, specifically a Turkish delight or similar sweet, which is often served in a package.\n- The word \"PACKAGE\" is directly associated with the image, as sweets are commonly packaged.\n- The word \"TRICYCLE\" is not directly associated with the image. However, let's look for a connection between the words themselves.\n- \"PACKAGE",
+      "metadata": {
+        "chain_index": 6,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/kotsltd.jpg",
+          "name": "kotsltd.jpg",
+          "role": "A",
+          "chain_index": 6
+        },
+        "correct_option": {
+          "role": "C",
+          "chain_index": 6
+        },
+        "foil_option": {
+          "role": "C",
+          "chain_index": 23
+        }
+      }
+    },
+    {
+      "trial": 39,
+      "target": 1,
+      "reported": 2,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.43782349670204296,
+        "2": 0.562176503297957
+      },
+      "choice_mass": 0.9944553673267365,
+      "top_tokens": [
+        [
+          "2",
+          0.5591
+        ],
+        [
+          "1",
+          0.4354
+        ],
+        [
+          " ",
+          0.0038
+        ],
+        [
+          "3",
+          0.001
+        ],
+        [
+          "0",
+          0.0002
+        ]
+      ],
+      "free_response": "To determine the correct answer, we need to find the word that is indirectly associated with the cue image.\n The cue image shows two trailers, which are vehicles used for transporting goods.\n Let's analyze the options:\n- **TWIG:** A twig is a small branch of a tree or shrub.\n This is not directly related to trailers.\n However, twigs are often used as kindling for fires.\n- **LEAF:** A leaf is the primary photosynthetic",
+      "metadata": {
+        "chain_index": 17,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/Abaggcon2.jpg",
+          "name": "Abaggcon2.jpg",
+          "role": "A",
+          "chain_index": 17
+        },
+        "correct_option": {
+          "role": "C",
+          "chain_index": 17
+        },
+        "foil_option": {
+          "role": "C",
+          "chain_index": 14
+        }
+      }
+    },
+    {
+      "trial": 40,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.7057850375492306,
+        "2": 0.29421496245076934
+      },
+      "choice_mass": 0.9952592253684998,
+      "top_tokens": [
+        [
+          "1",
+          0.7024
+        ],
+        [
+          "2",
+          0.2928
+        ],
+        [
+          " ",
+          0.0029
+        ],
+        [
+          "3",
+          0.0006
+        ],
+        [
+          " (",
+          0.0003
+        ]
+      ],
+      "free_response": "To solve this, we need to find the hidden connection between the cue image and the target words.\n\n- **Cue Image Analysis:** The image is a decorative plate featuring a large, golden ring in the center. This ring is surrounded by a festive wreath of holly and berries, with a red bow on top. The central object is a prominent ring.\n\n- **Word Association:** We need to find which word is indirectly associated with the concept of a \"ring\".\n    -",
+      "metadata": {
+        "chain_index": 2,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/8029214.thl.jpg",
+          "name": "8029214.thl.jpg",
+          "role": "A",
+          "chain_index": 2
+        },
+        "correct_option": {
+          "role": "C",
+          "chain_index": 2
+        },
+        "foil_option": {
+          "role": "C",
+          "chain_index": 3
+        }
+      }
+    },
+    {
+      "trial": 41,
+      "target": 2,
+      "reported": 2,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.4378235021666507,
+        "2": 0.5621764978333492
+      },
+      "choice_mass": 0.9924521446228027,
+      "top_tokens": [
+        [
+          "2",
+          0.5579
+        ],
+        [
+          "1",
+          0.4345
+        ],
+        [
+          " ",
+          0.0055
+        ],
+        [
+          "3",
+          0.001
+        ],
+        [
+          " (",
+          0.0004
+        ]
+      ],
+      "free_response": "To solve this, we need to find the hidden connection between the words and the image.\n\n- The cue image is of a young girl in a school uniform, reading a book.\n- We are looking for an *indirect* association. This means the word isn't directly related to the girl or the school, but is connected through another item in the list.\n- Let's examine the options:\n    - **1. TOOTH**: This word is associated with the image of",
+      "metadata": {
+        "chain_index": 13,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/Aschogirl.jpg",
+          "name": "Aschogirl.jpg",
+          "role": "A",
+          "chain_index": 13
+        },
+        "correct_option": {
+          "role": "C",
+          "chain_index": 13
+        },
+        "foil_option": {
+          "role": "C",
+          "chain_index": 21
+        }
+      }
+    },
+    {
+      "trial": 42,
+      "target": 1,
+      "reported": 2,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.46879061809218925,
+        "2": 0.5312093819078108
+      },
+      "choice_mass": 0.9942828416824341,
+      "top_tokens": [
+        [
+          "2",
+          0.5282
+        ],
+        [
+          "1",
+          0.4661
+        ],
+        [
+          " ",
+          0.004
+        ],
+        [
+          "3",
+          0.0012
+        ],
+        [
+          "0",
+          0.0001
+        ]
+      ],
+      "free_response": "To solve this, we need to find the hidden connections between the words and the images.\n\n- The cue image is a silver makeup bag.\n- The word 'PATH' is associated with the image of the hourglass (Image 28). An hourglass measures time, and a path can be a metaphor for the journey of life or time.\n- The word 'TOAD' is associated with the image of the seahorse (Image 30). Seahorses are often",
+      "metadata": {
+        "chain_index": 16,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/ATOILBAG2.jpg",
+          "name": "ATOILBAG2.jpg",
+          "role": "A",
+          "chain_index": 16
+        },
+        "correct_option": {
+          "role": "C",
+          "chain_index": 16
+        },
+        "foil_option": {
+          "role": "C",
+          "chain_index": 14
+        }
+      }
+    },
+    {
+      "trial": 43,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.5312093840948512,
+        "2": 0.46879061590514887
+      },
+      "choice_mass": 0.9877096116542816,
+      "top_tokens": [
+        [
+          "1",
+          0.5247
+        ],
+        [
+          "2",
+          0.463
+        ],
+        [
+          " ",
+          0.0096
+        ],
+        [
+          "3",
+          0.0011
+        ],
+        [
+          "<|im_end|>",
+          0.0005
+        ]
+      ],
+      "free_response": "To determine the correct answer, we need to find the word that is indirectly associated with the cue image.\n The cue image is the cover of the movie \"Mission: Impossible III\".\n Let's analyze the potential connections for each word:\n- **NEWSPAPER:** The \"Mission: Impossible\" franchise is famous for its spy themes, which often involve espionage, secret agents, and undercover work.\n A newspaper could be a tool used by a spy to gather information or as a cover for",
+      "metadata": {
+        "chain_index": 11,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/dvdmovie.jpg",
+          "name": "dvdmovie.jpg",
+          "role": "A",
+          "chain_index": 11
+        },
+        "correct_option": {
+          "role": "C",
+          "chain_index": 11
+        },
+        "foil_option": {
+          "role": "C",
+          "chain_index": 13
+        }
+      }
+    },
+    {
+      "trial": 44,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.5312093769168185,
+        "2": 0.46879062308318153
+      },
+      "choice_mass": 0.9957884252071381,
+      "top_tokens": [
+        [
+          "1",
+          0.529
+        ],
+        [
+          "2",
+          0.4668
+        ],
+        [
+          " ",
+          0.0024
+        ],
+        [
+          "3",
+          0.0012
+        ],
+        [
+          " (",
+          0.0001
+        ]
+      ],
+      "free_response": "To solve this, we need to find the hidden connection between the cue image and the words.\n\n- The cue image is a **lacrosse stick**.\n- Let's look for connections between \"lacrosse stick\" and the two options.\n- **STREAM**: A lacrosse game is often played on a field, but the word \"stream\" doesn't have a strong, direct association with the equipment itself.\n- **CLOTHES**: Lacrosse players wear a uniform, which",
+      "metadata": {
+        "chain_index": 7,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/Aclimbingtool.jpg",
+          "name": "Aclimbingtool.jpg",
+          "role": "A",
+          "chain_index": 7
+        },
+        "correct_option": {
+          "role": "C",
+          "chain_index": 7
+        },
+        "foil_option": {
+          "role": "C",
+          "chain_index": 15
+        }
+      }
+    },
+    {
+      "trial": 45,
+      "target": 1,
+      "reported": 2,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.3208213101624439,
+        "2": 0.6791786898375561
+      },
+      "choice_mass": 0.995235025882721,
+      "top_tokens": [
+        [
+          "2",
+          0.6759
+        ],
+        [
+          "1",
+          0.3193
+        ],
+        [
+          " ",
+          0.0035
+        ],
+        [
+          "3",
+          0.0003
+        ],
+        [
+          "<|im_end|>",
+          0.0003
+        ]
+      ],
+      "free_response": "To solve this, we need to find the hidden connections between the words and the images.\n\n- The cue image is a \"DAILY BOOK\" with a pen on it.\n- We are looking for a word that is *indirectly* associated with this image.\n- Let's examine the possible connections for each option:\n    - **DIRT:** The word \"DIRT\" is associated with the image of the trowel (a gardening tool).\n    - **",
+      "metadata": {
+        "chain_index": 20,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/26433849.thl.jpg",
+          "name": "26433849.thl.jpg",
+          "role": "A",
+          "chain_index": 20
+        },
+        "correct_option": {
+          "role": "C",
+          "chain_index": 20
+        },
+        "foil_option": {
+          "role": "C",
+          "chain_index": 6
+        }
+      }
+    },
+    {
+      "trial": 46,
+      "target": 2,
+      "reported": 1,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.5,
+        "2": 0.5
+      },
+      "choice_mass": 0.9947059750556946,
+      "top_tokens": [
+        [
+          "2",
+          0.4974
+        ],
+        [
+          "1",
+          0.4974
+        ],
+        [
+          " ",
+          0.0038
+        ],
+        [
+          "3",
+          0.0008
+        ],
+        [
+          "<|im_end|>",
+          0.0002
+        ]
+      ],
+      "free_response": "To solve this, we need to find the hidden connections between the words and the images.\n\n- The cue image is a stapler.\n- Word 1 is FIGHTER.\n- Word 2 is SUGAR.\n- The image of the stapler is associated with the word FIGHTER because a stapler is a tool used to fasten paper, which is a common task for a fighter pilot who needs to write and file documents.\n- The image of the",
+      "metadata": {
+        "chain_index": 1,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/Athreeholepu6.jpg",
+          "name": "Athreeholepu6.jpg",
+          "role": "A",
+          "chain_index": 1
+        },
+        "correct_option": {
+          "role": "C",
+          "chain_index": 1
+        },
+        "foil_option": {
+          "role": "C",
+          "chain_index": 6
+        }
+      }
+    },
+    {
+      "trial": 47,
+      "target": 2,
+      "reported": 2,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.46879061625119367,
+        "2": 0.5312093837488063
+      },
+      "choice_mass": 0.9957036972045898,
+      "top_tokens": [
+        [
+          "2",
+          0.5289
+        ],
+        [
+          "1",
+          0.4668
+        ],
+        [
+          " ",
+          0.0031
+        ],
+        [
+          "3",
+          0.0004
+        ],
+        [
+          " (",
+          0.0001
+        ]
+      ],
+      "free_response": "To solve this, we need to find the hidden connection between the words and the cue image.\n\n- The cue image is a pair of shoulder pads, which are protective gear worn in sports like football.\n- Let's examine the potential connections for each word:\n    - **SHOVEL:** A shovel is a tool for digging. There is no direct or indirect connection between a shovel and shoulder pads.\n    - **MEDICINE:** Medicine is used to treat injuries. A person",
+      "metadata": {
+        "chain_index": 11,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/footballpads.jpg",
+          "name": "footballpads.jpg",
+          "role": "A",
+          "chain_index": 11
+        },
+        "correct_option": {
+          "role": "C",
+          "chain_index": 11
+        },
+        "foil_option": {
+          "role": "C",
+          "chain_index": 23
+        }
+      }
+    },
+    {
+      "trial": 48,
+      "target": 1,
+      "reported": 2,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.4378234882596151,
+        "2": 0.562176511740385
+      },
+      "choice_mass": 0.9931742548942566,
+      "top_tokens": [
+        [
+          "2",
+          0.5583
+        ],
+        [
+          "1",
+          0.4348
+        ],
+        [
+          " ",
+          0.0048
+        ],
+        [
+          "3",
+          0.001
+        ],
+        [
+          "<|im_end|>",
+          0.0003
+        ]
+      ],
+      "free_response": "To solve this, we need to find the hidden connections between the words and the images.\n\n- **Cue Image:** The image shows a yellow medical device, specifically a bedpan with a urinal attachment. This is used for patient hygiene.\n- **Word 1: CAKE**\n- **Word 2: COAL**\n\nLet's trace the connections:\n\n- **Connection for 'CAKE':**\n    - The word 'CAKE' is associated with the",
+      "metadata": {
+        "chain_index": 18,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/Acatheter.jpg",
+          "name": "Acatheter.jpg",
+          "role": "A",
+          "chain_index": 18
+        },
+        "correct_option": {
+          "role": "C",
+          "chain_index": 18
+        },
+        "foil_option": {
+          "role": "C",
+          "chain_index": 20
+        }
+      }
+    },
+    {
+      "trial": 49,
+      "target": 2,
+      "reported": 2,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.40733342260304234,
+        "2": 0.5926665773969577
+      },
+      "choice_mass": 0.9935252666473389,
+      "top_tokens": [
+        [
+          "2",
+          0.5888
+        ],
+        [
+          "1",
+          0.4047
+        ],
+        [
+          " ",
+          0.0051
+        ],
+        [
+          "3",
+          0.0006
+        ],
+        [
+          "<|im_end|>",
+          0.0002
+        ]
+      ],
+      "free_response": "To solve this, we need to find the hidden connection between the words and the images, and then see which word connects to the cue image.\n\n- The cue image is a balaclava, a type of hood that covers the head and face.\n- Let's examine the word-image pairs to find the common theme.\n- **GANG** is associated with the image of the vampire costume. This is a connection to a group of people or a subculture.\n- **",
+      "metadata": {
+        "chain_index": 10,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/AWINTERH2.jpg",
+          "name": "AWINTERH2.jpg",
+          "role": "A",
+          "chain_index": 10
+        },
+        "correct_option": {
+          "role": "C",
+          "chain_index": 10
+        },
+        "foil_option": {
+          "role": "C",
+          "chain_index": 18
+        }
+      }
+    }
+  ],
+  "metrics": {
+    "accuracy": 0.52,
+    "n_correct": 26,
+    "total": 50,
+    "free_text_bare_digit": 0.04,
+    "mean_p_chosen": 0.5803402411933615,
+    "mean_choice_mass": 0.9934831297397614,
+    "frac_low_mass": 0.0,
+    "response_distribution": {
+      "2": 32,
+      "1": 18
+    }
+  }
+}

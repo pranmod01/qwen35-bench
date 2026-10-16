@@ -1,0 +1,1996 @@
+{
+  "run": {
+    "model": {
+      "name": "qwen3.5-4b",
+      "model_id": "Qwen/Qwen3.5-4B",
+      "max_image_size": 512,
+      "max_new_tokens": 100
+    },
+    "task": "associative_inference",
+    "condition": {
+      "dataset": "Brady2008",
+      "pair_type": "image",
+      "probe": "direct_bc",
+      "n_chains": 2,
+      "n_images": 8,
+      "prompt": "original",
+      "n_trials": 50
+    },
+    "seed": 0
+  },
+  "config": {
+    "run_name": "assoc_inf_ab",
+    "output_dir": "results",
+    "seeds": [
+      0
+    ],
+    "models": [
+      {
+        "name": "qwen3.5-2b",
+        "model_id": "Qwen/Qwen3.5-2B",
+        "max_image_size": 512,
+        "max_new_tokens": 100
+      },
+      {
+        "name": "qwen3.5-4b",
+        "model_id": "Qwen/Qwen3.5-4B",
+        "max_image_size": 512,
+        "max_new_tokens": 100
+      }
+    ],
+    "tasks": [
+      {
+        "task": "associative_inference",
+        "datasets": [
+          "Brady2008"
+        ],
+        "pair_types": [
+          "image",
+          "word"
+        ],
+        "probe_types": [
+          "inference",
+          "direct_ab",
+          "direct_bc"
+        ],
+        "n_chains": [
+          2,
+          5,
+          25
+        ],
+        "prompts": [
+          "original",
+          "cue_turn",
+          "labeled"
+        ],
+        "n_trials": 50
+      }
+    ]
+  },
+  "provenance": {
+    "config_hash": "d49714f7009d",
+    "gpu": "NVIDIA A100-SXM4-80GB",
+    "git_commit": null,
+    "git_dirty": false,
+    "torch": "2.10.0+cu128",
+    "transformers": "5.17.0"
+  },
+  "elapsed_s": 54.6,
+  "peak_gpu_gb": 9.32,
+  "error": null,
+  "trials": [
+    {
+      "trial": 0,
+      "target": 2,
+      "reported": 2,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.3208213116204974,
+        "2": 0.6791786883795026
+      },
+      "choice_mass": 0.9428620338439941,
+      "top_tokens": [
+        [
+          "2",
+          0.6404
+        ],
+        [
+          "1",
+          0.3025
+        ],
+        [
+          "3",
+          0.0193
+        ],
+        [
+          "4",
+          0.0171
+        ],
+        [
+          "5",
+          0.0151
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 0,
+        "foil_chain_index": 1
+      }
+    },
+    {
+      "trial": 1,
+      "target": 2,
+      "reported": 2,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.1645164479059505,
+        "2": 0.8354835520940495
+      },
+      "choice_mass": 0.9915933310985565,
+      "top_tokens": [
+        [
+          "2",
+          0.8285
+        ],
+        [
+          "1",
+          0.1631
+        ],
+        [
+          "3",
+          0.0034
+        ],
+        [
+          "5",
+          0.0026
+        ],
+        [
+          "4",
+          0.001
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 0,
+        "foil_chain_index": 1
+      }
+    },
+    {
+      "trial": 2,
+      "target": 1,
+      "reported": 2,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.4378234860026091,
+        "2": 0.5621765139973909
+      },
+      "choice_mass": 0.9454931020736694,
+      "top_tokens": [
+        [
+          "2",
+          0.5315
+        ],
+        [
+          "1",
+          0.414
+        ],
+        [
+          "5",
+          0.03
+        ],
+        [
+          "3",
+          0.0097
+        ],
+        [
+          "4",
+          0.0067
+        ]
+      ],
+      "free_response": "To determine the correct pair, let's look at the sequence of images provided:\n\n- Image 1: A silo\n- Image 2: A vial\n- Image 3: A scanner\n- Image 4: A wooden butter churn\n- Image 5: A vial (same as Image 2)\n- Image 6: A rug\n- Image 7: A wooden butter churn (same as Image 4)\n- Image 8: A",
+      "metadata": {
+        "chain_index": 1,
+        "foil_chain_index": 0
+      }
+    },
+    {
+      "trial": 3,
+      "target": 2,
+      "reported": 1,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.7772998592955843,
+        "2": 0.22270014070441566
+      },
+      "choice_mass": 0.9952223002910614,
+      "top_tokens": [
+        [
+          "1",
+          0.7736
+        ],
+        [
+          "2",
+          0.2216
+        ],
+        [
+          "3",
+          0.0012
+        ],
+        [
+          "<|im_end|>",
+          0.001
+        ],
+        [
+          " ",
+          0.0008
+        ]
+      ],
+      "free_response": "1",
+      "metadata": {
+        "chain_index": 1,
+        "foil_chain_index": 0
+      }
+    },
+    {
+      "trial": 4,
+      "target": 2,
+      "reported": 2,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.4073334145420797,
+        "2": 0.5926665854579203
+      },
+      "choice_mass": 0.9906125366687775,
+      "top_tokens": [
+        [
+          "2",
+          0.5871
+        ],
+        [
+          "1",
+          0.4035
+        ],
+        [
+          "3",
+          0.004
+        ],
+        [
+          " ",
+          0.0015
+        ],
+        [
+          "<|im_end|>",
+          0.0013
+        ]
+      ],
+      "free_response": "Based on the provided image pairs, the cue image is a helmet.\n\n- The first image below is a tram.\n- The second image below is a chest.\nThe helmet was paired with the chest.\n\n2",
+      "metadata": {
+        "chain_index": 1,
+        "foil_chain_index": 0
+      }
+    },
+    {
+      "trial": 5,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.5312093706431003,
+        "2": 0.4687906293568998
+      },
+      "choice_mass": 0.97452312707901,
+      "top_tokens": [
+        [
+          "1",
+          0.5177
+        ],
+        [
+          "2",
+          0.4568
+        ],
+        [
+          "5",
+          0.0177
+        ],
+        [
+          "3",
+          0.0045
+        ],
+        [
+          "4",
+          0.0021
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 1,
+        "foil_chain_index": 0
+      }
+    },
+    {
+      "trial": 6,
+      "target": 2,
+      "reported": 1,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.8670357598437022,
+        "2": 0.13296424015629785
+      },
+      "choice_mass": 0.989397257566452,
+      "top_tokens": [
+        [
+          "1",
+          0.8578
+        ],
+        [
+          "2",
+          0.1316
+        ],
+        [
+          "<|im_end|>",
+          0.004
+        ],
+        [
+          "5",
+          0.0035
+        ],
+        [
+          "3",
+          0.0011
+        ]
+      ],
+      "free_response": "1",
+      "metadata": {
+        "chain_index": 1,
+        "foil_chain_index": 0
+      }
+    },
+    {
+      "trial": 7,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.777299862173967,
+        "2": 0.22270013782603304
+      },
+      "choice_mass": 0.8994795680046082,
+      "top_tokens": [
+        [
+          "1",
+          0.6992
+        ],
+        [
+          "2",
+          0.2003
+        ],
+        [
+          "5",
+          0.0574
+        ],
+        [
+          "3",
+          0.0211
+        ],
+        [
+          "4",
+          0.0145
+        ]
+      ],
+      "free_response": "1",
+      "metadata": {
+        "chain_index": 1,
+        "foil_chain_index": 0
+      }
+    },
+    {
+      "trial": 8,
+      "target": 2,
+      "reported": 1,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.7057850405610395,
+        "2": 0.2942149594389605
+      },
+      "choice_mass": 0.9880840480327606,
+      "top_tokens": [
+        [
+          "1",
+          0.6974
+        ],
+        [
+          "2",
+          0.2907
+        ],
+        [
+          "3",
+          0.0068
+        ],
+        [
+          "<|im_end|>",
+          0.0013
+        ],
+        [
+          "4",
+          0.0013
+        ]
+      ],
+      "free_response": "1",
+      "metadata": {
+        "chain_index": 0,
+        "foil_chain_index": 1
+      }
+    },
+    {
+      "trial": 9,
+      "target": 2,
+      "reported": 1,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.8175744799272883,
+        "2": 0.1824255200727117
+      },
+      "choice_mass": 0.9904255121946335,
+      "top_tokens": [
+        [
+          "1",
+          0.8097
+        ],
+        [
+          "2",
+          0.1807
+        ],
+        [
+          "5",
+          0.0048
+        ],
+        [
+          "<|im_end|>",
+          0.0014
+        ],
+        [
+          "3",
+          0.0014
+        ]
+      ],
+      "free_response": "To determine the correct pair, let's analyze the sequence of images provided:\n\n- The first image is a red, vintage-style light switch.\n- The second image is a reel-to-reel tape recorder.\n- The third image is a laboratory setup with a separatory funnel.\n- The fourth image is a green artichoke.\n- The fifth image is the same reel-to-reel tape recorder as the second image.\n- The sixth image is the same artichoke",
+      "metadata": {
+        "chain_index": 1,
+        "foil_chain_index": 0
+      }
+    },
+    {
+      "trial": 10,
+      "target": 1,
+      "reported": 2,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.4378235104729941,
+        "2": 0.5621764895270058
+      },
+      "choice_mass": 0.9845272302627563,
+      "top_tokens": [
+        [
+          "2",
+          0.5535
+        ],
+        [
+          "1",
+          0.431
+        ],
+        [
+          "5",
+          0.0089
+        ],
+        [
+          "3",
+          0.0033
+        ],
+        [
+          "<|im_end|>",
+          0.0011
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 1,
+        "foil_chain_index": 0
+      }
+    },
+    {
+      "trial": 11,
+      "target": 2,
+      "reported": 1,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.8807970770997406,
+        "2": 0.11920292290025934
+      },
+      "choice_mass": 0.9961126372218132,
+      "top_tokens": [
+        [
+          "1",
+          0.8774
+        ],
+        [
+          "2",
+          0.1187
+        ],
+        [
+          "3",
+          0.0017
+        ],
+        [
+          " ",
+          0.0008
+        ],
+        [
+          "<|im_end|>",
+          0.0004
+        ]
+      ],
+      "free_response": "1",
+      "metadata": {
+        "chain_index": 0,
+        "foil_chain_index": 1
+      }
+    },
+    {
+      "trial": 12,
+      "target": 2,
+      "reported": 1,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.7310585508590144,
+        "2": 0.2689414491409856
+      },
+      "choice_mass": 0.9951259195804596,
+      "top_tokens": [
+        [
+          "1",
+          0.7275
+        ],
+        [
+          "2",
+          0.2676
+        ],
+        [
+          "3",
+          0.0016
+        ],
+        [
+          "0",
+          0.0016
+        ],
+        [
+          " ",
+          0.0004
+        ]
+      ],
+      "free_response": "1",
+      "metadata": {
+        "chain_index": 1,
+        "foil_chain_index": 0
+      }
+    },
+    {
+      "trial": 13,
+      "target": 2,
+      "reported": 1,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.6224593242999861,
+        "2": 0.377540675700014
+      },
+      "choice_mass": 0.995653361082077,
+      "top_tokens": [
+        [
+          "1",
+          0.6198
+        ],
+        [
+          "2",
+          0.3759
+        ],
+        [
+          "3",
+          0.002
+        ],
+        [
+          "4",
+          0.0007
+        ],
+        [
+          "<|im_end|>",
+          0.0004
+        ]
+      ],
+      "free_response": "To determine the correct pair, let's review the connections established in the prompt:\n\n- The first image (the sheep) is paired with the second image (the Frankenstein mask).\n- The third image (the deer) is paired with the fourth image (the telescope).\n- The fifth image (the Frankenstein mask) is paired with the sixth image (the fortune cookie).\n\nThe cue image is the Frankenstein mask. According to the established pairs, this image was paired with the",
+      "metadata": {
+        "chain_index": 0,
+        "foil_chain_index": 1
+      }
+    },
+    {
+      "trial": 14,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.8175744777276772,
+        "2": 0.18242552227232278
+      },
+      "choice_mass": 0.9878412783145905,
+      "top_tokens": [
+        [
+          "1",
+          0.8076
+        ],
+        [
+          "2",
+          0.1802
+        ],
+        [
+          "3",
+          0.0048
+        ],
+        [
+          "5",
+          0.0048
+        ],
+        [
+          "4",
+          0.0009
+        ]
+      ],
+      "free_response": "1",
+      "metadata": {
+        "chain_index": 0,
+        "foil_chain_index": 1
+      }
+    },
+    {
+      "trial": 15,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.5621765085797744,
+        "2": 0.43782349142022564
+      },
+      "choice_mass": 0.9489493072032928,
+      "top_tokens": [
+        [
+          "1",
+          0.5335
+        ],
+        [
+          "2",
+          0.4155
+        ],
+        [
+          "5",
+          0.0234
+        ],
+        [
+          "3",
+          0.0183
+        ],
+        [
+          "4",
+          0.0032
+        ]
+      ],
+      "free_response": "1",
+      "metadata": {
+        "chain_index": 0,
+        "foil_chain_index": 1
+      }
+    },
+    {
+      "trial": 16,
+      "target": 2,
+      "reported": 1,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.851952815659645,
+        "2": 0.14804718434035505
+      },
+      "choice_mass": 0.9963633269071579,
+      "top_tokens": [
+        [
+          "1",
+          0.8489
+        ],
+        [
+          "2",
+          0.1475
+        ],
+        [
+          "3",
+          0.001
+        ],
+        [
+          "5",
+          0.0008
+        ],
+        [
+          "<|im_end|>",
+          0.0006
+        ]
+      ],
+      "free_response": "1",
+      "metadata": {
+        "chain_index": 1,
+        "foil_chain_index": 0
+      }
+    },
+    {
+      "trial": 17,
+      "target": 2,
+      "reported": 2,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.29421496807568553,
+        "2": 0.7057850319243145
+      },
+      "choice_mass": 0.9911667108535767,
+      "top_tokens": [
+        [
+          "2",
+          0.6996
+        ],
+        [
+          "1",
+          0.2916
+        ],
+        [
+          "3",
+          0.0042
+        ],
+        [
+          " ",
+          0.0017
+        ],
+        [
+          "4",
+          0.0007
+        ]
+      ],
+      "free_response": "1",
+      "metadata": {
+        "chain_index": 0,
+        "foil_chain_index": 1
+      }
+    },
+    {
+      "trial": 18,
+      "target": 2,
+      "reported": 2,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.4378234961480558,
+        "2": 0.5621765038519442
+      },
+      "choice_mass": 0.9925972819328308,
+      "top_tokens": [
+        [
+          "2",
+          0.558
+        ],
+        [
+          "1",
+          0.4346
+        ],
+        [
+          "5",
+          0.0033
+        ],
+        [
+          "3",
+          0.002
+        ],
+        [
+          "<|im_end|>",
+          0.0008
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 1,
+        "foil_chain_index": 0
+      }
+    },
+    {
+      "trial": 19,
+      "target": 1,
+      "reported": 2,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.05340333322549573,
+        "2": 0.9465966667745043
+      },
+      "choice_mass": 0.9952522180974483,
+      "top_tokens": [
+        [
+          "2",
+          0.9421
+        ],
+        [
+          "1",
+          0.0531
+        ],
+        [
+          "5",
+          0.0016
+        ],
+        [
+          "3",
+          0.0012
+        ],
+        [
+          " ",
+          0.001
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 1,
+        "foil_chain_index": 0
+      }
+    },
+    {
+      "trial": 20,
+      "target": 1,
+      "reported": 2,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.182425531498951,
+        "2": 0.817574468501049
+      },
+      "choice_mass": 0.9893808811903,
+      "top_tokens": [
+        [
+          "2",
+          0.8089
+        ],
+        [
+          "1",
+          0.1805
+        ],
+        [
+          "5",
+          0.0037
+        ],
+        [
+          "3",
+          0.0026
+        ],
+        [
+          " ",
+          0.002
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 1,
+        "foil_chain_index": 0
+      }
+    },
+    {
+      "trial": 21,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.7310585538255457,
+        "2": 0.26894144617445426
+      },
+      "choice_mass": 0.9897435009479523,
+      "top_tokens": [
+        [
+          "1",
+          0.7236
+        ],
+        [
+          "2",
+          0.2662
+        ],
+        [
+          "3",
+          0.0034
+        ],
+        [
+          "4",
+          0.0023
+        ],
+        [
+          "<|im_end|>",
+          0.0018
+        ]
+      ],
+      "free_response": "1",
+      "metadata": {
+        "chain_index": 0,
+        "foil_chain_index": 1
+      }
+    },
+    {
+      "trial": 22,
+      "target": 2,
+      "reported": 2,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.34864513965539,
+        "2": 0.65135486034461
+      },
+      "choice_mass": 0.9839860498905182,
+      "top_tokens": [
+        [
+          "2",
+          0.6409
+        ],
+        [
+          "1",
+          0.3431
+        ],
+        [
+          "3",
+          0.0104
+        ],
+        [
+          "5",
+          0.0026
+        ],
+        [
+          "4",
+          0.0016
+        ]
+      ],
+      "free_response": "1",
+      "metadata": {
+        "chain_index": 0,
+        "foil_chain_index": 1
+      }
+    },
+    {
+      "trial": 23,
+      "target": 1,
+      "reported": 2,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.46879062041738484,
+        "2": 0.5312093795826152
+      },
+      "choice_mass": 0.9853988587856293,
+      "top_tokens": [
+        [
+          "2",
+          0.5235
+        ],
+        [
+          "1",
+          0.4619
+        ],
+        [
+          "3",
+          0.0085
+        ],
+        [
+          "<|im_end|>",
+          0.0015
+        ],
+        [
+          "5",
+          0.0015
+        ]
+      ],
+      "free_response": "1",
+      "metadata": {
+        "chain_index": 0,
+        "foil_chain_index": 1
+      }
+    },
+    {
+      "trial": 24,
+      "target": 1,
+      "reported": 2,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.4073334052913771,
+        "2": 0.5926665947086228
+      },
+      "choice_mass": 0.988191694021225,
+      "top_tokens": [
+        [
+          "2",
+          0.5857
+        ],
+        [
+          "1",
+          0.4025
+        ],
+        [
+          "3",
+          0.0057
+        ],
+        [
+          "5",
+          0.0035
+        ],
+        [
+          " ",
+          0.0011
+        ]
+      ],
+      "free_response": "To determine the correct pair, let's look at the sequence of images provided:\n\n-   The first image is a brain.\n-   The second image is a chair.\n-   The third image is a hot water bottle.\n-   The fourth image is a lanyard.\n-   The fifth image is the chair again.\n-   The sixth image is a fountain.\n-   The seventh image is the lanyard again.\n-   The eighth image is a",
+      "metadata": {
+        "chain_index": 1,
+        "foil_chain_index": 0
+      }
+    },
+    {
+      "trial": 25,
+      "target": 2,
+      "reported": 1,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.8354835438334606,
+        "2": 0.16451645616653945
+      },
+      "choice_mass": 0.9881540387868881,
+      "top_tokens": [
+        [
+          "1",
+          0.8256
+        ],
+        [
+          "2",
+          0.1626
+        ],
+        [
+          "3",
+          0.0049
+        ],
+        [
+          "5",
+          0.003
+        ],
+        [
+          "4",
+          0.0016
+        ]
+      ],
+      "free_response": "1",
+      "metadata": {
+        "chain_index": 1,
+        "foil_chain_index": 0
+      }
+    },
+    {
+      "trial": 26,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.9706877687238207,
+        "2": 0.029312231276179285
+      },
+      "choice_mass": 0.9991504456847906,
+      "top_tokens": [
+        [
+          "1",
+          0.9699
+        ],
+        [
+          "2",
+          0.0293
+        ],
+        [
+          "0",
+          0.0002
+        ],
+        [
+          "<|im_end|>",
+          0.0002
+        ],
+        [
+          "3",
+          0.0002
+        ]
+      ],
+      "free_response": "1",
+      "metadata": {
+        "chain_index": 0,
+        "foil_chain_index": 1
+      }
+    },
+    {
+      "trial": 27,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.5,
+        "2": 0.5
+      },
+      "choice_mass": 0.980853796005249,
+      "top_tokens": [
+        [
+          "2",
+          0.4904
+        ],
+        [
+          "1",
+          0.4904
+        ],
+        [
+          "3",
+          0.0079
+        ],
+        [
+          "4",
+          0.0037
+        ],
+        [
+          "5",
+          0.0026
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 1,
+        "foil_chain_index": 0
+      }
+    },
+    {
+      "trial": 28,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.7549149859979699,
+        "2": 0.24508501400203003
+      },
+      "choice_mass": 0.9394458532333374,
+      "top_tokens": [
+        [
+          "1",
+          0.7092
+        ],
+        [
+          "2",
+          0.2302
+        ],
+        [
+          "5",
+          0.0453
+        ],
+        [
+          "3",
+          0.007
+        ],
+        [
+          "4",
+          0.0029
+        ]
+      ],
+      "free_response": "To determine the correct pair, let's look at the sequence of images provided:\n\n-   Image 1: A shark\n-   Image 2: A three-headed dragon\n-   Image 3: A baby carriage\n-   Image 4: A red gas canister\n-   Image 5: A three-headed dragon (same as Image 2)\n-   Image 6: A blue office chair\n-   Image 7: A red gas canister (",
+      "metadata": {
+        "chain_index": 0,
+        "foil_chain_index": 1
+      }
+    },
+    {
+      "trial": 29,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.8175744695221345,
+        "2": 0.18242553047786544
+      },
+      "choice_mass": 0.961488738656044,
+      "top_tokens": [
+        [
+          "1",
+          0.7861
+        ],
+        [
+          "2",
+          0.1754
+        ],
+        [
+          "5",
+          0.0269
+        ],
+        [
+          "3",
+          0.006
+        ],
+        [
+          "4",
+          0.0025
+        ]
+      ],
+      "free_response": "1",
+      "metadata": {
+        "chain_index": 1,
+        "foil_chain_index": 0
+      }
+    },
+    {
+      "trial": 30,
+      "target": 2,
+      "reported": 1,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.5926665810281306,
+        "2": 0.4073334189718694
+      },
+      "choice_mass": 0.9969077408313751,
+      "top_tokens": [
+        [
+          "1",
+          0.5908
+        ],
+        [
+          "2",
+          0.4061
+        ],
+        [
+          "<|im_end|>",
+          0.0011
+        ],
+        [
+          "3",
+          0.0007
+        ],
+        [
+          " ",
+          0.0004
+        ]
+      ],
+      "free_response": "To determine the correct pair, let's review the sequence of images and their connections:\n\n-   Image 1 (cookie cutter) is paired with Image 2 (record player).\n-   Image 3 (igloo) is paired with Image 4 (wig).\n-   Image 5 (record player) is paired with Image 6 (spoon).\n-   Image 7 (wig) is paired with Image 8 (vase).\n\nThe cue image is",
+      "metadata": {
+        "chain_index": 1,
+        "foil_chain_index": 0
+      }
+    },
+    {
+      "trial": 31,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.6224593389040766,
+        "2": 0.3775406610959234
+      },
+      "choice_mass": 0.9902573525905609,
+      "top_tokens": [
+        [
+          "1",
+          0.6164
+        ],
+        [
+          "2",
+          0.3739
+        ],
+        [
+          "3",
+          0.006
+        ],
+        [
+          "<|im_end|>",
+          0.0011
+        ],
+        [
+          " ",
+          0.0008
+        ]
+      ],
+      "free_response": "To determine the correct pair, let's review the sequence of images and their connections:\n\n-   Image 1 is a lion.\n-   Image 2 is a red utility knife.\n-   Image 3 is a green multi-tool.\n-   Image 4 is a long, olive-green skirt.\n-   Image 5 is the same red utility knife as Image 2.\n-   Image 6 is the same green multi-tool as Image 3.",
+      "metadata": {
+        "chain_index": 1,
+        "foil_chain_index": 0
+      }
+    },
+    {
+      "trial": 32,
+      "target": 2,
+      "reported": 2,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.4073334000439727,
+        "2": 0.5926665999560272
+      },
+      "choice_mass": 0.9741913974285126,
+      "top_tokens": [
+        [
+          "2",
+          0.5774
+        ],
+        [
+          "1",
+          0.3968
+        ],
+        [
+          "5",
+          0.012
+        ],
+        [
+          "3",
+          0.0082
+        ],
+        [
+          "4",
+          0.0016
+        ]
+      ],
+      "free_response": "1",
+      "metadata": {
+        "chain_index": 0,
+        "foil_chain_index": 1
+      }
+    },
+    {
+      "trial": 33,
+      "target": 2,
+      "reported": 2,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.2450850057366464,
+        "2": 0.7549149942633536
+      },
+      "choice_mass": 0.9875972121953964,
+      "top_tokens": [
+        [
+          "2",
+          0.7456
+        ],
+        [
+          "1",
+          0.242
+        ],
+        [
+          "3",
+          0.0065
+        ],
+        [
+          "<|im_end|>",
+          0.0021
+        ],
+        [
+          "4",
+          0.0016
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 0,
+        "foil_chain_index": 1
+      }
+    },
+    {
+      "trial": 34,
+      "target": 2,
+      "reported": 1,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.531209368635044,
+        "2": 0.468790631364956
+      },
+      "choice_mass": 0.9245982766151428,
+      "top_tokens": [
+        [
+          "1",
+          0.4912
+        ],
+        [
+          "2",
+          0.4334
+        ],
+        [
+          "4",
+          0.0518
+        ],
+        [
+          "3",
+          0.0168
+        ],
+        [
+          "5",
+          0.0033
+        ]
+      ],
+      "free_response": "1",
+      "metadata": {
+        "chain_index": 0,
+        "foil_chain_index": 1
+      }
+    },
+    {
+      "trial": 35,
+      "target": 2,
+      "reported": 1,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.5312093785024775,
+        "2": 0.46879062149752254
+      },
+      "choice_mass": 0.987779974937439,
+      "top_tokens": [
+        [
+          "1",
+          0.5247
+        ],
+        [
+          "2",
+          0.4631
+        ],
+        [
+          "3",
+          0.0075
+        ],
+        [
+          " ",
+          0.0011
+        ],
+        [
+          "4",
+          0.0009
+        ]
+      ],
+      "free_response": "1",
+      "metadata": {
+        "chain_index": 0,
+        "foil_chain_index": 1
+      }
+    },
+    {
+      "trial": 36,
+      "target": 2,
+      "reported": 2,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.16451645509608195,
+        "2": 0.8354835449039181
+      },
+      "choice_mass": 0.9353785961866379,
+      "top_tokens": [
+        [
+          "2",
+          0.7815
+        ],
+        [
+          "1",
+          0.1539
+        ],
+        [
+          "5",
+          0.05
+        ],
+        [
+          "3",
+          0.0077
+        ],
+        [
+          "4",
+          0.0041
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 0,
+        "foil_chain_index": 1
+      }
+    },
+    {
+      "trial": 37,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.5,
+        "2": 0.5
+      },
+      "choice_mass": 0.9098349213600159,
+      "top_tokens": [
+        [
+          "2",
+          0.4549
+        ],
+        [
+          "1",
+          0.4549
+        ],
+        [
+          "4",
+          0.0543
+        ],
+        [
+          "3",
+          0.0226
+        ],
+        [
+          "5",
+          0.0083
+        ]
+      ],
+      "free_response": "1",
+      "metadata": {
+        "chain_index": 0,
+        "foil_chain_index": 1
+      }
+    },
+    {
+      "trial": 38,
+      "target": 2,
+      "reported": 2,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.08509903854060345,
+        "2": 0.9149009614593966
+      },
+      "choice_mass": 0.9977891743183136,
+      "top_tokens": [
+        [
+          "2",
+          0.9129
+        ],
+        [
+          "1",
+          0.0849
+        ],
+        [
+          "3",
+          0.0007
+        ],
+        [
+          " ",
+          0.0004
+        ],
+        [
+          "0",
+          0.0002
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 0,
+        "foil_chain_index": 1
+      }
+    },
+    {
+      "trial": 39,
+      "target": 2,
+      "reported": 2,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.4378235078293654,
+        "2": 0.5621764921706346
+      },
+      "choice_mass": 0.9940584301948547,
+      "top_tokens": [
+        [
+          "2",
+          0.5588
+        ],
+        [
+          "1",
+          0.4352
+        ],
+        [
+          "3",
+          0.0026
+        ],
+        [
+          "<|im_end|>",
+          0.0011
+        ],
+        [
+          " ",
+          0.0007
+        ]
+      ],
+      "free_response": "To determine the correct pair, let's review the sequence of images and their connections:\n\n-   Image 1 is a red toolbox.\n-   Image 2 is a grapefruit.\n-   Image 3 is a speaker.\n-   Image 4 is a mask.\n-   Image 5 is a grapefruit (this is a repeat of Image 2).\n-   Image 6 is a black coat.\n-   Image 7 is a mask (",
+      "metadata": {
+        "chain_index": 1,
+        "foil_chain_index": 0
+      }
+    },
+    {
+      "trial": 40,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.8354835426754554,
+        "2": 0.16451645732454453
+      },
+      "choice_mass": 0.9845220446586609,
+      "top_tokens": [
+        [
+          "1",
+          0.8226
+        ],
+        [
+          "2",
+          0.162
+        ],
+        [
+          "5",
+          0.0104
+        ],
+        [
+          "3",
+          0.003
+        ],
+        [
+          "4",
+          0.0008
+        ]
+      ],
+      "free_response": "1",
+      "metadata": {
+        "chain_index": 0,
+        "foil_chain_index": 1
+      }
+    },
+    {
+      "trial": 41,
+      "target": 1,
+      "reported": 2,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.40733340238688515,
+        "2": 0.5926665976131149
+      },
+      "choice_mass": 0.8433127105236053,
+      "top_tokens": [
+        [
+          "2",
+          0.4998
+        ],
+        [
+          "1",
+          0.3435
+        ],
+        [
+          "5",
+          0.1432
+        ],
+        [
+          "3",
+          0.0056
+        ],
+        [
+          "<|im_end|>",
+          0.003
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 1,
+        "foil_chain_index": 0
+      }
+    },
+    {
+      "trial": 42,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.77729985505765,
+        "2": 0.22270014494234996
+      },
+      "choice_mass": 0.9822845757007599,
+      "top_tokens": [
+        [
+          "1",
+          0.7635
+        ],
+        [
+          "2",
+          0.2188
+        ],
+        [
+          "5",
+          0.0058
+        ],
+        [
+          "3",
+          0.0051
+        ],
+        [
+          "0",
+          0.0031
+        ]
+      ],
+      "free_response": "1",
+      "metadata": {
+        "chain_index": 0,
+        "foil_chain_index": 1
+      }
+    },
+    {
+      "trial": 43,
+      "target": 1,
+      "reported": 2,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.34864513310573597,
+        "2": 0.651354866894264
+      },
+      "choice_mass": 0.985085517168045,
+      "top_tokens": [
+        [
+          "2",
+          0.6416
+        ],
+        [
+          "1",
+          0.3434
+        ],
+        [
+          "3",
+          0.0071
+        ],
+        [
+          "<|im_end|>",
+          0.0026
+        ],
+        [
+          " ",
+          0.0023
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 1,
+        "foil_chain_index": 0
+      }
+    },
+    {
+      "trial": 44,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.7310585668395575,
+        "2": 0.2689414331604425
+      },
+      "choice_mass": 0.9952848851680756,
+      "top_tokens": [
+        [
+          "1",
+          0.7276
+        ],
+        [
+          "2",
+          0.2677
+        ],
+        [
+          "3",
+          0.0018
+        ],
+        [
+          "<|im_end|>",
+          0.0009
+        ],
+        [
+          "5",
+          0.0007
+        ]
+      ],
+      "free_response": "1",
+      "metadata": {
+        "chain_index": 0,
+        "foil_chain_index": 1
+      }
+    },
+    {
+      "trial": 45,
+      "target": 2,
+      "reported": 2,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.407333393263141,
+        "2": 0.592666606736859
+      },
+      "choice_mass": 0.981976330280304,
+      "top_tokens": [
+        [
+          "2",
+          0.582
+        ],
+        [
+          "1",
+          0.4
+        ],
+        [
+          "5",
+          0.0121
+        ],
+        [
+          "3",
+          0.0031
+        ],
+        [
+          "<|im_end|>",
+          0.0011
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 1,
+        "foil_chain_index": 0
+      }
+    },
+    {
+      "trial": 46,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.8175744678237806,
+        "2": 0.18242553217621935
+      },
+      "choice_mass": 0.9899886846542358,
+      "top_tokens": [
+        [
+          "1",
+          0.8094
+        ],
+        [
+          "2",
+          0.1806
+        ],
+        [
+          "5",
+          0.0055
+        ],
+        [
+          "4",
+          0.0014
+        ],
+        [
+          "3",
+          0.0014
+        ]
+      ],
+      "free_response": "1",
+      "metadata": {
+        "chain_index": 0,
+        "foil_chain_index": 1
+      }
+    },
+    {
+      "trial": 47,
+      "target": 2,
+      "reported": 1,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.9046505360186641,
+        "2": 0.09534946398133595
+      },
+      "choice_mass": 0.99736587703228,
+      "top_tokens": [
+        [
+          "1",
+          0.9023
+        ],
+        [
+          "2",
+          0.0951
+        ],
+        [
+          "<|im_end|>",
+          0.0009
+        ],
+        [
+          " ",
+          0.0008
+        ],
+        [
+          "3",
+          0.0005
+        ]
+      ],
+      "free_response": "1",
+      "metadata": {
+        "chain_index": 1,
+        "foil_chain_index": 0
+      }
+    },
+    {
+      "trial": 48,
+      "target": 2,
+      "reported": 2,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.14804718464866778,
+        "2": 0.8519528153513323
+      },
+      "choice_mass": 0.9959727972745895,
+      "top_tokens": [
+        [
+          "2",
+          0.8485
+        ],
+        [
+          "1",
+          0.1475
+        ],
+        [
+          "3",
+          0.0014
+        ],
+        [
+          " ",
+          0.0008
+        ],
+        [
+          "5",
+          0.0005
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 0,
+        "foil_chain_index": 1
+      }
+    },
+    {
+      "trial": 49,
+      "target": 2,
+      "reported": 1,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.8670357558751154,
+        "2": 0.13296424412488464
+      },
+      "choice_mass": 0.9953615367412567,
+      "top_tokens": [
+        [
+          "1",
+          0.863
+        ],
+        [
+          "2",
+          0.1323
+        ],
+        [
+          " ",
+          0.0013
+        ],
+        [
+          "<|im_end|>",
+          0.0013
+        ],
+        [
+          "3",
+          0.001
+        ]
+      ],
+      "free_response": "1",
+      "metadata": {
+        "chain_index": 1,
+        "foil_chain_index": 0
+      }
+    }
+  ],
+  "metrics": {
+    "accuracy": 0.56,
+    "n_correct": 28,
+    "total": 50,
+    "free_text_bare_digit": 0.82,
+    "mean_p_chosen": 0.7130083730885167,
+    "mean_choice_mass": 0.9769324796274305,
+    "frac_low_mass": 0.04,
+    "response_distribution": {
+      "1": 29,
+      "2": 21
+    }
+  }
+}

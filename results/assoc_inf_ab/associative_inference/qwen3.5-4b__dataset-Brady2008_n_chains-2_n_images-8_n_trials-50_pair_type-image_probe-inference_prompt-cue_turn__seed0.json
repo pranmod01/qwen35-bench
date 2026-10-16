@@ -1,0 +1,2846 @@
+{
+  "run": {
+    "model": {
+      "name": "qwen3.5-4b",
+      "model_id": "Qwen/Qwen3.5-4B",
+      "max_image_size": 512,
+      "max_new_tokens": 100
+    },
+    "task": "associative_inference",
+    "condition": {
+      "dataset": "Brady2008",
+      "pair_type": "image",
+      "probe": "inference",
+      "n_chains": 2,
+      "n_images": 8,
+      "prompt": "cue_turn",
+      "n_trials": 50
+    },
+    "seed": 0
+  },
+  "config": {
+    "run_name": "assoc_inf_ab",
+    "output_dir": "results",
+    "seeds": [
+      0
+    ],
+    "models": [
+      {
+        "name": "qwen3.5-2b",
+        "model_id": "Qwen/Qwen3.5-2B",
+        "max_image_size": 512,
+        "max_new_tokens": 100
+      },
+      {
+        "name": "qwen3.5-4b",
+        "model_id": "Qwen/Qwen3.5-4B",
+        "max_image_size": 512,
+        "max_new_tokens": 100
+      }
+    ],
+    "tasks": [
+      {
+        "task": "associative_inference",
+        "datasets": [
+          "Brady2008"
+        ],
+        "pair_types": [
+          "image",
+          "word"
+        ],
+        "probe_types": [
+          "inference",
+          "direct_ab",
+          "direct_bc"
+        ],
+        "n_chains": [
+          2,
+          5,
+          25
+        ],
+        "prompts": [
+          "original",
+          "cue_turn",
+          "labeled"
+        ],
+        "n_trials": 50
+      }
+    ]
+  },
+  "provenance": {
+    "config_hash": "d49714f7009d",
+    "gpu": "NVIDIA A100-SXM4-80GB",
+    "git_commit": null,
+    "git_dirty": false,
+    "torch": "2.10.0+cu128",
+    "transformers": "5.17.0"
+  },
+  "elapsed_s": 214.7,
+  "peak_gpu_gb": 9.33,
+  "error": null,
+  "trials": [
+    {
+      "trial": 0,
+      "target": 2,
+      "reported": 2,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.2942149658596422,
+        "2": 0.7057850341403579
+      },
+      "choice_mass": 0.9980705380439758,
+      "top_tokens": [
+        [
+          "2",
+          0.7044
+        ],
+        [
+          "1",
+          0.2936
+        ],
+        [
+          " ",
+          0.0007
+        ],
+        [
+          "3",
+          0.0006
+        ],
+        [
+          "<|im_end|>",
+          0.0004
+        ]
+      ],
+      "free_response": "To determine the indirect association, we must follow the chain of connections established in the initial pairs.\n\n- The cue image is the first image (the Christmas house).\n- According to the first pair, the Christmas house is directly connected to the green glass cup.\n- According to the second pair, the green glass cup is directly connected to the wooden lectern.\n- According to the third pair, the wooden lectern is directly connected to the red wallet.\n- This creates a chain",
+      "metadata": {
+        "chain_index": 0,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/Aceramichous2.jpg",
+          "name": "Aceramichous2.jpg",
+          "role": "A",
+          "chain_index": 0
+        },
+        "correct_option": {
+          "path": "memory_datasets/Brady2008Objects/Akitchentool2.jpg",
+          "name": "Akitchentool2.jpg",
+          "role": "C",
+          "chain_index": 0
+        },
+        "foil_option": {
+          "path": "memory_datasets/Brady2008Objects/Aelectronicg9.jpg",
+          "name": "Aelectronicg9.jpg",
+          "role": "C",
+          "chain_index": 1
+        }
+      }
+    },
+    {
+      "trial": 1,
+      "target": 2,
+      "reported": 2,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.26894144249743984,
+        "2": 0.7310585575025602
+      },
+      "choice_mass": 0.9985735714435577,
+      "top_tokens": [
+        [
+          "2",
+          0.73
+        ],
+        [
+          "1",
+          0.2686
+        ],
+        [
+          "3",
+          0.0005
+        ],
+        [
+          "<|im_end|>",
+          0.0004
+        ],
+        [
+          " ",
+          0.0004
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 0,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/ADRESSE14.jpg",
+          "name": "ADRESSE14.jpg",
+          "role": "A",
+          "chain_index": 0
+        },
+        "correct_option": {
+          "path": "memory_datasets/Brady2008Objects/Aclamp62.jpg",
+          "name": "Aclamp62.jpg",
+          "role": "C",
+          "chain_index": 0
+        },
+        "foil_option": {
+          "path": "memory_datasets/Brady2008Objects/AALMOND1.jpg",
+          "name": "AALMOND1.jpg",
+          "role": "C",
+          "chain_index": 1
+        }
+      }
+    },
+    {
+      "trial": 2,
+      "target": 1,
+      "reported": 2,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.3775406611915723,
+        "2": 0.6224593388084277
+      },
+      "choice_mass": 0.9941121339797974,
+      "top_tokens": [
+        [
+          "2",
+          0.6188
+        ],
+        [
+          "1",
+          0.3753
+        ],
+        [
+          "3",
+          0.0037
+        ],
+        [
+          " ",
+          0.0015
+        ],
+        [
+          "4",
+          0.0002
+        ]
+      ],
+      "free_response": "To determine the indirect association, we must follow the chain of connections established in the initial pairs.\n\n- The cue image is the scanner.\n- According to the provided pairs, the scanner (image 3) is directly connected to the wooden butter churn (image 4). This is the (BC pair).\n- The wooden butter churn (image 4) is, in turn, directly connected to the patterned rug (image 5). This is also a (BC pair).",
+      "metadata": {
+        "chain_index": 1,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/26423652.thl.jpg",
+          "name": "26423652.thl.jpg",
+          "role": "A",
+          "chain_index": 1
+        },
+        "correct_option": {
+          "path": "memory_datasets/Brady2008Objects/Abutterdish.jpg",
+          "name": "Abutterdish.jpg",
+          "role": "C",
+          "chain_index": 1
+        },
+        "foil_option": {
+          "path": "memory_datasets/Brady2008Objects/APERSRUG.jpg",
+          "name": "APERSRUG.jpg",
+          "role": "C",
+          "chain_index": 0
+        }
+      }
+    },
+    {
+      "trial": 3,
+      "target": 1,
+      "reported": 2,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.32082130354088556,
+        "2": 0.6791786964591144
+      },
+      "choice_mass": 0.997546523809433,
+      "top_tokens": [
+        [
+          "2",
+          0.6775
+        ],
+        [
+          "1",
+          0.32
+        ],
+        [
+          "3",
+          0.0013
+        ],
+        [
+          " ",
+          0.0007
+        ],
+        [
+          "4",
+          0.0001
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 1,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/26421583.thl.jpg",
+          "name": "26421583.thl.jpg",
+          "role": "A",
+          "chain_index": 1
+        },
+        "correct_option": {
+          "path": "memory_datasets/Brady2008Objects/Aringclamp2.jpg",
+          "name": "Aringclamp2.jpg",
+          "role": "C",
+          "chain_index": 1
+        },
+        "foil_option": {
+          "path": "memory_datasets/Brady2008Objects/Akiwifruit6.jpg",
+          "name": "Akiwifruit6.jpg",
+          "role": "C",
+          "chain_index": 0
+        }
+      }
+    },
+    {
+      "trial": 4,
+      "target": 1,
+      "reported": 2,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.268941451361405,
+        "2": 0.731058548638595
+      },
+      "choice_mass": 0.9969599843025208,
+      "top_tokens": [
+        [
+          "2",
+          0.7288
+        ],
+        [
+          "1",
+          0.2681
+        ],
+        [
+          "3",
+          0.0023
+        ],
+        [
+          "<|im_end|>",
+          0.0002
+        ],
+        [
+          " ",
+          0.0002
+        ]
+      ],
+      "free_response": "To determine the correct answer, we must trace the connections between the images based on the provided pairs.\n\n- The cue image is the red die.\n- According to the pairs, the red die is directly associated with the pickaxe (Image 2).\n- The pickaxe (Image 2) is, in turn, directly associated with the helmet (Image 4).\n- The helmet (Image 4) is directly associated with the tram (Image 5).\n- The",
+      "metadata": {
+        "chain_index": 1,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/Adice10.jpg",
+          "name": "Adice10.jpg",
+          "role": "A",
+          "chain_index": 1
+        },
+        "correct_option": {
+          "path": "memory_datasets/Brady2008Objects/ATRUNK15.jpg",
+          "name": "ATRUNK15.jpg",
+          "role": "C",
+          "chain_index": 1
+        },
+        "foil_option": {
+          "path": "memory_datasets/Brady2008Objects/AANTCABL2.jpg",
+          "name": "AANTCABL2.jpg",
+          "role": "C",
+          "chain_index": 0
+        }
+      }
+    },
+    {
+      "trial": 5,
+      "target": 2,
+      "reported": 2,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.2018132216225264,
+        "2": 0.7981867783774736
+      },
+      "choice_mass": 0.9986716061830521,
+      "top_tokens": [
+        [
+          "2",
+          0.7971
+        ],
+        [
+          "1",
+          0.2015
+        ],
+        [
+          "3",
+          0.0008
+        ],
+        [
+          " ",
+          0.0002
+        ],
+        [
+          "<|im_end|>",
+          0.0001
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 1,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/ASALTPEPP.jpg",
+          "name": "ASALTPEPP.jpg",
+          "role": "A",
+          "chain_index": 1
+        },
+        "correct_option": {
+          "path": "memory_datasets/Brady2008Objects/Abagofherbs.jpg",
+          "name": "Abagofherbs.jpg",
+          "role": "C",
+          "chain_index": 1
+        },
+        "foil_option": {
+          "path": "memory_datasets/Brady2008Objects/AANTTRUCK.jpg",
+          "name": "AANTTRUCK.jpg",
+          "role": "C",
+          "chain_index": 0
+        }
+      }
+    },
+    {
+      "trial": 6,
+      "target": 2,
+      "reported": 2,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.46879063211769767,
+        "2": 0.5312093678823023
+      },
+      "choice_mass": 0.9968505799770355,
+      "top_tokens": [
+        [
+          "2",
+          0.5295
+        ],
+        [
+          "1",
+          0.4673
+        ],
+        [
+          "3",
+          0.0017
+        ],
+        [
+          " ",
+          0.0008
+        ],
+        [
+          "<|im_end|>",
+          0.0002
+        ]
+      ],
+      "free_response": "To determine the indirect association, we must follow the chain of connections established in the initial pairs.\n\n- The cue image is the plate of pasta.\n- In the provided pairs, the pasta dish is linked to the heating element (Image 2).\n- The heating element is, in turn, linked to the corkscrew (Image 1).\n- Therefore, the corkscrew is indirectly associated with the pasta dish through the heating element.\n\nThe image indirectly associated with the cue",
+      "metadata": {
+        "chain_index": 1,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/Abowlofpasta.jpg",
+          "name": "Abowlofpasta.jpg",
+          "role": "A",
+          "chain_index": 1
+        },
+        "correct_option": {
+          "path": "memory_datasets/Brady2008Objects/ADRAWBRI3.jpg",
+          "name": "ADRAWBRI3.jpg",
+          "role": "C",
+          "chain_index": 1
+        },
+        "foil_option": {
+          "path": "memory_datasets/Brady2008Objects/corkscrew02.jpg",
+          "name": "corkscrew02.jpg",
+          "role": "C",
+          "chain_index": 0
+        }
+      }
+    },
+    {
+      "trial": 7,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.5312093653449329,
+        "2": 0.4687906346550671
+      },
+      "choice_mass": 0.9932816624641418,
+      "top_tokens": [
+        [
+          "1",
+          0.5276
+        ],
+        [
+          "2",
+          0.4656
+        ],
+        [
+          "3",
+          0.0046
+        ],
+        [
+          " ",
+          0.0007
+        ],
+        [
+          "0",
+          0.0005
+        ]
+      ],
+      "free_response": "To determine the indirect association, let's trace the connections between the images based on the provided pairs.\n\n- The cue image is a spyglass, which corresponds to the third image in the sequence.\n- The third image is part of the (AB) pair, meaning it is associated with the second image, which is a spinning wheel.\n- The second image (spinning wheel) is part of the (BC) pair, meaning it is associated with the fifth image, which is two",
+      "metadata": {
+        "chain_index": 1,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/ARETRACT2.jpg",
+          "name": "ARETRACT2.jpg",
+          "role": "A",
+          "chain_index": 1
+        },
+        "correct_option": {
+          "path": "memory_datasets/Brady2008Objects/ASEWINGT4.jpg",
+          "name": "ASEWINGT4.jpg",
+          "role": "C",
+          "chain_index": 1
+        },
+        "foil_option": {
+          "path": "memory_datasets/Brady2008Objects/AMEAT2.jpg",
+          "name": "AMEAT2.jpg",
+          "role": "C",
+          "chain_index": 0
+        }
+      }
+    },
+    {
+      "trial": 8,
+      "target": 1,
+      "reported": 2,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.2227001468720019,
+        "2": 0.7772998531279981
+      },
+      "choice_mass": 0.9983550608158112,
+      "top_tokens": [
+        [
+          "2",
+          0.776
+        ],
+        [
+          "1",
+          0.2223
+        ],
+        [
+          "3",
+          0.0006
+        ],
+        [
+          " ",
+          0.0005
+        ],
+        [
+          "<|im_end|>",
+          0.0003
+        ]
+      ],
+      "free_response": "To determine the indirect association, we must follow the chain of connections established in the initial pairs.\n\n- The cue image is the coiled orange rope.\n- According to the first pair, the orange rope is directly associated with the metal kitchen strainer.\n- The second pair shows that the metal kitchen strainer is directly associated with the yellow and purple backpack.\n- The third pair shows that the yellow and purple backpack is directly associated with the blue toy gas pump.\n- The fourth",
+      "metadata": {
+        "chain_index": 0,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/Asafetyrope.jpg",
+          "name": "Asafetyrope.jpg",
+          "role": "A",
+          "chain_index": 0
+        },
+        "correct_option": {
+          "path": "memory_datasets/Brady2008Objects/Arubberducky2.jpg",
+          "name": "Arubberducky2.jpg",
+          "role": "C",
+          "chain_index": 0
+        },
+        "foil_option": {
+          "path": "memory_datasets/Brady2008Objects/AGUIRO.jpg",
+          "name": "AGUIRO.jpg",
+          "role": "C",
+          "chain_index": 1
+        }
+      }
+    },
+    {
+      "trial": 9,
+      "target": 1,
+      "reported": 2,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.26894143455049885,
+        "2": 0.7310585654495012
+      },
+      "choice_mass": 0.997151643037796,
+      "top_tokens": [
+        [
+          "2",
+          0.729
+        ],
+        [
+          "1",
+          0.2682
+        ],
+        [
+          "3",
+          0.002
+        ],
+        [
+          " ",
+          0.0003
+        ],
+        [
+          "4",
+          0.0002
+        ]
+      ],
+      "free_response": "To determine the indirect association, we must follow the chain of connections established in the initial pairs.\n\n- The cue image is the separatory funnel on a stand.\n- This image is identical to the third image in the original sequence.\n- According to the provided pairs, the third image is part of a (BC) pair with the fourth image, which is the artichoke.\n- The fourth image (artichoke) is also part of another (BC) pair with the",
+      "metadata": {
+        "chain_index": 1,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/ALAB2.jpg",
+          "name": "ALAB2.jpg",
+          "role": "A",
+          "chain_index": 1
+        },
+        "correct_option": {
+          "path": "memory_datasets/Brady2008Objects/8248852.thl.jpg",
+          "name": "8248852.thl.jpg",
+          "role": "C",
+          "chain_index": 1
+        },
+        "foil_option": {
+          "path": "memory_datasets/Brady2008Objects/ABOOK23.jpg",
+          "name": "ABOOK23.jpg",
+          "role": "C",
+          "chain_index": 0
+        }
+      }
+    },
+    {
+      "trial": 10,
+      "target": 2,
+      "reported": 2,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.43782350180398294,
+        "2": 0.5621764981960171
+      },
+      "choice_mass": 0.9983376860618591,
+      "top_tokens": [
+        [
+          "2",
+          0.5612
+        ],
+        [
+          "1",
+          0.4371
+        ],
+        [
+          "3",
+          0.0011
+        ],
+        [
+          " ",
+          0.0003
+        ],
+        [
+          "4",
+          0.0001
+        ]
+      ],
+      "free_response": "To determine the indirect association, we must follow the chain of connections established in the initial pairs.\n\n- The cue image is the wooden car with the matryoshka doll driver.\n- According to the provided pairs, the wooden car (image 3) is directly connected to the model rocket (image 4). This is the 'BC pair'.\n- The model rocket (image 4) is, in turn, directly connected to the bottle with the ship inside (image 2",
+      "metadata": {
+        "chain_index": 1,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/Atoy17.jpg",
+          "name": "Atoy17.jpg",
+          "role": "A",
+          "chain_index": 1
+        },
+        "correct_option": {
+          "path": "memory_datasets/Brady2008Objects/AHARMONS2.jpg",
+          "name": "AHARMONS2.jpg",
+          "role": "C",
+          "chain_index": 1
+        },
+        "foil_option": {
+          "path": "memory_datasets/Brady2008Objects/AFRYPAN7.jpg",
+          "name": "AFRYPAN7.jpg",
+          "role": "C",
+          "chain_index": 0
+        }
+      }
+    },
+    {
+      "trial": 11,
+      "target": 2,
+      "reported": 2,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.4378234831888858,
+        "2": 0.5621765168111142
+      },
+      "choice_mass": 0.9979632794857025,
+      "top_tokens": [
+        [
+          "2",
+          0.561
+        ],
+        [
+          "1",
+          0.4369
+        ],
+        [
+          "3",
+          0.0008
+        ],
+        [
+          " ",
+          0.0007
+        ],
+        [
+          "<|im_end|>",
+          0.0002
+        ]
+      ],
+      "free_response": "To determine the indirect association, we must follow the chain of connections established in the pairs.\n\n- The cue image is the first image in the sequence, which we'll call Image A.\n- Image A is paired with Image B (the yellow monkey bars).\n- Image B is paired with Image C (the green statue).\n- Image C is paired with Image D (the bag of dried fruit).\n- Image D is paired with Image E (the stand mixer).\n\nThe question",
+      "metadata": {
+        "chain_index": 0,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/APIPEST18.jpg",
+          "name": "APIPEST18.jpg",
+          "role": "A",
+          "chain_index": 0
+        },
+        "correct_option": {
+          "path": "memory_datasets/Brady2008Objects/mixer.jpg",
+          "name": "mixer.jpg",
+          "role": "C",
+          "chain_index": 0
+        },
+        "foil_option": {
+          "path": "memory_datasets/Brady2008Objects/APOTPBAG2.jpg",
+          "name": "APOTPBAG2.jpg",
+          "role": "C",
+          "chain_index": 1
+        }
+      }
+    },
+    {
+      "trial": 12,
+      "target": 2,
+      "reported": 2,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.4073334027264073,
+        "2": 0.5926665972735927
+      },
+      "choice_mass": 0.998090922832489,
+      "top_tokens": [
+        [
+          "2",
+          0.5915
+        ],
+        [
+          "1",
+          0.4066
+        ],
+        [
+          "3",
+          0.001
+        ],
+        [
+          " ",
+          0.0003
+        ],
+        [
+          "0",
+          0.0002
+        ]
+      ],
+      "free_response": "To determine the correct answer, we must follow the chain of associations established in the initial pairs.\n\n- The cue image is of tacos.\n- In the provided pairs, the image of the tacos is linked to the image of the Christmas ornament (Image C). This is shown in the pair (C, D).\n- The image of the Christmas ornament (Image C) is then linked to the image of the wooden desk (Image E). This is shown in the pair (C, E",
+      "metadata": {
+        "chain_index": 1,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/Ataco.jpg",
+          "name": "Ataco.jpg",
+          "role": "A",
+          "chain_index": 1
+        },
+        "correct_option": {
+          "path": "memory_datasets/Brady2008Objects/chocolatebar.jpg",
+          "name": "chocolatebar.jpg",
+          "role": "C",
+          "chain_index": 1
+        },
+        "foil_option": {
+          "path": "memory_datasets/Brady2008Objects/ACHAIRDE2.jpg",
+          "name": "ACHAIRDE2.jpg",
+          "role": "C",
+          "chain_index": 0
+        }
+      }
+    },
+    {
+      "trial": 13,
+      "target": 1,
+      "reported": 2,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.06008664885801085,
+        "2": 0.9399133511419892
+      },
+      "choice_mass": 0.9993763566017151,
+      "top_tokens": [
+        [
+          "2",
+          0.9393
+        ],
+        [
+          "1",
+          0.06
+        ],
+        [
+          "3",
+          0.0003
+        ],
+        [
+          " ",
+          0.0001
+        ],
+        [
+          "<|im_end|>",
+          0.0001
+        ]
+      ],
+      "free_response": "To determine the indirect association, we must follow the chain of connections established in the initial pairs.\n\n- The cue image is the sheep, which corresponds to image (A).\n- According to the first pair, (AB), image (A) is directly connected to image (B), which is the Frankenstein mask.\n- According to the second pair, (BC), image (B) is directly connected to image (C), which is the telescope.\n- This establishes a chain:",
+      "metadata": {
+        "chain_index": 0,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/Alambtoy6.jpg",
+          "name": "Alambtoy6.jpg",
+          "role": "A",
+          "chain_index": 0
+        },
+        "correct_option": {
+          "path": "memory_datasets/Brady2008Objects/fortune-cookie.jpg",
+          "name": "fortune-cookie.jpg",
+          "role": "C",
+          "chain_index": 0
+        },
+        "foil_option": {
+          "path": "memory_datasets/Brady2008Objects/26370659.thm.jpg",
+          "name": "26370659.thm.jpg",
+          "role": "C",
+          "chain_index": 1
+        }
+      }
+    },
+    {
+      "trial": 14,
+      "target": 2,
+      "reported": 2,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.29421497955091835,
+        "2": 0.7057850204490816
+      },
+      "choice_mass": 0.9988307058811188,
+      "top_tokens": [
+        [
+          "2",
+          0.705
+        ],
+        [
+          "1",
+          0.2939
+        ],
+        [
+          "3",
+          0.0007
+        ],
+        [
+          " ",
+          0.0002
+        ],
+        [
+          "<|im_end|>",
+          0.0001
+        ]
+      ],
+      "free_response": "To determine the indirect association, we must follow the chain of connections established in the pairs.\n\n- The cue image is the castle.\n- According to the first pair, the castle is directly associated with the DieHard battery.\n- According to the second pair, the DieHard battery is directly associated with the wooden mannequin.\n- According to the third pair, the wooden mannequin is directly associated with the prickly pear fruit.\n- According to the fourth pair, the",
+      "metadata": {
+        "chain_index": 0,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/26383637.thl.jpg",
+          "name": "26383637.thl.jpg",
+          "role": "A",
+          "chain_index": 0
+        },
+        "correct_option": {
+          "path": "memory_datasets/Brady2008Objects/AWHISTLE4.jpg",
+          "name": "AWHISTLE4.jpg",
+          "role": "C",
+          "chain_index": 0
+        },
+        "foil_option": {
+          "path": "memory_datasets/Brady2008Objects/AHARPSIC5.jpg",
+          "name": "AHARPSIC5.jpg",
+          "role": "C",
+          "chain_index": 1
+        }
+      }
+    },
+    {
+      "trial": 15,
+      "target": 1,
+      "reported": 2,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.29421497343305036,
+        "2": 0.7057850265669496
+      },
+      "choice_mass": 0.9993618130683899,
+      "top_tokens": [
+        [
+          "2",
+          0.7053
+        ],
+        [
+          "1",
+          0.294
+        ],
+        [
+          "3",
+          0.0002
+        ],
+        [
+          "<|im_end|>",
+          0.0002
+        ],
+        [
+          " ",
+          0.0001
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 0,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/ronald.jpg",
+          "name": "ronald.jpg",
+          "role": "A",
+          "chain_index": 0
+        },
+        "correct_option": {
+          "path": "memory_datasets/Brady2008Objects/Aconnector2.jpg",
+          "name": "Aconnector2.jpg",
+          "role": "C",
+          "chain_index": 0
+        },
+        "foil_option": {
+          "path": "memory_datasets/Brady2008Objects/ALINTREMO.jpg",
+          "name": "ALINTREMO.jpg",
+          "role": "C",
+          "chain_index": 1
+        }
+      }
+    },
+    {
+      "trial": 16,
+      "target": 2,
+      "reported": 2,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.37754067483764486,
+        "2": 0.6224593251623551
+      },
+      "choice_mass": 0.9991859197616577,
+      "top_tokens": [
+        [
+          "2",
+          0.622
+        ],
+        [
+          "1",
+          0.3772
+        ],
+        [
+          "3",
+          0.0005
+        ],
+        [
+          " ",
+          0.0001
+        ],
+        [
+          "0",
+          0.0001
+        ]
+      ],
+      "free_response": "To determine the indirect association, we must follow the chain of connections established in the initial pairs.\n\n- The cue image is a wheel.\n- In the provided pairs, the wheel (image 3) is directly connected to the paint can (image 4). This forms the pair (3, 4).\n- The paint can (image 4) is then directly connected to the track set (image 2). This forms the pair (4, 2).\n- Therefore",
+      "metadata": {
+        "chain_index": 1,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/26427867.thl.jpg",
+          "name": "26427867.thl.jpg",
+          "role": "A",
+          "chain_index": 1
+        },
+        "correct_option": {
+          "path": "memory_datasets/Brady2008Objects/36407726.thl.jpg",
+          "name": "36407726.thl.jpg",
+          "role": "C",
+          "chain_index": 1
+        },
+        "foil_option": {
+          "path": "memory_datasets/Brady2008Objects/ADIAMCRYS.jpg",
+          "name": "ADIAMCRYS.jpg",
+          "role": "C",
+          "chain_index": 0
+        }
+      }
+    },
+    {
+      "trial": 17,
+      "target": 2,
+      "reported": 2,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.26894144753866434,
+        "2": 0.7310585524613357
+      },
+      "choice_mass": 0.997826337814331,
+      "top_tokens": [
+        [
+          "2",
+          0.7295
+        ],
+        [
+          "1",
+          0.2684
+        ],
+        [
+          " ",
+          0.0011
+        ],
+        [
+          "3",
+          0.0005
+        ],
+        [
+          "<|im_end|>",
+          0.0003
+        ]
+      ],
+      "free_response": "To determine the indirect association, we must follow the chain of connections established in the initial pairs.\n\n- The cue image is the coffee grinder.\n- According to the first pair, the coffee grinder is directly associated with the tractor.\n- According to the second pair, the tractor is directly associated with the oscilloscope.\n- According to the third pair, the oscilloscope is directly associated with the disco ball.\n- This creates a chain: Coffee Grinder \u2192 Tractor \u2192 Osc",
+      "metadata": {
+        "chain_index": 0,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/Afoodproces13.jpg",
+          "name": "Afoodproces13.jpg",
+          "role": "A",
+          "chain_index": 0
+        },
+        "correct_option": {
+          "path": "memory_datasets/Brady2008Objects/radish.jpg",
+          "name": "radish.jpg",
+          "role": "C",
+          "chain_index": 0
+        },
+        "foil_option": {
+          "path": "memory_datasets/Brady2008Objects/Adiscoball2.jpg",
+          "name": "Adiscoball2.jpg",
+          "role": "C",
+          "chain_index": 1
+        }
+      }
+    },
+    {
+      "trial": 18,
+      "target": 2,
+      "reported": 2,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.16451644399279866,
+        "2": 0.8354835560072014
+      },
+      "choice_mass": 0.9982663244009018,
+      "top_tokens": [
+        [
+          "2",
+          0.834
+        ],
+        [
+          "1",
+          0.1642
+        ],
+        [
+          "3",
+          0.0008
+        ],
+        [
+          " ",
+          0.0004
+        ],
+        [
+          "0",
+          0.0001
+        ]
+      ],
+      "free_response": "To determine the indirect association, we must follow the chain of connections established in the initial pairs.\n\n- The cue image is the red Game Boy Advance SP.\n- In the first pair, the Game Boy Advance SP (image C) is connected to the cotton swabs (image D).\n- In the second pair, the cotton swabs (image D) are connected to the elf-like onion character (image B).\n- In the third pair, the elf-like onion character (image",
+      "metadata": {
+        "chain_index": 1,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/gameboy.jpg",
+          "name": "gameboy.jpg",
+          "role": "A",
+          "chain_index": 1
+        },
+        "correct_option": {
+          "path": "memory_datasets/Brady2008Objects/AMEASDEVI.jpg",
+          "name": "AMEASDEVI.jpg",
+          "role": "C",
+          "chain_index": 1
+        },
+        "foil_option": {
+          "path": "memory_datasets/Brady2008Objects/Afaucet9.jpg",
+          "name": "Afaucet9.jpg",
+          "role": "C",
+          "chain_index": 0
+        }
+      }
+    },
+    {
+      "trial": 19,
+      "target": 2,
+      "reported": 2,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.40733341614489305,
+        "2": 0.592666583855107
+      },
+      "choice_mass": 0.9966309666633606,
+      "top_tokens": [
+        [
+          "2",
+          0.5907
+        ],
+        [
+          "1",
+          0.406
+        ],
+        [
+          "3",
+          0.0019
+        ],
+        [
+          " ",
+          0.0008
+        ],
+        [
+          "4",
+          0.0002
+        ]
+      ],
+      "free_response": "To determine the indirect association, let's trace the connections between the images based on the provided pairs.\n\n- The cue image is the white skirt.\n- According to the (AB) pair, the skirt is associated with the carved pumpkin.\n- According to the (BC) pair, the carved pumpkin is associated with the circuit board.\n- According to the (BC) pair, the circuit board is also associated with the boot.\n- Therefore, the boot is indirectly associated with the",
+      "metadata": {
+        "chain_index": 1,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/Askirt2.jpg",
+          "name": "Askirt2.jpg",
+          "role": "A",
+          "chain_index": 1
+        },
+        "correct_option": {
+          "path": "memory_datasets/Brady2008Objects/ABANJO5.jpg",
+          "name": "ABANJO5.jpg",
+          "role": "C",
+          "chain_index": 1
+        },
+        "foil_option": {
+          "path": "memory_datasets/Brady2008Objects/Ashoeshines15.jpg",
+          "name": "Ashoeshines15.jpg",
+          "role": "C",
+          "chain_index": 0
+        }
+      }
+    },
+    {
+      "trial": 20,
+      "target": 1,
+      "reported": 2,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.3486451444036063,
+        "2": 0.6513548555963937
+      },
+      "choice_mass": 0.9983291327953339,
+      "top_tokens": [
+        [
+          "2",
+          0.6503
+        ],
+        [
+          "1",
+          0.3481
+        ],
+        [
+          "3",
+          0.0009
+        ],
+        [
+          " ",
+          0.0004
+        ],
+        [
+          "4",
+          0.0001
+        ]
+      ],
+      "free_response": "1",
+      "metadata": {
+        "chain_index": 1,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/ANEWSBOX4.jpg",
+          "name": "ANEWSBOX4.jpg",
+          "role": "A",
+          "chain_index": 1
+        },
+        "correct_option": {
+          "path": "memory_datasets/Brady2008Objects/Ascanner11.jpg",
+          "name": "Ascanner11.jpg",
+          "role": "C",
+          "chain_index": 1
+        },
+        "foil_option": {
+          "path": "memory_datasets/Brady2008Objects/AGAUGE.jpg",
+          "name": "AGAUGE.jpg",
+          "role": "C",
+          "chain_index": 0
+        }
+      }
+    },
+    {
+      "trial": 21,
+      "target": 1,
+      "reported": 2,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.22270014121998807,
+        "2": 0.777299858780012
+      },
+      "choice_mass": 0.9981520771980286,
+      "top_tokens": [
+        [
+          "2",
+          0.7759
+        ],
+        [
+          "1",
+          0.2223
+        ],
+        [
+          "3",
+          0.0012
+        ],
+        [
+          "<|im_end|>",
+          0.0002
+        ],
+        [
+          " ",
+          0.0002
+        ]
+      ],
+      "free_response": "To determine the correct answer, we must follow the chain of associations established in the initial pairs.\n\n- The cue image is the pair of blue inline skates.\n- According to the first pair provided, the inline skates are associated with the Y-shaped metal tool.\n- The second pair shows that the Y-shaped metal tool is associated with the pile of raisins.\n- The third pair shows that the pile of raisins is associated with the white traffic bollard.\n- The",
+      "metadata": {
+        "chain_index": 0,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/rollerblades.jpg",
+          "name": "rollerblades.jpg",
+          "role": "A",
+          "chain_index": 0
+        },
+        "correct_option": {
+          "path": "memory_datasets/Brady2008Objects/8024092.thl.jpg",
+          "name": "8024092.thl.jpg",
+          "role": "C",
+          "chain_index": 0
+        },
+        "foil_option": {
+          "path": "memory_datasets/Brady2008Objects/ASKYDIVE.jpg",
+          "name": "ASKYDIVE.jpg",
+          "role": "C",
+          "chain_index": 1
+        }
+      }
+    },
+    {
+      "trial": 22,
+      "target": 1,
+      "reported": 2,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.2450850065338682,
+        "2": 0.7549149934661318
+      },
+      "choice_mass": 0.9986989796161652,
+      "top_tokens": [
+        [
+          "2",
+          0.7539
+        ],
+        [
+          "1",
+          0.2448
+        ],
+        [
+          "3",
+          0.0006
+        ],
+        [
+          " ",
+          0.0004
+        ],
+        [
+          "<|im_end|>",
+          0.0002
+        ]
+      ],
+      "free_response": "To determine the indirect association, we must follow the chain of connections established in the initial pairs.\n\n- The cue image is the artificial Christmas tree.\n- According to the first pair, the Christmas tree is directly connected to the exercise bike.\n- The second pair shows that the exercise bike is directly connected to the bed storage organizer.\n- The third pair shows that the bed storage organizer is directly connected to the spark plug.\n- The fourth pair shows that the spark plug is directly connected",
+      "metadata": {
+        "chain_index": 0,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/AMINITRE7.jpg",
+          "name": "AMINITRE7.jpg",
+          "role": "A",
+          "chain_index": 0
+        },
+        "correct_option": {
+          "path": "memory_datasets/Brady2008Objects/Abedspringsam.jpg",
+          "name": "Abedspringsam.jpg",
+          "role": "C",
+          "chain_index": 0
+        },
+        "foil_option": {
+          "path": "memory_datasets/Brady2008Objects/ATUNFORK2.jpg",
+          "name": "ATUNFORK2.jpg",
+          "role": "C",
+          "chain_index": 1
+        }
+      }
+    },
+    {
+      "trial": 23,
+      "target": 1,
+      "reported": 2,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.32082131342473136,
+        "2": 0.6791786865752686
+      },
+      "choice_mass": 0.9982428252696991,
+      "top_tokens": [
+        [
+          "2",
+          0.678
+        ],
+        [
+          "1",
+          0.3203
+        ],
+        [
+          "3",
+          0.0006
+        ],
+        [
+          " ",
+          0.0006
+        ],
+        [
+          "<|im_end|>",
+          0.0003
+        ]
+      ],
+      "free_response": "To determine the indirect association, we must follow the chain of connections established in the initial pairs.\n\n- The cue image is the blue and yellow scooter.\n- In the first pair, the scooter (image A) is directly connected to the orange-handled trowel (image B).\n- In the second pair, the orange-handled trowel (image B) is directly connected to the set of measuring spoons (image C).\n- In the third pair, the set",
+      "metadata": {
+        "chain_index": 0,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/scooter.jpg",
+          "name": "scooter.jpg",
+          "role": "A",
+          "chain_index": 0
+        },
+        "correct_option": {
+          "path": "memory_datasets/Brady2008Objects/Ameasuringsp5.jpg",
+          "name": "Ameasuringsp5.jpg",
+          "role": "C",
+          "chain_index": 0
+        },
+        "foil_option": {
+          "path": "memory_datasets/Brady2008Objects/Apersonsfoot.jpg",
+          "name": "Apersonsfoot.jpg",
+          "role": "C",
+          "chain_index": 1
+        }
+      }
+    },
+    {
+      "trial": 24,
+      "target": 1,
+      "reported": 2,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.22270014431020924,
+        "2": 0.7772998556897908
+      },
+      "choice_mass": 0.9981109797954559,
+      "top_tokens": [
+        [
+          "2",
+          0.7758
+        ],
+        [
+          "1",
+          0.2223
+        ],
+        [
+          "3",
+          0.0012
+        ],
+        [
+          " ",
+          0.0003
+        ],
+        [
+          "<|im_end|>",
+          0.0001
+        ]
+      ],
+      "free_response": "To determine the indirect association, let's trace the connections between the images based on the provided pairs.\n\n- The cue image is a red hot water bottle.\n- From the first pair, we know the hot water bottle (Image 3) is directly connected to the wooden chair (Image 2).\n- From the second pair, we know the wooden chair (Image 2) is directly connected to the fountain (Image 5).\n- This creates a chain: Hot Water Bottle",
+      "metadata": {
+        "chain_index": 1,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/Ahotwaterbot2.jpg",
+          "name": "Ahotwaterbot2.jpg",
+          "role": "A",
+          "chain_index": 1
+        },
+        "correct_option": {
+          "path": "memory_datasets/Brady2008Objects/timemagazine.jpg",
+          "name": "timemagazine.jpg",
+          "role": "C",
+          "chain_index": 1
+        },
+        "foil_option": {
+          "path": "memory_datasets/Brady2008Objects/AFOUNTAI5.jpg",
+          "name": "AFOUNTAI5.jpg",
+          "role": "C",
+          "chain_index": 0
+        }
+      }
+    },
+    {
+      "trial": 25,
+      "target": 2,
+      "reported": 2,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.26894144709958506,
+        "2": 0.7310585529004149
+      },
+      "choice_mass": 0.9981496930122375,
+      "top_tokens": [
+        [
+          "2",
+          0.7297
+        ],
+        [
+          "1",
+          0.2684
+        ],
+        [
+          "3",
+          0.0009
+        ],
+        [
+          " ",
+          0.0005
+        ],
+        [
+          "<|im_end|>",
+          0.0002
+        ]
+      ],
+      "free_response": "To determine the correct answer, we must follow the chain of associations established in the initial pairs.\n\n- The cue image is the ball peen hammer, which is image #3.\n- The first association provided is (BC pair), linking image #3 (hammer) to image #4 (wooden well).\n- The second association provided is (AB pair), linking image #2 (honey pot) to image #3 (hammer).\n- This creates a chain: Image #",
+      "metadata": {
+        "chain_index": 1,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/Abikepedalar2.jpg",
+          "name": "Abikepedalar2.jpg",
+          "role": "A",
+          "chain_index": 1
+        },
+        "correct_option": {
+          "path": "memory_datasets/Brady2008Objects/ABEARIN28.jpg",
+          "name": "ABEARIN28.jpg",
+          "role": "C",
+          "chain_index": 1
+        },
+        "foil_option": {
+          "path": "memory_datasets/Brady2008Objects/A_flower.jpg",
+          "name": "A_flower.jpg",
+          "role": "C",
+          "chain_index": 0
+        }
+      }
+    },
+    {
+      "trial": 26,
+      "target": 1,
+      "reported": 2,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.29421497141584513,
+        "2": 0.7057850285841549
+      },
+      "choice_mass": 0.9988061189651489,
+      "top_tokens": [
+        [
+          "2",
+          0.7049
+        ],
+        [
+          "1",
+          0.2939
+        ],
+        [
+          "3",
+          0.0004
+        ],
+        [
+          " ",
+          0.0003
+        ],
+        [
+          "<|im_end|>",
+          0.0002
+        ]
+      ],
+      "free_response": "To determine the correct answer, we need to follow the chain of associations based on the provided image pairs.\n\n- The cue image is the first image in the sequence, which is a gold glittery mask.\n- The first pair is (AB), linking the mask (Image A) to the radio (Image B).\n- The second pair is (BC), linking the radio (Image B) to the frog (Image C).\n- The third pair is (BC), linking the frog",
+      "metadata": {
+        "chain_index": 0,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/8076304.thl.jpg",
+          "name": "8076304.thl.jpg",
+          "role": "A",
+          "chain_index": 0
+        },
+        "correct_option": {
+          "path": "memory_datasets/Brady2008Objects/8020414.thl.jpg",
+          "name": "8020414.thl.jpg",
+          "role": "C",
+          "chain_index": 0
+        },
+        "foil_option": {
+          "path": "memory_datasets/Brady2008Objects/candy3.jpg",
+          "name": "candy3.jpg",
+          "role": "C",
+          "chain_index": 1
+        }
+      }
+    },
+    {
+      "trial": 27,
+      "target": 1,
+      "reported": 2,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.20181322612299288,
+        "2": 0.7981867738770071
+      },
+      "choice_mass": 0.9959538877010345,
+      "top_tokens": [
+        [
+          "2",
+          0.795
+        ],
+        [
+          "1",
+          0.201
+        ],
+        [
+          "3",
+          0.0017
+        ],
+        [
+          " ",
+          0.0015
+        ],
+        [
+          "4",
+          0.0002
+        ]
+      ],
+      "free_response": "To determine the correct answer, we need to follow the chain of associations based on the provided image pairs.\n\n- The cue image is the alb, which is Image 3.\n- According to the pair (AB), Image 3 (the alb) is associated with Image 4 (the blue glass bottle).\n- According to the pair (BC), Image 4 (the blue glass bottle) is associated with Image 5 (the blue polka-dot cloth).\n- The question",
+      "metadata": {
+        "chain_index": 1,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/AROBES4.jpg",
+          "name": "AROBES4.jpg",
+          "role": "A",
+          "chain_index": 1
+        },
+        "correct_option": {
+          "path": "memory_datasets/Brady2008Objects/ACASTLE16.jpg",
+          "name": "ACASTLE16.jpg",
+          "role": "C",
+          "chain_index": 1
+        },
+        "foil_option": {
+          "path": "memory_datasets/Brady2008Objects/ASHOWCAP.jpg",
+          "name": "ASHOWCAP.jpg",
+          "role": "C",
+          "chain_index": 0
+        }
+      }
+    },
+    {
+      "trial": 28,
+      "target": 1,
+      "reported": 2,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.2942149701527005,
+        "2": 0.7057850298472995
+      },
+      "choice_mass": 0.9986029267311096,
+      "top_tokens": [
+        [
+          "2",
+          0.7048
+        ],
+        [
+          "1",
+          0.2938
+        ],
+        [
+          "<|im_end|>",
+          0.0005
+        ],
+        [
+          "3",
+          0.0004
+        ],
+        [
+          " ",
+          0.0002
+        ]
+      ],
+      "free_response": "To determine the indirect association, we must follow the chain of connections established in the pairs.\n\n- The cue image is the shark, which is image (A).\n- Image (A) is directly connected to image (B), the three-headed dragon.\n- Image (B) is directly connected to image (C), the yellow baby carriage.\n- Image (C) is directly connected to image (D), the red gas canister.\n- Image (D) is directly connected",
+      "metadata": {
+        "chain_index": 0,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/Ashark7.jpg",
+          "name": "Ashark7.jpg",
+          "role": "A",
+          "chain_index": 0
+        },
+        "correct_option": {
+          "path": "memory_datasets/Brady2008Objects/Achair618.jpg",
+          "name": "Achair618.jpg",
+          "role": "C",
+          "chain_index": 0
+        },
+        "foil_option": {
+          "path": "memory_datasets/Brady2008Objects/ADINGHY.jpg",
+          "name": "ADINGHY.jpg",
+          "role": "C",
+          "chain_index": 1
+        }
+      }
+    },
+    {
+      "trial": 29,
+      "target": 2,
+      "reported": 2,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.3208213114410563,
+        "2": 0.6791786885589437
+      },
+      "choice_mass": 0.9983569979667664,
+      "top_tokens": [
+        [
+          "2",
+          0.6781
+        ],
+        [
+          "1",
+          0.3203
+        ],
+        [
+          "3",
+          0.0008
+        ],
+        [
+          " ",
+          0.0003
+        ],
+        [
+          "4",
+          0.0002
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 1,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/ANAPKIN4.jpg",
+          "name": "ANAPKIN4.jpg",
+          "role": "A",
+          "chain_index": 1
+        },
+        "correct_option": {
+          "path": "memory_datasets/Brady2008Objects/26424075.thl.jpg",
+          "name": "26424075.thl.jpg",
+          "role": "C",
+          "chain_index": 1
+        },
+        "foil_option": {
+          "path": "memory_datasets/Brady2008Objects/Athimble2.jpg",
+          "name": "Athimble2.jpg",
+          "role": "C",
+          "chain_index": 0
+        }
+      }
+    },
+    {
+      "trial": 30,
+      "target": 1,
+      "reported": 2,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.43782348509762137,
+        "2": 0.5621765149023786
+      },
+      "choice_mass": 0.9976694881916046,
+      "top_tokens": [
+        [
+          "2",
+          0.5609
+        ],
+        [
+          "1",
+          0.4368
+        ],
+        [
+          " ",
+          0.0011
+        ],
+        [
+          "3",
+          0.0006
+        ],
+        [
+          "<|im_end|>",
+          0.0005
+        ]
+      ],
+      "free_response": "To determine the indirect association, we must follow the chain of connections established in the initial pairs.\n\n- The cue image is the igloo.\n- According to the provided pairs, the igloo is directly connected to the red record player (Image 2).\n- The red record player is, in turn, directly connected to the red wig (Image 4).\n- The red wig is directly connected to the silver scoop (Image 5).\n- Therefore, the silver scoop is",
+      "metadata": {
+        "chain_index": 1,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/igloo.jpg",
+          "name": "igloo.jpg",
+          "role": "A",
+          "chain_index": 1
+        },
+        "correct_option": {
+          "path": "memory_datasets/Brady2008Objects/ABLUBLOTT.jpg",
+          "name": "ABLUBLOTT.jpg",
+          "role": "C",
+          "chain_index": 1
+        },
+        "foil_option": {
+          "path": "memory_datasets/Brady2008Objects/Aspoonofsuga2.jpg",
+          "name": "Aspoonofsuga2.jpg",
+          "role": "C",
+          "chain_index": 0
+        }
+      }
+    },
+    {
+      "trial": 31,
+      "target": 2,
+      "reported": 1,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.5621764990728355,
+        "2": 0.4378235009271645
+      },
+      "choice_mass": 0.9973327815532684,
+      "top_tokens": [
+        [
+          "1",
+          0.5607
+        ],
+        [
+          "2",
+          0.4367
+        ],
+        [
+          "3",
+          0.0016
+        ],
+        [
+          " ",
+          0.0006
+        ],
+        [
+          "<|im_end|>",
+          0.0002
+        ]
+      ],
+      "free_response": "To determine the indirect association, we can follow the chain of connections established in the initial pairs.\n\n- The cue image is the green multi-tool.\n- According to the (AB) and (BC) pairs, the green multi-tool is directly associated with the red utility knife.\n- The red utility knife is, in turn, directly associated with the lion figurine.\n- The lion figurine is directly associated with the bell.\n- Therefore, the bell is indirectly associated with the",
+      "metadata": {
+        "chain_index": 1,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/Acampingtoolk.jpg",
+          "name": "Acampingtoolk.jpg",
+          "role": "A",
+          "chain_index": 1
+        },
+        "correct_option": {
+          "path": "memory_datasets/Brady2008Objects/26374605.thl.jpg",
+          "name": "26374605.thl.jpg",
+          "role": "C",
+          "chain_index": 1
+        },
+        "foil_option": {
+          "path": "memory_datasets/Brady2008Objects/ABELL7.jpg",
+          "name": "ABELL7.jpg",
+          "role": "C",
+          "chain_index": 0
+        }
+      }
+    },
+    {
+      "trial": 32,
+      "target": 1,
+      "reported": 2,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.06008664697153308,
+        "2": 0.9399133530284669
+      },
+      "choice_mass": 0.99886155128479,
+      "top_tokens": [
+        [
+          "2",
+          0.9388
+        ],
+        [
+          "1",
+          0.06
+        ],
+        [
+          "3",
+          0.0007
+        ],
+        [
+          " ",
+          0.0002
+        ],
+        [
+          "0",
+          0.0001
+        ]
+      ],
+      "free_response": "To determine the indirect association, we must follow the chain of connections established in the initial pairs.\n\n- The cue image is the railroad crossing signal.\n- According to the first pair, the railroad crossing signal is directly associated with the wooden kitchen island.\n- The second pair shows that the wooden kitchen island is directly associated with the gray elephant figurine.\n- The third pair shows that the gray elephant figurine is directly associated with the covered wagon.\n\nTherefore, the chain of association is",
+      "metadata": {
+        "chain_index": 0,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/ARAILLIGH.jpg",
+          "name": "ARAILLIGH.jpg",
+          "role": "A",
+          "chain_index": 0
+        },
+        "correct_option": {
+          "path": "memory_datasets/Brady2008Objects/Aelectricgri3.jpg",
+          "name": "Aelectricgri3.jpg",
+          "role": "C",
+          "chain_index": 0
+        },
+        "foil_option": {
+          "path": "memory_datasets/Brady2008Objects/cowboywagon.jpg",
+          "name": "cowboywagon.jpg",
+          "role": "C",
+          "chain_index": 1
+        }
+      }
+    },
+    {
+      "trial": 33,
+      "target": 2,
+      "reported": 2,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.1480471880842372,
+        "2": 0.8519528119157628
+      },
+      "choice_mass": 0.997537299990654,
+      "top_tokens": [
+        [
+          "2",
+          0.8499
+        ],
+        [
+          "1",
+          0.1477
+        ],
+        [
+          "3",
+          0.0009
+        ],
+        [
+          "<|im_end|>",
+          0.0008
+        ],
+        [
+          " ",
+          0.0003
+        ]
+      ],
+      "free_response": "To determine the indirect association, we must follow the chain of connections established in the initial pairs.\n\n- The cue image is the first image in the sequence, which shows a maze.\n- According to the provided pairs, the first image (the maze) is directly connected to the second image (the blue bag). This is the (AB) pair.\n- The second image (the blue bag) is then connected to the third image (the mop bucket). This is the (BC)",
+      "metadata": {
+        "chain_index": 0,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/labyrinthe.jpg",
+          "name": "labyrinthe.jpg",
+          "role": "A",
+          "chain_index": 0
+        },
+        "correct_option": {
+          "path": "memory_datasets/Brady2008Objects/ABRAIN3.jpg",
+          "name": "ABRAIN3.jpg",
+          "role": "C",
+          "chain_index": 0
+        },
+        "foil_option": {
+          "path": "memory_datasets/Brady2008Objects/Abackpack11.jpg",
+          "name": "Abackpack11.jpg",
+          "role": "C",
+          "chain_index": 1
+        }
+      }
+    },
+    {
+      "trial": 34,
+      "target": 2,
+      "reported": 2,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.34864514857869566,
+        "2": 0.6513548514213043
+      },
+      "choice_mass": 0.998300313949585,
+      "top_tokens": [
+        [
+          "2",
+          0.6502
+        ],
+        [
+          "1",
+          0.3481
+        ],
+        [
+          "3",
+          0.0008
+        ],
+        [
+          "<|im_end|>",
+          0.0002
+        ],
+        [
+          " ",
+          0.0002
+        ]
+      ],
+      "free_response": "To determine the correct answer, we need to follow the chain of associations established in the prompt.\n\n- The cue image is the first image in the sequence, which shows rolls of Euro banknotes.\n- This image is part of an \"(AB pair)\". The second image in this pair is the colorful woven tote bag.\n- The tote bag is then part of a \"(BC pair)\". The third image in this pair is the ceramic garlic crock.\n- The garlic crock is part",
+      "metadata": {
+        "chain_index": 0,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/26434233.thl.jpg",
+          "name": "26434233.thl.jpg",
+          "role": "A",
+          "chain_index": 0
+        },
+        "correct_option": {
+          "path": "memory_datasets/Brady2008Objects/Atoyhomeoffi4.jpg",
+          "name": "Atoyhomeoffi4.jpg",
+          "role": "C",
+          "chain_index": 0
+        },
+        "foil_option": {
+          "path": "memory_datasets/Brady2008Objects/Ataperecorde4.jpg",
+          "name": "Ataperecorde4.jpg",
+          "role": "C",
+          "chain_index": 1
+        }
+      }
+    },
+    {
+      "trial": 35,
+      "target": 1,
+      "reported": 2,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.3486451427375645,
+        "2": 0.6513548572624356
+      },
+      "choice_mass": 0.9990493953227997,
+      "top_tokens": [
+        [
+          "2",
+          0.6507
+        ],
+        [
+          "1",
+          0.3483
+        ],
+        [
+          "<|im_end|>",
+          0.0003
+        ],
+        [
+          "3",
+          0.0003
+        ],
+        [
+          " ",
+          0.0002
+        ]
+      ],
+      "free_response": "To determine the indirect association, we must follow the chain of connections established in the initial pairs.\n\n- The cue image is the coat rack, which is the first item in the (AB) pair.\n- According to the (AB) pair, the item associated with the coat rack is the mask.\n- The mask is the first item in the (BC) pair.\n- According to the (BC) pair, the item associated with the mask is the mixer.\n- The",
+      "metadata": {
+        "chain_index": 0,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/ACOATHA44.jpg",
+          "name": "ACOATHA44.jpg",
+          "role": "A",
+          "chain_index": 0
+        },
+        "correct_option": {
+          "path": "memory_datasets/Brady2008Objects/changepurse03.jpg",
+          "name": "changepurse03.jpg",
+          "role": "C",
+          "chain_index": 0
+        },
+        "foil_option": {
+          "path": "memory_datasets/Brady2008Objects/ALINTREMO.jpg",
+          "name": "ALINTREMO.jpg",
+          "role": "C",
+          "chain_index": 1
+        }
+      }
+    },
+    {
+      "trial": 36,
+      "target": 1,
+      "reported": 2,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.24508500584880788,
+        "2": 0.7549149941511921
+      },
+      "choice_mass": 0.9983774721622467,
+      "top_tokens": [
+        [
+          "2",
+          0.7537
+        ],
+        [
+          "1",
+          0.2447
+        ],
+        [
+          "3",
+          0.0009
+        ],
+        [
+          " ",
+          0.0003
+        ],
+        [
+          "<|im_end|>",
+          0.0002
+        ]
+      ],
+      "free_response": "To determine the indirect association, we must follow the chain of connections established in the pairs.\n\n- The cue image is the grey mechanical ring.\n- According to the first pair, the grey mechanical ring is directly associated with the black spaceship.\n- According to the second pair, the black spaceship is directly associated with the wooden hourglass.\n- According to the third pair, the wooden hourglass is directly associated with the pink heart-shaped pillow.\n- According to the fourth pair, the",
+      "metadata": {
+        "chain_index": 0,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/Aplastichousi.jpg",
+          "name": "Aplastichousi.jpg",
+          "role": "A",
+          "chain_index": 0
+        },
+        "correct_option": {
+          "path": "memory_datasets/Brady2008Objects/neckrest.jpg",
+          "name": "neckrest.jpg",
+          "role": "C",
+          "chain_index": 0
+        },
+        "foil_option": {
+          "path": "memory_datasets/Brady2008Objects/26372669.thl.jpg",
+          "name": "26372669.thl.jpg",
+          "role": "C",
+          "chain_index": 1
+        }
+      }
+    },
+    {
+      "trial": 37,
+      "target": 1,
+      "reported": 2,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.2450850201053852,
+        "2": 0.7549149798946148
+      },
+      "choice_mass": 0.9966317862272263,
+      "top_tokens": [
+        [
+          "2",
+          0.7524
+        ],
+        [
+          "1",
+          0.2443
+        ],
+        [
+          "<|im_end|>",
+          0.0016
+        ],
+        [
+          " ",
+          0.001
+        ],
+        [
+          "3",
+          0.0004
+        ]
+      ],
+      "free_response": "To determine the indirect association, we need to follow the chain of connections provided in the pairs.\n\n- The cue image is the orange, beaded object.\n- According to the first pair, the orange, beaded object is directly associated with the \"Molecular Model Set\" (the white box with colorful balls).\n- The second pair shows that the \"Molecular Model Set\" is directly associated with the grey, ribbed ring.\n- The third pair shows that the grey,",
+      "metadata": {
+        "chain_index": 0,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/ASHAKER2.jpg",
+          "name": "ASHAKER2.jpg",
+          "role": "A",
+          "chain_index": 0
+        },
+        "correct_option": {
+          "path": "memory_datasets/Brady2008Objects/26431734.thl.jpg",
+          "name": "26431734.thl.jpg",
+          "role": "C",
+          "chain_index": 0
+        },
+        "foil_option": {
+          "path": "memory_datasets/Brady2008Objects/AGLASSEY5.jpg",
+          "name": "AGLASSEY5.jpg",
+          "role": "C",
+          "chain_index": 1
+        }
+      }
+    },
+    {
+      "trial": 38,
+      "target": 2,
+      "reported": 2,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.14804718167522152,
+        "2": 0.8519528183247785
+      },
+      "choice_mass": 0.9991192817687988,
+      "top_tokens": [
+        [
+          "2",
+          0.8512
+        ],
+        [
+          "1",
+          0.1479
+        ],
+        [
+          "3",
+          0.0004
+        ],
+        [
+          " ",
+          0.0002
+        ],
+        [
+          "<|im_end|>",
+          0.0001
+        ]
+      ],
+      "free_response": "To determine the indirect association, we must follow the chain of connections established in the initial pairs.\n\n- The cue image is the first image in the sequence, which is a pencil.\n- According to the provided pairs, the first image (pencil) is directly connected to the second image (clothes hangers).\n- The second image (clothes hangers) is then connected to the third image (a box of chocolates).\n- The third image (box of chocolates) is",
+      "metadata": {
+        "chain_index": 0,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/makeupcrayon.jpg",
+          "name": "makeupcrayon.jpg",
+          "role": "A",
+          "chain_index": 0
+        },
+        "correct_option": {
+          "path": "memory_datasets/Brady2008Objects/26421538.thl.jpg",
+          "name": "26421538.thl.jpg",
+          "role": "C",
+          "chain_index": 0
+        },
+        "foil_option": {
+          "path": "memory_datasets/Brady2008Objects/APANCAKE3.jpg",
+          "name": "APANCAKE3.jpg",
+          "role": "C",
+          "chain_index": 1
+        }
+      }
+    },
+    {
+      "trial": 39,
+      "target": 1,
+      "reported": 2,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.26894145958487636,
+        "2": 0.7310585404151236
+      },
+      "choice_mass": 0.9988385736942291,
+      "top_tokens": [
+        [
+          "2",
+          0.7302
+        ],
+        [
+          "1",
+          0.2686
+        ],
+        [
+          "3",
+          0.0005
+        ],
+        [
+          " ",
+          0.0004
+        ],
+        [
+          "0",
+          0.0001
+        ]
+      ],
+      "free_response": "To determine the correct answer, we need to follow the chain of associations based on the provided image pairs.\n\n- The cue image is the speaker.\n- According to the (AB) pair, the speaker (image 3) is associated with the mask (image 4).\n- According to the (BC) pair, the mask (image 4) is associated with the grapefruit (image 5).\n- According to the (AB) pair, the grapefruit (image",
+      "metadata": {
+        "chain_index": 1,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/8020414.thl.jpg",
+          "name": "8020414.thl.jpg",
+          "role": "A",
+          "chain_index": 1
+        },
+        "correct_option": {
+          "path": "memory_datasets/Brady2008Objects/Acandlehold17.jpg",
+          "name": "Acandlehold17.jpg",
+          "role": "C",
+          "chain_index": 1
+        },
+        "foil_option": {
+          "path": "memory_datasets/Brady2008Objects/ABLACSUI3.jpg",
+          "name": "ABLACSUI3.jpg",
+          "role": "C",
+          "chain_index": 0
+        }
+      }
+    },
+    {
+      "trial": 40,
+      "target": 1,
+      "reported": 2,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.3486451501991184,
+        "2": 0.6513548498008815
+      },
+      "choice_mass": 0.9985324740409851,
+      "top_tokens": [
+        [
+          "2",
+          0.6504
+        ],
+        [
+          "1",
+          0.3481
+        ],
+        [
+          "3",
+          0.001
+        ],
+        [
+          " ",
+          0.0002
+        ],
+        [
+          "4",
+          0.0001
+        ]
+      ],
+      "free_response": "1",
+      "metadata": {
+        "chain_index": 0,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/A1991CHE7.jpg",
+          "name": "A1991CHE7.jpg",
+          "role": "A",
+          "chain_index": 0
+        },
+        "correct_option": {
+          "path": "memory_datasets/Brady2008Objects/bands-a.jpg",
+          "name": "bands-a.jpg",
+          "role": "C",
+          "chain_index": 0
+        },
+        "foil_option": {
+          "path": "memory_datasets/Brady2008Objects/8020414.thl.jpg",
+          "name": "8020414.thl.jpg",
+          "role": "C",
+          "chain_index": 1
+        }
+      }
+    },
+    {
+      "trial": 41,
+      "target": 1,
+      "reported": 2,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.16451645459380326,
+        "2": 0.8354835454061967
+      },
+      "choice_mass": 0.998685896396637,
+      "top_tokens": [
+        [
+          "2",
+          0.8344
+        ],
+        [
+          "1",
+          0.1643
+        ],
+        [
+          "3",
+          0.0008
+        ],
+        [
+          " ",
+          0.0002
+        ],
+        [
+          "4",
+          0.0001
+        ]
+      ],
+      "free_response": "To determine the indirect association, we must follow the chain of connections established in the initial pairs.\n\n- The cue image is the miniature tree.\n- According to the provided pairs, the miniature tree (image 3) is directly connected to the dental crown (image 2). This is the link: Tree -> Crown.\n- The dental crown (image 2) is, in turn, directly connected to the red keychain (image 4). This is the second link: Crown",
+      "metadata": {
+        "chain_index": 1,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/26554880.thl.jpg",
+          "name": "26554880.thl.jpg",
+          "role": "A",
+          "chain_index": 1
+        },
+        "correct_option": {
+          "path": "memory_datasets/Brady2008Objects/26429123.thl.jpg",
+          "name": "26429123.thl.jpg",
+          "role": "C",
+          "chain_index": 1
+        },
+        "foil_option": {
+          "path": "memory_datasets/Brady2008Objects/barbwirecoil.jpg",
+          "name": "barbwirecoil.jpg",
+          "role": "C",
+          "chain_index": 0
+        }
+      }
+    },
+    {
+      "trial": 42,
+      "target": 1,
+      "reported": 2,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.2689414446311001,
+        "2": 0.7310585553689
+      },
+      "choice_mass": 0.998525470495224,
+      "top_tokens": [
+        [
+          "2",
+          0.73
+        ],
+        [
+          "1",
+          0.2685
+        ],
+        [
+          "3",
+          0.0008
+        ],
+        [
+          "0",
+          0.0002
+        ],
+        [
+          " ",
+          0.0002
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 0,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/Atoyhelicopte.jpg",
+          "name": "Atoyhelicopte.jpg",
+          "role": "A",
+          "chain_index": 0
+        },
+        "correct_option": {
+          "path": "memory_datasets/Brady2008Objects/mixer.jpg",
+          "name": "mixer.jpg",
+          "role": "C",
+          "chain_index": 0
+        },
+        "foil_option": {
+          "path": "memory_datasets/Brady2008Objects/Aim4ribbo.jpg",
+          "name": "Aim4ribbo.jpg",
+          "role": "C",
+          "chain_index": 1
+        }
+      }
+    },
+    {
+      "trial": 43,
+      "target": 2,
+      "reported": 1,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.6513548426259415,
+        "2": 0.34864515737405855
+      },
+      "choice_mass": 0.9976314902305603,
+      "top_tokens": [
+        [
+          "1",
+          0.6498
+        ],
+        [
+          "2",
+          0.3478
+        ],
+        [
+          "3",
+          0.0014
+        ],
+        [
+          " ",
+          0.0002
+        ],
+        [
+          "<|im_end|>",
+          0.0002
+        ]
+      ],
+      "free_response": "To determine the indirect association, we need to follow the chain of connections established in the initial pairs.\n\n- The cue image is the white electric hand mixer.\n- In the provided pairs, the hand mixer is linked to the statue of Jesus.\n- The statue of Jesus is, in turn, linked to the snow globe with the doll inside.\n- The snow globe with the doll is then linked to the water cooler bottle.\n\nTherefore, the water cooler bottle is the item that is",
+      "metadata": {
+        "chain_index": 1,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/AMIXER1.jpg",
+          "name": "AMIXER1.jpg",
+          "role": "A",
+          "chain_index": 1
+        },
+        "correct_option": {
+          "path": "memory_datasets/Brady2008Objects/AWATERJU3.jpg",
+          "name": "AWATERJU3.jpg",
+          "role": "C",
+          "chain_index": 1
+        },
+        "foil_option": {
+          "path": "memory_datasets/Brady2008Objects/Athermos7.jpg",
+          "name": "Athermos7.jpg",
+          "role": "C",
+          "chain_index": 0
+        }
+      }
+    },
+    {
+      "trial": 44,
+      "target": 1,
+      "reported": 2,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.3208213052908399,
+        "2": 0.67917869470916
+      },
+      "choice_mass": 0.9955442845821381,
+      "top_tokens": [
+        [
+          "2",
+          0.6762
+        ],
+        [
+          "1",
+          0.3194
+        ],
+        [
+          "3",
+          0.0028
+        ],
+        [
+          "<|im_end|>",
+          0.001
+        ],
+        [
+          " ",
+          0.0002
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 0,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/Awindmill3.jpg",
+          "name": "Awindmill3.jpg",
+          "role": "A",
+          "chain_index": 0
+        },
+        "correct_option": {
+          "path": "memory_datasets/Brady2008Objects/36411021.thl.jpg",
+          "name": "36411021.thl.jpg",
+          "role": "C",
+          "chain_index": 0
+        },
+        "foil_option": {
+          "path": "memory_datasets/Brady2008Objects/Aancientston3.jpg",
+          "name": "Aancientston3.jpg",
+          "role": "C",
+          "chain_index": 1
+        }
+      }
+    },
+    {
+      "trial": 45,
+      "target": 1,
+      "reported": 2,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.40733341017278724,
+        "2": 0.5926665898272128
+      },
+      "choice_mass": 0.9980720281600952,
+      "top_tokens": [
+        [
+          "2",
+          0.5915
+        ],
+        [
+          "1",
+          0.4065
+        ],
+        [
+          " ",
+          0.0008
+        ],
+        [
+          "3",
+          0.0007
+        ],
+        [
+          "<|im_end|>",
+          0.0002
+        ]
+      ],
+      "free_response": "To determine the indirect association, we can follow the chain of connections provided in the initial pairs.\n\n- The cue image is the red yoyo.\n- According to the (AB) pair, the red yoyo is associated with the red rake.\n- According to the (BC) pair, the red rake is associated with the red rope toy.\n- According to the (CD) pair, the red rope toy is associated with the red thermos.\n- According to the (",
+      "metadata": {
+        "chain_index": 1,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/26418207.thl.jpg",
+          "name": "26418207.thl.jpg",
+          "role": "A",
+          "chain_index": 1
+        },
+        "correct_option": {
+          "path": "memory_datasets/Brady2008Objects/Ajug158.jpg",
+          "name": "Ajug158.jpg",
+          "role": "C",
+          "chain_index": 1
+        },
+        "foil_option": {
+          "path": "memory_datasets/Brady2008Objects/legoblocks.jpg",
+          "name": "legoblocks.jpg",
+          "role": "C",
+          "chain_index": 0
+        }
+      }
+    },
+    {
+      "trial": 46,
+      "target": 1,
+      "reported": 2,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.37754066113804974,
+        "2": 0.6224593388619503
+      },
+      "choice_mass": 0.9976590573787689,
+      "top_tokens": [
+        [
+          "2",
+          0.621
+        ],
+        [
+          "1",
+          0.3767
+        ],
+        [
+          "3",
+          0.0009
+        ],
+        [
+          " ",
+          0.0009
+        ],
+        [
+          "<|im_end|>",
+          0.0003
+        ]
+      ],
+      "free_response": "To determine the indirect association, we must follow the chain of connections established in the initial pairs.\n\n- The cue image is the vampire costume.\n- According to the first pair, the vampire costume is directly associated with the golden box.\n- The second pair shows that the golden box is directly associated with the gummy bears.\n- The third pair shows that the gummy bears are directly associated with the mixer.\n- The fourth pair shows that the mixer is directly associated with the white",
+      "metadata": {
+        "chain_index": 0,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/vampire.jpg",
+          "name": "vampire.jpg",
+          "role": "A",
+          "chain_index": 0
+        },
+        "correct_option": {
+          "path": "memory_datasets/Brady2008Objects/gytsl9.jpg",
+          "name": "gytsl9.jpg",
+          "role": "C",
+          "chain_index": 0
+        },
+        "foil_option": {
+          "path": "memory_datasets/Brady2008Objects/Abooties4.jpg",
+          "name": "Abooties4.jpg",
+          "role": "C",
+          "chain_index": 1
+        }
+      }
+    },
+    {
+      "trial": 47,
+      "target": 1,
+      "reported": 2,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.16451644956749556,
+        "2": 0.8354835504325044
+      },
+      "choice_mass": 0.9984502494335175,
+      "top_tokens": [
+        [
+          "2",
+          0.8342
+        ],
+        [
+          "1",
+          0.1643
+        ],
+        [
+          "3",
+          0.0009
+        ],
+        [
+          "<|im_end|>",
+          0.0002
+        ],
+        [
+          " ",
+          0.0002
+        ]
+      ],
+      "free_response": "To determine the indirect association, let's trace the connections between the images based on the provided pairs.\n\n- The cue image is a net on a stick.\n- From the first pair, we know that the net on a stick is directly associated with the blue circle.\n- From the second pair, we know that the blue circle is directly associated with the plate of bread rolls.\n- From the third pair, we know that the plate of bread rolls is directly associated with the potted",
+      "metadata": {
+        "chain_index": 1,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/Abutterflynet.jpg",
+          "name": "Abutterflynet.jpg",
+          "role": "A",
+          "chain_index": 1
+        },
+        "correct_option": {
+          "path": "memory_datasets/Brady2008Objects/AMICRO67.jpg",
+          "name": "AMICRO67.jpg",
+          "role": "C",
+          "chain_index": 1
+        },
+        "foil_option": {
+          "path": "memory_datasets/Brady2008Objects/APAPYRUS.jpg",
+          "name": "APAPYRUS.jpg",
+          "role": "C",
+          "chain_index": 0
+        }
+      }
+    },
+    {
+      "trial": 48,
+      "target": 1,
+      "reported": 2,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.4073333965549479,
+        "2": 0.5926666034450522
+      },
+      "choice_mass": 0.9974707961082458,
+      "top_tokens": [
+        [
+          "2",
+          0.5912
+        ],
+        [
+          "1",
+          0.4063
+        ],
+        [
+          "3",
+          0.0017
+        ],
+        [
+          " ",
+          0.0002
+        ],
+        [
+          "4",
+          0.0002
+        ]
+      ],
+      "free_response": "To determine the correct answer, we need to follow the chain of associations based on the provided image pairs.\n\n- The cue image is the Matryoshka doll.\n- According to the first pair, the Matryoshka doll is directly associated with the salt and pepper shakers.\n- The second pair shows that the salt and pepper shakers are directly associated with the baby swing.\n- The third pair shows that the baby swing is directly associated with the stained-glass tile.",
+      "metadata": {
+        "chain_index": 0,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/ARUSSDO13.jpg",
+          "name": "ARUSSDO13.jpg",
+          "role": "A",
+          "chain_index": 0
+        },
+        "correct_option": {
+          "path": "memory_datasets/Brady2008Objects/26466258.thl.jpg",
+          "name": "26466258.thl.jpg",
+          "role": "C",
+          "chain_index": 0
+        },
+        "foil_option": {
+          "path": "memory_datasets/Brady2008Objects/22856784.thl.jpg",
+          "name": "22856784.thl.jpg",
+          "role": "C",
+          "chain_index": 1
+        }
+      }
+    },
+    {
+      "trial": 49,
+      "target": 2,
+      "reported": 1,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.5,
+        "2": 0.5
+      },
+      "choice_mass": 0.9972525238990784,
+      "top_tokens": [
+        [
+          "2",
+          0.4986
+        ],
+        [
+          "1",
+          0.4986
+        ],
+        [
+          " ",
+          0.0014
+        ],
+        [
+          "3",
+          0.0007
+        ],
+        [
+          "<|im_end|>",
+          0.0004
+        ]
+      ],
+      "free_response": "To determine the indirect association, we must follow the chain of connections established in the initial pairs.\n\n- The cue image is the black double-basin sink.\n- According to the provided pairs, the sink (image 3) is directly connected to the vegetable platter (image 2). This is the (BC) pair.\n- The vegetable platter (image 2) is, in turn, directly connected to the meat grinder (image 5). This is the (AB",
+      "metadata": {
+        "chain_index": 1,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/Akitchensinka.jpg",
+          "name": "Akitchensinka.jpg",
+          "role": "A",
+          "chain_index": 1
+        },
+        "correct_option": {
+          "path": "memory_datasets/Brady2008Objects/ASHRIMP3.jpg",
+          "name": "ASHRIMP3.jpg",
+          "role": "C",
+          "chain_index": 1
+        },
+        "foil_option": {
+          "path": "memory_datasets/Brady2008Objects/ACOFGRIN2.jpg",
+          "name": "ACOFGRIN2.jpg",
+          "role": "C",
+          "chain_index": 0
+        }
+      }
+    }
+  ],
+  "metrics": {
+    "accuracy": 0.36,
+    "n_correct": 18,
+    "total": 50,
+    "free_text_bare_digit": 0.18,
+    "mean_p_chosen": 0.6990438849679623,
+    "mean_choice_mass": 0.9978877890110016,
+    "frac_low_mass": 0.0,
+    "response_distribution": {
+      "2": 46,
+      "1": 4
+    }
+  }
+}

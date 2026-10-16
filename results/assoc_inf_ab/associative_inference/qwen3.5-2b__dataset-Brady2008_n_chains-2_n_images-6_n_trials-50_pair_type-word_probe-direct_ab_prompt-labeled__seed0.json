@@ -1,0 +1,1996 @@
+{
+  "run": {
+    "model": {
+      "name": "qwen3.5-2b",
+      "model_id": "Qwen/Qwen3.5-2B",
+      "max_image_size": 512,
+      "max_new_tokens": 100
+    },
+    "task": "associative_inference",
+    "condition": {
+      "dataset": "Brady2008",
+      "pair_type": "word",
+      "probe": "direct_ab",
+      "n_chains": 2,
+      "n_images": 6,
+      "prompt": "labeled",
+      "n_trials": 50
+    },
+    "seed": 0
+  },
+  "config": {
+    "run_name": "assoc_inf_ab",
+    "output_dir": "results",
+    "seeds": [
+      0
+    ],
+    "models": [
+      {
+        "name": "qwen3.5-2b",
+        "model_id": "Qwen/Qwen3.5-2B",
+        "max_image_size": 512,
+        "max_new_tokens": 100
+      },
+      {
+        "name": "qwen3.5-4b",
+        "model_id": "Qwen/Qwen3.5-4B",
+        "max_image_size": 512,
+        "max_new_tokens": 100
+      }
+    ],
+    "tasks": [
+      {
+        "task": "associative_inference",
+        "datasets": [
+          "Brady2008"
+        ],
+        "pair_types": [
+          "image",
+          "word"
+        ],
+        "probe_types": [
+          "inference",
+          "direct_ab",
+          "direct_bc"
+        ],
+        "n_chains": [
+          2,
+          5,
+          25
+        ],
+        "prompts": [
+          "original",
+          "cue_turn",
+          "labeled"
+        ],
+        "n_trials": 50
+      }
+    ]
+  },
+  "provenance": {
+    "config_hash": "d49714f7009d",
+    "gpu": "NVIDIA A100-SXM4-80GB",
+    "git_commit": null,
+    "git_dirty": false,
+    "torch": "2.10.0+cu128",
+    "transformers": "5.17.0"
+  },
+  "elapsed_s": 137.2,
+  "peak_gpu_gb": 4.55,
+  "error": null,
+  "trials": [
+    {
+      "trial": 0,
+      "target": 2,
+      "reported": 1,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.5621765021216099,
+        "2": 0.43782349787839014
+      },
+      "choice_mass": 0.9903579354286194,
+      "top_tokens": [
+        [
+          "1",
+          0.5568
+        ],
+        [
+          "2",
+          0.4336
+        ],
+        [
+          "3",
+          0.0062
+        ],
+        [
+          "4",
+          0.0018
+        ],
+        [
+          "5",
+          0.0005
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 0,
+        "foil_chain_index": 1
+      }
+    },
+    {
+      "trial": 1,
+      "target": 2,
+      "reported": 1,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.5621764955113016,
+        "2": 0.4378235044886985
+      },
+      "choice_mass": 0.9889040291309357,
+      "top_tokens": [
+        [
+          "1",
+          0.5559
+        ],
+        [
+          "2",
+          0.433
+        ],
+        [
+          "3",
+          0.007
+        ],
+        [
+          "4",
+          0.002
+        ],
+        [
+          "<|im_end|>",
+          0.0008
+        ]
+      ],
+      "free_response": "Based on the analysis of the provided image pairs:\n\n- The first image is a black floppy disk.\n- The second image is a compact powder blush with a mirror and brush.\n- The third image is a pressure gauge on a hose.\n- The fourth image is the same compact powder blush as the second image.\n\nThe question asks to identify which of the two images (Image 1 or Image 2) was paired with the cue image (the floppy disk).\n\n- Image",
+      "metadata": {
+        "chain_index": 0,
+        "foil_chain_index": 1
+      }
+    },
+    {
+      "trial": 2,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.5312093776153956,
+        "2": 0.4687906223846044
+      },
+      "choice_mass": 0.9802156388759613,
+      "top_tokens": [
+        [
+          "1",
+          0.5207
+        ],
+        [
+          "2",
+          0.4595
+        ],
+        [
+          "3",
+          0.0157
+        ],
+        [
+          "4",
+          0.0019
+        ],
+        [
+          "<|im_end|>",
+          0.001
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 1,
+        "foil_chain_index": 0
+      }
+    },
+    {
+      "trial": 3,
+      "target": 2,
+      "reported": 2,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.4073333974628003,
+        "2": 0.5926666025371997
+      },
+      "choice_mass": 0.978393018245697,
+      "top_tokens": [
+        [
+          "2",
+          0.5799
+        ],
+        [
+          "1",
+          0.3985
+        ],
+        [
+          "3",
+          0.0155
+        ],
+        [
+          "4",
+          0.0034
+        ],
+        [
+          "<|im_end|>",
+          0.0009
+        ]
+      ],
+      "free_response": "Based on the analysis of the provided image pairs:\n\n- The **cue image** is a squeegee.\n- The **first image** (Image 1) is a sensor probe with a cable.\n- The **second image** (Image 2) is a stuffed dog.\n\nThe task is to identify which of the two images was paired with the cue image. The provided text does not contain any information linking the squeegee to either the sensor probe or the stuffed dog",
+      "metadata": {
+        "chain_index": 1,
+        "foil_chain_index": 0
+      }
+    },
+    {
+      "trial": 4,
+      "target": 2,
+      "reported": 2,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.46879061731646626,
+        "2": 0.5312093826835338
+      },
+      "choice_mass": 0.9934993088245392,
+      "top_tokens": [
+        [
+          "2",
+          0.5278
+        ],
+        [
+          "1",
+          0.4657
+        ],
+        [
+          "3",
+          0.0046
+        ],
+        [
+          "4",
+          0.0008
+        ],
+        [
+          "<|im_end|>",
+          0.0005
+        ]
+      ],
+      "free_response": "Based on the provided information, let's analyze the connections.\n\n- The **cue image** is a **peanut**.\n- The **AB pair** consists of a **barometer** and a **glass goblet**.\n- The **BC pair** consists of a **wooden basket** and the **glass goblet**.\n\nThe question asks which of the two images (Image 1 or Image 2) was paired with the cue image (the peanut).\n\n- **Image",
+      "metadata": {
+        "chain_index": 1,
+        "foil_chain_index": 0
+      }
+    },
+    {
+      "trial": 5,
+      "target": 1,
+      "reported": 2,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.43782350944709114,
+        "2": 0.5621764905529089
+      },
+      "choice_mass": 0.9868852198123932,
+      "top_tokens": [
+        [
+          "2",
+          0.5548
+        ],
+        [
+          "1",
+          0.4321
+        ],
+        [
+          "3",
+          0.0102
+        ],
+        [
+          "4",
+          0.0012
+        ],
+        [
+          "<|im_end|>",
+          0.0007
+        ]
+      ],
+      "free_response": "Based on the analysis of the provided image pairs:\n\n- The first pair consists of a yellow bowl containing crayons and a light green neck pillow.\n- The second pair consists of a green artichoke and the same light green neck pillow.\n\nThe question asks which of the two images (Image 1 or Image 2) was paired with the cue image.\n\n- The cue image is the green artichoke.\n- The artichoke is paired with the neck pillow in",
+      "metadata": {
+        "chain_index": 1,
+        "foil_chain_index": 0
+      }
+    },
+    {
+      "trial": 6,
+      "target": 2,
+      "reported": 2,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.4687906176468491,
+        "2": 0.531209382353151
+      },
+      "choice_mass": 0.990464597940445,
+      "top_tokens": [
+        [
+          "2",
+          0.5261
+        ],
+        [
+          "1",
+          0.4643
+        ],
+        [
+          "3",
+          0.0058
+        ],
+        [
+          "4",
+          0.0017
+        ],
+        [
+          "<|im_end|>",
+          0.0009
+        ]
+      ],
+      "free_response": "Based on the analysis of the provided image pairs:\n\n- The first pair consists of a black and silver wind-up robot (Image 1) and a cinnamon roll (Image 2).\n- The second pair consists of a picture of Tower Bridge (Image 3) and a picture of a cinnamon roll (Image 4).\n\nThe question asks which of the two images, Image 1 or Image 2, was paired with the cue image (Tower Bridge).\n\n- Image 1",
+      "metadata": {
+        "chain_index": 1,
+        "foil_chain_index": 0
+      }
+    },
+    {
+      "trial": 7,
+      "target": 1,
+      "reported": 2,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.3775406685561031,
+        "2": 0.622459331443897
+      },
+      "choice_mass": 0.98538938164711,
+      "top_tokens": [
+        [
+          "2",
+          0.6134
+        ],
+        [
+          "1",
+          0.372
+        ],
+        [
+          "3",
+          0.0099
+        ],
+        [
+          "4",
+          0.0032
+        ],
+        [
+          "5",
+          0.0005
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 1,
+        "foil_chain_index": 0
+      }
+    },
+    {
+      "trial": 8,
+      "target": 2,
+      "reported": 1,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.5621765006952115,
+        "2": 0.4378234993047885
+      },
+      "choice_mass": 0.9925012290477753,
+      "top_tokens": [
+        [
+          "1",
+          0.558
+        ],
+        [
+          "2",
+          0.4345
+        ],
+        [
+          "3",
+          0.0048
+        ],
+        [
+          "4",
+          0.0011
+        ],
+        [
+          "<|im_end|>",
+          0.0007
+        ]
+      ],
+      "free_response": "Based on the visual content of the images, here is the analysis:\n\n- The **cue image** is a brass horn with a black, possibly leather, bell.\n- **Image 1** is a white plastic bag containing goldfish.\n- **Image 2** is a blue and purple drum.\n\nThere is no direct visual or semantic connection between the horn and either the bag or the drum. The question asks which of the two images was paired with the cue image, implying",
+      "metadata": {
+        "chain_index": 0,
+        "foil_chain_index": 1
+      }
+    },
+    {
+      "trial": 9,
+      "target": 2,
+      "reported": 2,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.37754066860014085,
+        "2": 0.6224593313998592
+      },
+      "choice_mass": 0.9788424968719482,
+      "top_tokens": [
+        [
+          "2",
+          0.6093
+        ],
+        [
+          "1",
+          0.3696
+        ],
+        [
+          "3",
+          0.0162
+        ],
+        [
+          "4",
+          0.0022
+        ],
+        [
+          "<|im_end|>",
+          0.0012
+        ]
+      ],
+      "free_response": "Based on the analysis of the provided image pairs:\n\n- The cue image is the green tray with the rooster design.\n- Image 1 is the box of candy.\n- Image 2 is the dune buggy.\n\nThe pairs are:\n- (AB pair): The comb and the candy box.\n- (BC pair): The rooster tray and the buggy.\n\nTherefore, the image paired with the cue image (the rooster tray) is Image 2.",
+      "metadata": {
+        "chain_index": 1,
+        "foil_chain_index": 0
+      }
+    },
+    {
+      "trial": 10,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.5,
+        "2": 0.5
+      },
+      "choice_mass": 0.9868946075439453,
+      "top_tokens": [
+        [
+          "2",
+          0.4934
+        ],
+        [
+          "1",
+          0.4934
+        ],
+        [
+          "3",
+          0.009
+        ],
+        [
+          "4",
+          0.002
+        ],
+        [
+          "<|im_end|>",
+          0.0007
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 1,
+        "foil_chain_index": 0
+      }
+    },
+    {
+      "trial": 11,
+      "target": 2,
+      "reported": 1,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.6224593251342695,
+        "2": 0.37754067486573045
+      },
+      "choice_mass": 0.9893707633018494,
+      "top_tokens": [
+        [
+          "1",
+          0.6158
+        ],
+        [
+          "2",
+          0.3735
+        ],
+        [
+          "3",
+          0.006
+        ],
+        [
+          "4",
+          0.0025
+        ],
+        [
+          "<|im_end|>",
+          0.0007
+        ]
+      ],
+      "free_response": "Based on the analysis of the provided image pairs:\n\n- The first image is a black lanyard with a red tip.\n- The second image is a wooden mallet.\n- The third image is a golden saxophone.\n- The fourth image is a beige electronic component.\n\nThe pairs are:\n- (AB pair): Lanyard and Mallet\n- (BC pair): Lanyard and Electronic Component\n\nThe question asks which of the two images (Image 1",
+      "metadata": {
+        "chain_index": 0,
+        "foil_chain_index": 1
+      }
+    },
+    {
+      "trial": 12,
+      "target": 2,
+      "reported": 1,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.5312093665156714,
+        "2": 0.46879063348432853
+      },
+      "choice_mass": 0.9932186007499695,
+      "top_tokens": [
+        [
+          "1",
+          0.5276
+        ],
+        [
+          "2",
+          0.4656
+        ],
+        [
+          "3",
+          0.0046
+        ],
+        [
+          "4",
+          0.0008
+        ],
+        [
+          "<|im_end|>",
+          0.0006
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 1,
+        "foil_chain_index": 0
+      }
+    },
+    {
+      "trial": 13,
+      "target": 2,
+      "reported": 1,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.5312093822573041,
+        "2": 0.46879061774269587
+      },
+      "choice_mass": 0.9843860864639282,
+      "top_tokens": [
+        [
+          "1",
+          0.5229
+        ],
+        [
+          "2",
+          0.4615
+        ],
+        [
+          "3",
+          0.0109
+        ],
+        [
+          "4",
+          0.0019
+        ],
+        [
+          "<|im_end|>",
+          0.0011
+        ]
+      ],
+      "free_response": "Based on the visual content of the images, here is the analysis:\n\n- The **cue image** is a brown paper bag with handles.\n- **Image 1** is a wooden honey dipper.\n- **Image 2** is a black floppy disk.\n\nThere is no obvious semantic or visual connection between the bag and either of the other two items. The question asks which of the two images was paired with the cue image. Since neither image 1 nor image 2",
+      "metadata": {
+        "chain_index": 0,
+        "foil_chain_index": 1
+      }
+    },
+    {
+      "trial": 14,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.5,
+        "2": 0.5
+      },
+      "choice_mass": 0.9879409074783325,
+      "top_tokens": [
+        [
+          "2",
+          0.494
+        ],
+        [
+          "1",
+          0.494
+        ],
+        [
+          "3",
+          0.007
+        ],
+        [
+          "4",
+          0.0026
+        ],
+        [
+          "5",
+          0.001
+        ]
+      ],
+      "free_response": "Based on the visual content of the images, here is the analysis:\n\n- The **cue image** is a bottle of dark liquid (likely syrup or wine) resting on a bed of autumn leaves.\n- **Image 1** is a child's car seat with a plaid pattern.\n- **Image 2** is a paint roller with an orange foam roller and a purple handle.\n\nThere is no direct visual or semantic connection between the cue image (bottle on leaves)",
+      "metadata": {
+        "chain_index": 0,
+        "foil_chain_index": 1
+      }
+    },
+    {
+      "trial": 15,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.5,
+        "2": 0.5
+      },
+      "choice_mass": 0.9927365779876709,
+      "top_tokens": [
+        [
+          "2",
+          0.4964
+        ],
+        [
+          "1",
+          0.4964
+        ],
+        [
+          "3",
+          0.0043
+        ],
+        [
+          "4",
+          0.0008
+        ],
+        [
+          "0",
+          0.0007
+        ]
+      ],
+      "free_response": "Based on the analysis of the provided image pairs:\n\n- The first pair consists of a crystal ball on a stand (Image 1) and a brown drawstring bag (Image 2).\n- The second pair consists of a wedding cake (Image 2) and a wooden box (Image 3).\n\nThe cue image is the crystal ball on the stand. Comparing this to the pairs, it matches the first pair.\n\nTherefore, the image paired with the cue image is Image",
+      "metadata": {
+        "chain_index": 0,
+        "foil_chain_index": 1
+      }
+    },
+    {
+      "trial": 16,
+      "target": 2,
+      "reported": 1,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.531209370777129,
+        "2": 0.468790629222871
+      },
+      "choice_mass": 0.9921766519546509,
+      "top_tokens": [
+        [
+          "1",
+          0.5271
+        ],
+        [
+          "2",
+          0.4651
+        ],
+        [
+          "3",
+          0.0052
+        ],
+        [
+          "<|im_end|>",
+          0.0009
+        ],
+        [
+          "4",
+          0.0009
+        ]
+      ],
+      "free_response": "Based on the analysis of the provided image pairs, here is the logical deduction:\n\n- The \"cue image\" is the wheel.\n- The \"BC pair\" consists of the wheel and the paint can.\n- The \"AB pair\" consists of the two identical images of the slot track.\n\nTherefore, the image that was paired with the cue image (the wheel) is the one from the BC pair.\n\nThe image from the BC pair is Image 2.",
+      "metadata": {
+        "chain_index": 1,
+        "foil_chain_index": 0
+      }
+    },
+    {
+      "trial": 17,
+      "target": 2,
+      "reported": 1,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.5926665876373706,
+        "2": 0.40733341236262943
+      },
+      "choice_mass": 0.992791086435318,
+      "top_tokens": [
+        [
+          "1",
+          0.5884
+        ],
+        [
+          "2",
+          0.4044
+        ],
+        [
+          "3",
+          0.0045
+        ],
+        [
+          "<|im_end|>",
+          0.0009
+        ],
+        [
+          "4",
+          0.0009
+        ]
+      ],
+      "free_response": "Based on the analysis of the provided pairs:\n\n- The first image (Image 1) is a stethoscope.\n- The second image (Image 2) is a green hammock.\n- The third image (Image 3) is a football player.\n- The fourth image (Image 4) is another hammock, identical to the second one.\n\nThe pairs are:\n- (AB pair): Stethoscope and Hammock.\n- (BC pair",
+      "metadata": {
+        "chain_index": 0,
+        "foil_chain_index": 1
+      }
+    },
+    {
+      "trial": 18,
+      "target": 2,
+      "reported": 2,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.43782349993675984,
+        "2": 0.5621765000632402
+      },
+      "choice_mass": 0.9839835166931152,
+      "top_tokens": [
+        [
+          "2",
+          0.5532
+        ],
+        [
+          "1",
+          0.4308
+        ],
+        [
+          "3",
+          0.013
+        ],
+        [
+          "4",
+          0.0014
+        ],
+        [
+          "<|im_end|>",
+          0.0006
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 1,
+        "foil_chain_index": 0
+      }
+    },
+    {
+      "trial": 19,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.5,
+        "2": 0.5
+      },
+      "choice_mass": 0.9930082559585571,
+      "top_tokens": [
+        [
+          "2",
+          0.4965
+        ],
+        [
+          "1",
+          0.4965
+        ],
+        [
+          "3",
+          0.0043
+        ],
+        [
+          "4",
+          0.0008
+        ],
+        [
+          "<|im_end|>",
+          0.0007
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 1,
+        "foil_chain_index": 0
+      }
+    },
+    {
+      "trial": 20,
+      "target": 1,
+      "reported": 2,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.4378234970399089,
+        "2": 0.562176502960091
+      },
+      "choice_mass": 0.9927039444446564,
+      "top_tokens": [
+        [
+          "2",
+          0.5581
+        ],
+        [
+          "1",
+          0.4346
+        ],
+        [
+          "3",
+          0.0048
+        ],
+        [
+          "4",
+          0.0011
+        ],
+        [
+          "<|im_end|>",
+          0.0007
+        ]
+      ],
+      "free_response": "Based on the analysis of the provided image pairs:\n\n- The first pair consists of a wooden toy trumpet and a wooden toy swing set.\n- The second pair consists of a green pea pod and a wooden toy swing set.\n\nThe cue image is the green pea pod. By comparing it to the items in the pairs, we can see that it is identical to the item in the second pair.\n\nTherefore, the image paired with the cue image is Image 2.\n\n2",
+      "metadata": {
+        "chain_index": 1,
+        "foil_chain_index": 0
+      }
+    },
+    {
+      "trial": 21,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.6513548483425566,
+        "2": 0.34864515165744336
+      },
+      "choice_mass": 0.9932136237621307,
+      "top_tokens": [
+        [
+          "1",
+          0.6469
+        ],
+        [
+          "2",
+          0.3463
+        ],
+        [
+          "3",
+          0.0044
+        ],
+        [
+          "4",
+          0.0009
+        ],
+        [
+          "<|im_end|>",
+          0.0007
+        ]
+      ],
+      "free_response": "1",
+      "metadata": {
+        "chain_index": 0,
+        "foil_chain_index": 1
+      }
+    },
+    {
+      "trial": 22,
+      "target": 2,
+      "reported": 1,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.5312093631216435,
+        "2": 0.4687906368783565
+      },
+      "choice_mass": 0.9911646842956543,
+      "top_tokens": [
+        [
+          "1",
+          0.5265
+        ],
+        [
+          "2",
+          0.4646
+        ],
+        [
+          "3",
+          0.0052
+        ],
+        [
+          "4",
+          0.0022
+        ],
+        [
+          "<|im_end|>",
+          0.0005
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 0,
+        "foil_chain_index": 1
+      }
+    },
+    {
+      "trial": 23,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.5621765002546856,
+        "2": 0.4378234997453144
+      },
+      "choice_mass": 0.9931159615516663,
+      "top_tokens": [
+        [
+          "1",
+          0.5583
+        ],
+        [
+          "2",
+          0.4348
+        ],
+        [
+          "3",
+          0.0043
+        ],
+        [
+          "4",
+          0.0008
+        ],
+        [
+          "<|im_end|>",
+          0.0007
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 0,
+        "foil_chain_index": 1
+      }
+    },
+    {
+      "trial": 24,
+      "target": 1,
+      "reported": 2,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.46879062390391085,
+        "2": 0.5312093760960891
+      },
+      "choice_mass": 0.9814628064632416,
+      "top_tokens": [
+        [
+          "2",
+          0.5214
+        ],
+        [
+          "1",
+          0.4601
+        ],
+        [
+          "3",
+          0.0123
+        ],
+        [
+          "4",
+          0.004
+        ],
+        [
+          "5",
+          0.0007
+        ]
+      ],
+      "free_response": "Based on the analysis of the provided image pairs:\n\n- The \"cue image\" is the black device with a dial, which is the same as the first image in the sequence.\n- The \"BC pair\" is the yellow ball with a rope.\n- The \"AB pair\" is the staple gun.\n\nThe question asks which of the two images (Image 1 or Image 2) was paired with the cue image.\n- Image 1 is the staple gun.",
+      "metadata": {
+        "chain_index": 1,
+        "foil_chain_index": 0
+      }
+    },
+    {
+      "trial": 25,
+      "target": 2,
+      "reported": 2,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.46879064123032643,
+        "2": 0.5312093587696736
+      },
+      "choice_mass": 0.993052214384079,
+      "top_tokens": [
+        [
+          "2",
+          0.5275
+        ],
+        [
+          "1",
+          0.4655
+        ],
+        [
+          "3",
+          0.0046
+        ],
+        [
+          "<|im_end|>",
+          0.0009
+        ],
+        [
+          "4",
+          0.0007
+        ]
+      ],
+      "free_response": "Based on the analysis of the provided pairs:\n\n- The first pair consists of an image of a mistletoe ornament and a sign for road work.\n- The second pair consists of a sign for road work and an image of a boat.\n\nThe cue image is the one with the black and white structure, which is the same image that appears in the second pair.\n\nTherefore, the cue image was paired with the image of the boat.\n\n2",
+      "metadata": {
+        "chain_index": 1,
+        "foil_chain_index": 0
+      }
+    },
+    {
+      "trial": 26,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.531209370555026,
+        "2": 0.4687906294449739
+      },
+      "choice_mass": 0.9956095814704895,
+      "top_tokens": [
+        [
+          "1",
+          0.5289
+        ],
+        [
+          "2",
+          0.4667
+        ],
+        [
+          "3",
+          0.0028
+        ],
+        [
+          "4",
+          0.0005
+        ],
+        [
+          "<|im_end|>",
+          0.0005
+        ]
+      ],
+      "free_response": "Based on the analysis of the provided image pairs:\n\n- The first pair consists of a perforated metal cylinder with a handle and a wicker basket on a stand.\n- The second pair consists of a yellow bag and a chisel.\n\nThe cue image is the perforated metal cylinder.\n\n- The image that shares a similar object (a perforated metal cylinder) with the cue image is the first image in the pair.\n- The second image in the pair (the chisel",
+      "metadata": {
+        "chain_index": 0,
+        "foil_chain_index": 1
+      }
+    },
+    {
+      "trial": 27,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.5621765058995589,
+        "2": 0.4378234941004411
+      },
+      "choice_mass": 0.9882102906703949,
+      "top_tokens": [
+        [
+          "1",
+          0.5555
+        ],
+        [
+          "2",
+          0.4327
+        ],
+        [
+          "3",
+          0.009
+        ],
+        [
+          "4",
+          0.0014
+        ],
+        [
+          "<|im_end|>",
+          0.0007
+        ]
+      ],
+      "free_response": "Based on the analysis of the provided pairs:\n\n- The first pair consists of a **scales** (Image 1) and a **lollipop** (Image 2).\n- The second pair consists of a **swing set** (Image 3) and a **lollipop** (Image 4).\n\nThe cue image is the **scales**.\n\nTherefore, the image paired with the cue image is Image 2.\n\n2",
+      "metadata": {
+        "chain_index": 1,
+        "foil_chain_index": 0
+      }
+    },
+    {
+      "trial": 28,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.5621765012208259,
+        "2": 0.4378234987791741
+      },
+      "choice_mass": 0.9868026077747345,
+      "top_tokens": [
+        [
+          "1",
+          0.5548
+        ],
+        [
+          "2",
+          0.432
+        ],
+        [
+          "3",
+          0.009
+        ],
+        [
+          "4",
+          0.002
+        ],
+        [
+          "5",
+          0.0008
+        ]
+      ],
+      "free_response": "Based on the provided information, the pairs are:\n- (AB pair): Image 1 (Truck) and Image 2 (Helmet)\n- (BC pair): Image 3 (String) and Image 4 (Disco ball)\n\nThe question asks which of the two images, Image 1 or Image 2, was paired with the cue image.\nThe cue image is the truck (Image 1).\nThe pair containing the truck is the (AB pair).",
+      "metadata": {
+        "chain_index": 0,
+        "foil_chain_index": 1
+      }
+    },
+    {
+      "trial": 29,
+      "target": 1,
+      "reported": 2,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.43782348411940986,
+        "2": 0.5621765158805901
+      },
+      "choice_mass": 0.9807668030261993,
+      "top_tokens": [
+        [
+          "2",
+          0.5514
+        ],
+        [
+          "1",
+          0.4294
+        ],
+        [
+          "3",
+          0.0147
+        ],
+        [
+          "4",
+          0.0026
+        ],
+        [
+          "<|im_end|>",
+          0.0008
+        ]
+      ],
+      "free_response": "Based on the analysis of the provided image pairs:\n\n- The first pair consists of a high-top stool and a cordless telephone.\n- The second pair consists of a paint roller and a compass.\n- The third pair consists of a high-top stool and a cordless telephone.\n- The fourth pair consists of a paint roller and a compass.\n\nThe cue image is the paint roller. The image that shares a pair with it is the compass.\n\nTherefore, the correct image is",
+      "metadata": {
+        "chain_index": 1,
+        "foil_chain_index": 0
+      }
+    },
+    {
+      "trial": 30,
+      "target": 2,
+      "reported": 2,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.46879060544977647,
+        "2": 0.5312093945502235
+      },
+      "choice_mass": 0.9871382415294647,
+      "top_tokens": [
+        [
+          "2",
+          0.5244
+        ],
+        [
+          "1",
+          0.4628
+        ],
+        [
+          "3",
+          0.0096
+        ],
+        [
+          "4",
+          0.0015
+        ],
+        [
+          "<|im_end|>",
+          0.0007
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 1,
+        "foil_chain_index": 0
+      }
+    },
+    {
+      "trial": 31,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.5621765056537795,
+        "2": 0.4378234943462204
+      },
+      "choice_mass": 0.9927870631217957,
+      "top_tokens": [
+        [
+          "1",
+          0.5581
+        ],
+        [
+          "2",
+          0.4347
+        ],
+        [
+          "3",
+          0.0048
+        ],
+        [
+          "4",
+          0.0011
+        ],
+        [
+          "<|im_end|>",
+          0.0007
+        ]
+      ],
+      "free_response": "Based on the provided images and the logic of the pairs, here is the analysis:\n\n- The first pair consists of a \"chips\" image and a \"money\" image. The connection is that the chips are shaped like the bill, and the money is shaped like the chips.\n- The second pair consists of a \"tool\" image and a \"bag\" image. The connection is that the tool is a type of sewing machine, and the bag is a type of sewing kit.",
+      "metadata": {
+        "chain_index": 1,
+        "foil_chain_index": 0
+      }
+    },
+    {
+      "trial": 32,
+      "target": 2,
+      "reported": 1,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.5621765104202232,
+        "2": 0.4378234895797768
+      },
+      "choice_mass": 0.9907057881355286,
+      "top_tokens": [
+        [
+          "1",
+          0.557
+        ],
+        [
+          "2",
+          0.4338
+        ],
+        [
+          "3",
+          0.0055
+        ],
+        [
+          "4",
+          0.002
+        ],
+        [
+          "5",
+          0.0007
+        ]
+      ],
+      "free_response": "Based on the analysis of the provided image pairs:\n\n- The first image is a close-up of a camera lens.\n- The second image is a pink, plush toy that resembles a dragon or a small creature.\n\nThe third image is a baby bassinet, and the fourth image is the same pink plush toy.\n\nThe question asks which of the two images (Image 1 or Image 2) was paired with the cue image (the camera lens).\n\n- Image 1 (",
+      "metadata": {
+        "chain_index": 0,
+        "foil_chain_index": 1
+      }
+    },
+    {
+      "trial": 33,
+      "target": 2,
+      "reported": 1,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.6513548539813365,
+        "2": 0.3486451460186634
+      },
+      "choice_mass": 0.9890851080417633,
+      "top_tokens": [
+        [
+          "1",
+          0.6442
+        ],
+        [
+          "2",
+          0.3448
+        ],
+        [
+          "3",
+          0.0063
+        ],
+        [
+          "4",
+          0.0021
+        ],
+        [
+          "0",
+          0.0009
+        ]
+      ],
+      "free_response": "Based on the provided information, the pairs are:\n\n- **Image 1** (the orange machine) is paired with **Image 2** (the blue dinosaur).\n- **Image 3** (the potted plant) is paired with **Image 4** (the same blue dinosaur).\n\nThe cue image is the orange machine (Image 1).\n\nTherefore, the image paired with the cue image is Image 2.\n\n2",
+      "metadata": {
+        "chain_index": 0,
+        "foil_chain_index": 1
+      }
+    },
+    {
+      "trial": 34,
+      "target": 2,
+      "reported": 1,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.56217649894741,
+        "2": 0.43782350105259
+      },
+      "choice_mass": 0.9900603294372559,
+      "top_tokens": [
+        [
+          "1",
+          0.5566
+        ],
+        [
+          "2",
+          0.4335
+        ],
+        [
+          "3",
+          0.0048
+        ],
+        [
+          "4",
+          0.0029
+        ],
+        [
+          "<|im_end|>",
+          0.0009
+        ]
+      ],
+      "free_response": "Based on the analysis of the provided images and pairs:\n\n- The **cue image** is the brown wooden rack with green accents.\n- The **AB pair** consists of the red toolbox and the peanut butter jar.\n- The **BC pair** consists of the wicker basket and the red toolbox.\n\nThe question asks which of the two images (Image 1 or Image 2) was paired with the cue image.\n\n- Image 1 is the red toolbox.\n-",
+      "metadata": {
+        "chain_index": 0,
+        "foil_chain_index": 1
+      }
+    },
+    {
+      "trial": 35,
+      "target": 2,
+      "reported": 1,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.5621764947749956,
+        "2": 0.43782350522500435
+      },
+      "choice_mass": 0.9899439215660095,
+      "top_tokens": [
+        [
+          "1",
+          0.5565
+        ],
+        [
+          "2",
+          0.4334
+        ],
+        [
+          "3",
+          0.0055
+        ],
+        [
+          "4",
+          0.0023
+        ],
+        [
+          "<|im_end|>",
+          0.0012
+        ]
+      ],
+      "free_response": "Based on the analysis of the provided image pairs:\n\n- The first pair consists of two identical white speakers, one stacked on top of the other.\n- The second pair consists of two identical wooden-handled tools, one placed on top of the other.\n\nThe cue image provided is the first speaker. Therefore, the image that was paired with it is the second image in the sequence.\n\nThe correct digit is 2.",
+      "metadata": {
+        "chain_index": 0,
+        "foil_chain_index": 1
+      }
+    },
+    {
+      "trial": 36,
+      "target": 2,
+      "reported": 1,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.6513548543770293,
+        "2": 0.3486451456229706
+      },
+      "choice_mass": 0.9915946424007416,
+      "top_tokens": [
+        [
+          "1",
+          0.6459
+        ],
+        [
+          "2",
+          0.3457
+        ],
+        [
+          "3",
+          0.0044
+        ],
+        [
+          "4",
+          0.0018
+        ],
+        [
+          "<|im_end|>",
+          0.0011
+        ]
+      ],
+      "free_response": "Based on the analysis of the provided image pairs:\n\n- The first image is a close-up of a metallic, iridescent hoop earring.\n- The second image is a bottle of Tilex Mold & Mildew cleaner.\n\nThe third image is a pile of split peas.\nThe fourth image is a parachute.\n\nThe question asks to identify which of the two images (the earring or the cleaner) was paired with the cue image (the earring).\n\n- The cue",
+      "metadata": {
+        "chain_index": 0,
+        "foil_chain_index": 1
+      }
+    },
+    {
+      "trial": 37,
+      "target": 1,
+      "reported": 2,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.46879061534880756,
+        "2": 0.5312093846511925
+      },
+      "choice_mass": 0.991827666759491,
+      "top_tokens": [
+        [
+          "2",
+          0.5269
+        ],
+        [
+          "1",
+          0.465
+        ],
+        [
+          "3",
+          0.0059
+        ],
+        [
+          "4",
+          0.0008
+        ],
+        [
+          "0",
+          0.0007
+        ]
+      ],
+      "free_response": "Based on the analysis of the provided pairs:\n\n- The first pair consists of a blue pet carrier and a planet with rings (Saturn). The connection is likely thematic, relating to travel or transport.\n- The second pair consists of a spiral staircase and a decorative tray. The connection is likely thematic, relating to home, living spaces, or furniture.\n\nThe cue image is the blue pet carrier. Therefore, it belongs to the first pair.\n\nThe image paired with the cue image is",
+      "metadata": {
+        "chain_index": 0,
+        "foil_chain_index": 1
+      }
+    },
+    {
+      "trial": 38,
+      "target": 2,
+      "reported": 1,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.562176516156198,
+        "2": 0.437823483843802
+      },
+      "choice_mass": 0.9914546310901642,
+      "top_tokens": [
+        [
+          "1",
+          0.5574
+        ],
+        [
+          "2",
+          0.4341
+        ],
+        [
+          "3",
+          0.0048
+        ],
+        [
+          "4",
+          0.0018
+        ],
+        [
+          "<|im_end|>",
+          0.0007
+        ]
+      ],
+      "free_response": "Based on the analysis of the provided images and pairs:\n\n- The **cue image** is a silver foot pedal with two numbered buttons, labeled \"1\" and \"2\".\n- The **AB pair** consists of the foot pedal (Image 1) and the triangular ruler with a yellow highlighter (Image 2).\n- The **BC pair** consists of the wooden blocks (Image 3) and the same triangular ruler with a yellow highlighter (Image 2).",
+      "metadata": {
+        "chain_index": 0,
+        "foil_chain_index": 1
+      }
+    },
+    {
+      "trial": 39,
+      "target": 2,
+      "reported": 2,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.4073334111383007,
+        "2": 0.5926665888616993
+      },
+      "choice_mass": 0.9731739461421967,
+      "top_tokens": [
+        [
+          "2",
+          0.5768
+        ],
+        [
+          "1",
+          0.3964
+        ],
+        [
+          "3",
+          0.0154
+        ],
+        [
+          "4",
+          0.0082
+        ],
+        [
+          "<|im_end|>",
+          0.0011
+        ]
+      ],
+      "free_response": "Based on the analysis of the provided images and pairs:\n\n- The cue image is a black, ornate bench with a patterned cushion.\n- Image 1 is a black, boxy heater with a mesh front and control knobs.\n- Image 2 is a white, rectangular security camera or intercom unit.\n\nThe pairs are:\n- (AB pair): Image 1 (heater) and Image 2 (camera).\n- (BC pair): Image 3 (",
+      "metadata": {
+        "chain_index": 1,
+        "foil_chain_index": 0
+      }
+    },
+    {
+      "trial": 40,
+      "target": 1,
+      "reported": 2,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.46879061067365707,
+        "2": 0.5312093893263429
+      },
+      "choice_mass": 0.9945332705974579,
+      "top_tokens": [
+        [
+          "2",
+          0.5283
+        ],
+        [
+          "1",
+          0.4662
+        ],
+        [
+          "3",
+          0.004
+        ],
+        [
+          "<|im_end|>",
+          0.0005
+        ],
+        [
+          "4",
+          0.0004
+        ]
+      ],
+      "free_response": "Based on the analysis of the provided image pairs:\n\n- The first pair consists of a gumball machine and a black cap.\n- The second pair consists of a yellow teapot set and a black cap.\n\nThe question asks which of the two images (Image 1 or Image 2) was paired with the cue image (the gumball machine).\n\n- Image 1 is the black cap.\n- Image 2 is the yellow teapot set.\n\nTherefore,",
+      "metadata": {
+        "chain_index": 0,
+        "foil_chain_index": 1
+      }
+    },
+    {
+      "trial": 41,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.5312093872047463,
+        "2": 0.4687906127952537
+      },
+      "choice_mass": 0.9888859689235687,
+      "top_tokens": [
+        [
+          "1",
+          0.5253
+        ],
+        [
+          "2",
+          0.4636
+        ],
+        [
+          "3",
+          0.0075
+        ],
+        [
+          "4",
+          0.0021
+        ],
+        [
+          "<|im_end|>",
+          0.0006
+        ]
+      ],
+      "free_response": "Based on the analysis of the provided image pairs:\n\n- The first pair consists of a wooden toy stroller and a bicycle crank.\n- The second pair consists of a grenade and a bicycle crank.\n- The third pair consists of a corkscrew and a bicycle crank.\n\nThe cue image is a grenade. The only image in the list that is a grenade is the first one. Therefore, the cue image was paired with the first image.\n\n1",
+      "metadata": {
+        "chain_index": 1,
+        "foil_chain_index": 0
+      }
+    },
+    {
+      "trial": 42,
+      "target": 1,
+      "reported": 2,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.46879063006959215,
+        "2": 0.5312093699304078
+      },
+      "choice_mass": 0.9931416213512421,
+      "top_tokens": [
+        [
+          "2",
+          0.5276
+        ],
+        [
+          "1",
+          0.4656
+        ],
+        [
+          "3",
+          0.004
+        ],
+        [
+          "4",
+          0.0013
+        ],
+        [
+          "<|im_end|>",
+          0.0006
+        ]
+      ],
+      "free_response": "Based on the analysis of the provided image pairs:\n\n- The first image is a close-up of a fire hose nozzle.\n- The second image is a wetsuit.\n- The third image is a piece of candy.\n- The fourth image is a wetsuit.\n- The fifth image is a piece of candy.\n\nThe pairs are:\n- (AB pair): Image 1 (fire hose) and Image 2 (wetsuit).\n- (BC",
+      "metadata": {
+        "chain_index": 0,
+        "foil_chain_index": 1
+      }
+    },
+    {
+      "trial": 43,
+      "target": 1,
+      "reported": 2,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.4687906166700991,
+        "2": 0.5312093833299009
+      },
+      "choice_mass": 0.9905342757701874,
+      "top_tokens": [
+        [
+          "2",
+          0.5262
+        ],
+        [
+          "1",
+          0.4644
+        ],
+        [
+          "3",
+          0.0066
+        ],
+        [
+          "4",
+          0.0013
+        ],
+        [
+          "<|im_end|>",
+          0.0007
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 1,
+        "foil_chain_index": 0
+      }
+    },
+    {
+      "trial": 44,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.5621764918895296,
+        "2": 0.43782350811047044
+      },
+      "choice_mass": 0.9930211901664734,
+      "top_tokens": [
+        [
+          "1",
+          0.5583
+        ],
+        [
+          "2",
+          0.4348
+        ],
+        [
+          "3",
+          0.0043
+        ],
+        [
+          "<|im_end|>",
+          0.0011
+        ],
+        [
+          "4",
+          0.0007
+        ]
+      ],
+      "free_response": "Based on the analysis of the provided images and pairs:\n\n- The **cue image** is the pink, plush dice hanging from a string.\n- The **AB pair** consists of the pink dice (Image 1) and the lion figurine (Image 2).\n- The **BC pair** consists of the headlamp (Image 3) and the elephant figurine (Image 4).\n\nThe question asks which of the two images (Image 1 or Image 2",
+      "metadata": {
+        "chain_index": 0,
+        "foil_chain_index": 1
+      }
+    },
+    {
+      "trial": 45,
+      "target": 2,
+      "reported": 2,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.4073334123883191,
+        "2": 0.5926665876116809
+      },
+      "choice_mass": 0.9864367544651031,
+      "top_tokens": [
+        [
+          "2",
+          0.5846
+        ],
+        [
+          "1",
+          0.4018
+        ],
+        [
+          "3",
+          0.0094
+        ],
+        [
+          "4",
+          0.0021
+        ],
+        [
+          "<|im_end|>",
+          0.001
+        ]
+      ],
+      "free_response": "Based on the analysis of the provided images and pairs:\n\n- The \"Cue image\" is the Pantene hair product bottle.\n- The \"BC pair\" consists of the headlamp and the battery.\n- The \"AB pair\" consists of the doll walker and the headlamp.\n\nThe question asks which of the two images (Image 1 or Image 2) was paired with the cue image.\n\n- Image 1 is the doll walker.\n- Image 2",
+      "metadata": {
+        "chain_index": 1,
+        "foil_chain_index": 0
+      }
+    },
+    {
+      "trial": 46,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.5,
+        "2": 0.5
+      },
+      "choice_mass": 0.9878177046775818,
+      "top_tokens": [
+        [
+          "2",
+          0.4939
+        ],
+        [
+          "1",
+          0.4939
+        ],
+        [
+          "3",
+          0.007
+        ],
+        [
+          "4",
+          0.002
+        ],
+        [
+          "5",
+          0.0012
+        ]
+      ],
+      "free_response": "Based on the analysis of the provided image pairs:\n\n- The first image is a decorative, ornate seat, likely from a historical chair or throne.\n- The second image is a black otoscope, a medical instrument used to examine the ear.\n- The third image is a roll of white paper, possibly a receipt or a label.\n- The fourth image is a statue of a kneeling figure in armor.\n\nThe question asks to identify which of the two images (Image 1",
+      "metadata": {
+        "chain_index": 0,
+        "foil_chain_index": 1
+      }
+    },
+    {
+      "trial": 47,
+      "target": 2,
+      "reported": 2,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.437823484481625,
+        "2": 0.562176515518375
+      },
+      "choice_mass": 0.9833280444145203,
+      "top_tokens": [
+        [
+          "2",
+          0.5528
+        ],
+        [
+          "1",
+          0.4305
+        ],
+        [
+          "3",
+          0.0115
+        ],
+        [
+          "4",
+          0.0023
+        ],
+        [
+          "<|im_end|>",
+          0.0014
+        ]
+      ],
+      "free_response": "Based on the analysis of the provided images and pairs:\n\n- The cue image is the blue, industrial-style light fixture.\n- Image 1 is a reindeer headband.\n- Image 2 is a silver horse brooch.\n\nThe pairs are:\n- (AB pair): The pommel horse and the reindeer headband.\n- (BC pair): The light fixture and the horse brooch.\n\nTherefore, the image paired with the cue image (the light fixture",
+      "metadata": {
+        "chain_index": 1,
+        "foil_chain_index": 0
+      }
+    },
+    {
+      "trial": 48,
+      "target": 2,
+      "reported": 1,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.6513548535162657,
+        "2": 0.34864514648373435
+      },
+      "choice_mass": 0.98898646235466,
+      "top_tokens": [
+        [
+          "1",
+          0.6442
+        ],
+        [
+          "2",
+          0.3448
+        ],
+        [
+          "3",
+          0.0063
+        ],
+        [
+          "4",
+          0.003
+        ],
+        [
+          "<|im_end|>",
+          0.0006
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 0,
+        "foil_chain_index": 1
+      }
+    },
+    {
+      "trial": 49,
+      "target": 2,
+      "reported": 1,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.5,
+        "2": 0.5
+      },
+      "choice_mass": 0.9919801950454712,
+      "top_tokens": [
+        [
+          "2",
+          0.496
+        ],
+        [
+          "1",
+          0.496
+        ],
+        [
+          "3",
+          0.0049
+        ],
+        [
+          "<|im_end|>",
+          0.001
+        ],
+        [
+          "4",
+          0.001
+        ]
+      ],
+      "free_response": "Based on the analysis of the provided pairs:\n\n- The first pair consists of a man in a vampire costume and a black cable with connectors.\n- The second pair consists of a \"Backspace\" key on a keyboard and a pair of black shoulder pads.\n\nThe cue image provided is the \"Backspace\" key.\n\nTherefore, the image paired with the cue image is Image 2.\n\n2",
+      "metadata": {
+        "chain_index": 1,
+        "foil_chain_index": 0
+      }
+    }
+  ],
+  "metrics": {
+    "accuracy": 0.48,
+    "n_correct": 24,
+    "total": 50,
+    "free_text_bare_digit": 0.26,
+    "mean_p_chosen": 0.5579962870620225,
+    "mean_choice_mass": 0.9888899850845337,
+    "frac_low_mass": 0.0,
+    "response_distribution": {
+      "1": 31,
+      "2": 19
+    }
+  }
+}

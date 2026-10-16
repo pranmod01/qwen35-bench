@@ -1,0 +1,1996 @@
+{
+  "run": {
+    "model": {
+      "name": "qwen3.5-4b",
+      "model_id": "Qwen/Qwen3.5-4B",
+      "max_image_size": 512,
+      "max_new_tokens": 100
+    },
+    "task": "associative_inference",
+    "condition": {
+      "dataset": "Brady2008",
+      "pair_type": "word",
+      "probe": "direct_ab",
+      "n_chains": 2,
+      "n_images": 6,
+      "prompt": "labeled",
+      "n_trials": 50
+    },
+    "seed": 0
+  },
+  "config": {
+    "run_name": "assoc_inf_ab",
+    "output_dir": "results",
+    "seeds": [
+      0
+    ],
+    "models": [
+      {
+        "name": "qwen3.5-2b",
+        "model_id": "Qwen/Qwen3.5-2B",
+        "max_image_size": 512,
+        "max_new_tokens": 100
+      },
+      {
+        "name": "qwen3.5-4b",
+        "model_id": "Qwen/Qwen3.5-4B",
+        "max_image_size": 512,
+        "max_new_tokens": 100
+      }
+    ],
+    "tasks": [
+      {
+        "task": "associative_inference",
+        "datasets": [
+          "Brady2008"
+        ],
+        "pair_types": [
+          "image",
+          "word"
+        ],
+        "probe_types": [
+          "inference",
+          "direct_ab",
+          "direct_bc"
+        ],
+        "n_chains": [
+          2,
+          5,
+          25
+        ],
+        "prompts": [
+          "original",
+          "cue_turn",
+          "labeled"
+        ],
+        "n_trials": 50
+      }
+    ]
+  },
+  "provenance": {
+    "config_hash": "d49714f7009d",
+    "gpu": "NVIDIA A100-SXM4-80GB",
+    "git_commit": null,
+    "git_dirty": false,
+    "torch": "2.10.0+cu128",
+    "transformers": "5.17.0"
+  },
+  "elapsed_s": 56.1,
+  "peak_gpu_gb": 9.3,
+  "error": null,
+  "trials": [
+    {
+      "trial": 0,
+      "target": 2,
+      "reported": 1,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.651354837438194,
+        "2": 0.34864516256180605
+      },
+      "choice_mass": 0.9919996857643127,
+      "top_tokens": [
+        [
+          "1",
+          0.6461
+        ],
+        [
+          "2",
+          0.3459
+        ],
+        [
+          "3",
+          0.003
+        ],
+        [
+          " ",
+          0.0016
+        ],
+        [
+          "0",
+          0.0009
+        ]
+      ],
+      "free_response": "1",
+      "metadata": {
+        "chain_index": 0,
+        "foil_chain_index": 1
+      }
+    },
+    {
+      "trial": 1,
+      "target": 2,
+      "reported": 1,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.6791786862480124,
+        "2": 0.3208213137519876
+      },
+      "choice_mass": 0.976791501045227,
+      "top_tokens": [
+        [
+          "1",
+          0.6634
+        ],
+        [
+          "2",
+          0.3134
+        ],
+        [
+          " ",
+          0.0095
+        ],
+        [
+          " (",
+          0.0045
+        ],
+        [
+          "3",
+          0.0035
+        ]
+      ],
+      "free_response": "To solve this, we need to understand the connections established in the initial pairs.\n\n- The first pair is (AB pair), which connects Image 1 (a floppy disk) and Image 2 (a makeup compact).\n- The second pair is (BC pair), which connects Image 2 (the makeup compact) and Image 3 (a pressure gauge).\n- The word \"DECK\" is associated with the (BC pair). A floppy disk is often called a \"deck\"",
+      "metadata": {
+        "chain_index": 0,
+        "foil_chain_index": 1
+      }
+    },
+    {
+      "trial": 2,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.6224593258827601,
+        "2": 0.37754067411723985
+      },
+      "choice_mass": 0.9829209744930267,
+      "top_tokens": [
+        [
+          "1",
+          0.6118
+        ],
+        [
+          "2",
+          0.3711
+        ],
+        [
+          " ",
+          0.0053
+        ],
+        [
+          "3",
+          0.0041
+        ],
+        [
+          "<|im_end|>",
+          0.0025
+        ]
+      ],
+      "free_response": "To determine the correct answer, we need to trace the connections between the items based on the provided pairs.\n\n- The cue image is a film reel.\n- According to the first pair, the film reel is connected to the inline skates (Image 1).\n- The second pair connects the inline skates (Image 1) to the painted pumpkin (Image 2).\n- This creates a chain: Film Reel -> Inline Skates -> Painted Pumpkin.\n- The",
+      "metadata": {
+        "chain_index": 1,
+        "foil_chain_index": 0
+      }
+    },
+    {
+      "trial": 3,
+      "target": 2,
+      "reported": 1,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.6513548549157423,
+        "2": 0.3486451450842577
+      },
+      "choice_mass": 0.9823611378669739,
+      "top_tokens": [
+        [
+          "1",
+          0.6399
+        ],
+        [
+          "2",
+          0.3425
+        ],
+        [
+          "3",
+          0.0049
+        ],
+        [
+          "<|im_end|>",
+          0.0043
+        ],
+        [
+          " ",
+          0.0043
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 1,
+        "foil_chain_index": 0
+      }
+    },
+    {
+      "trial": 4,
+      "target": 2,
+      "reported": 2,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.3486451523714047,
+        "2": 0.6513548476285953
+      },
+      "choice_mass": 0.9778658747673035,
+      "top_tokens": [
+        [
+          "2",
+          0.6369
+        ],
+        [
+          "1",
+          0.3409
+        ],
+        [
+          "3",
+          0.0132
+        ],
+        [
+          " ",
+          0.0055
+        ],
+        [
+          "<|im_end|>",
+          0.0006
+        ]
+      ],
+      "free_response": "To determine the correct answer, we must follow the logical connections established in the prompt.\n\n1.  **Analyze the initial pairs:**\n    - The first pair is (AB), which consists of a nautical barometer and a fruit goblet.\n    - The second pair is (BC), which consists of the same fruit goblet and a wooden basket.\n\n2.  **Identify the connection:**\n    - The image of the fruit goblet is common to both pairs",
+      "metadata": {
+        "chain_index": 1,
+        "foil_chain_index": 0
+      }
+    },
+    {
+      "trial": 5,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.7310585616123206,
+        "2": 0.26894143838767937
+      },
+      "choice_mass": 0.991967111825943,
+      "top_tokens": [
+        [
+          "1",
+          0.7252
+        ],
+        [
+          "2",
+          0.2668
+        ],
+        [
+          "3",
+          0.0038
+        ],
+        [
+          " ",
+          0.0014
+        ],
+        [
+          "<|im_end|>",
+          0.0008
+        ]
+      ],
+      "free_response": "1",
+      "metadata": {
+        "chain_index": 1,
+        "foil_chain_index": 0
+      }
+    },
+    {
+      "trial": 6,
+      "target": 2,
+      "reported": 1,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.6513548717516321,
+        "2": 0.3486451282483679
+      },
+      "choice_mass": 0.9543254971504211,
+      "top_tokens": [
+        [
+          "1",
+          0.6216
+        ],
+        [
+          "2",
+          0.3327
+        ],
+        [
+          "3",
+          0.0397
+        ],
+        [
+          " ",
+          0.002
+        ],
+        [
+          "<|im_end|>",
+          0.0015
+        ]
+      ],
+      "free_response": "1",
+      "metadata": {
+        "chain_index": 1,
+        "foil_chain_index": 0
+      }
+    },
+    {
+      "trial": 7,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.798186779555327,
+        "2": 0.20181322044467295
+      },
+      "choice_mass": 0.9737353622913361,
+      "top_tokens": [
+        [
+          "1",
+          0.7772
+        ],
+        [
+          "2",
+          0.1965
+        ],
+        [
+          " ",
+          0.0111
+        ],
+        [
+          "3",
+          0.0049
+        ],
+        [
+          " (",
+          0.003
+        ]
+      ],
+      "free_response": "1",
+      "metadata": {
+        "chain_index": 1,
+        "foil_chain_index": 0
+      }
+    },
+    {
+      "trial": 8,
+      "target": 2,
+      "reported": 1,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.6791786826560668,
+        "2": 0.32082131734393315
+      },
+      "choice_mass": 0.9832737147808075,
+      "top_tokens": [
+        [
+          "1",
+          0.6678
+        ],
+        [
+          "2",
+          0.3155
+        ],
+        [
+          "3",
+          0.0058
+        ],
+        [
+          " ",
+          0.0058
+        ],
+        [
+          "<|im_end|>",
+          0.0021
+        ]
+      ],
+      "free_response": "To solve this, we need to understand the connection between the cue image and the other images in the sequence.\n\n- The cue image is a brass bugle.\n- The instruction mentions \"hidden connections\" and provides a word clue: \"FRIEND\".\n- In the provided sequence, the word \"FRIEND\" is associated with the pair (BC), which consists of the drum (Image 2) and the bag of fish (Image 1).\n- The connection between the drum",
+      "metadata": {
+        "chain_index": 0,
+        "foil_chain_index": 1
+      }
+    },
+    {
+      "trial": 9,
+      "target": 2,
+      "reported": 1,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.6224593415069182,
+        "2": 0.3775406584930818
+      },
+      "choice_mass": 0.9176061749458313,
+      "top_tokens": [
+        [
+          "1",
+          0.5712
+        ],
+        [
+          "2",
+          0.3464
+        ],
+        [
+          "3",
+          0.0682
+        ],
+        [
+          " ",
+          0.0049
+        ],
+        [
+          "4",
+          0.0038
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 1,
+        "foil_chain_index": 0
+      }
+    },
+    {
+      "trial": 10,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.9241418215652194,
+        "2": 0.07585817843478064
+      },
+      "choice_mass": 0.9876929521560669,
+      "top_tokens": [
+        [
+          "1",
+          0.9128
+        ],
+        [
+          "2",
+          0.0749
+        ],
+        [
+          "3",
+          0.0054
+        ],
+        [
+          " ",
+          0.0037
+        ],
+        [
+          "0",
+          0.0011
+        ]
+      ],
+      "free_response": "To determine the correct answer, we must trace the connections established in the initial sequence.\n\n- The sequence begins with an image of a monkey (let's call it Image A) and an image of a squash (Image B).\n- The first connection is explicitly stated as an \"(AB pair)\", linking the monkey and the squash.\n- The next connection is a \"(BC pair)\", which links the squash (Image B) to a duster (Image C).\n- The word \"BASE",
+      "metadata": {
+        "chain_index": 1,
+        "foil_chain_index": 0
+      }
+    },
+    {
+      "trial": 11,
+      "target": 2,
+      "reported": 1,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.7057850370283227,
+        "2": 0.29421496297167726
+      },
+      "choice_mass": 0.9864629209041595,
+      "top_tokens": [
+        [
+          "1",
+          0.6962
+        ],
+        [
+          "2",
+          0.2902
+        ],
+        [
+          " ",
+          0.0053
+        ],
+        [
+          "<|im_end|>",
+          0.0047
+        ],
+        [
+          "3",
+          0.002
+        ]
+      ],
+      "free_response": "1",
+      "metadata": {
+        "chain_index": 0,
+        "foil_chain_index": 1
+      }
+    },
+    {
+      "trial": 12,
+      "target": 2,
+      "reported": 1,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.817574475139384,
+        "2": 0.18242552486061603
+      },
+      "choice_mass": 0.974291518330574,
+      "top_tokens": [
+        [
+          "1",
+          0.7966
+        ],
+        [
+          "2",
+          0.1777
+        ],
+        [
+          "3",
+          0.0165
+        ],
+        [
+          " ",
+          0.0037
+        ],
+        [
+          "4",
+          0.0017
+        ]
+      ],
+      "free_response": "To solve this, we need to find the hidden connection between the cue image and the options.\n\n- The cue image is an easel.\n- The word associated with the first pair (A-B) is \"CHAPEL\".\n- The word associated with the second pair (B-C) is \"POPCORN\".\n\nLet's analyze the connections:\n\n- **Connection 1 (A-B):** The image A is a shield with swords. The word is \"CHAPEL",
+      "metadata": {
+        "chain_index": 1,
+        "foil_chain_index": 0
+      }
+    },
+    {
+      "trial": 13,
+      "target": 2,
+      "reported": 1,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.5926665897815859,
+        "2": 0.40733341021841407
+      },
+      "choice_mass": 0.9861094951629639,
+      "top_tokens": [
+        [
+          "1",
+          0.5844
+        ],
+        [
+          "2",
+          0.4017
+        ],
+        [
+          " ",
+          0.0065
+        ],
+        [
+          "3",
+          0.0039
+        ],
+        [
+          "<|im_end|>",
+          0.001
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 0,
+        "foil_chain_index": 1
+      }
+    },
+    {
+      "trial": 14,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.5926665980276494,
+        "2": 0.40733340197235063
+      },
+      "choice_mass": 0.9757679402828217,
+      "top_tokens": [
+        [
+          "1",
+          0.5783
+        ],
+        [
+          "2",
+          0.3975
+        ],
+        [
+          "3",
+          0.0106
+        ],
+        [
+          "<|im_end|>",
+          0.0034
+        ],
+        [
+          " ",
+          0.003
+        ]
+      ],
+      "free_response": "To determine the correct answer, we must follow the logical connections established in the prompt.\n\n1.  **Analyze the initial pairs:**\n    - The first image (a perfume bottle with autumn leaves) is paired with the word \"BRIDGE\".\n    - The second image (a car seat) is paired with the word \"VITAMIN\".\n    - The third image (a scarf) is paired with the word \"BRIDGE\".\n    - The fourth image (a",
+      "metadata": {
+        "chain_index": 0,
+        "foil_chain_index": 1
+      }
+    },
+    {
+      "trial": 15,
+      "target": 1,
+      "reported": 2,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.46879063721081987,
+        "2": 0.5312093627891802
+      },
+      "choice_mass": 0.9854958355426788,
+      "top_tokens": [
+        [
+          "2",
+          0.5235
+        ],
+        [
+          "1",
+          0.462
+        ],
+        [
+          " ",
+          0.0058
+        ],
+        [
+          "3",
+          0.0045
+        ],
+        [
+          "0",
+          0.0007
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 0,
+        "foil_chain_index": 1
+      }
+    },
+    {
+      "trial": 16,
+      "target": 2,
+      "reported": 2,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.4378234947859228,
+        "2": 0.5621765052140772
+      },
+      "choice_mass": 0.9906610548496246,
+      "top_tokens": [
+        [
+          "2",
+          0.5569
+        ],
+        [
+          "1",
+          0.4337
+        ],
+        [
+          "<|im_end|>",
+          0.0029
+        ],
+        [
+          " ",
+          0.0023
+        ],
+        [
+          "3",
+          0.0023
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 1,
+        "foil_chain_index": 0
+      }
+    },
+    {
+      "trial": 17,
+      "target": 2,
+      "reported": 1,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.6791786959027769,
+        "2": 0.32082130409722315
+      },
+      "choice_mass": 0.9850400388240814,
+      "top_tokens": [
+        [
+          "1",
+          0.669
+        ],
+        [
+          "2",
+          0.316
+        ],
+        [
+          "3",
+          0.0045
+        ],
+        [
+          " ",
+          0.0045
+        ],
+        [
+          "<|im_end|>",
+          0.0035
+        ]
+      ],
+      "free_response": "1",
+      "metadata": {
+        "chain_index": 0,
+        "foil_chain_index": 1
+      }
+    },
+    {
+      "trial": 18,
+      "target": 2,
+      "reported": 1,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.6791786865198103,
+        "2": 0.32082131348018966
+      },
+      "choice_mass": 0.985323429107666,
+      "top_tokens": [
+        [
+          "1",
+          0.6692
+        ],
+        [
+          "2",
+          0.3161
+        ],
+        [
+          "3",
+          0.0074
+        ],
+        [
+          " ",
+          0.004
+        ],
+        [
+          "4",
+          0.0006
+        ]
+      ],
+      "free_response": "1",
+      "metadata": {
+        "chain_index": 1,
+        "foil_chain_index": 0
+      }
+    },
+    {
+      "trial": 19,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.6224593296524493,
+        "2": 0.37754067034755073
+      },
+      "choice_mass": 0.9872347116470337,
+      "top_tokens": [
+        [
+          "1",
+          0.6145
+        ],
+        [
+          "2",
+          0.3727
+        ],
+        [
+          "3",
+          0.0077
+        ],
+        [
+          " ",
+          0.0013
+        ],
+        [
+          "0",
+          0.0012
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 1,
+        "foil_chain_index": 0
+      }
+    },
+    {
+      "trial": 20,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.7981867841444495,
+        "2": 0.20181321585555045
+      },
+      "choice_mass": 0.9807790815830231,
+      "top_tokens": [
+        [
+          "1",
+          0.7828
+        ],
+        [
+          "2",
+          0.1979
+        ],
+        [
+          " ",
+          0.0112
+        ],
+        [
+          " (",
+          0.0018
+        ],
+        [
+          "3",
+          0.0018
+        ]
+      ],
+      "free_response": "1",
+      "metadata": {
+        "chain_index": 1,
+        "foil_chain_index": 0
+      }
+    },
+    {
+      "trial": 21,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.5,
+        "2": 0.5
+      },
+      "choice_mass": 0.9875918626785278,
+      "top_tokens": [
+        [
+          "2",
+          0.4938
+        ],
+        [
+          "1",
+          0.4938
+        ],
+        [
+          " ",
+          0.0038
+        ],
+        [
+          "3",
+          0.0026
+        ],
+        [
+          "<|im_end|>",
+          0.0023
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 0,
+        "foil_chain_index": 1
+      }
+    },
+    {
+      "trial": 22,
+      "target": 2,
+      "reported": 1,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.7772998578021074,
+        "2": 0.22270014219789264
+      },
+      "choice_mass": 0.9815211296081543,
+      "top_tokens": [
+        [
+          "1",
+          0.7629
+        ],
+        [
+          "2",
+          0.2186
+        ],
+        [
+          " ",
+          0.0085
+        ],
+        [
+          "<|im_end|>",
+          0.0035
+        ],
+        [
+          "3",
+          0.0035
+        ]
+      ],
+      "free_response": "1",
+      "metadata": {
+        "chain_index": 0,
+        "foil_chain_index": 1
+      }
+    },
+    {
+      "trial": 23,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.5,
+        "2": 0.5
+      },
+      "choice_mass": 0.9916509985923767,
+      "top_tokens": [
+        [
+          "2",
+          0.4958
+        ],
+        [
+          "1",
+          0.4958
+        ],
+        [
+          "3",
+          0.0033
+        ],
+        [
+          " ",
+          0.002
+        ],
+        [
+          "<|im_end|>",
+          0.0012
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 0,
+        "foil_chain_index": 1
+      }
+    },
+    {
+      "trial": 24,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.7549149875106612,
+        "2": 0.24508501248933884
+      },
+      "choice_mass": 0.9899595677852631,
+      "top_tokens": [
+        [
+          "1",
+          0.7473
+        ],
+        [
+          "2",
+          0.2426
+        ],
+        [
+          "3",
+          0.0044
+        ],
+        [
+          "<|im_end|>",
+          0.0013
+        ],
+        [
+          "0",
+          0.001
+        ]
+      ],
+      "free_response": "1",
+      "metadata": {
+        "chain_index": 1,
+        "foil_chain_index": 0
+      }
+    },
+    {
+      "trial": 25,
+      "target": 2,
+      "reported": 1,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.5,
+        "2": 0.5
+      },
+      "choice_mass": 0.9453808069229126,
+      "top_tokens": [
+        [
+          "2",
+          0.4727
+        ],
+        [
+          "1",
+          0.4727
+        ],
+        [
+          "3",
+          0.044
+        ],
+        [
+          " ",
+          0.006
+        ],
+        [
+          "<|im_end|>",
+          0.0019
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 1,
+        "foil_chain_index": 0
+      }
+    },
+    {
+      "trial": 26,
+      "target": 1,
+      "reported": 2,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.4378235087441073,
+        "2": 0.5621764912558928
+      },
+      "choice_mass": 0.9854652285575867,
+      "top_tokens": [
+        [
+          "2",
+          0.554
+        ],
+        [
+          "1",
+          0.4315
+        ],
+        [
+          " ",
+          0.0048
+        ],
+        [
+          "3",
+          0.0037
+        ],
+        [
+          "<|im_end|>",
+          0.0026
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 0,
+        "foil_chain_index": 1
+      }
+    },
+    {
+      "trial": 27,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.6513548564541668,
+        "2": 0.34864514354583326
+      },
+      "choice_mass": 0.967406690120697,
+      "top_tokens": [
+        [
+          "1",
+          0.6301
+        ],
+        [
+          "2",
+          0.3373
+        ],
+        [
+          " ",
+          0.0131
+        ],
+        [
+          "3",
+          0.007
+        ],
+        [
+          "<|im_end|>",
+          0.0051
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 1,
+        "foil_chain_index": 0
+      }
+    },
+    {
+      "trial": 28,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.6224593397218503,
+        "2": 0.37754066027814964
+      },
+      "choice_mass": 0.9879189729690552,
+      "top_tokens": [
+        [
+          "1",
+          0.6149
+        ],
+        [
+          "2",
+          0.373
+        ],
+        [
+          "3",
+          0.0053
+        ],
+        [
+          " ",
+          0.0037
+        ],
+        [
+          " (",
+          0.0008
+        ]
+      ],
+      "free_response": "1",
+      "metadata": {
+        "chain_index": 0,
+        "foil_chain_index": 1
+      }
+    },
+    {
+      "trial": 29,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.7310585492286623,
+        "2": 0.2689414507713377
+      },
+      "choice_mass": 0.9874217212200165,
+      "top_tokens": [
+        [
+          "1",
+          0.7219
+        ],
+        [
+          "2",
+          0.2656
+        ],
+        [
+          "3",
+          0.0062
+        ],
+        [
+          " ",
+          0.0026
+        ],
+        [
+          "0",
+          0.0008
+        ]
+      ],
+      "free_response": "1",
+      "metadata": {
+        "chain_index": 1,
+        "foil_chain_index": 0
+      }
+    },
+    {
+      "trial": 30,
+      "target": 2,
+      "reported": 1,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.8670357540159532,
+        "2": 0.13296424598404677
+      },
+      "choice_mass": 0.9794918894767761,
+      "top_tokens": [
+        [
+          "1",
+          0.8493
+        ],
+        [
+          "2",
+          0.1302
+        ],
+        [
+          "3",
+          0.0107
+        ],
+        [
+          " ",
+          0.0057
+        ],
+        [
+          "0",
+          0.0009
+        ]
+      ],
+      "free_response": "1",
+      "metadata": {
+        "chain_index": 1,
+        "foil_chain_index": 0
+      }
+    },
+    {
+      "trial": 31,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.6224593336528811,
+        "2": 0.37754066634711886
+      },
+      "choice_mass": 0.9803917407989502,
+      "top_tokens": [
+        [
+          "1",
+          0.6103
+        ],
+        [
+          "2",
+          0.3701
+        ],
+        [
+          "3",
+          0.0077
+        ],
+        [
+          " ",
+          0.0068
+        ],
+        [
+          "<|im_end|>",
+          0.0012
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 1,
+        "foil_chain_index": 0
+      }
+    },
+    {
+      "trial": 32,
+      "target": 2,
+      "reported": 1,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.651354852808984,
+        "2": 0.34864514719101597
+      },
+      "choice_mass": 0.9873229265213013,
+      "top_tokens": [
+        [
+          "1",
+          0.6431
+        ],
+        [
+          "2",
+          0.3442
+        ],
+        [
+          "3",
+          0.0049
+        ],
+        [
+          " ",
+          0.0038
+        ],
+        [
+          "<|im_end|>",
+          0.001
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 0,
+        "foil_chain_index": 1
+      }
+    },
+    {
+      "trial": 33,
+      "target": 2,
+      "reported": 1,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.7057850352153039,
+        "2": 0.29421496478469616
+      },
+      "choice_mass": 0.9879577159881592,
+      "top_tokens": [
+        [
+          "1",
+          0.6973
+        ],
+        [
+          "2",
+          0.2907
+        ],
+        [
+          "3",
+          0.0041
+        ],
+        [
+          " ",
+          0.0032
+        ],
+        [
+          " (",
+          0.0015
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 0,
+        "foil_chain_index": 1
+      }
+    },
+    {
+      "trial": 34,
+      "target": 2,
+      "reported": 1,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.7057850316905333,
+        "2": 0.29421496830946664
+      },
+      "choice_mass": 0.989723265171051,
+      "top_tokens": [
+        [
+          "1",
+          0.6985
+        ],
+        [
+          "2",
+          0.2912
+        ],
+        [
+          " ",
+          0.0047
+        ],
+        [
+          "3",
+          0.0032
+        ],
+        [
+          "<|im_end|>",
+          0.0005
+        ]
+      ],
+      "free_response": "1",
+      "metadata": {
+        "chain_index": 0,
+        "foil_chain_index": 1
+      }
+    },
+    {
+      "trial": 35,
+      "target": 2,
+      "reported": 1,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.6224593181173422,
+        "2": 0.3775406818826577
+      },
+      "choice_mass": 0.9891598224639893,
+      "top_tokens": [
+        [
+          "1",
+          0.6157
+        ],
+        [
+          "2",
+          0.3734
+        ],
+        [
+          "3",
+          0.0041
+        ],
+        [
+          "<|im_end|>",
+          0.0025
+        ],
+        [
+          " ",
+          0.002
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 0,
+        "foil_chain_index": 1
+      }
+    },
+    {
+      "trial": 36,
+      "target": 2,
+      "reported": 1,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.7981867701139943,
+        "2": 0.20181322988600575
+      },
+      "choice_mass": 0.9955836534500122,
+      "top_tokens": [
+        [
+          "1",
+          0.7947
+        ],
+        [
+          "2",
+          0.2009
+        ],
+        [
+          "3",
+          0.0014
+        ],
+        [
+          " ",
+          0.0014
+        ],
+        [
+          "<|im_end|>",
+          0.0006
+        ]
+      ],
+      "free_response": "1",
+      "metadata": {
+        "chain_index": 0,
+        "foil_chain_index": 1
+      }
+    },
+    {
+      "trial": 37,
+      "target": 1,
+      "reported": 2,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.4378234922869456,
+        "2": 0.5621765077130544
+      },
+      "choice_mass": 0.9863560199737549,
+      "top_tokens": [
+        [
+          "2",
+          0.5545
+        ],
+        [
+          "1",
+          0.4318
+        ],
+        [
+          "3",
+          0.0054
+        ],
+        [
+          "<|im_end|>",
+          0.0042
+        ],
+        [
+          " ",
+          0.0026
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 0,
+        "foil_chain_index": 1
+      }
+    },
+    {
+      "trial": 38,
+      "target": 2,
+      "reported": 1,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.7310585714392625,
+        "2": 0.2689414285607375
+      },
+      "choice_mass": 0.9876034259796143,
+      "top_tokens": [
+        [
+          "1",
+          0.722
+        ],
+        [
+          "2",
+          0.2656
+        ],
+        [
+          "3",
+          0.0055
+        ],
+        [
+          " ",
+          0.0026
+        ],
+        [
+          "<|im_end|>",
+          0.0023
+        ]
+      ],
+      "free_response": "1",
+      "metadata": {
+        "chain_index": 0,
+        "foil_chain_index": 1
+      }
+    },
+    {
+      "trial": 39,
+      "target": 2,
+      "reported": 2,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.46879064451840263,
+        "2": 0.5312093554815973
+      },
+      "choice_mass": 0.9731972217559814,
+      "top_tokens": [
+        [
+          "2",
+          0.517
+        ],
+        [
+          "1",
+          0.4562
+        ],
+        [
+          "3",
+          0.02
+        ],
+        [
+          "4",
+          0.0014
+        ],
+        [
+          " ",
+          0.0013
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 1,
+        "foil_chain_index": 0
+      }
+    },
+    {
+      "trial": 40,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.6791786831208253,
+        "2": 0.3208213168791747
+      },
+      "choice_mass": 0.9838040471076965,
+      "top_tokens": [
+        [
+          "1",
+          0.6682
+        ],
+        [
+          "2",
+          0.3156
+        ],
+        [
+          "3",
+          0.0074
+        ],
+        [
+          " ",
+          0.0035
+        ],
+        [
+          "<|im_end|>",
+          0.0019
+        ]
+      ],
+      "free_response": "To solve this, we need to trace the connections between the items based on the provided pairs.\n\n- The cue image is the red gumball machine.\n- From the first set of pairs, we know that the gumball machine is paired with the black hat (Image 1). This is the (AB) pair.\n- The second set of pairs shows a connection between the black hat (Image 1) and the yellow tea set (Image 2). This is the",
+      "metadata": {
+        "chain_index": 0,
+        "foil_chain_index": 1
+      }
+    },
+    {
+      "trial": 41,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.8354835444127696,
+        "2": 0.16451645558723033
+      },
+      "choice_mass": 0.9859326779842377,
+      "top_tokens": [
+        [
+          "1",
+          0.8237
+        ],
+        [
+          "2",
+          0.1622
+        ],
+        [
+          "<|im_end|>",
+          0.0049
+        ],
+        [
+          "3",
+          0.0038
+        ],
+        [
+          " ",
+          0.0026
+        ]
+      ],
+      "free_response": "1",
+      "metadata": {
+        "chain_index": 1,
+        "foil_chain_index": 0
+      }
+    },
+    {
+      "trial": 42,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.5312093736162676,
+        "2": 0.4687906263837324
+      },
+      "choice_mass": 0.98433718085289,
+      "top_tokens": [
+        [
+          "1",
+          0.5229
+        ],
+        [
+          "2",
+          0.4614
+        ],
+        [
+          " ",
+          0.0066
+        ],
+        [
+          "3",
+          0.004
+        ],
+        [
+          "<|im_end|>",
+          0.0012
+        ]
+      ],
+      "free_response": "To determine the correct answer, we need to analyze the connections established in the initial pairs and then apply them to the cue image.\n\n- The first pair is (A, B), where Image 1 is A and Image 2 is B.\n- The second pair is (B, C), where Image 2 is B and Image 3 is C.\n- The third pair is (C, D), where Image 3 is C and Image 4 is D.\n\nThis",
+      "metadata": {
+        "chain_index": 0,
+        "foil_chain_index": 1
+      }
+    },
+    {
+      "trial": 43,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.9465966671556955,
+        "2": 0.053403332844304485
+      },
+      "choice_mass": 0.9859883412718773,
+      "top_tokens": [
+        [
+          "1",
+          0.9333
+        ],
+        [
+          "2",
+          0.0527
+        ],
+        [
+          " ",
+          0.0049
+        ],
+        [
+          "3",
+          0.003
+        ],
+        [
+          "0",
+          0.0023
+        ]
+      ],
+      "free_response": "1",
+      "metadata": {
+        "chain_index": 1,
+        "foil_chain_index": 0
+      }
+    },
+    {
+      "trial": 44,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.5621764967305841,
+        "2": 0.4378235032694159
+      },
+      "choice_mass": 0.9903932511806488,
+      "top_tokens": [
+        [
+          "1",
+          0.5568
+        ],
+        [
+          "2",
+          0.4336
+        ],
+        [
+          "3",
+          0.0038
+        ],
+        [
+          " ",
+          0.0026
+        ],
+        [
+          " (",
+          0.0009
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 0,
+        "foil_chain_index": 1
+      }
+    },
+    {
+      "trial": 45,
+      "target": 2,
+      "reported": 1,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.5312093752006826,
+        "2": 0.4687906247993175
+      },
+      "choice_mass": 0.6770891845226288,
+      "top_tokens": [
+        [
+          "1",
+          0.3597
+        ],
+        [
+          "3",
+          0.3174
+        ],
+        [
+          "2",
+          0.3174
+        ],
+        [
+          "<|im_end|>",
+          0.0019
+        ],
+        [
+          " ",
+          0.0017
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 1,
+        "foil_chain_index": 0
+      }
+    },
+    {
+      "trial": 46,
+      "target": 1,
+      "reported": 2,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.46879062618050066,
+        "2": 0.5312093738194993
+      },
+      "choice_mass": 0.9908067286014557,
+      "top_tokens": [
+        [
+          "2",
+          0.5263
+        ],
+        [
+          "1",
+          0.4645
+        ],
+        [
+          " ",
+          0.0035
+        ],
+        [
+          "<|im_end|>",
+          0.0024
+        ],
+        [
+          "3",
+          0.0015
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 0,
+        "foil_chain_index": 1
+      }
+    },
+    {
+      "trial": 47,
+      "target": 2,
+      "reported": 1,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.5,
+        "2": 0.5
+      },
+      "choice_mass": 0.9797491431236267,
+      "top_tokens": [
+        [
+          "2",
+          0.4899
+        ],
+        [
+          "1",
+          0.4899
+        ],
+        [
+          "3",
+          0.0102
+        ],
+        [
+          " ",
+          0.0042
+        ],
+        [
+          "0",
+          0.0014
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 1,
+        "foil_chain_index": 0
+      }
+    },
+    {
+      "trial": 48,
+      "target": 2,
+      "reported": 1,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.7310585673444103,
+        "2": 0.2689414326555897
+      },
+      "choice_mass": 0.987447053194046,
+      "top_tokens": [
+        [
+          "1",
+          0.7219
+        ],
+        [
+          "2",
+          0.2656
+        ],
+        [
+          "3",
+          0.0043
+        ],
+        [
+          " ",
+          0.0043
+        ],
+        [
+          " (",
+          0.001
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 0,
+        "foil_chain_index": 1
+      }
+    },
+    {
+      "trial": 49,
+      "target": 2,
+      "reported": 1,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.5926666024749319,
+        "2": 0.40733339752506814
+      },
+      "choice_mass": 0.9715631902217865,
+      "top_tokens": [
+        [
+          "1",
+          0.5758
+        ],
+        [
+          "2",
+          0.3958
+        ],
+        [
+          "3",
+          0.0197
+        ],
+        [
+          " ",
+          0.0044
+        ],
+        [
+          "4",
+          0.0009
+        ]
+      ],
+      "free_response": "1",
+      "metadata": {
+        "chain_index": 1,
+        "foil_chain_index": 0
+      }
+    }
+  ],
+  "metrics": {
+    "accuracy": 0.44,
+    "n_correct": 22,
+    "total": 50,
+    "free_text_bare_digit": 0.82,
+    "mean_p_chosen": 0.6616145594211678,
+    "mean_choice_mass": 0.975518429428339,
+    "frac_low_mass": 0.02,
+    "response_distribution": {
+      "1": 43,
+      "2": 7
+    }
+  }
+}

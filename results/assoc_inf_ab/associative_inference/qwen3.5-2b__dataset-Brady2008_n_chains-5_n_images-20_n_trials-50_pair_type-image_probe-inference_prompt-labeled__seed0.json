@@ -1,0 +1,2846 @@
+{
+  "run": {
+    "model": {
+      "name": "qwen3.5-2b",
+      "model_id": "Qwen/Qwen3.5-2B",
+      "max_image_size": 512,
+      "max_new_tokens": 100
+    },
+    "task": "associative_inference",
+    "condition": {
+      "dataset": "Brady2008",
+      "pair_type": "image",
+      "probe": "inference",
+      "n_chains": 5,
+      "n_images": 20,
+      "prompt": "labeled",
+      "n_trials": 50
+    },
+    "seed": 0
+  },
+  "config": {
+    "run_name": "assoc_inf_ab",
+    "output_dir": "results",
+    "seeds": [
+      0
+    ],
+    "models": [
+      {
+        "name": "qwen3.5-2b",
+        "model_id": "Qwen/Qwen3.5-2B",
+        "max_image_size": 512,
+        "max_new_tokens": 100
+      },
+      {
+        "name": "qwen3.5-4b",
+        "model_id": "Qwen/Qwen3.5-4B",
+        "max_image_size": 512,
+        "max_new_tokens": 100
+      }
+    ],
+    "tasks": [
+      {
+        "task": "associative_inference",
+        "datasets": [
+          "Brady2008"
+        ],
+        "pair_types": [
+          "image",
+          "word"
+        ],
+        "probe_types": [
+          "inference",
+          "direct_ab",
+          "direct_bc"
+        ],
+        "n_chains": [
+          2,
+          5,
+          25
+        ],
+        "prompts": [
+          "original",
+          "cue_turn",
+          "labeled"
+        ],
+        "n_trials": 50
+      }
+    ]
+  },
+  "provenance": {
+    "config_hash": "d49714f7009d",
+    "gpu": "NVIDIA A100-SXM4-80GB",
+    "git_commit": null,
+    "git_dirty": false,
+    "torch": "2.10.0+cu128",
+    "transformers": "5.17.0"
+  },
+  "elapsed_s": 179.0,
+  "peak_gpu_gb": 4.74,
+  "error": null,
+  "trials": [
+    {
+      "trial": 0,
+      "target": 2,
+      "reported": 1,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.5621764930986548,
+        "2": 0.43782350690134525
+      },
+      "choice_mass": 0.9910039603710175,
+      "top_tokens": [
+        [
+          "1",
+          0.5571
+        ],
+        [
+          "2",
+          0.4339
+        ],
+        [
+          "3",
+          0.0062
+        ],
+        [
+          "4",
+          0.0009
+        ],
+        [
+          "<|im_end|>",
+          0.0008
+        ]
+      ],
+      "free_response": "Based on the analysis of the visual content:\n\n- The **cue image** (Image 1) shows a yellow, crumpled bag of what appears to be flour or a similar dry food product.\n- The **second image** (Image 2) shows a burgundy leather handbag.\n\nThe connection between these two items is not direct or obvious. The bag in the cue image is a generic representation of a food container, while the handbag is a specific type of accessory",
+      "metadata": {
+        "chain_index": 4,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/Akitchentool2.jpg",
+          "name": "Akitchentool2.jpg",
+          "role": "A",
+          "chain_index": 4
+        },
+        "correct_option": {
+          "path": "memory_datasets/Brady2008Objects/Apurse83.jpg",
+          "name": "Apurse83.jpg",
+          "role": "C",
+          "chain_index": 4
+        },
+        "foil_option": {
+          "path": "memory_datasets/Brady2008Objects/ABAGFLOU3.jpg",
+          "name": "ABAGFLOU3.jpg",
+          "role": "C",
+          "chain_index": 2
+        }
+      }
+    },
+    {
+      "trial": 1,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.5621765122889741,
+        "2": 0.4378234877110259
+      },
+      "choice_mass": 0.9965040683746338,
+      "top_tokens": [
+        [
+          "1",
+          0.5602
+        ],
+        [
+          "2",
+          0.4363
+        ],
+        [
+          "3",
+          0.0023
+        ],
+        [
+          "<|im_end|>",
+          0.0007
+        ],
+        [
+          "4",
+          0.0002
+        ]
+      ],
+      "free_response": "Based on the analysis of the visual content:\n\n- The **cue image** is a red, four-wheeled walker with a basket.\n- **Image 1** is a wooden stool with a basket-like structure on top.\n- **Image 2** is a white pet bowl with the text \"FEED me!\" and images of biscuits.\n\nThe connection between the cue image (walker) and Image 1 (stool) is that both are types of furniture designed for",
+      "metadata": {
+        "chain_index": 1,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/8063317.thl.jpg",
+          "name": "8063317.thl.jpg",
+          "role": "A",
+          "chain_index": 1
+        },
+        "correct_option": {
+          "path": "memory_datasets/Brady2008Objects/Astool76.jpg",
+          "name": "Astool76.jpg",
+          "role": "C",
+          "chain_index": 1
+        },
+        "foil_option": {
+          "path": "memory_datasets/Brady2008Objects/ADOGFOOD.jpg",
+          "name": "ADOGFOOD.jpg",
+          "role": "C",
+          "chain_index": 4
+        }
+      }
+    },
+    {
+      "trial": 2,
+      "target": 2,
+      "reported": 2,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.37754068591771794,
+        "2": 0.6224593140822821
+      },
+      "choice_mass": 0.9970203042030334,
+      "top_tokens": [
+        [
+          "2",
+          0.6206
+        ],
+        [
+          "1",
+          0.3764
+        ],
+        [
+          "3",
+          0.0017
+        ],
+        [
+          "<|im_end|>",
+          0.0004
+        ],
+        [
+          "4",
+          0.0004
+        ]
+      ],
+      "free_response": "Based on the analysis of the visual content:\n\n- The **cue image** is a metal scoop, which is a tool used for scooping or transferring materials.\n- **Image 1** is a red, cylindrical object that appears to be a component of a larger machine, possibly a drill press or a similar tool.\n- **Image 2** is a workbench, which is a piece of furniture used for working with tools and materials.\n\nThe connection between the metal scoop (",
+      "metadata": {
+        "chain_index": 3,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/AFLOURSCO.jpg",
+          "name": "AFLOURSCO.jpg",
+          "role": "A",
+          "chain_index": 3
+        },
+        "correct_option": {
+          "path": "memory_datasets/Brady2008Objects/workbench.jpg",
+          "name": "workbench.jpg",
+          "role": "C",
+          "chain_index": 3
+        },
+        "foil_option": {
+          "path": "memory_datasets/Brady2008Objects/Adrum22.jpg",
+          "name": "Adrum22.jpg",
+          "role": "C",
+          "chain_index": 1
+        }
+      }
+    },
+    {
+      "trial": 3,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.5621764951045477,
+        "2": 0.43782350489545224
+      },
+      "choice_mass": 0.997159332036972,
+      "top_tokens": [
+        [
+          "1",
+          0.5606
+        ],
+        [
+          "2",
+          0.4366
+        ],
+        [
+          "3",
+          0.002
+        ],
+        [
+          "<|im_end|>",
+          0.0003
+        ],
+        [
+          "4",
+          0.0002
+        ]
+      ],
+      "free_response": "Based on the analysis of the provided images:\n\n- The **cue image** is a white toaster oven.\n- **Image 1** is a silver thimble, which is a small kitchen utensil.\n- **Image 2** is a cinnamon roll, which is a type of baked good.\n\nA toaster oven is a kitchen appliance used for cooking. Both a thimble and a cinnamon roll are items that can be found in a kitchen. Therefore, the thim",
+      "metadata": {
+        "chain_index": 2,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/ATOASTOV2.jpg",
+          "name": "ATOASTOV2.jpg",
+          "role": "A",
+          "chain_index": 2
+        },
+        "correct_option": {
+          "path": "memory_datasets/Brady2008Objects/Athimble2.jpg",
+          "name": "Athimble2.jpg",
+          "role": "C",
+          "chain_index": 2
+        },
+        "foil_option": {
+          "path": "memory_datasets/Brady2008Objects/cinnamonroll.jpg",
+          "name": "cinnamonroll.jpg",
+          "role": "C",
+          "chain_index": 4
+        }
+      }
+    },
+    {
+      "trial": 4,
+      "target": 1,
+      "reported": 2,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.43782348483299743,
+        "2": 0.5621765151670025
+      },
+      "choice_mass": 0.997134804725647,
+      "top_tokens": [
+        [
+          "2",
+          0.5606
+        ],
+        [
+          "1",
+          0.4366
+        ],
+        [
+          "3",
+          0.0016
+        ],
+        [
+          "4",
+          0.0007
+        ],
+        [
+          "<|im_end|>",
+          0.0004
+        ]
+      ],
+      "free_response": "Based on the visual content of the images, here is the analysis:\n\n- The **cue image** is a white, blocky object with a yellow top and the number \"D 417\" printed on it.\n- **Image 1** shows a large bighorn sheep. There is no direct visual or logical connection between the cue image and the sheep.\n- **Image 2** shows a wooden box containing several small, cylindrical objects with colored tops (yellow,",
+      "metadata": {
+        "chain_index": 2,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/AMILMARK2.jpg",
+          "name": "AMILMARK2.jpg",
+          "role": "A",
+          "chain_index": 2
+        },
+        "correct_option": {
+          "path": "memory_datasets/Brady2008Objects/Amountaingoa2.jpg",
+          "name": "Amountaingoa2.jpg",
+          "role": "C",
+          "chain_index": 2
+        },
+        "foil_option": {
+          "path": "memory_datasets/Brady2008Objects/26420830.thl.jpg",
+          "name": "26420830.thl.jpg",
+          "role": "C",
+          "chain_index": 1
+        }
+      }
+    },
+    {
+      "trial": 5,
+      "target": 2,
+      "reported": 1,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.5312093783920135,
+        "2": 0.46879062160798646
+      },
+      "choice_mass": 0.9972689747810364,
+      "top_tokens": [
+        [
+          "1",
+          0.5298
+        ],
+        [
+          "2",
+          0.4675
+        ],
+        [
+          "3",
+          0.0019
+        ],
+        [
+          "<|im_end|>",
+          0.0004
+        ],
+        [
+          "4",
+          0.0002
+        ]
+      ],
+      "free_response": "Based on the analysis of the visual content, here is the reasoning for the connection:\n\n- The cue image is a sign for \"1 HOUR PARKING\" with an arrow pointing to the left.\n- Image 1 shows a collection of colorful, patterned scarves.\n- Image 2 shows a green, cylindrical metal object with holes, which appears to be a type of lantern or a decorative container.\n\nThere is no direct visual link between the parking sign and either of the other",
+      "metadata": {
+        "chain_index": 2,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/22849284.thl.jpg",
+          "name": "22849284.thl.jpg",
+          "role": "A",
+          "chain_index": 2
+        },
+        "correct_option": {
+          "path": "memory_datasets/Brady2008Objects/Abutanco3.jpg",
+          "name": "Abutanco3.jpg",
+          "role": "C",
+          "chain_index": 2
+        },
+        "foil_option": {
+          "path": "memory_datasets/Brady2008Objects/Ascarf3.jpg",
+          "name": "Ascarf3.jpg",
+          "role": "C",
+          "chain_index": 3
+        }
+      }
+    },
+    {
+      "trial": 6,
+      "target": 2,
+      "reported": 1,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.5926665908465489,
+        "2": 0.407333409153451
+      },
+      "choice_mass": 0.9960296452045441,
+      "top_tokens": [
+        [
+          "1",
+          0.5903
+        ],
+        [
+          "2",
+          0.4057
+        ],
+        [
+          "3",
+          0.0027
+        ],
+        [
+          "4",
+          0.0005
+        ],
+        [
+          "<|im_end|>",
+          0.0003
+        ]
+      ],
+      "free_response": "Based on the analysis of the provided image pairs, here is the logical deduction:\n\n1.  **Analyze the Cue Image:** The cue image is a red and yellow balance scale with red bowls.\n2.  **Analyze the Image Pairs:** The pairs are grouped into two categories:\n    -   **AB pairs:** These pairs are linked by a shared visual element. For example, the first image in the AB pair is a lion, and the second is a certificate.",
+      "metadata": {
+        "chain_index": 2,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/Ascale60.jpg",
+          "name": "Ascale60.jpg",
+          "role": "A",
+          "chain_index": 2
+        },
+        "correct_option": {
+          "path": "memory_datasets/Brady2008Objects/bathtowel.jpg",
+          "name": "bathtowel.jpg",
+          "role": "C",
+          "chain_index": 2
+        },
+        "foil_option": {
+          "path": "memory_datasets/Brady2008Objects/APIPEST18.jpg",
+          "name": "APIPEST18.jpg",
+          "role": "C",
+          "chain_index": 4
+        }
+      }
+    },
+    {
+      "trial": 7,
+      "target": 2,
+      "reported": 1,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.5,
+        "2": 0.5
+      },
+      "choice_mass": 0.9984024167060852,
+      "top_tokens": [
+        [
+          "2",
+          0.4992
+        ],
+        [
+          "1",
+          0.4992
+        ],
+        [
+          "3",
+          0.001
+        ],
+        [
+          "<|im_end|>",
+          0.0003
+        ],
+        [
+          "4",
+          0.0001
+        ]
+      ],
+      "free_response": "Based on the analysis of the visual content, here is the reasoning for the connection:\n\n- The cue image is a sack of flour.\n- Image 1 shows a white hard hat with yellow ear protection.\n- Image 2 shows a wooden dining table.\n\nThere is no direct visual link between the sack of flour and either the hard hat or the table. However, the hard hat is a piece of personal protective equipment (PPE) used in industrial or construction settings. Flour is",
+      "metadata": {
+        "chain_index": 3,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/26428057.thl.jpg",
+          "name": "26428057.thl.jpg",
+          "role": "A",
+          "chain_index": 3
+        },
+        "correct_option": {
+          "path": "memory_datasets/Brady2008Objects/Atable132.jpg",
+          "name": "Atable132.jpg",
+          "role": "C",
+          "chain_index": 3
+        },
+        "foil_option": {
+          "path": "memory_datasets/Brady2008Objects/8024597.thl.jpg",
+          "name": "8024597.thl.jpg",
+          "role": "C",
+          "chain_index": 4
+        }
+      }
+    },
+    {
+      "trial": 8,
+      "target": 2,
+      "reported": 1,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.5,
+        "2": 0.5
+      },
+      "choice_mass": 0.9934523105621338,
+      "top_tokens": [
+        [
+          "2",
+          0.4967
+        ],
+        [
+          "1",
+          0.4967
+        ],
+        [
+          "3",
+          0.0055
+        ],
+        [
+          "4",
+          0.0004
+        ],
+        [
+          "<|im_end|>",
+          0.0004
+        ]
+      ],
+      "free_response": "Based on the analysis of the visual content:\n\n- The **cue image** is a brown, round, tufted cushion with a braided edge.\n- **Image 1** is a decorative floral arrangement with red berries and gold accents.\n- **Image 2** is an orange cup with white polka dots holding wooden spoons.\n\nThere is no direct visual similarity or obvious thematic link between the cushion and either of the other two images. The cushion is a piece of",
+      "metadata": {
+        "chain_index": 1,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/ACUSHIO12.jpg",
+          "name": "ACUSHIO12.jpg",
+          "role": "A",
+          "chain_index": 1
+        },
+        "correct_option": {
+          "path": "memory_datasets/Brady2008Objects/Awoodenspoon3.jpg",
+          "name": "Awoodenspoon3.jpg",
+          "role": "C",
+          "chain_index": 1
+        },
+        "foil_option": {
+          "path": "memory_datasets/Brady2008Objects/AARTPLANT.jpg",
+          "name": "AARTPLANT.jpg",
+          "role": "C",
+          "chain_index": 4
+        }
+      }
+    },
+    {
+      "trial": 9,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.5,
+        "2": 0.5
+      },
+      "choice_mass": 0.9971405267715454,
+      "top_tokens": [
+        [
+          "2",
+          0.4986
+        ],
+        [
+          "1",
+          0.4986
+        ],
+        [
+          "3",
+          0.002
+        ],
+        [
+          "<|im_end|>",
+          0.0004
+        ],
+        [
+          "4",
+          0.0002
+        ]
+      ],
+      "free_response": "Based on the analysis of the visual content, here is the reasoning for the connection:\n\n- The cue image is a brown goat.\n- Image 1 is a military-style lunch box.\n- Image 2 is a statue of a knight in armor.\n\nThe connection between the goat and the lunch box is not direct or obvious. However, the connection between the goat and the knight statue is also not direct.\n\nLet's re-evaluate the pairs provided in the prompt to find the",
+      "metadata": {
+        "chain_index": 2,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/AGOAT10.jpg",
+          "name": "AGOAT10.jpg",
+          "role": "A",
+          "chain_index": 2
+        },
+        "correct_option": {
+          "path": "memory_datasets/Brady2008Objects/AMILPANS2.jpg",
+          "name": "AMILPANS2.jpg",
+          "role": "C",
+          "chain_index": 2
+        },
+        "foil_option": {
+          "path": "memory_datasets/Brady2008Objects/medievalknight.jpg",
+          "name": "medievalknight.jpg",
+          "role": "C",
+          "chain_index": 4
+        }
+      }
+    },
+    {
+      "trial": 10,
+      "target": 2,
+      "reported": 1,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.5926665928324956,
+        "2": 0.4073334071675045
+      },
+      "choice_mass": 0.996987372636795,
+      "top_tokens": [
+        [
+          "1",
+          0.5909
+        ],
+        [
+          "2",
+          0.4061
+        ],
+        [
+          "3",
+          0.0019
+        ],
+        [
+          "<|im_end|>",
+          0.0006
+        ],
+        [
+          "4",
+          0.0002
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 3,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/AHEATER3.jpg",
+          "name": "AHEATER3.jpg",
+          "role": "A",
+          "chain_index": 3
+        },
+        "correct_option": {
+          "path": "memory_datasets/Brady2008Objects/swiffermop.jpg",
+          "name": "swiffermop.jpg",
+          "role": "C",
+          "chain_index": 3
+        },
+        "foil_option": {
+          "path": "memory_datasets/Brady2008Objects/26425573.thl.jpg",
+          "name": "26425573.thl.jpg",
+          "role": "C",
+          "chain_index": 1
+        }
+      }
+    },
+    {
+      "trial": 11,
+      "target": 2,
+      "reported": 2,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.46879060755439683,
+        "2": 0.5312093924456032
+      },
+      "choice_mass": 0.9970866143703461,
+      "top_tokens": [
+        [
+          "2",
+          0.5297
+        ],
+        [
+          "1",
+          0.4674
+        ],
+        [
+          "3",
+          0.0022
+        ],
+        [
+          "<|im_end|>",
+          0.0003
+        ],
+        [
+          "4",
+          0.0002
+        ]
+      ],
+      "free_response": "Based on the analysis of the visual content:\n\n- The **cue image** is a pumpkin-shaped cookie cutter.\n- **Image 1** shows a piece of dead, gnarled wood or a tree branch.\n- **Image 2** shows a red wallet with keys attached to it.\n\nThere is no direct visual or semantic link between a pumpkin cookie cutter and either a piece of wood or a wallet with keys.\n\nHowever, we can look for an indirect connection. The",
+      "metadata": {
+        "chain_index": 4,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/APUMPCOOK.jpg",
+          "name": "APUMPCOOK.jpg",
+          "role": "A",
+          "chain_index": 4
+        },
+        "correct_option": {
+          "path": "memory_datasets/Brady2008Objects/AKEYHOL10.jpg",
+          "name": "AKEYHOL10.jpg",
+          "role": "C",
+          "chain_index": 4
+        },
+        "foil_option": {
+          "path": "memory_datasets/Brady2008Objects/ADRYWOOD.jpg",
+          "name": "ADRYWOOD.jpg",
+          "role": "C",
+          "chain_index": 2
+        }
+      }
+    },
+    {
+      "trial": 12,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.5312093864713632,
+        "2": 0.4687906135286368
+      },
+      "choice_mass": 0.9949678480625153,
+      "top_tokens": [
+        [
+          "1",
+          0.5285
+        ],
+        [
+          "2",
+          0.4664
+        ],
+        [
+          "3",
+          0.0036
+        ],
+        [
+          "<|im_end|>",
+          0.0007
+        ],
+        [
+          "4",
+          0.0004
+        ]
+      ],
+      "free_response": "Based on the analysis of the visual content:\n\n- The cue image is a white, oval-shaped food processor bowl with black handles.\n- Image 1 is a bottle of Mazola Corn Oil.\n- Image 2 is a bamboo plant.\n\nThe food processor bowl in the cue image is a tool used for preparing food, which would typically involve ingredients like corn oil. Therefore, the corn oil is an ingredient that would be used with the food processor.\n\nThis creates an indirect association",
+      "metadata": {
+        "chain_index": 4,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/mangosplitter.jpg",
+          "name": "mangosplitter.jpg",
+          "role": "A",
+          "chain_index": 4
+        },
+        "correct_option": {
+          "path": "memory_datasets/Brady2008Objects/oilbottleolive.jpg",
+          "name": "oilbottleolive.jpg",
+          "role": "C",
+          "chain_index": 4
+        },
+        "foil_option": {
+          "path": "memory_datasets/Brady2008Objects/10050937.thl.jpg",
+          "name": "10050937.thl.jpg",
+          "role": "C",
+          "chain_index": 2
+        }
+      }
+    },
+    {
+      "trial": 13,
+      "target": 2,
+      "reported": 1,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.5312093560218746,
+        "2": 0.46879064397812537
+      },
+      "choice_mass": 0.9964222013950348,
+      "top_tokens": [
+        [
+          "1",
+          0.5293
+        ],
+        [
+          "2",
+          0.4671
+        ],
+        [
+          "3",
+          0.0025
+        ],
+        [
+          "<|im_end|>",
+          0.0005
+        ],
+        [
+          "4",
+          0.0003
+        ]
+      ],
+      "free_response": "Based on the analysis of the provided images:\n\n- The **cue image** is a vintage boombox, which is a type of electronic music player.\n- **Image 1** is a wooden compass set on a base.\n- **Image 2** is a metal clothespin with a hook.\n\nThere is no direct visual or functional connection between a boombox and either a compass or a clothespin. However, both the boombox and the clothespin are common household items that",
+      "metadata": {
+        "chain_index": 1,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/26421382.thl.jpg",
+          "name": "26421382.thl.jpg",
+          "role": "A",
+          "chain_index": 1
+        },
+        "correct_option": {
+          "path": "memory_datasets/Brady2008Objects/26685596.thl.jpg",
+          "name": "26685596.thl.jpg",
+          "role": "C",
+          "chain_index": 1
+        },
+        "foil_option": {
+          "path": "memory_datasets/Brady2008Objects/26372690.thl.jpg",
+          "name": "26372690.thl.jpg",
+          "role": "C",
+          "chain_index": 4
+        }
+      }
+    },
+    {
+      "trial": 14,
+      "target": 2,
+      "reported": 1,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.6513548541351203,
+        "2": 0.34864514586487966
+      },
+      "choice_mass": 0.9981707334518433,
+      "top_tokens": [
+        [
+          "1",
+          0.6502
+        ],
+        [
+          "2",
+          0.348
+        ],
+        [
+          "3",
+          0.0013
+        ],
+        [
+          "<|im_end|>",
+          0.0002
+        ],
+        [
+          "4",
+          0.0001
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 0,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/Agreencup2.jpg",
+          "name": "Agreencup2.jpg",
+          "role": "A",
+          "chain_index": 0
+        },
+        "correct_option": {
+          "path": "memory_datasets/Brady2008Objects/AOVENMIT5.jpg",
+          "name": "AOVENMIT5.jpg",
+          "role": "C",
+          "chain_index": 0
+        },
+        "foil_option": {
+          "path": "memory_datasets/Brady2008Objects/AOLDMILL2.jpg",
+          "name": "AOLDMILL2.jpg",
+          "role": "C",
+          "chain_index": 2
+        }
+      }
+    },
+    {
+      "trial": 15,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.5621764887553025,
+        "2": 0.4378235112446975
+      },
+      "choice_mass": 0.997398853302002,
+      "top_tokens": [
+        [
+          "1",
+          0.5607
+        ],
+        [
+          "2",
+          0.4367
+        ],
+        [
+          "3",
+          0.0016
+        ],
+        [
+          "<|im_end|>",
+          0.0004
+        ],
+        [
+          "4",
+          0.0003
+        ]
+      ],
+      "free_response": "Based on the analysis of the visual content:\n\n- The **cue image** is a wooden mallet, which is a tool used for striking or hitting something.\n- **Image 1** shows a pair of white, fuzzy, sock-like objects. These are not related to the function or appearance of the mallet.\n- **Image 2** shows a white electric hand mixer. A hand mixer is a tool used for beating or mixing ingredients.\n\nBoth Image 1 and Image",
+      "metadata": {
+        "chain_index": 0,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/ADRUMSTI4.jpg",
+          "name": "ADRUMSTI4.jpg",
+          "role": "A",
+          "chain_index": 0
+        },
+        "correct_option": {
+          "path": "memory_datasets/Brady2008Objects/grips.jpg",
+          "name": "grips.jpg",
+          "role": "C",
+          "chain_index": 0
+        },
+        "foil_option": {
+          "path": "memory_datasets/Brady2008Objects/AONETOAST.jpg",
+          "name": "AONETOAST.jpg",
+          "role": "C",
+          "chain_index": 1
+        }
+      }
+    },
+    {
+      "trial": 16,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.5926665975503334,
+        "2": 0.40733340244966665
+      },
+      "choice_mass": 0.9966255128383636,
+      "top_tokens": [
+        [
+          "1",
+          0.5907
+        ],
+        [
+          "2",
+          0.406
+        ],
+        [
+          "3",
+          0.0021
+        ],
+        [
+          "<|im_end|>",
+          0.0005
+        ],
+        [
+          "4",
+          0.0004
+        ]
+      ],
+      "free_response": "Based on the analysis of the visual content:\n\n- The **cue image** shows a yellow duck plush toy sitting in a wooden high chair.\n- **Image 1** is a red and black cylindrical object, which appears to be a camera lens or a similar piece of equipment.\n- **Image 2** is a golden saxophone.\n\nThere is no direct visual or semantic link between the duck in the high chair and either the camera lens or the saxophone. The duck is",
+      "metadata": {
+        "chain_index": 3,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/8019684.thl.jpg",
+          "name": "8019684.thl.jpg",
+          "role": "A",
+          "chain_index": 3
+        },
+        "correct_option": {
+          "path": "memory_datasets/Brady2008Objects/Apencilsharp5.jpg",
+          "name": "Apencilsharp5.jpg",
+          "role": "C",
+          "chain_index": 3
+        },
+        "foil_option": {
+          "path": "memory_datasets/Brady2008Objects/ASOPRASAX.jpg",
+          "name": "ASOPRASAX.jpg",
+          "role": "C",
+          "chain_index": 0
+        }
+      }
+    },
+    {
+      "trial": 17,
+      "target": 1,
+      "reported": 2,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.4378235007451469,
+        "2": 0.562176499254853
+      },
+      "choice_mass": 0.9942414164543152,
+      "top_tokens": [
+        [
+          "2",
+          0.5589
+        ],
+        [
+          "1",
+          0.4353
+        ],
+        [
+          "3",
+          0.0043
+        ],
+        [
+          "<|im_end|>",
+          0.0006
+        ],
+        [
+          "4",
+          0.0006
+        ]
+      ],
+      "free_response": "Based on the analysis of the visual content:\n\n- The **cue image** (Image 1) shows a set of cookies.\n- **Image 2** shows a metal tool, specifically a ratcheting wrench or a similar type of fastener.\n\nThere is no direct visual or semantic connection between a set of cookies and a metal wrench. The connection is therefore indirect.\n\nThe image that is indirectly associated with the cue image is Image 2.\n\n2",
+      "metadata": {
+        "chain_index": 1,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/sntslrc.jpg",
+          "name": "sntslrc.jpg",
+          "role": "A",
+          "chain_index": 1
+        },
+        "correct_option": {
+          "path": "memory_datasets/Brady2008Objects/AFOUNTAI5.jpg",
+          "name": "AFOUNTAI5.jpg",
+          "role": "C",
+          "chain_index": 1
+        },
+        "foil_option": {
+          "path": "memory_datasets/Brady2008Objects/Abikepedalar2.jpg",
+          "name": "Abikepedalar2.jpg",
+          "role": "C",
+          "chain_index": 0
+        }
+      }
+    },
+    {
+      "trial": 18,
+      "target": 2,
+      "reported": 2,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.4073333932833745,
+        "2": 0.5926666067166255
+      },
+      "choice_mass": 0.9939071834087372,
+      "top_tokens": [
+        [
+          "2",
+          0.5891
+        ],
+        [
+          "1",
+          0.4049
+        ],
+        [
+          "3",
+          0.0045
+        ],
+        [
+          "4",
+          0.0008
+        ],
+        [
+          "<|im_end|>",
+          0.0004
+        ]
+      ],
+      "free_response": "Based on the analysis of the visual content, here is the reasoning for the connection:\n\n- The cue image is an orange, hard-shell case with a yellow stripe and the words \"AIRPORT FIRE\" printed on it. This is a piece of equipment used for fire suppression.\n- Image 1 is a fishing lure, which is an object used for catching fish.\n- Image 2 is a pocket watch, an object used for telling time.\n\nThere is no direct visual or functional",
+      "metadata": {
+        "chain_index": 2,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/AFIRSTA15.jpg",
+          "name": "AFIRSTA15.jpg",
+          "role": "A",
+          "chain_index": 2
+        },
+        "correct_option": {
+          "path": "memory_datasets/Brady2008Objects/Apocketwatch.jpg",
+          "name": "Apocketwatch.jpg",
+          "role": "C",
+          "chain_index": 2
+        },
+        "foil_option": {
+          "path": "memory_datasets/Brady2008Objects/bait04.jpg",
+          "name": "bait04.jpg",
+          "role": "C",
+          "chain_index": 1
+        }
+      }
+    },
+    {
+      "trial": 19,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.5926665833721618,
+        "2": 0.4073334166278381
+      },
+      "choice_mass": 0.9956230521202087,
+      "top_tokens": [
+        [
+          "1",
+          0.5901
+        ],
+        [
+          "2",
+          0.4056
+        ],
+        [
+          "3",
+          0.0027
+        ],
+        [
+          "<|im_end|>",
+          0.0008
+        ],
+        [
+          "4",
+          0.0004
+        ]
+      ],
+      "free_response": "Based on the analysis of the provided images:\n\n- The **cue image** is a wooden bucket with a handle, which is a type of **wooden mill**.\n- **Image 1** is a red Nintendo Game Boy, a handheld video game console.\n- **Image 2** is a yellow and black ice axe, a tool used for climbing or mountaineering.\n\nThe connection between the wooden mill (cue) and the other two items is indirect. The wooden mill",
+      "metadata": {
+        "chain_index": 3,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/Abutterchurn5.jpg",
+          "name": "Abutterchurn5.jpg",
+          "role": "A",
+          "chain_index": 3
+        },
+        "correct_option": {
+          "path": "memory_datasets/Brady2008Objects/gameboy.jpg",
+          "name": "gameboy.jpg",
+          "role": "C",
+          "chain_index": 3
+        },
+        "foil_option": {
+          "path": "memory_datasets/Brady2008Objects/AICEAXE2.jpg",
+          "name": "AICEAXE2.jpg",
+          "role": "C",
+          "chain_index": 4
+        }
+      }
+    },
+    {
+      "trial": 20,
+      "target": 2,
+      "reported": 1,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.5312093839544912,
+        "2": 0.4687906160455088
+      },
+      "choice_mass": 0.9960985481739044,
+      "top_tokens": [
+        [
+          "1",
+          0.5291
+        ],
+        [
+          "2",
+          0.467
+        ],
+        [
+          "3",
+          0.0028
+        ],
+        [
+          "<|im_end|>",
+          0.0004
+        ],
+        [
+          "4",
+          0.0004
+        ]
+      ],
+      "free_response": "Based on the analysis of the visual content:\n\n- The **cue image** is a black tactical vest with \"POLICE\" written on it.\n- **Image 1** is a plush toy of the character Lumiere from Disney's *Beauty and the Beast*.\n- **Image 2** is a young boy wearing a white bucket hat and a light blue shirt.\n\nThe connection between the police vest and the boy is indirect. The boy is wearing a hat that is a direct",
+      "metadata": {
+        "chain_index": 2,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/26391079.thl.jpg",
+          "name": "26391079.thl.jpg",
+          "role": "A",
+          "chain_index": 2
+        },
+        "correct_option": {
+          "path": "memory_datasets/Brady2008Objects/ABOY.jpg",
+          "name": "ABOY.jpg",
+          "role": "C",
+          "chain_index": 2
+        },
+        "foil_option": {
+          "path": "memory_datasets/Brady2008Objects/MAT-J0150-J0153.jpg",
+          "name": "MAT-J0150-J0153.jpg",
+          "role": "C",
+          "chain_index": 4
+        }
+      }
+    },
+    {
+      "trial": 21,
+      "target": 2,
+      "reported": 1,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.5312093834375573,
+        "2": 0.4687906165624427
+      },
+      "choice_mass": 0.9975762963294983,
+      "top_tokens": [
+        [
+          "1",
+          0.5299
+        ],
+        [
+          "2",
+          0.4677
+        ],
+        [
+          "3",
+          0.0017
+        ],
+        [
+          "4",
+          0.0002
+        ],
+        [
+          "0",
+          0.0002
+        ]
+      ],
+      "free_response": "Based on the analysis of the visual content, here is the reasoning for the connection:\n\n- The cue image is a padlock, which is an object used for securing things.\n- Image 1 is a cheese server, a kitchen utensil used for serving food.\n- Image 2 is a white ghost figurine, a decorative item.\n\nThe connection between a padlock and a cheese server is not direct. However, the connection between a padlock and a ghost figurine is",
+      "metadata": {
+        "chain_index": 0,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/Alock34.jpg",
+          "name": "Alock34.jpg",
+          "role": "A",
+          "chain_index": 0
+        },
+        "correct_option": {
+          "path": "memory_datasets/Brady2008Objects/AGHOST.jpg",
+          "name": "AGHOST.jpg",
+          "role": "C",
+          "chain_index": 0
+        },
+        "foil_option": {
+          "path": "memory_datasets/Brady2008Objects/ACHEESLIC.jpg",
+          "name": "ACHEESLIC.jpg",
+          "role": "C",
+          "chain_index": 2
+        }
+      }
+    },
+    {
+      "trial": 22,
+      "target": 1,
+      "reported": 2,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.43782351211744286,
+        "2": 0.5621764878825571
+      },
+      "choice_mass": 0.9941085875034332,
+      "top_tokens": [
+        [
+          "2",
+          0.5589
+        ],
+        [
+          "1",
+          0.4352
+        ],
+        [
+          "3",
+          0.0048
+        ],
+        [
+          "4",
+          0.0004
+        ],
+        [
+          "<|im_end|>",
+          0.0003
+        ]
+      ],
+      "free_response": "Based on the analysis of the visual content:\n\n- The **cue image** is a wooden bowl with a snake-skin pattern.\n- **Image 1** is a red rubber stamp.\n- **Image 2** is a metal fork.\n\nThere is no direct visual or semantic connection between the cue image (the bowl) and either of the other two images. The relationship between the cue image and Image 1 is that both are objects that could be used for writing or marking",
+      "metadata": {
+        "chain_index": 1,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/ABOWLCARV.jpg",
+          "name": "ABOWLCARV.jpg",
+          "role": "A",
+          "chain_index": 1
+        },
+        "correct_option": {
+          "path": "memory_datasets/Brady2008Objects/8079958.thl.jpg",
+          "name": "8079958.thl.jpg",
+          "role": "C",
+          "chain_index": 1
+        },
+        "foil_option": {
+          "path": "memory_datasets/Brady2008Objects/fork-a.jpg",
+          "name": "fork-a.jpg",
+          "role": "C",
+          "chain_index": 0
+        }
+      }
+    },
+    {
+      "trial": 23,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.5926665786181717,
+        "2": 0.40733342138182826
+      },
+      "choice_mass": 0.995120108127594,
+      "top_tokens": [
+        [
+          "1",
+          0.5898
+        ],
+        [
+          "2",
+          0.4053
+        ],
+        [
+          "3",
+          0.004
+        ],
+        [
+          "4",
+          0.0004
+        ],
+        [
+          "<|im_end|>",
+          0.0002
+        ]
+      ],
+      "free_response": "Based on the analysis of the visual content, here is the reasoning for the connection:\n\n- The **cue image** is a wooden washboard.\n- **Image 1** is a wooden hair straightener.\n- **Image 2** is a blue leather camera bag.\n\nThe washboard (cue) and the hair straightener (Image 1) are both associated with hair care and grooming. The camera bag (Image 2) is an accessory for photography and has no",
+      "metadata": {
+        "chain_index": 1,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/AWASHRACK.jpg",
+          "name": "AWASHRACK.jpg",
+          "role": "A",
+          "chain_index": 1
+        },
+        "correct_option": {
+          "path": "memory_datasets/Brady2008Objects/ACIGARCU3.jpg",
+          "name": "ACIGARCU3.jpg",
+          "role": "C",
+          "chain_index": 1
+        },
+        "foil_option": {
+          "path": "memory_datasets/Brady2008Objects/Acamerabag.jpg",
+          "name": "Acamerabag.jpg",
+          "role": "C",
+          "chain_index": 0
+        }
+      }
+    },
+    {
+      "trial": 24,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.6224593336721541,
+        "2": 0.37754066632784594
+      },
+      "choice_mass": 0.997747927904129,
+      "top_tokens": [
+        [
+          "1",
+          0.6211
+        ],
+        [
+          "2",
+          0.3767
+        ],
+        [
+          "3",
+          0.0011
+        ],
+        [
+          "<|im_end|>",
+          0.0006
+        ],
+        [
+          "4",
+          0.0003
+        ]
+      ],
+      "free_response": "Based on the analysis of the visual content:\n\n- The **cue image** is a pink \"I'm 4\" birthday rosette.\n- **Image 1** is a grey and black athletic shoe.\n- **Image 2** is a black, rectangular object with ridges, which appears to be a grill pan or a similar kitchen tool.\n\nThere is no direct visual or semantic link between a birthday rosette and either a shoe or a grill pan.",
+      "metadata": {
+        "chain_index": 2,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/Aim4ribbo.jpg",
+          "name": "Aim4ribbo.jpg",
+          "role": "A",
+          "chain_index": 2
+        },
+        "correct_option": {
+          "path": "memory_datasets/Brady2008Objects/Abicycleshoe.jpg",
+          "name": "Abicycleshoe.jpg",
+          "role": "C",
+          "chain_index": 2
+        },
+        "foil_option": {
+          "path": "memory_datasets/Brady2008Objects/26429137.thl.jpg",
+          "name": "26429137.thl.jpg",
+          "role": "C",
+          "chain_index": 3
+        }
+      }
+    },
+    {
+      "trial": 25,
+      "target": 2,
+      "reported": 1,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.5312093845486509,
+        "2": 0.46879061545134915
+      },
+      "choice_mass": 0.9973972141742706,
+      "top_tokens": [
+        [
+          "1",
+          0.5298
+        ],
+        [
+          "2",
+          0.4676
+        ],
+        [
+          "3",
+          0.0017
+        ],
+        [
+          "<|im_end|>",
+          0.0005
+        ],
+        [
+          "4",
+          0.0002
+        ]
+      ],
+      "free_response": "Based on the analysis of the visual content, here is the reasoning for the connection:\n\n- The cue image is a brown, textured sack with the text \"STANDARD LIFE\" printed on it.\n- Image 1 is a computer hard drive.\n- Image 2 is a dark blue, ornate electronic device, which appears to be a power supply unit or a similar electronic component.\n\nThe connection between the cue image (a sack) and Image 1 (a hard drive)",
+      "metadata": {
+        "chain_index": 3,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/AOLDLIFE3.jpg",
+          "name": "AOLDLIFE3.jpg",
+          "role": "A",
+          "chain_index": 3
+        },
+        "correct_option": {
+          "path": "memory_datasets/Brady2008Objects/26437028.thl.jpg",
+          "name": "26437028.thl.jpg",
+          "role": "C",
+          "chain_index": 3
+        },
+        "foil_option": {
+          "path": "memory_datasets/Brady2008Objects/Acomputerdriv.jpg",
+          "name": "Acomputerdriv.jpg",
+          "role": "C",
+          "chain_index": 2
+        }
+      }
+    },
+    {
+      "trial": 26,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.5312093753710482,
+        "2": 0.4687906246289519
+      },
+      "choice_mass": 0.9964612126350403,
+      "top_tokens": [
+        [
+          "1",
+          0.5293
+        ],
+        [
+          "2",
+          0.4671
+        ],
+        [
+          "3",
+          0.0025
+        ],
+        [
+          "<|im_end|>",
+          0.0004
+        ],
+        [
+          "4",
+          0.0003
+        ]
+      ],
+      "free_response": "Based on the analysis of the visual content, here is the reasoning for the connection:\n\n- The cue image is a blue, metal tool with three bells attached to it. This is a jingle bell.\n- Image 1 shows a stamp booklet. While the booklet contains stamps, the primary object is the booklet itself, not the stamps.\n- Image 2 shows a makeup product, specifically an eyeliner pencil.\n- There is no direct visual or functional link between a jingle",
+      "metadata": {
+        "chain_index": 0,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/Abells7.jpg",
+          "name": "Abells7.jpg",
+          "role": "A",
+          "chain_index": 0
+        },
+        "correct_option": {
+          "path": "memory_datasets/Brady2008Objects/ASTAMPS.jpg",
+          "name": "ASTAMPS.jpg",
+          "role": "C",
+          "chain_index": 0
+        },
+        "foil_option": {
+          "path": "memory_datasets/Brady2008Objects/makeupcrayon.jpg",
+          "name": "makeupcrayon.jpg",
+          "role": "C",
+          "chain_index": 4
+        }
+      }
+    },
+    {
+      "trial": 27,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.5621764901758521,
+        "2": 0.4378235098241479
+      },
+      "choice_mass": 0.9954110980033875,
+      "top_tokens": [
+        [
+          "1",
+          0.5596
+        ],
+        [
+          "2",
+          0.4358
+        ],
+        [
+          "3",
+          0.0033
+        ],
+        [
+          "<|im_end|>",
+          0.0006
+        ],
+        [
+          "4",
+          0.0004
+        ]
+      ],
+      "free_response": "Based on the analysis of the provided image pairs, here is the logical deduction:\n\n1.  **Analyze the Cues:** The two images provided as cues are an external hard drive and a high jump mat.\n2.  **Analyze the Pairs:** The task is to find pairs that are indirectly associated with these cues.\n    -   The first pair (Image 1: Orca, Image 2: High jump mat) is a classic example of an \"animal",
+      "metadata": {
+        "chain_index": 2,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/Acompactdisc2.jpg",
+          "name": "Acompactdisc2.jpg",
+          "role": "A",
+          "chain_index": 2
+        },
+        "correct_option": {
+          "path": "memory_datasets/Brady2008Objects/Aorcatoy4.jpg",
+          "name": "Aorcatoy4.jpg",
+          "role": "C",
+          "chain_index": 2
+        },
+        "foil_option": {
+          "path": "memory_datasets/Brady2008Objects/jumpmattress.jpg",
+          "name": "jumpmattress.jpg",
+          "role": "C",
+          "chain_index": 1
+        }
+      }
+    },
+    {
+      "trial": 28,
+      "target": 2,
+      "reported": 1,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.5,
+        "2": 0.5
+      },
+      "choice_mass": 0.9981971383094788,
+      "top_tokens": [
+        [
+          "2",
+          0.4991
+        ],
+        [
+          "1",
+          0.4991
+        ],
+        [
+          "3",
+          0.0012
+        ],
+        [
+          "<|im_end|>",
+          0.0002
+        ],
+        [
+          "4",
+          0.0001
+        ]
+      ],
+      "free_response": "Based on the analysis of the image pairs provided:\n\n- The first pair consists of an owl and a pair of blue gloves. The connection is likely that the owl is wearing the gloves.\n- The second pair consists of a set of wooden blocks and a set of metal measuring spoons. The connection is that both are sets of tools or items used for construction or cooking.\n\nThe cue image is the owl. We need to find which of the two images (Image 1 or Image",
+      "metadata": {
+        "chain_index": 0,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/Aowl8.jpg",
+          "name": "Aowl8.jpg",
+          "role": "A",
+          "chain_index": 0
+        },
+        "correct_option": {
+          "path": "memory_datasets/Brady2008Objects/Atoyblocks.jpg",
+          "name": "Atoyblocks.jpg",
+          "role": "C",
+          "chain_index": 0
+        },
+        "foil_option": {
+          "path": "memory_datasets/Brady2008Objects/AHOCKPANT.jpg",
+          "name": "AHOCKPANT.jpg",
+          "role": "C",
+          "chain_index": 3
+        }
+      }
+    },
+    {
+      "trial": 29,
+      "target": 2,
+      "reported": 1,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.5312093770501503,
+        "2": 0.46879062294984974
+      },
+      "choice_mass": 0.997350662946701,
+      "top_tokens": [
+        [
+          "1",
+          0.5298
+        ],
+        [
+          "2",
+          0.4675
+        ],
+        [
+          "3",
+          0.0015
+        ],
+        [
+          "<|im_end|>",
+          0.0004
+        ],
+        [
+          "4",
+          0.0004
+        ]
+      ],
+      "free_response": "Based on the analysis of the visual content:\n\n- The **cue image** is a black hair claw.\n- **Image 1** is a green laboratory apparatus, which is unrelated to a hair claw.\n- **Image 2** is a red ladybug.\n\nA hair claw is used to hold hair, while a ladybug is an insect. There is no direct or indirect functional or thematic connection between a hair claw and a ladybug. Therefore, neither image is indirectly associated",
+      "metadata": {
+        "chain_index": 3,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/clawhairclips.jpg",
+          "name": "clawhairclips.jpg",
+          "role": "A",
+          "chain_index": 3
+        },
+        "correct_option": {
+          "path": "memory_datasets/Brady2008Objects/26375702.thl.jpg",
+          "name": "26375702.thl.jpg",
+          "role": "C",
+          "chain_index": 3
+        },
+        "foil_option": {
+          "path": "memory_datasets/Brady2008Objects/Ascientifict3.jpg",
+          "name": "Ascientifict3.jpg",
+          "role": "C",
+          "chain_index": 4
+        }
+      }
+    },
+    {
+      "trial": 30,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.5621765099627187,
+        "2": 0.4378234900372813
+      },
+      "choice_mass": 0.9976312220096588,
+      "top_tokens": [
+        [
+          "1",
+          0.5608
+        ],
+        [
+          "2",
+          0.4368
+        ],
+        [
+          "3",
+          0.0014
+        ],
+        [
+          "<|im_end|>",
+          0.0004
+        ],
+        [
+          "4",
+          0.0003
+        ]
+      ],
+      "free_response": "Based on the analysis of the visual content, here is the reasoning for the connection:\n\n- The cue image is a wooden box with a red interior and an ornate, carved wooden drawer.\n- Image 1 is a wooden object that is a direct visual match to the drawer seen in the cue image. It is a wooden handle with a series of wooden beads.\n- Image 2 is a beige, vintage-style projector. There is no visual or semantic link between a projector and a",
+      "metadata": {
+        "chain_index": 4,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/26425323.thl.jpg",
+          "name": "26425323.thl.jpg",
+          "role": "A",
+          "chain_index": 4
+        },
+        "correct_option": {
+          "path": "memory_datasets/Brady2008Objects/Abackaccesso4.jpg",
+          "name": "Abackaccesso4.jpg",
+          "role": "C",
+          "chain_index": 4
+        },
+        "foil_option": {
+          "path": "memory_datasets/Brady2008Objects/26421538.thl.jpg",
+          "name": "26421538.thl.jpg",
+          "role": "C",
+          "chain_index": 3
+        }
+      }
+    },
+    {
+      "trial": 31,
+      "target": 2,
+      "reported": 1,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.6224593285552839,
+        "2": 0.3775406714447161
+      },
+      "choice_mass": 0.9933339357376099,
+      "top_tokens": [
+        [
+          "1",
+          0.6183
+        ],
+        [
+          "2",
+          0.375
+        ],
+        [
+          "3",
+          0.0042
+        ],
+        [
+          "4",
+          0.0014
+        ],
+        [
+          "<|im_end|>",
+          0.0005
+        ]
+      ],
+      "free_response": "Based on the analysis of the provided images, here is the logical deduction:\n\n1.  **Analyze the Cue Image:** The cue image is a photograph of a mechanical part, specifically a cable guide or a similar automotive component. It is characterized by its metallic construction, a central cylindrical housing, and attached black cables.\n\n2.  **Analyze Image 1:** This image displays an ornate, classical-style urn or vase. It is an object of decorative art and has no functional",
+      "metadata": {
+        "chain_index": 2,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/Acableandacce.jpg",
+          "name": "Acableandacce.jpg",
+          "role": "A",
+          "chain_index": 2
+        },
+        "correct_option": {
+          "path": "memory_datasets/Brady2008Objects/Abisontoy.jpg",
+          "name": "Abisontoy.jpg",
+          "role": "C",
+          "chain_index": 2
+        },
+        "foil_option": {
+          "path": "memory_datasets/Brady2008Objects/ABUILDAR4.jpg",
+          "name": "ABUILDAR4.jpg",
+          "role": "C",
+          "chain_index": 4
+        }
+      }
+    },
+    {
+      "trial": 32,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.5926665954152083,
+        "2": 0.4073334045847917
+      },
+      "choice_mass": 0.9949240684509277,
+      "top_tokens": [
+        [
+          "1",
+          0.5897
+        ],
+        [
+          "2",
+          0.4053
+        ],
+        [
+          "3",
+          0.0035
+        ],
+        [
+          "<|im_end|>",
+          0.0006
+        ],
+        [
+          "4",
+          0.0005
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 4,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/showercurtainsuchi.jpg",
+          "name": "showercurtainsuchi.jpg",
+          "role": "A",
+          "chain_index": 4
+        },
+        "correct_option": {
+          "path": "memory_datasets/Brady2008Objects/10049816.thl.jpg",
+          "name": "10049816.thl.jpg",
+          "role": "C",
+          "chain_index": 4
+        },
+        "foil_option": {
+          "path": "memory_datasets/Brady2008Objects/AEIFFELTO.jpg",
+          "name": "AEIFFELTO.jpg",
+          "role": "C",
+          "chain_index": 3
+        }
+      }
+    },
+    {
+      "trial": 33,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.5621765031515892,
+        "2": 0.4378234968484109
+      },
+      "choice_mass": 0.9976332485675812,
+      "top_tokens": [
+        [
+          "1",
+          0.5608
+        ],
+        [
+          "2",
+          0.4368
+        ],
+        [
+          "3",
+          0.0014
+        ],
+        [
+          "<|im_end|>",
+          0.0005
+        ],
+        [
+          "4",
+          0.0002
+        ]
+      ],
+      "free_response": "Based on the analysis of the visual content:\n\n- The **cue image** is a yellow house with a grey roof and a white porch.\n- **Image 1** is a metallic wine glass.\n- **Image 2** is a red and blue fabric teepee.\n\nThe connection between the cue image (the house) and Image 1 (the wine glass) is indirect. The house is a common setting for hosting a dinner party, which would involve serving food and drinks",
+      "metadata": {
+        "chain_index": 0,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/26431734.thl.jpg",
+          "name": "26431734.thl.jpg",
+          "role": "A",
+          "chain_index": 0
+        },
+        "correct_option": {
+          "path": "memory_datasets/Brady2008Objects/Adecorativem2.jpg",
+          "name": "Adecorativem2.jpg",
+          "role": "C",
+          "chain_index": 0
+        },
+        "foil_option": {
+          "path": "memory_datasets/Brady2008Objects/teepee.jpg",
+          "name": "teepee.jpg",
+          "role": "C",
+          "chain_index": 2
+        }
+      }
+    },
+    {
+      "trial": 34,
+      "target": 2,
+      "reported": 1,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.5,
+        "2": 0.5
+      },
+      "choice_mass": 0.9969779253005981,
+      "top_tokens": [
+        [
+          "2",
+          0.4985
+        ],
+        [
+          "1",
+          0.4985
+        ],
+        [
+          "3",
+          0.0023
+        ],
+        [
+          "<|im_end|>",
+          0.0003
+        ],
+        [
+          "4",
+          0.0002
+        ]
+      ],
+      "free_response": "Based on the analysis of the provided image pairs, here is the logical deduction:\n\n1.  **Analyze the Cue Image:** The cue image is an orange, spiky ball. This object is a classic toy for dogs, often used for chewing or playing.\n2.  **Analyze Image 1:** This image shows a white whale figurine. While it is a different object, it is a common type of toy that dogs are also known to play with.\n3.",
+      "metadata": {
+        "chain_index": 1,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/Atoyball.jpg",
+          "name": "Atoyball.jpg",
+          "role": "A",
+          "chain_index": 1
+        },
+        "correct_option": {
+          "path": "memory_datasets/Brady2008Objects/ATELESCO2.jpg",
+          "name": "ATELESCO2.jpg",
+          "role": "C",
+          "chain_index": 1
+        },
+        "foil_option": {
+          "path": "memory_datasets/Brady2008Objects/26370651.thm.jpg",
+          "name": "26370651.thm.jpg",
+          "role": "C",
+          "chain_index": 3
+        }
+      }
+    },
+    {
+      "trial": 35,
+      "target": 2,
+      "reported": 1,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.5621765004357708,
+        "2": 0.43782349956422917
+      },
+      "choice_mass": 0.9971930384635925,
+      "top_tokens": [
+        [
+          "1",
+          0.5606
+        ],
+        [
+          "2",
+          0.4366
+        ],
+        [
+          "3",
+          0.0016
+        ],
+        [
+          "<|im_end|>",
+          0.0005
+        ],
+        [
+          "4",
+          0.0004
+        ]
+      ],
+      "free_response": "Based on the analysis of the visual content, here is the reasoning for the connection:\n\n- The cue image is an orange, plastic mobile phone.\n- Image 1 is a rusty, cylindrical metal object that resembles a barrel or a large container.\n- Image 2 is a white paint can with a black interior.\n\nThe connection between the orange phone and the other two images is indirect. The orange color of the phone is a key feature. Image 2 is a paint can,",
+      "metadata": {
+        "chain_index": 0,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/26377777.thl.jpg",
+          "name": "26377777.thl.jpg",
+          "role": "A",
+          "chain_index": 0
+        },
+        "correct_option": {
+          "path": "memory_datasets/Brady2008Objects/23065398.thl.jpg",
+          "name": "23065398.thl.jpg",
+          "role": "C",
+          "chain_index": 0
+        },
+        "foil_option": {
+          "path": "memory_datasets/Brady2008Objects/22855536.thl.jpg",
+          "name": "22855536.thl.jpg",
+          "role": "C",
+          "chain_index": 2
+        }
+      }
+    },
+    {
+      "trial": 36,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.5621764995724043,
+        "2": 0.43782350042759566
+      },
+      "choice_mass": 0.996533989906311,
+      "top_tokens": [
+        [
+          "1",
+          0.5602
+        ],
+        [
+          "2",
+          0.4363
+        ],
+        [
+          "3",
+          0.0023
+        ],
+        [
+          "4",
+          0.0005
+        ],
+        [
+          "<|im_end|>",
+          0.0004
+        ]
+      ],
+      "free_response": "Based on the analysis of the visual content:\n\n- The **cue image** is a red apple-shaped clock with a wooden base.\n- **Image 1** is a golden, ornate oil lamp hanging from chains.\n- **Image 2** is a colorful wooden toy train.\n\nThe apple clock is a common decorative item found in homes. Oil lamps and toy trains are also common household items. However, there is no direct visual or functional link between an apple clock and either",
+      "metadata": {
+        "chain_index": 4,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/26374787.thl.jpg",
+          "name": "26374787.thl.jpg",
+          "role": "A",
+          "chain_index": 4
+        },
+        "correct_option": {
+          "path": "memory_datasets/Brady2008Objects/AINCENSE4.jpg",
+          "name": "AINCENSE4.jpg",
+          "role": "C",
+          "chain_index": 4
+        },
+        "foil_option": {
+          "path": "memory_datasets/Brady2008Objects/Atoy33.jpg",
+          "name": "Atoy33.jpg",
+          "role": "C",
+          "chain_index": 3
+        }
+      }
+    },
+    {
+      "trial": 37,
+      "target": 2,
+      "reported": 1,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.5621764946998586,
+        "2": 0.4378235053001414
+      },
+      "choice_mass": 0.9976820349693298,
+      "top_tokens": [
+        [
+          "1",
+          0.5609
+        ],
+        [
+          "2",
+          0.4368
+        ],
+        [
+          "3",
+          0.0016
+        ],
+        [
+          "<|im_end|>",
+          0.0004
+        ],
+        [
+          "4",
+          0.0001
+        ]
+      ],
+      "free_response": "Based on the analysis of the provided image pairs, here is the logical deduction:\n\n1.  **Analyze the Cues:** The two images provided as cues are:\n    -   Image 1: A wooden model of the Eiffel Tower.\n    -   Image 2: A black plate filled with various fruits.\n\n2.  **Analyze the Pairs:** The task is to find which of these two images is *indirectly* associated with the Eiffel",
+      "metadata": {
+        "chain_index": 1,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/Aeiffeltower2.jpg",
+          "name": "Aeiffeltower2.jpg",
+          "role": "A",
+          "chain_index": 1
+        },
+        "correct_option": {
+          "path": "memory_datasets/Brady2008Objects/Abowloffruit4.jpg",
+          "name": "Abowloffruit4.jpg",
+          "role": "C",
+          "chain_index": 1
+        },
+        "foil_option": {
+          "path": "memory_datasets/Brady2008Objects/Ascale60.jpg",
+          "name": "Ascale60.jpg",
+          "role": "C",
+          "chain_index": 3
+        }
+      }
+    },
+    {
+      "trial": 38,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.5926666005203219,
+        "2": 0.407333399479678
+      },
+      "choice_mass": 0.9960187673568726,
+      "top_tokens": [
+        [
+          "1",
+          0.5903
+        ],
+        [
+          "2",
+          0.4057
+        ],
+        [
+          "3",
+          0.0024
+        ],
+        [
+          "<|im_end|>",
+          0.0009
+        ],
+        [
+          "4",
+          0.0003
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 1,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/ABATHTAP.jpg",
+          "name": "ABATHTAP.jpg",
+          "role": "A",
+          "chain_index": 1
+        },
+        "correct_option": {
+          "path": "memory_datasets/Brady2008Objects/Abowlofporrid.jpg",
+          "name": "Abowlofporrid.jpg",
+          "role": "C",
+          "chain_index": 1
+        },
+        "foil_option": {
+          "path": "memory_datasets/Brady2008Objects/AFERRY5.jpg",
+          "name": "AFERRY5.jpg",
+          "role": "C",
+          "chain_index": 4
+        }
+      }
+    },
+    {
+      "trial": 39,
+      "target": 2,
+      "reported": 2,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.4687906349936381,
+        "2": 0.531209365006362
+      },
+      "choice_mass": 0.9964133203029633,
+      "top_tokens": [
+        [
+          "2",
+          0.5293
+        ],
+        [
+          "1",
+          0.4671
+        ],
+        [
+          "3",
+          0.0028
+        ],
+        [
+          "4",
+          0.0003
+        ],
+        [
+          "<|im_end|>",
+          0.0003
+        ]
+      ],
+      "free_response": "Based on the analysis of the visual content, here is the reasoning for the connection:\n\n- The cue image is a metallic, triangular object that appears to be a set of interlocking triangle clips or a similar tool.\n- Image 1 is a container of dental floss.\n- Image 2 is a baseball.\n- There is no direct visual similarity or obvious functional link between the triangular clips and either the dental floss or the baseball.\n- However, the question asks for",
+      "metadata": {
+        "chain_index": 4,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/clips-a.jpg",
+          "name": "clips-a.jpg",
+          "role": "A",
+          "chain_index": 4
+        },
+        "correct_option": {
+          "path": "memory_datasets/Brady2008Objects/baseball.JPG",
+          "name": "baseball.JPG",
+          "role": "C",
+          "chain_index": 4
+        },
+        "foil_option": {
+          "path": "memory_datasets/Brady2008Objects/supersmilefloss.jpg",
+          "name": "supersmilefloss.jpg",
+          "role": "C",
+          "chain_index": 3
+        }
+      }
+    },
+    {
+      "trial": 40,
+      "target": 2,
+      "reported": 1,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.5312093682946186,
+        "2": 0.4687906317053814
+      },
+      "choice_mass": 0.9961043000221252,
+      "top_tokens": [
+        [
+          "1",
+          0.5291
+        ],
+        [
+          "2",
+          0.467
+        ],
+        [
+          "3",
+          0.0025
+        ],
+        [
+          "4",
+          0.0006
+        ],
+        [
+          "<|im_end|>",
+          0.0005
+        ]
+      ],
+      "free_response": "Based on the analysis of the provided image pairs, here is the logical deduction:\n\n1.  **Analyze the Cue Image:** The cue image is a blue, shallow ceramic dish.\n2.  **Analyze the Pairs:** The task is to find an image that is *indirectly* associated with the cue image.\n    -   The first pair (Image 1 and Image 2) shows a blue dish and a black optical device. The blue dish is the",
+      "metadata": {
+        "chain_index": 0,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/Asoapdish3.jpg",
+          "name": "Asoapdish3.jpg",
+          "role": "A",
+          "chain_index": 0
+        },
+        "correct_option": {
+          "path": "memory_datasets/Brady2008Objects/Aclamp42.jpg",
+          "name": "Aclamp42.jpg",
+          "role": "C",
+          "chain_index": 0
+        },
+        "foil_option": {
+          "path": "memory_datasets/Brady2008Objects/ALINENCA3.jpg",
+          "name": "ALINENCA3.jpg",
+          "role": "C",
+          "chain_index": 2
+        }
+      }
+    },
+    {
+      "trial": 41,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.5,
+        "2": 0.5
+      },
+      "choice_mass": 0.9964614510536194,
+      "top_tokens": [
+        [
+          "2",
+          0.4982
+        ],
+        [
+          "1",
+          0.4982
+        ],
+        [
+          "3",
+          0.0026
+        ],
+        [
+          "4",
+          0.0004
+        ],
+        [
+          "<|im_end|>",
+          0.0002
+        ]
+      ],
+      "free_response": "Based on the analysis of the visual content:\n\n- The **cue image** is a pumpkin with intricate carved swirls.\n- **Image 1** is a panda figurine.\n- **Image 2** is a black vacuum sealer.\n\nThe carved pumpkin in the cue image is a common object associated with Halloween. The panda figurine is a generic toy, and the vacuum sealer is a kitchen appliance. There is no direct visual or thematic link between the carved pumpkin and",
+      "metadata": {
+        "chain_index": 3,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/Acarvedpumpk2.jpg",
+          "name": "Acarvedpumpk2.jpg",
+          "role": "A",
+          "chain_index": 3
+        },
+        "correct_option": {
+          "path": "memory_datasets/Brady2008Objects/26379612.thl.jpg",
+          "name": "26379612.thl.jpg",
+          "role": "C",
+          "chain_index": 3
+        },
+        "foil_option": {
+          "path": "memory_datasets/Brady2008Objects/8018499.thl.jpg",
+          "name": "8018499.thl.jpg",
+          "role": "C",
+          "chain_index": 0
+        }
+      }
+    },
+    {
+      "trial": 42,
+      "target": 2,
+      "reported": 1,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.6513548642012351,
+        "2": 0.34864513579876494
+      },
+      "choice_mass": 0.998039036989212,
+      "top_tokens": [
+        [
+          "1",
+          0.6501
+        ],
+        [
+          "2",
+          0.348
+        ],
+        [
+          "3",
+          0.0011
+        ],
+        [
+          "<|im_end|>",
+          0.0004
+        ],
+        [
+          "4",
+          0.0002
+        ]
+      ],
+      "free_response": "Based on the analysis of the visual content:\n\n- The cue image is a pineapple drink.\n- Image 1 is a bottle opener with a design of a windmill, which is a common feature on bottles of pineapple juice.\n- Image 2 is a pearl brooch.\n\nThe connection between the pineapple drink and the bottle opener is a functional association (the opener is used for opening the bottle). The connection between the pineapple drink and the pearl brooch is not directly related. Therefore",
+      "metadata": {
+        "chain_index": 4,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/Atropicalpine.jpg",
+          "name": "Atropicalpine.jpg",
+          "role": "A",
+          "chain_index": 4
+        },
+        "correct_option": {
+          "path": "memory_datasets/Brady2008Objects/Ahandheldmir3.jpg",
+          "name": "Ahandheldmir3.jpg",
+          "role": "C",
+          "chain_index": 4
+        },
+        "foil_option": {
+          "path": "memory_datasets/Brady2008Objects/ACLOGOPE3.jpg",
+          "name": "ACLOGOPE3.jpg",
+          "role": "C",
+          "chain_index": 1
+        }
+      }
+    },
+    {
+      "trial": 43,
+      "target": 2,
+      "reported": 2,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.4687906341927117,
+        "2": 0.5312093658072883
+      },
+      "choice_mass": 0.9952182173728943,
+      "top_tokens": [
+        [
+          "2",
+          0.5287
+        ],
+        [
+          "1",
+          0.4665
+        ],
+        [
+          "3",
+          0.0036
+        ],
+        [
+          "<|im_end|>",
+          0.0005
+        ],
+        [
+          "4",
+          0.0004
+        ]
+      ],
+      "free_response": "Based on the analysis of the visual content:\n\n- The cue image is a wooden toy spinning top.\n- Image 1 is a colorful, wooden toy train.\n- Image 2 is a wooden hairbrush with metal spikes.\n\nThe toy train (Image 1) and the hairbrush (Image 2) are both toys. The spinning top (the cue image) is also a toy. Therefore, both Image 1 and Image 2 are indirectly associated with the cue image",
+      "metadata": {
+        "chain_index": 2,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/image004.jpg",
+          "name": "image004.jpg",
+          "role": "A",
+          "chain_index": 2
+        },
+        "correct_option": {
+          "path": "memory_datasets/Brady2008Objects/Abootscrubber.jpg",
+          "name": "Abootscrubber.jpg",
+          "role": "C",
+          "chain_index": 2
+        },
+        "foil_option": {
+          "path": "memory_datasets/Brady2008Objects/Atoy33.jpg",
+          "name": "Atoy33.jpg",
+          "role": "C",
+          "chain_index": 1
+        }
+      }
+    },
+    {
+      "trial": 44,
+      "target": 2,
+      "reported": 2,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.46879063508840185,
+        "2": 0.5312093649115982
+      },
+      "choice_mass": 0.9952421188354492,
+      "top_tokens": [
+        [
+          "2",
+          0.5287
+        ],
+        [
+          "1",
+          0.4666
+        ],
+        [
+          "3",
+          0.0036
+        ],
+        [
+          "<|im_end|>",
+          0.0005
+        ],
+        [
+          "4",
+          0.0004
+        ]
+      ],
+      "free_response": "Based on the analysis of the provided images:\n\n- The **cue image** is a potato masher.\n- **Image 1** is a sock.\n- **Image 2** is a wall-mounted air conditioning unit.\n\nA potato masher is a kitchen utensil used for mashing food. A sock is an article of clothing, and an air conditioning unit is an appliance for cooling. Neither of these items is directly related to the function or use of a potato masher",
+      "metadata": {
+        "chain_index": 1,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/AHANDRAK.jpg",
+          "name": "AHANDRAK.jpg",
+          "role": "A",
+          "chain_index": 1
+        },
+        "correct_option": {
+          "path": "memory_datasets/Brady2008Objects/22853352.thl.jpg",
+          "name": "22853352.thl.jpg",
+          "role": "C",
+          "chain_index": 1
+        },
+        "foil_option": {
+          "path": "memory_datasets/Brady2008Objects/AWINTSOC2.jpg",
+          "name": "AWINTSOC2.jpg",
+          "role": "C",
+          "chain_index": 2
+        }
+      }
+    },
+    {
+      "trial": 45,
+      "target": 2,
+      "reported": 1,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.5,
+        "2": 0.5
+      },
+      "choice_mass": 0.9955495595932007,
+      "top_tokens": [
+        [
+          "2",
+          0.4978
+        ],
+        [
+          "1",
+          0.4978
+        ],
+        [
+          "3",
+          0.0034
+        ],
+        [
+          "<|im_end|>",
+          0.0004
+        ],
+        [
+          "4",
+          0.0004
+        ]
+      ],
+      "free_response": "Based on the analysis of the provided image pairs, here is the logical deduction:\n\n1.  **Identify the Cue Image:** The cue image is the brown saddle shown in the first image of the sequence.\n2.  **Analyze the Pairs:** The task is to find an image that is *indirectly* associated with the saddle.\n    -   The first pair (AB) shows a blue and red object, which is unrelated to the saddle.\n    -",
+      "metadata": {
+        "chain_index": 2,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/ASADDLE2.jpg",
+          "name": "ASADDLE2.jpg",
+          "role": "A",
+          "chain_index": 2
+        },
+        "correct_option": {
+          "path": "memory_datasets/Brady2008Objects/AANTHAT2.jpg",
+          "name": "AANTHAT2.jpg",
+          "role": "C",
+          "chain_index": 2
+        },
+        "foil_option": {
+          "path": "memory_datasets/Brady2008Objects/AHONEY.jpg",
+          "name": "AHONEY.jpg",
+          "role": "C",
+          "chain_index": 4
+        }
+      }
+    },
+    {
+      "trial": 46,
+      "target": 1,
+      "reported": 2,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.4687906231425092,
+        "2": 0.5312093768574908
+      },
+      "choice_mass": 0.9958557486534119,
+      "top_tokens": [
+        [
+          "2",
+          0.529
+        ],
+        [
+          "1",
+          0.4668
+        ],
+        [
+          "3",
+          0.0031
+        ],
+        [
+          "4",
+          0.0004
+        ],
+        [
+          "<|im_end|>",
+          0.0003
+        ]
+      ],
+      "free_response": "Based on the analysis of the visual content:\n\n- The **cue image** is a chocolate-covered popsicle on a stick.\n- **Image 1** is a clear glass jar with a metal clasp.\n- **Image 2** is a yellow envelope with a black pen resting on it.\n\nThere is no direct visual or semantic link between a popsicle and either a glass jar or an envelope. However, the popsicle is a type of frozen treat, which is often",
+      "metadata": {
+        "chain_index": 0,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/Achocolateice.jpg",
+          "name": "Achocolateice.jpg",
+          "role": "A",
+          "chain_index": 0
+        },
+        "correct_option": {
+          "path": "memory_datasets/Brady2008Objects/Ajar33.jpg",
+          "name": "Ajar33.jpg",
+          "role": "C",
+          "chain_index": 0
+        },
+        "foil_option": {
+          "path": "memory_datasets/Brady2008Objects/26432760.thl.jpg",
+          "name": "26432760.thl.jpg",
+          "role": "C",
+          "chain_index": 1
+        }
+      }
+    },
+    {
+      "trial": 47,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.5926665956878163,
+        "2": 0.4073334043121837
+      },
+      "choice_mass": 0.9956661760807037,
+      "top_tokens": [
+        [
+          "1",
+          0.5901
+        ],
+        [
+          "2",
+          0.4056
+        ],
+        [
+          "3",
+          0.0031
+        ],
+        [
+          "4",
+          0.0006
+        ],
+        [
+          "<|im_end|>",
+          0.0003
+        ]
+      ],
+      "free_response": "Based on the analysis of the visual content:\n\n- The cue image is a chrysanthemum flower.\n- Image 1 is a 3D model of the Taj Mahal, a famous mausoleum in India.\n- Image 2 is a picture frame.\n\nThere is no direct visual or semantic connection between a chrysanthemum flower and either a Taj Mahal or a picture frame.\n\nHowever, the chrysanthemum flower is a common",
+      "metadata": {
+        "chain_index": 2,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/Ablossom.jpg",
+          "name": "Ablossom.jpg",
+          "role": "A",
+          "chain_index": 2
+        },
+        "correct_option": {
+          "path": "memory_datasets/Brady2008Objects/Aancientbuild.jpg",
+          "name": "Aancientbuild.jpg",
+          "role": "C",
+          "chain_index": 2
+        },
+        "foil_option": {
+          "path": "memory_datasets/Brady2008Objects/AFRAME15.jpg",
+          "name": "AFRAME15.jpg",
+          "role": "C",
+          "chain_index": 4
+        }
+      }
+    },
+    {
+      "trial": 48,
+      "target": 2,
+      "reported": 2,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.43782351247214973,
+        "2": 0.5621764875278502
+      },
+      "choice_mass": 0.9971244633197784,
+      "top_tokens": [
+        [
+          "2",
+          0.5606
+        ],
+        [
+          "1",
+          0.4366
+        ],
+        [
+          "3",
+          0.002
+        ],
+        [
+          "4",
+          0.0003
+        ],
+        [
+          "<|im_end|>",
+          0.0003
+        ]
+      ],
+      "free_response": "Based on the analysis of the visual content, here is the reasoning for the connection:\n\n- The cue image is a Russian Matryoshka doll, which is a traditional nesting doll.\n- Image 1 is a planet, specifically Saturn, with its characteristic rings.\n- Image 2 is a Matryoshka doll, which is a type of nesting doll.\n\nSince the cue image is a Matryoshka doll and Image 2 is also a Matryoshka doll",
+      "metadata": {
+        "chain_index": 4,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/ACHINDECP.jpg",
+          "name": "ACHINDECP.jpg",
+          "role": "A",
+          "chain_index": 4
+        },
+        "correct_option": {
+          "path": "memory_datasets/Brady2008Objects/ARUSSDO13.jpg",
+          "name": "ARUSSDO13.jpg",
+          "role": "C",
+          "chain_index": 4
+        },
+        "foil_option": {
+          "path": "memory_datasets/Brady2008Objects/Asaturn.jpg",
+          "name": "Asaturn.jpg",
+          "role": "C",
+          "chain_index": 0
+        }
+      }
+    },
+    {
+      "trial": 49,
+      "target": 2,
+      "reported": 1,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.5312093800408982,
+        "2": 0.46879061995910176
+      },
+      "choice_mass": 0.9963006377220154,
+      "top_tokens": [
+        [
+          "1",
+          0.5292
+        ],
+        [
+          "2",
+          0.4671
+        ],
+        [
+          "3",
+          0.0028
+        ],
+        [
+          "4",
+          0.0004
+        ],
+        [
+          "<|im_end|>",
+          0.0002
+        ]
+      ],
+      "free_response": "Based on the analysis of the provided image pairs, here is the logical deduction:\n\n1.  **Analyze the Cues:** The two images to be evaluated are Image 1 (a football helmet) and Image 2 (a lantern).\n2.  **Analyze the Pairs:** The task is to find which of these two images is *indirectly* associated with the cue image.\n    -   Image 1 is part of the (AB) pair with the",
+      "metadata": {
+        "chain_index": 2,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/Aplastichousi.jpg",
+          "name": "Aplastichousi.jpg",
+          "role": "A",
+          "chain_index": 2
+        },
+        "correct_option": {
+          "path": "memory_datasets/Brady2008Objects/ATEALANT8.jpg",
+          "name": "ATEALANT8.jpg",
+          "role": "C",
+          "chain_index": 2
+        },
+        "foil_option": {
+          "path": "memory_datasets/Brady2008Objects/footballhelmet.jpg",
+          "name": "footballhelmet.jpg",
+          "role": "C",
+          "chain_index": 4
+        }
+      }
+    }
+  ],
+  "metrics": {
+    "accuracy": 0.5,
+    "n_correct": 25,
+    "total": 50,
+    "free_text_bare_digit": 0.08,
+    "mean_p_chosen": 0.5568539730378941,
+    "mean_choice_mass": 0.9962783837318421,
+    "frac_low_mass": 0.0,
+    "response_distribution": {
+      "1": 39,
+      "2": 11
+    }
+  }
+}
