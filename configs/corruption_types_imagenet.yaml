@@ -1,0 +1,48 @@
+# Image corruption sweep, part 2: the other corruption types (2026-10-26). Same design, run_name and clean
+# reference as configs/corruption_gaussian_imagenet.yaml, which has the full account. Ten types at
+# severities 1, 3 and 5 on a three-point n grid, recognition and serial order only, so each model fits one
+# 48 h job. Seven ask the distribution question (ImageNet-C: shot and impulse noise, defocus blur, contrast,
+# brightness, pixelate, JPEG); three ask whether an image that is not of anything is remembered at all
+# (src/corruption.py): `patch_shuffle` and `phase_scramble`, the analogues of the `scrambled` token pool, and
+# `noise_image`, the analogue of the `clean` random-ID pool.
+#
+# Cost from the final runs' seconds per trial, 50 trials x 2 seeds, 30 (type, severity) sets x 2 tasks x 3 sizes:
+# 0.8B ~23 h, 2B ~26 h, 4B ~31 h, 9B ~39 h. Hardware as part 1 (n=1,000 peaks well under those at 2,500):
+#
+#     X="--partition=burst --exclude=ins046,ins047,ins058,ins082,ins091,ins092 --time=48:00:00 --export=ALL,PYTORCH_ALLOC_CONF=expandable_segments:True"
+#     sbatch $X --gres=gpu:1 scripts/bench.sbatch configs/corruption_types_imagenet.yaml --model qwen3.5-0.8b-img256   (and 2b)
+#     sbatch $X --gres=gpu:h100:1 --mem=96G scripts/bench.sbatch configs/corruption_types_imagenet.yaml --model qwen3.5-4b-img256   (and 9b)
+
+run_name: imagenet_corruption
+
+output_dir: results
+
+seeds: [0, 1]
+
+models:
+  - name: qwen3.5-0.8b-img256
+    model_id: Qwen/Qwen3.5-0.8B
+    max_image_size: 256
+    max_new_tokens: 100
+  - name: qwen3.5-2b-img256
+    model_id: Qwen/Qwen3.5-2B
+    max_image_size: 256
+    max_new_tokens: 100
+  - name: qwen3.5-4b-img256
+    model_id: Qwen/Qwen3.5-4B
+    max_image_size: 256
+    max_new_tokens: 100
+  - name: qwen3.5-9b-img256
+    model_id: Qwen/Qwen3.5-9B
+    max_image_size: 256
+    max_new_tokens: 100
+
+tasks:
+  - {task: afc_recognition, prompts: [original], datasets: [imagenet], foil_types: [novel], single_foil: true,
+     corruptions: [shot_noise, impulse_noise, defocus_blur, contrast, brightness, pixelate, jpeg_compression,
+                   patch_shuffle, phase_scramble, noise_image],
+     severities: [1, 3, 5], n_images: [5, 100, 1000], n_trials: 50}
+  - {task: serial_order, prompts: [original], datasets: [imagenet], counterbalance: true,
+     corruptions: [shot_noise, impulse_noise, defocus_blur, contrast, brightness, pixelate, jpeg_compression,
+                   patch_shuffle, phase_scramble, noise_image],
+     severities: [1, 3, 5], n_images: [5, 100, 1000], n_trials: 50}

@@ -1,0 +1,47 @@
+# Preflight for the thinking-on token runs (2026-10-26): one trial at the largest cell of every task in
+# configs/tokens/full_L{64,256}_thinking.yaml and pam_L{64,256}_thinking.yaml, 2B/4B/9B. Reports the summed
+# GPU peak (does L64 fit one card with a 12k trace on top of a 32k prompt?) and the per-trial time with a
+# trace on a ~128k-token prompt, before the 456-cell set is queued. Serial order traces twice per trial.
+# L1/L8 prompts are under 2k tokens and were covered by configs/tokens/thinking_probe.yaml.
+#
+#     X="--partition=burst --exclude=ins037,ins046,ins047,ins058,ins082,ins091,ins092 --time=12:00:00"
+#     for M in 2b 4b 9b; do sbatch $X --gres=gpu:2 --mem=128G --job-name=tok_think_pf_$M \
+#         scripts/bench.sbatch configs/tokens/thinking_preflight.yaml --model qwen3.5-$M; done
+
+run_name: tokens_thinking_preflight
+
+output_dir: results
+
+seeds: [0]
+
+thinking: &thinking
+  enabled: true
+  budget: 12288
+  temperature: 0.6
+  top_p: 0.95
+  top_k: 20
+
+models:
+  - name: qwen3.5-2b
+    model_id: Qwen/Qwen3.5-2B
+    max_new_tokens: 100
+    device_map: auto
+    thinking: *thinking
+  - name: qwen3.5-4b
+    model_id: Qwen/Qwen3.5-4B
+    max_new_tokens: 100
+    device_map: auto
+    thinking: *thinking
+  - name: qwen3.5-9b
+    model_id: Qwen/Qwen3.5-9B
+    max_new_tokens: 100
+    device_map: auto
+    thinking: *thinking
+
+tasks:
+  - {task: afc_recognition, prompts: [original], datasets: [tokens], foil_types: [novel, recombined],
+     single_foil: true, token_pools: [clean], item_lengths: [64, 256], n_images: [500], n_trials: 1}
+  - {task: serial_order, prompts: [original], datasets: [tokens], counterbalance: true,
+     token_pools: [clean], item_lengths: [64, 256], n_images: [500], n_trials: 1}
+  - {task: paired_associates, prompts: [sandwich], datasets: [tokens], wordpool: extended,
+     token_pools: [clean], item_lengths: [64, 256], n_images: [500], n_trials: 1}

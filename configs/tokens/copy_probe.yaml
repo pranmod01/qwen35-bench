@@ -1,0 +1,30 @@
+# Recognition with the item as the answer (2026-10-21), the `copy` prompt in bench/tasks/afc_recognition_eval.py.
+# In tokens_full L=8 the 0.8B/2B answer "1" on ~95% of n=1 trials, yet the cued-recall probe
+# (configs/tokens/recall_probe.yaml) reproduces the studied item's tail at ~90%. This asks the recognition
+# question with the same two options but scores each option's likelihood as the reply, so no digit mapping is
+# involved. Same seeds and cells as recall_probe and the `original` cells of tokens_full / tokens_ab_labeled:
+# the prompt text does not consume the RNG, so each trial's episode is identical to the `original` one.
+#
+#     sbatch --partition=burst --exclude=ins037,ins047,ins058,ins082,ins091,ins092 --time=6:00:00 --gres=gpu:1 \
+#         --job-name=tok_copy scripts/bench.sbatch configs/tokens/copy_probe.yaml
+
+run_name: tokens_copy_probe
+
+output_dir: results
+
+seeds: [0, 1]
+
+models:
+  - name: qwen3.5-0.8b
+    model_id: Qwen/Qwen3.5-0.8B
+    max_new_tokens: 100
+  - name: qwen3.5-2b
+    model_id: Qwen/Qwen3.5-2B
+    max_new_tokens: 100
+  - name: qwen3.5-4b
+    model_id: Qwen/Qwen3.5-4B
+    max_new_tokens: 100
+
+tasks:
+  - {task: afc_recognition, prompts: [copy], datasets: [tokens], foil_types: [novel],
+     single_foil: true, token_pools: [clean], item_lengths: [8], n_images: [1, 5, 100, 1000], n_trials: 50}

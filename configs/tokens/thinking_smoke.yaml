@@ -1,0 +1,34 @@
+# Thinking-mode smoke test on token items (2026-10-21), before configs/tokens/thinking_probe.yaml. Measures what
+# that run needs decided: trace length and loop rate (`thinking_frac_budget`) on gibberish items, seconds per
+# trial, and that think() runs on the token-splice input path. 5 trials per cell, so accuracy means nothing.
+# 4,096 budget as configs/thinking_smoke.yaml; the probe uses the finals' 12,288.
+#
+#     sbatch --partition=burst --exclude=ins037,ins047,ins058,ins082,ins091,ins092 --time=6:00:00 --gres=gpu:1 \
+#         --job-name=tok_think_smoke scripts/bench.sbatch configs/tokens/thinking_smoke.yaml
+
+run_name: tokens_thinking_smoke
+
+output_dir: results
+
+seeds: [0]
+
+thinking: &thinking
+  enabled: true
+  budget: 4096
+  temperature: 0.6
+  top_p: 0.95
+  top_k: 20
+
+models:
+  - name: qwen3.5-2b
+    model_id: Qwen/Qwen3.5-2B
+    max_new_tokens: 100
+    thinking: *thinking
+  - name: qwen3.5-4b
+    model_id: Qwen/Qwen3.5-4B
+    max_new_tokens: 100
+    thinking: *thinking
+
+tasks:
+  - {task: afc_recognition, prompts: [original, copy], datasets: [tokens], foil_types: [novel],
+     single_foil: true, token_pools: [clean], item_lengths: [8], n_images: [1, 100], n_trials: 5}

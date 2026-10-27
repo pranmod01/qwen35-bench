@@ -1,0 +1,52 @@
+# Natural-text token items, preflight (2026-10-26). Items are spans of real text (tokens/corpus.py): `natural`
+# keeps the words in order, `scrambled` shuffles each span's tokens, so the two share token frequencies and differ
+# only in whether the item makes sense. The gibberish reference is the `clean` pool in results/tokens_full.
+#
+# Each task runs twice, once as is and once as `baseline: true`, where the tested item is unstudied: with real text
+# the model's language prior alone prefers an intact span to a recombined one and a sentence's true tail to a foreign
+# one, so memory is the lift over the baseline, not the raw accuracy. Novel-foil recognition and serial order have no
+# such prior (both options are intact, or both studied) and need no baseline.
+#
+# Short cells (n x (L + 1) <= ~33k prompt tokens), so 0.8B-9B fit one 48 GB card. Needs the span caches
+# (memory_datasets/wikitext103/spans_L{8,64}.*; see tokens/corpus.py) before the runner's size check.
+#
+#     X="--partition=burst --exclude=ins046,ins047,ins058,ins082,ins091,ins092 --time=12:00:00 --gres=gpu:1"
+#     sbatch $X --job-name=nat_<model> scripts/bench.sbatch configs/tokens/natural_preflight.yaml --model qwen3.5-<model>
+
+run_name: tokens_natural
+
+output_dir: results
+
+seeds: [0, 1]
+
+models:
+  - name: qwen3.5-0.8b
+    model_id: Qwen/Qwen3.5-0.8B
+    max_new_tokens: 100
+  - name: qwen3.5-2b
+    model_id: Qwen/Qwen3.5-2B
+    max_new_tokens: 100
+  - name: qwen3.5-4b
+    model_id: Qwen/Qwen3.5-4B
+    max_new_tokens: 100
+  - name: qwen3.5-9b
+    model_id: Qwen/Qwen3.5-9B
+    max_new_tokens: 100
+
+tasks:
+  - {task: afc_recognition, prompts: [original], datasets: [tokens], foil_types: [novel, recombined], single_foil: true,
+     token_pools: [natural, scrambled], item_lengths: [8], n_images: [5, 25, 100, 250, 1000, 2500], n_trials: 50}
+  - {task: afc_recognition, prompts: [original], datasets: [tokens], foil_types: [novel, recombined], single_foil: true,
+     token_pools: [natural, scrambled], item_lengths: [64], n_images: [5, 25, 100, 250, 500], n_trials: 50}
+  - {task: afc_recognition, prompts: [original], datasets: [tokens], foil_types: [recombined], single_foil: true, baseline: true,
+     token_pools: [natural, scrambled], item_lengths: [8], n_images: [5, 250, 2500], n_trials: 50}
+  - {task: afc_recognition, prompts: [original], datasets: [tokens], foil_types: [recombined], single_foil: true, baseline: true,
+     token_pools: [natural, scrambled], item_lengths: [64], n_images: [5, 250, 500], n_trials: 50}
+  - {task: serial_order, prompts: [original], datasets: [tokens], counterbalance: true,
+     token_pools: [natural, scrambled], item_lengths: [8], n_images: [5, 25, 100, 250, 1000, 2500], n_trials: 50}
+  - {task: serial_order, prompts: [original], datasets: [tokens], counterbalance: true,
+     token_pools: [natural, scrambled], item_lengths: [64], n_images: [5, 25, 100, 250, 500], n_trials: 50}
+  - {task: token_recall, datasets: [tokens], token_pools: [natural, scrambled], item_lengths: [8], n_images: [1, 5, 25, 100, 250, 1000, 2500], n_trials: 50}
+  - {task: token_recall, datasets: [tokens], token_pools: [natural, scrambled], item_lengths: [64], n_images: [1, 5, 25, 100, 250, 500], n_trials: 50}
+  - {task: token_recall, datasets: [tokens], token_pools: [natural, scrambled], item_lengths: [8], n_images: [5, 250, 2500], n_trials: 50, baseline: true}
+  - {task: token_recall, datasets: [tokens], token_pools: [natural, scrambled], item_lengths: [64], n_images: [5, 250, 500], n_trials: 50, baseline: true}

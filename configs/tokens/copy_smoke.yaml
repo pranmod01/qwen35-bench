@@ -1,0 +1,22 @@
+# Smoke test for the recognition `copy` prompt (2026-10-21): the answer is the studied item itself, scored by
+# likelihood (bench/tasks/afc_recognition_eval.score_copy). 5 trials, one model, two list sizes: checks the
+# scoring path end to end on a GPU and the shape of the free-text replies, says nothing about accuracy.
+# Full probe: configs/tokens/copy_probe.yaml.
+#
+#     sbatch --partition=burst --exclude=ins037,ins047,ins058,ins082,ins091,ins092 --time=1:00:00 --gres=gpu:1 \
+#         --job-name=tok_copy_smoke scripts/bench.sbatch configs/tokens/copy_smoke.yaml
+
+run_name: tokens_copy_smoke
+
+output_dir: results
+
+seeds: [0]
+
+models:
+  - name: qwen3.5-0.8b
+    model_id: Qwen/Qwen3.5-0.8B
+    max_new_tokens: 100
+
+tasks:
+  - {task: afc_recognition, prompts: [copy], datasets: [tokens], foil_types: [novel],
+     single_foil: true, token_pools: [clean], item_lengths: [8], n_images: [1, 100], n_trials: 5}

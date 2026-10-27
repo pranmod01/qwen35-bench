@@ -1,0 +1,45 @@
+# Paired associates with token-item cues, item length L=8, thinking on (2026-10-26). The thinking-on counterpart of
+# configs/tokens/pam_L8.yaml: same tasks, prompts, pool, trials and seeds, so thinking is the only change.
+# Decoding as configs/tokens/thinking_probe.yaml (budget 12,288, Qwen's thinking-mode sampling); a trace that
+# hits the budget is force-closed and read as a loop, so `thinking_frac_budget` must be reported next to accuracy.
+#
+# n is capped at 500 and the 0.8B is left out, from the probe: the 2B force-closes 90-100% of traces by n=100,
+# the 4B 64% and the 9B 31% at n=500, and the 0.8B looped at n=5. Beyond that the cell measures the budget.
+# Grid points are the off grid's up to 500, so every on cell has an off cell to compare with.
+#
+# Cost: a looping cell is 50 x 12,288 generated tokens, ~3-5 h; serial order traces twice per trial (the swapped
+# order gets its own trace). One job per model and task, resubmitted on timeout: the runner skips finished cells.
+#
+#     X="--partition=burst --exclude=ins037,ins046,ins047,ins058,ins082,ins091,ins092 --time=48:00:00"
+#     for M in 2b 4b 9b; do sbatch $X --gres=gpu:1 --job-name=tok_think_pam8_$M scripts/bench.sbatch configs/tokens/pam_L8_thinking.yaml --model qwen3.5-$M; done
+
+run_name: tokens_pam_thinking
+
+output_dir: results
+
+seeds: [0, 1]
+
+thinking: &thinking
+  enabled: true
+  budget: 12288
+  temperature: 0.6
+  top_p: 0.95
+  top_k: 20
+
+models:
+  - name: qwen3.5-2b
+    model_id: Qwen/Qwen3.5-2B
+    max_new_tokens: 100
+    thinking: *thinking
+  - name: qwen3.5-4b
+    model_id: Qwen/Qwen3.5-4B
+    max_new_tokens: 100
+    thinking: *thinking
+  - name: qwen3.5-9b
+    model_id: Qwen/Qwen3.5-9B
+    max_new_tokens: 100
+    thinking: *thinking
+
+tasks:
+  - {task: paired_associates, prompts: [sandwich], datasets: [tokens], wordpool: extended,
+     token_pools: [clean], item_lengths: [8], n_images: [1, 5, 25, 100, 250, 500], n_trials: 50}

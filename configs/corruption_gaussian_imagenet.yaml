@@ -1,0 +1,51 @@
+# Image corruption sweep, part 1: Gaussian noise at severities 1-5 (2026-10-26). The image counterpart of the
+# token pools (configs/tokens/natural_preflight.yaml): the same ImageNet crops, the same three tasks, prompts
+# and reading rules as the final ImageNet runs, with each image corrupted (src/corruption.py). A drop with
+# severity says how much the image results rest on the stimuli being natural, in-distribution photographs.
+#
+# The clean reference is the existing final runs (results/recognition_single_foil, serial_order_final and
+# pam_final, dataset imagenet), so severity 0 is not rerun here. Every image is corrupted as a deterministic
+# function of its pixels, so the studied copy and the test copy are identical, as a token item's IDs are.
+#
+# n grid: log-spaced to 2,500 (~165k tokens); corruptions do not change the token count, so hardware follows
+# the final runs' peaks at n=2,500: 0.8B 27 GB, 2B 36 GB, 4B 43 GB, 9B 56 GB. 0.8B/2B fit any 48 GB card;
+# 4B and 9B take an H100. Part 2 (other corruption types) is configs/corruption_types_imagenet.yaml.
+#
+# Cost from the final runs' seconds per trial, 50 trials x 2 seeds, 5 severities x 3 tasks x 6 sizes:
+# 0.8B ~21 h, 2B ~20 h, 4B ~29 h, 9B ~35 h, so one 48 h job per model:
+#
+#     X="--partition=burst --exclude=ins046,ins047,ins058,ins082,ins091,ins092 --time=48:00:00 --export=ALL,PYTORCH_ALLOC_CONF=expandable_segments:True"
+#     sbatch $X --gres=gpu:1 scripts/bench.sbatch configs/corruption_gaussian_imagenet.yaml --model qwen3.5-0.8b-img256   (and 2b)
+#     sbatch $X --gres=gpu:h100:1 --mem=96G scripts/bench.sbatch configs/corruption_gaussian_imagenet.yaml --model qwen3.5-4b-img256   (and 9b)
+
+run_name: imagenet_corruption
+
+output_dir: results
+
+seeds: [0, 1]
+
+models:
+  - name: qwen3.5-0.8b-img256
+    model_id: Qwen/Qwen3.5-0.8B
+    max_image_size: 256
+    max_new_tokens: 100
+  - name: qwen3.5-2b-img256
+    model_id: Qwen/Qwen3.5-2B
+    max_image_size: 256
+    max_new_tokens: 100
+  - name: qwen3.5-4b-img256
+    model_id: Qwen/Qwen3.5-4B
+    max_image_size: 256
+    max_new_tokens: 100
+  - name: qwen3.5-9b-img256
+    model_id: Qwen/Qwen3.5-9B
+    max_image_size: 256
+    max_new_tokens: 100
+
+tasks:
+  - {task: afc_recognition, prompts: [original], datasets: [imagenet], foil_types: [novel], single_foil: true,
+     corruptions: [gaussian_noise], severities: [1, 2, 3, 4, 5], n_images: [5, 25, 100, 250, 1000, 2500], n_trials: 50}
+  - {task: serial_order, prompts: [original], datasets: [imagenet], counterbalance: true,
+     corruptions: [gaussian_noise], severities: [1, 2, 3, 4, 5], n_images: [5, 25, 100, 250, 1000, 2500], n_trials: 50}
+  - {task: paired_associates, prompts: [sandwich], datasets: [imagenet], wordpool: extended,
+     corruptions: [gaussian_noise], severities: [1, 2, 3, 4, 5], n_images: [5, 25, 100, 250, 1000, 2500], n_trials: 50}

@@ -1,0 +1,27 @@
+# Image-corruption smoke test (2026-10-26): the pipeline end to end on a GPU before the sweeps in
+# configs/corruption_{gaussian,types}_imagenet.yaml. One model, two n, one corruption of each kind (ImageNet-C
+# noise, scrambled, replaced) at the lightest and heaviest severity, five trials a cell. Check: results exist for every cell, raw_response is sane, and
+# `corruption`/`severity` are in the filenames. Results are not part of any final set.
+#
+#     sbatch --partition=burst --exclude=ins046,ins047,ins058,ins082,ins091,ins092 --time=01:00:00 --gres=gpu:1 \
+#            scripts/bench.sbatch configs/corruption_smoke.yaml
+
+run_name: corruption_smoke
+
+output_dir: results
+
+seeds: [0]
+
+models:
+  - name: qwen3.5-0.8b-img256
+    model_id: Qwen/Qwen3.5-0.8B
+    max_image_size: 256
+    max_new_tokens: 100
+
+tasks:
+  - {task: afc_recognition, prompts: [original], datasets: [imagenet], foil_types: [novel], single_foil: true,
+     corruptions: [gaussian_noise, phase_scramble, noise_image], severities: [1, 5], n_images: [5, 100], n_trials: 5}
+  - {task: serial_order, prompts: [original], datasets: [imagenet], counterbalance: true,
+     corruptions: [gaussian_noise, phase_scramble, noise_image], severities: [1, 5], n_images: [5, 100], n_trials: 5}
+  - {task: paired_associates, prompts: [sandwich], datasets: [imagenet], wordpool: extended,
+     corruptions: [gaussian_noise, phase_scramble, noise_image], severities: [1, 5], n_images: [5, 100], n_trials: 5}

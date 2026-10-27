@@ -1,0 +1,23 @@
+# End-to-end check of paired associates with token-item cues (tokens/stimuli.pam_trials; bench/tasks/pam_eval.py)
+# on one GPU: the `sandwich` layout with a token item in the image's place, at two item lengths. Read
+# raw_response as well as accuracy: the point is that the model answers with a studied word at all.
+#
+#     sbatch --partition=burst --exclude=ins047,ins082,ins091,ins092 --time=1:00:00 --gres=gpu:1 \
+#         --job-name=tok_pam_smoke scripts/bench.sbatch configs/tokens/pam_smoke.yaml
+run_name: tokens_pam_smoke
+output_dir: results
+seeds: [0]
+
+models:
+  - name: qwen3.5-0.8b
+    model_id: Qwen/Qwen3.5-0.8B
+    max_new_tokens: 100
+
+tasks:
+  - task: paired_associates
+    prompts: [sandwich]
+    datasets: [tokens]
+    item_lengths: [8, 64]
+    token_pools: [clean]
+    n_images: [1, 5]
+    n_trials: 3

@@ -1,0 +1,57 @@
+# Preflight for paired associates with token-item cues (2026-10-21): one trial per cell at the largest list for
+# each item length, before any full run (configs/tokens/pam_L{8,64,256}.yaml). Same design rule as
+# configs/tokens/preflight_max.yaml: each length fills about the same ~241k of the 262,144-token context, except
+# L=8, which the 4,000-word `extended` pool caps first.
+#
+# Prompt cost measured with the tokenizer (sandwich layout, "Word: W\n<item>\nWord: W" per pair, extended pool):
+#   L=8    19.2 tokens/pair  n=4,000  ~77k tokens   (word pool binds; the token pool allows 30,681)
+#   L=64   75.5 tokens/pair  n=3,200  ~242k tokens  (pool allows 3,835)
+#   L=256  267.3 tokens/pair n=900    ~241k tokens  (pool allows 958)
+# Read error, peak_gpu_gb, elapsed_s and raw_response only; one trial says nothing about accuracy. Unlike the
+# recognition preflight this one generates (a word, up to 100 tokens), so elapsed_s is the per-trial cost to size
+# the full runs from.
+#
+# Hardware as configs/tokens/preflight_max.yaml (same prompt length): 0.8B 1 x A6000; 2B/4B 2 cards; 9B 3 x A6000;
+# 27B 6 x A6000 with the max_memory split below.
+#
+#     X="--partition=burst --exclude=ins047,ins082,ins091,ins092 --time=12:00:00 --export=ALL,PYTORCH_ALLOC_CONF=expandable_segments:True"
+#     sbatch $X --gres=gpu:A6000:1 --job-name=tpam_pf_0.8b scripts/bench.sbatch configs/tokens/pam_preflight.yaml --model qwen3.5-0.8b
+#     sbatch $X --gres=gpu:2 --mem=96G --job-name=tpam_pf_2b scripts/bench.sbatch configs/tokens/pam_preflight.yaml --model qwen3.5-2b  (4b: --mem=128G)
+#     sbatch $X --gres=gpu:A6000:3 --mem=128G --job-name=tpam_pf_9b scripts/bench.sbatch configs/tokens/pam_preflight.yaml --model qwen3.5-9b
+#     sbatch $X --gres=gpu:A6000:6 --mem=160G --job-name=tpam_pf_27b scripts/bench.sbatch configs/tokens/pam_preflight.yaml --model qwen3.5-27b
+
+run_name: tokens_pam_preflight
+
+output_dir: results
+
+seeds: [0]
+
+models:
+  - name: qwen3.5-0.8b
+    model_id: Qwen/Qwen3.5-0.8B
+    max_new_tokens: 100
+  - name: qwen3.5-2b
+    model_id: Qwen/Qwen3.5-2B
+    max_new_tokens: 100
+    device_map: auto
+  - name: qwen3.5-4b
+    model_id: Qwen/Qwen3.5-4B
+    max_new_tokens: 100
+    device_map: auto
+  - name: qwen3.5-9b
+    model_id: Qwen/Qwen3.5-9B
+    max_new_tokens: 100
+    device_map: auto
+  - name: qwen3.5-27b
+    model_id: Qwen/Qwen3.5-27B
+    max_new_tokens: 100
+    device_map: auto
+    max_memory: {0: 4GiB, 1: 11GiB, 2: 11GiB, 3: 11GiB, 4: 11GiB, 5: 11GiB}   # 6 x A6000, as the token full runs (full_L8.yaml)
+
+tasks:
+  - {task: paired_associates, prompts: [sandwich], datasets: [tokens], wordpool: extended,
+     token_pools: [clean], item_lengths: [8], n_images: [4000], n_trials: 1}
+  - {task: paired_associates, prompts: [sandwich], datasets: [tokens], wordpool: extended,
+     token_pools: [clean], item_lengths: [64], n_images: [3200], n_trials: 1}
+  - {task: paired_associates, prompts: [sandwich], datasets: [tokens], wordpool: extended,
+     token_pools: [clean], item_lengths: [256], n_images: [900], n_trials: 1}

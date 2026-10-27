@@ -1,0 +1,41 @@
+# Token recognition with thinking on (2026-10-21), both answer formats: the digit (`original`) and the item
+# itself (`copy`, configs/tokens/copy_probe.yaml). With thinking off the 0.8B/2B are near chance at n=1 and
+# the 2B peaks at n=100; this asks whether reasoning before the answer rescues the small sizes, as the image
+# thinking runs (configs/recognition_thinking_brady.yaml) asked for pictures.
+# Budget and decoding as those finals (12,288; a trace that hits it is read as a loop). n stops at 500 for the
+# same reason: image recognition traces stopped finishing there. The 0.8B is left out: its traces looped at n=5.
+# Runs only after configs/tokens/thinking_smoke.yaml reports trace lengths and timings.
+#
+#     X="--partition=burst --exclude=ins037,ins047,ins058,ins082,ins091,ins092 --time=48:00:00"
+#     sbatch $X --gres=gpu:1 --job-name=tok_think_2b scripts/bench.sbatch configs/tokens/thinking_probe.yaml --model qwen3.5-2b  (also 4b, 9b)
+
+run_name: tokens_thinking
+
+output_dir: results
+
+seeds: [0, 1]
+
+thinking: &thinking
+  enabled: true
+  budget: 12288
+  temperature: 0.6
+  top_p: 0.95
+  top_k: 20
+
+models:
+  - name: qwen3.5-2b
+    model_id: Qwen/Qwen3.5-2B
+    max_new_tokens: 100
+    thinking: *thinking
+  - name: qwen3.5-4b
+    model_id: Qwen/Qwen3.5-4B
+    max_new_tokens: 100
+    thinking: *thinking
+  - name: qwen3.5-9b
+    model_id: Qwen/Qwen3.5-9B
+    max_new_tokens: 100
+    thinking: *thinking
+
+tasks:
+  - {task: afc_recognition, prompts: [original, copy], datasets: [tokens], foil_types: [novel],
+     single_foil: true, token_pools: [clean], item_lengths: [8], n_images: [1, 5, 25, 100, 500], n_trials: 50}

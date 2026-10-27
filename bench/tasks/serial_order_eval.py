@@ -14,6 +14,7 @@ import re
 from bench.tasks.afc_recognition_eval import token_variants
 from tokens import stimuli as token_stimuli
 from bench.tasks.thinking import thinking_metrics, thinking_record
+from src import corruption
 from src.metrics import calculate_afc_serial_order_metrics
 from tasks.serial_order_memory import AFCSerialOrderMemoryTask
 
@@ -37,7 +38,8 @@ def expand_conditions(task_cfg):
         for dataset in task_cfg["datasets"]
         for n_images in task_cfg["n_images"]
         for prompt in prompts_from(task_cfg)
-        for stimulus in (token_variants(task_cfg) if dataset == token_stimuli.DATASET else [{}])
+        for stimulus in (token_variants(task_cfg) if dataset == token_stimuli.DATASET
+                         else corruption.variants(task_cfg, dataset))
     ]
 
 
@@ -170,7 +172,7 @@ def run(evaluator, condition, seed):
         else:
             task = AFCSerialOrderMemoryTask(dataset_name=condition["dataset"], n_images=n_images, n_tests=1,
                                             exemplars_per_concept=condition.get("exemplars_per_concept", 1))
-            trial_data = task.get_trials()
+            trial_data = corruption.apply(task.get_trials(), condition, seed)
         test_trial = trial_data["test_phase"][0]
         earlier = test_trial["target"]
         target = 3 - earlier if condition["prompt"] == "later" else earlier
