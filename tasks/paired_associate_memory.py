@@ -3,7 +3,7 @@ import sys
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).parent.parent))
-from src.stimuli import BradyDataset, DirectoryDataset, ThingsDataset
+from src.stimuli import BradyDataset, DirectoryDataset, ImageNetConceptsDataset, ThingsDataset
 
 
 class PairedAssociateMemoryTask:
@@ -28,6 +28,12 @@ class PairedAssociateMemoryTask:
             return DirectoryDataset(self.image_dir)
         if self.dataset_name == 'Brady2008':
             return BradyDataset(type='Objects', source=self.source, repo_id=self.repo_id)
+        if self.dataset_name == 'imagenet':
+            dataset = ImageNetConceptsDataset()
+            # _get_word_trials would otherwise shorten the list silently.
+            if n_to_load > len(dataset):
+                raise ValueError(f"imagenet has {len(dataset)} concepts; asked for {n_to_load}")
+            return dataset
         return ThingsDataset(n_categories=n_to_load)
 
     def _load_wordpool(self, wordpool_path):

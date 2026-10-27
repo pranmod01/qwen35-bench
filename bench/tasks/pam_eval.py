@@ -3,18 +3,45 @@
 Study N image-word pairs, then name the word paired with a test image. Message building, parsing and
 scoring are ported from vision-memory eval_scripts/eval_pam.py (pair_type='word') so results stay
 comparable. The model must produce the word, so chance is near zero rather than 50%.
+
+The `tokens` dataset swaps the images for token-ID sequences (tokens/stimuli.py) as the cue side of each pair;
+the word side, the test question and the scoring are unchanged, so image vs token cue is a config change. It
+needs `prompts: [sandwich]` (the layout the image runs settled on), and adds `item_lengths` and `token_pools`
+to the condition.
 """
 import random
 import re
+from pathlib import Path
 
+from bench.tasks.afc_recognition_eval import token_variants
 from bench.tasks.thinking import thinking_metrics, thinking_record
+from src import corruption
 from src.metrics import calculate_pam_metrics
 from tasks.paired_associate_memory import PairedAssociateMemoryTask
+from tokens import stimuli as token_stimuli
 
 NAME = "paired_associates"
 
-WORDPOOL_SIZE = 1637          # memory_datasets/wasnorm_wordpool.txt
-DATASET_SIZES = {"Brady2008": 2400, "things": 1854}
+# imagenet: the concepts in memory_datasets/ImageNet21k_w21_256/concepts.json; update if that list changes.
+DATASET_SIZES = {"Brady2008": 2400, "things": 1854, "imagenet": 3808}
+
+# Word pools, chosen per task with `wordpool:` (default `was`, left out of the condition so earlier result
+# filenames still match). `was` is the WAS-normed pool from the human PAM literature, which caps a list at
+# its 1,638 words; `extended` adds frequent concrete nouns to 4,000 for ImageNet lists longer than that
+# (scripts/build_pam_wordpool.py). Each trial samples its words from the whole pool, so the two differ in
+# which words can appear, not in how pairs are built.
+WORDPOOLS = {"was": "memory_datasets/wasnorm_wordpool.txt",
+             "extended": "memory_datasets/pam_wordpool_extended.txt"}
+DEFAULT_WORDPOOL = "was"
+
+
+def load_wordpool(name):
+    # The same reading as PairedAssociateMemoryTask._load_wordpool, for the token branch, which has no task object.
+    return [line.strip() for line in Path(WORDPOOLS[name]).read_text().splitlines() if line.strip()]
+
+
+def wordpool_size(name):
+    return len(load_wordpool(name))
 
 
 # Study-list layouts. `original` has nothing between pairs, so the text right before image k is the
@@ -55,18 +82,43 @@ def expand_conditions(task_cfg):
     unknown = set(prompts) - PROMPTS - {None}
     if unknown:
         raise ValueError(f"unknown prompt(s) {sorted(unknown)}; expected {sorted(PROMPTS)}")
+    wordpool = task_cfg.get("wordpool", DEFAULT_WORDPOOL)
+    if wordpool not in WORDPOOLS:
+        raise ValueError(f"unknown wordpool {wordpool!r}; expected {sorted(WORDPOOLS)}")
     return [
         {"dataset": dataset, "n_images": n_images, "n_trials": task_cfg.get("n_trials", 10),
-         **({"prompt": prompt} if prompt else {})}
+         **({"prompt": prompt} if prompt else {}),
+         **({"wordpool": wordpool} if wordpool != DEFAULT_WORDPOOL else {}),
+         **stimulus}
         for dataset in task_cfg["datasets"]
         for n_images in task_cfg["n_images"]
         for prompt in prompts
+        for stimulus in stimulus_variants(task_cfg, dataset, prompts)
     ]
+
+
+def stimulus_variants(task_cfg, dataset, prompts):
+    """Token-item settings to cross with each condition; corruption settings (or nothing) for image datasets."""
+    if dataset != token_stimuli.DATASET:
+        return corruption.variants(task_cfg, dataset)
+    # Only the layout the image runs settled on (item 40): the other five exist to explain the image
+    # off-by-one, and a token item has no closing boundary token to carry them over to (see build_messages).
+    if set(prompts) != {"sandwich"}:
+        raise ValueError("the tokens dataset needs `prompts: [sandwich]`")
+    return token_variants(task_cfg)
 
 
 def max_n_images(condition):
     # The task silently takes min(n, dataset, wordpool); the runner refuses instead.
-    return min(DATASET_SIZES[condition["dataset"]], WORDPOOL_SIZE)
+    words = wordpool_size(condition.get("wordpool", DEFAULT_WORDPOOL))
+    if condition["dataset"] == token_stimuli.DATASET:
+        # Every token is used once per episode; the test cue is a studied item, so no extra item is needed.
+        return min(token_stimuli.max_items(condition["token_pool"], condition["item_length"]), words)
+    return min(DATASET_SIZES[condition["dataset"]], words)
+
+
+def min_n_images(condition):
+    return 1
 
 
 # Replaces the task's prompt: with it, the 2B/4B often named the object in the image instead of
@@ -79,7 +131,15 @@ TEST_PROMPT = (
 
 def build_messages(evaluator, study_sequence, study_prompt, test_image, test_prompt=TEST_PROMPT,
                    layout="original"):
-    study_content = [{"type": "text", "text": study_prompt}]
+    tokens = isinstance(test_image, token_stimuli.TokenItem)
+    if tokens and layout != "sandwich":
+        raise ValueError(f"token items support only the sandwich layout, not {layout!r}")
+    # The chat template joins content parts with nothing between them, so with images the text after a pair
+    # runs straight into the next pair ("Word: SWORDWord: AXE"); that text is kept as is here. An image is
+    # closed by <|vision_end|>, a token item by nothing (tokens/stimuli.ITEM_SEPARATOR opens it), so the text
+    # that follows an item starts on a new line, which no item can contain.
+    after = "\n" if tokens else ""
+    study_content = [{"type": "text", "text": token_stimuli.reword(study_prompt, [test_image])}]
     for k, (img, word) in enumerate(study_sequence, 1):
         if layout == "pair_numbered":
             study_content.append({"type": "text", "text": f"Pair {k}:"})
@@ -91,17 +151,18 @@ def build_messages(evaluator, study_sequence, study_prompt, test_image, test_pro
             study_content.append({"type": "text", "text": f"Pair {k} - Image:"})
         elif layout == "sandwich":
             study_content.append({"type": "text", "text": f"Word: {word}"})
-        study_content.append(evaluator._encode_image(img))
+        study_content += token_stimuli.encode(evaluator, img)
         if layout == "pair_both":
             study_content.append({"type": "text", "text": f"Word {k}: {word}"})
         elif layout == "tagged":
             study_content.append({"type": "text", "text": f"Pair {k} - Word: {word}"})
         else:
-            study_content.append({"type": "text", "text": f"Word: {word}"})
-    test_content = [evaluator._encode_image(test_image), {"type": "text", "text": test_prompt}]
+            study_content.append({"type": "text", "text": f"{after}Word: {word}"})
+    test_content = token_stimuli.encode(evaluator, test_image)
+    test_content.append({"type": "text", "text": after + token_stimuli.reword(test_prompt, [test_image])})
     return [
         {"role": "user", "content": study_content},
-        {"role": "assistant", "content": "I have studied the image-pairs."},
+        {"role": "assistant", "content": token_stimuli.reword("I have studied the image-pairs.", [test_image])},
         {"role": "user", "content": test_content},
     ]
 
@@ -136,10 +197,20 @@ def run(evaluator, condition, seed):
     n_images = condition["n_images"]
     random.seed(seed)
 
+    wordpool = condition.get("wordpool", DEFAULT_WORDPOOL)
+    tokens = condition["dataset"] == token_stimuli.DATASET
+    if tokens:
+        pool = token_stimuli.build_pool(evaluator.processor.tokenizer, condition["token_pool"])
+        words = load_wordpool(wordpool)
+
     trials = []
     for i in range(condition["n_trials"]):
-        task = PairedAssociateMemoryTask(dataset_name=condition["dataset"], n_images=n_images, pair_type="word")
-        trial_data = task.get_trials()
+        if tokens:
+            trial_data = token_stimuli.pam_trials(pool, n_images, condition["item_length"], words)
+        else:
+            task = PairedAssociateMemoryTask(dataset_name=condition["dataset"], n_images=n_images, pair_type="word",
+                                             wordpool_path=WORDPOOLS[wordpool])
+            trial_data = corruption.apply(task.get_trials(), condition, seed)
         test_trial = trial_data["test_phase"][0]
 
         messages = build_messages(

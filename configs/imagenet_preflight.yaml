@@ -37,6 +37,9 @@ models:
     max_image_size: 256
     max_new_tokens: 100
     device_map: auto
+    max_memory: {0: 8GiB, 1: 60GiB}    # 2 x H100. Card 0 also carries the vision encoder and the 231k-token hidden
+                                       # states (~44 GB at n=3,500), so it gets almost no layers: uncapped it hit 77 GB
+                                       # (job 13369164) and still 76.5 GB with a 24 GiB cap (13544275); 118 GB total.
 
 tasks:
   - task: afc_recognition
@@ -50,5 +53,11 @@ tasks:
     prompts: [original]
     counterbalance: true
     datasets: [imagenet]
+    n_images: [3500]
+    n_trials: 1
+  - task: paired_associates
+    prompts: [sandwich]
+    datasets: [imagenet]
+    wordpool: extended
     n_images: [3500]
     n_trials: 1

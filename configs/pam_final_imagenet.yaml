@@ -1,0 +1,59 @@
+# Paired associates, final runs, ImageNet (2026-10-16). Same `sandwich` layout, prompt, reading rule and
+# run_name as configs/pam_final_{brady,things256}.yaml, so plots combine them. The n grid continues past the
+# Brady/THINGS 1,637 limit, which is the point of this dataset.
+#
+# Stimuli: memory_datasets/ImageNet21k_w21_256, one 256x256 center crop (66 tokens) per concept for the 3,808
+# mutually distinct ImageNet-21k concepts in concepts.json (see configs/recognition_single_foil_imagenet.yaml).
+# The crops are already 256 px, so `-img256` changes nothing about the prompt; the names match the THINGS-256
+# runs so plots group them by model size.
+#
+# Words: `wordpool: extended` (memory_datasets/pam_wordpool_extended.txt, 4,000 words: the WAS pool plus the
+# most frequent concrete WordNet nouns, none naming a pictured concept; scripts/build_pam_wordpool.py). The
+# WAS pool alone has 1,638 words and would cap the list there. Brady and THINGS keep the WAS pool, so a
+# difference between those curves and this one below 1,637 pairs could in principle be the pool; the pools
+# share every WAS word and the added words are matched in length and concreteness, but check before claiming
+# a dataset effect at small n.
+#
+# Stops at 3,500: n=3,500 is ~245k of the 262k-token context with the sandwich layout (~70 tokens per pair)
+# and nothing detects an overflow. Hardware is set by configs/imagenet_preflight.yaml; do not submit before
+# its paired_associates cells pass.
+
+run_name: pam_final
+
+output_dir: results
+
+seeds: [0, 1]
+
+models:
+  - name: qwen3.5-0.8b-img256
+    model_id: Qwen/Qwen3.5-0.8B
+    max_image_size: 256
+    max_new_tokens: 100
+  - name: qwen3.5-2b-img256
+    model_id: Qwen/Qwen3.5-2B
+    max_image_size: 256
+    max_new_tokens: 100
+  - name: qwen3.5-4b-img256
+    model_id: Qwen/Qwen3.5-4B
+    max_image_size: 256
+    max_new_tokens: 100
+  - name: qwen3.5-9b-img256
+    model_id: Qwen/Qwen3.5-9B
+    max_image_size: 256
+    max_new_tokens: 100
+  - name: qwen3.5-27b-img256
+    model_id: Qwen/Qwen3.5-27B
+    max_image_size: 256
+    max_new_tokens: 100
+    device_map: auto
+    max_memory: {0: 8GiB, 1: 60GiB}    # 2 x H100. Card 0 also carries the vision encoder and the 231k-token hidden
+                                       # states (~44 GB at n=3,500), so it gets almost no layers: uncapped it hit 77 GB
+                                       # (job 13369164) and still 76.5 GB with a 24 GiB cap (13544275); 118 GB total.
+
+tasks:
+  - task: paired_associates
+    prompts: [sandwich]
+    datasets: [imagenet]
+    wordpool: extended
+    n_images: [1, 5, 25, 100, 250, 500, 1000, 1500, 2000, 2500, 3000, 3500]
+    n_trials: 50
