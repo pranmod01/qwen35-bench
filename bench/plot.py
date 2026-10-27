@@ -33,12 +33,13 @@ TASKS = [
      "2AFC — Novel"),
     ("serial_order", {"prompt": "original"}, ["Brady2008", "things", "imagenet"],
      "Serial AFC"),
-    ("paired_associates", {"prompt": "sandwich"}, ["Brady2008", "things"],
+    ("paired_associates", {"prompt": "sandwich"}, ["Brady2008", "things", "imagenet"],
      "PAM (image-word)"),
 ]
 DATASET_LABELS = {"Brady2008": "Brady2008", "things": "Things", "imagenet": "ImageNet", "": ""}
 
-# Serial order split by the correct answer, one figure per split (Open Item 25).
+# Serial order split by the correct answer, one figure per split (Open Item 25). Only with --hit-splits:
+# the user reads accuracy, and bench.summarize flags a one-answer bias, so these are a diagnostic on request.
 HIT_SPLITS = [
     ("hit1", 'Serial AFC — hit1 (correct answer "1")'),
     ("hit2", 'Serial AFC — hit2 (correct answer "2")'),
@@ -78,7 +79,7 @@ plt.rcParams.update({
 
 # Minimum ratio between two labelled ticks on the log axis. Study sizes bunch up at the top end
 # (500, 1,000, 1,500, 1,637, and the 2,500 human reference), and their labels overprinted each other.
-MIN_LABEL_RATIO = 1.7
+MIN_LABEL_RATIO = 1.85   # 2,000 next to 3,500 (ratio 1.75) overlapped on the ImageNet grid
 
 
 def thin_labels(xticks):
@@ -205,6 +206,8 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("run_dirs", nargs="+")
     parser.add_argument("--out", default="plots")
+    parser.add_argument("--hit-splits", action="store_true",
+                        help="also write the serial-order hit1/hit2 figures (off by default)")
     args = parser.parse_args()
 
     rows = load_rows(*args.run_dirs)
@@ -227,7 +230,7 @@ def main():
                     print(f"note: {r['model']} {task} {dataset} n={r['n_images']} has "
                           f"{r['seeds']} seed ({r['episodes']} episodes)")
             make_plot(sel, task, dataset, title, args.out)
-            if task == "serial_order":
+            if task == "serial_order" and args.hit_splits:
                 for metric, hit_title in HIT_SPLITS:
                     make_hit_plot(sel, dataset, metric, hit_title, args.out)
 
