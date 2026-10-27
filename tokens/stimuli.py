@@ -9,13 +9,22 @@ neighbouring pieces merge, so a text round-trip would break the ID-level definit
 Within an episode no token is used twice, so a novel foil shares no token with the study list, and a
 recombined foil is made only of studied tokens.
 
-Trial builders mirror tasks/recognition.py and tasks/serial_order_memory.py: the same dict shape, and the
-global `random` that the adapters seed. The key "images" is kept so the adapters need no second code path.
+The `natural` and `scrambled` pools (tokens/corpus.py) draw items that are spans of real text instead: there
+old vs new holds at the span level, and the builders below are shared unchanged.
+
+A `baseline` trial tests an item that is not in the study list, so the forced choice can only follow the
+model's language prior (an intact span reads better than a recombined one; a sentence's true tail follows its
+cue). Memory in the natural pools is the lift over this baseline; with random tokens it sits at chance.
+
+Trial builders mirror tasks/recognition.py, tasks/serial_order_memory.py and tasks/paired_associate_memory.py: the
+same dict shape, and the global `random` that the adapters seed. The keys "images"/"image" are kept so the adapters
+need no second code path.
 """
 import random
 import re
 from dataclasses import dataclass
 from tasks.serial_order_memory import lag_bin
+from tokens import corpus
 
 DATASET = "tokens"
 
@@ -53,7 +62,9 @@ _POOLS = {}
 
 
 def build_pool(tokenizer, pool):
-    """Sorted token IDs that decode on their own to a clean piece of text (see _keep)."""
+    """Sorted token IDs that decode on their own to a clean piece of text (see _keep), or a corpus SpanPool."""
+    if pool in corpus.POOLS:
+        return corpus.SpanPool(pool, tokenizer)
     key = (tokenizer.name_or_path, pool)
     if key not in _POOLS:
         special = set(tokenizer.all_special_ids) | set(tokenizer.added_tokens_decoder)
@@ -66,10 +77,14 @@ def build_pool(tokenizer, pool):
 
 
 def max_items(pool, item_length):
+    if pool in corpus.POOLS:
+        return corpus.n_spans(item_length)
     return POOL_SIZES[pool] // item_length
 
 
 def sample_items(pool_ids, n_items, item_length):
+    if isinstance(pool_ids, corpus.SpanPool):
+        return [TokenItem(ids) for ids in pool_ids.sample(n_items, item_length)]
     if n_items * item_length > len(pool_ids):
         raise ValueError(f"{n_items} disjoint items of {item_length} tokens need {n_items * item_length} "
                          f"tokens, the pool has {len(pool_ids)}")
@@ -77,15 +92,29 @@ def sample_items(pool_ids, n_items, item_length):
     return [TokenItem(tuple(ids[k * item_length:(k + 1) * item_length])) for k in range(n_items)]
 
 
-def recognition_trials(pool_ids, n_items, item_length, foil_type):
+def recognition_trials(pool_ids, n_items, item_length, foil_type, baseline=False):
     """One 2-AFC test (studied item vs foil) on a studied item at a random position.
 
     novel:      the foil is a fresh item, sharing no token with the study list.
     recombined: the foil is the first half of studied item A joined to the second half of studied item B,
                 so every foil token was studied and only the binding of tokens into items rejects it.
                 The correct option is a third studied item, so neither option shares a half with the other.
+    baseline:   recombined only; the "correct" option and both halves of the foil are unstudied items, so the
+                choice measures the preference for an intact item over a seamed one with no memory to draw on.
+                (A novel baseline would be two unstudied intact items, 50% by construction.)
     """
-    if foil_type == "novel":
+    if baseline:
+        if foil_type != "recombined":
+            raise ValueError("baseline trials are defined for recombined foils only")
+        if item_length < 2:
+            raise ValueError("recombined foils join two half items, so items need at least 2 tokens")
+        items = sample_items(pool_ids, n_items + 3, item_length)
+        study, correct, a, b = items[:n_items], items[n_items], items[n_items + 1], items[n_items + 2]
+        half = item_length // 2
+        foil = TokenItem(a.ids[:half] + b.ids[half:])
+        sources = {"foil_head_position": None, "foil_tail_position": None}
+        tested = None
+    elif foil_type == "novel":
         items = sample_items(pool_ids, n_items + 1, item_length)
         study, foil = items[:n_items], items[n_items]
         tested = random.randrange(n_items)
@@ -93,6 +122,8 @@ def recognition_trials(pool_ids, n_items, item_length, foil_type):
     elif foil_type == "recombined":
         if n_items < 3:
             raise ValueError("recombined foils need at least 3 studied items")
+        if item_length < 2:
+            raise ValueError("recombined foils join two half items, so items need at least 2 tokens")
         study = sample_items(pool_ids, n_items, item_length)
         tested, a, b = random.sample(range(n_items), 3)
         half = item_length // 2
@@ -101,7 +132,8 @@ def recognition_trials(pool_ids, n_items, item_length, foil_type):
     else:
         raise ValueError(f"token stimuli support foil types novel and recombined, not {foil_type!r}")
 
-    correct = study[tested]
+    if not baseline:
+        correct = study[tested]
     target = 1 if random.random() < 0.5 else 2
     options = [correct, foil] if target == 1 else [foil, correct]
     return {
@@ -111,28 +143,60 @@ def recognition_trials(pool_ids, n_items, item_length, foil_type):
             "images": options,
             "target": target,
             "type": foil_type,
-            "metadata": {"test_position": tested + 1, **sources, "option_ids": [list(o.ids) for o in options]},
+            "metadata": {"test_position": None if baseline else tested + 1, **sources,
+                         "option_ids": [list(o.ids) for o in options]},
         }],
     }
 
 
-def recall_trials(pool_ids, n_items, item_length):
+def recall_trials(pool_ids, n_items, item_length, baseline=False):
     """Cued recall of a studied item at a random position: its first half is the cue, its second half the target.
 
     The foil tail is the second half of an unstudied item, so it shares no token with the study list. Scoring the
     target against it by likelihood is a 2-way choice with no answer digit, the control for recognition's 1/2 mapping.
+
+    baseline: the cued item is unstudied too, so the true tail can only win on the language prior.
     """
-    items = sample_items(pool_ids, n_items + 1, item_length)
-    study, unstudied = items[:n_items], items[n_items]
-    tested = random.randrange(n_items)
+    if item_length < 2:
+        raise ValueError("cued recall cues with half an item, so items need at least 2 tokens")
+    items = sample_items(pool_ids, n_items + 1 + baseline, item_length)
+    study, unstudied = items[:n_items], items[-1]
+    if baseline:
+        tested, cued = None, items[n_items]
+    else:
+        tested = random.randrange(n_items)
+        cued = study[tested]
     half = item_length // 2
     return {
         "study_prompt": "Here is a sequence of items to remember.",
         "study_sequence": study,
-        "cue": study[tested].ids[:half],
-        "target_tail": study[tested].ids[half:],
+        "cue": cued.ids[:half],
+        "target_tail": cued.ids[half:],
         "foil_tail": unstudied.ids[half:],
-        "metadata": {"test_position": tested + 1},
+        "metadata": {"test_position": None if baseline else tested + 1},
+    }
+
+
+def pam_trials(pool_ids, n_pairs, item_length, wordpool):
+    """Study (token item, word) pairs, then one cued test at a random position: the item is the cue, its word the target.
+
+    The token version of tasks/paired_associate_memory._get_word_trials: items stand in for the images, the words come
+    from the same pool, and the dict has the same shape, so bench/tasks/pam_eval.py builds and scores both alike. The
+    model must produce the word, so as for images chance is ~1/n, not 50%.
+    """
+    if n_pairs > len(wordpool):
+        raise ValueError(f"{n_pairs} pairs need {n_pairs} distinct words, the pool has {len(wordpool)}")
+    items = sample_items(pool_ids, n_pairs, item_length)
+    words = random.sample(wordpool, n_pairs)
+    tested = random.randrange(n_pairs)
+    return {
+        "study_prompt": "Remember the word paired with each item.",
+        "study_sequence": list(zip(items, words)),
+        "test_phase": [{
+            "image": items[tested],
+            "target": words[tested],
+            "metadata": {"test_position": tested + 1, "cue_ids": list(items[tested].ids)},
+        }],
     }
 
 

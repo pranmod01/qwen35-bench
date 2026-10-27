@@ -3,6 +3,8 @@
 #
 # n is set so every length fills the same ~244k of the 262,144-token context, so the length comparison
 # holds total tokens fixed: few long items vs many short ones. Each item costs L + 1 tokens (separator).
+#   L=1   n=122,000  (pool allows 245,449; context binds first; added 2026-10-16, novel and serial only:
+#                      a recombined foil or a recall cue is half an item, and half of one token is nothing)
 #   L=8   n=27,000   (pool allows 30,681; context binds first)
 #   L=64  n=3,750    (pool allows 3,834 with a novel foil)
 #   L=256 n=950      (pool allows 957 with a novel foil)
@@ -45,14 +47,20 @@ models:
     model_id: Qwen/Qwen3.5-27B
     max_new_tokens: 100
     device_map: auto
+    max_memory: {0: 4GiB, 1: 11GiB, 2: 11GiB, 3: 11GiB, 4: 11GiB, 5: 11GiB}   # 6 x A6000; 166 GB total at 244k tokens
+                                                                             # (2 x H100 OOM, job 13498037), ~30 GB a card when spread
 
 tasks:
+  - {task: afc_recognition, prompts: [original], datasets: [tokens], foil_types: [novel],
+     single_foil: true, token_pools: [clean], item_lengths: [1], n_images: [122000], n_trials: 1}
   - {task: afc_recognition, prompts: [original], datasets: [tokens], foil_types: [novel, recombined],
      single_foil: true, token_pools: [clean], item_lengths: [8], n_images: [27000], n_trials: 1}
   - {task: afc_recognition, prompts: [original], datasets: [tokens], foil_types: [novel, recombined],
      single_foil: true, token_pools: [clean], item_lengths: [64], n_images: [3750], n_trials: 1}
   - {task: afc_recognition, prompts: [original], datasets: [tokens], foil_types: [novel, recombined],
      single_foil: true, token_pools: [clean], item_lengths: [256], n_images: [950], n_trials: 1}
+  - {task: serial_order, prompts: [original], datasets: [tokens], counterbalance: true,
+     token_pools: [clean], item_lengths: [1], n_images: [122000], n_trials: 1}
   - {task: serial_order, prompts: [original], datasets: [tokens], counterbalance: true,
      token_pools: [clean], item_lengths: [8], n_images: [27000], n_trials: 1}
   - {task: serial_order, prompts: [original], datasets: [tokens], counterbalance: true,

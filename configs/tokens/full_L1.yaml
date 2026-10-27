@@ -1,0 +1,52 @@
+# Token-item full run, item length L=1 (2026-10-16). The endpoint of the length ladder in configs/tokens/full_L{8,64,256}.yaml:
+# one token per item, ~122,000 items in the same ~244k of the 262k context, so recognition asks only whether a single
+# token occurred anywhere in the list. Same run_name `tokens_full`; design is configs/tokens/preflight_max.yaml.
+#
+# Novel foils and serial order only: a recombined foil (and a recall cue) is half an item, and half of one token is
+# nothing, so the config check rejects `recombined` below L=2.
+# n grid: the L=8 grid continued to the L=1 maximum (122,000 items x 2 tokens each with the separator = 244k).
+# The grid sums to 445,762 stimulus tokens per trial pass, ~1.8x the max cell alone.
+# 50 trials x 2 seeds, pool `clean`, as the other lengths.
+#
+# Hardware: as full_L8.yaml (peak memory is set by the prompt length, which is the same here); confirm with the
+# L=1 preflight cells before submitting.
+#
+#     X="--partition=burst --exclude=ins082,ins091 --time=48:00:00 --export=ALL,PYTORCH_ALLOC_CONF=expandable_segments:True"
+#     sbatch $X --gres=gpu:A6000:1 scripts/bench.sbatch configs/tokens/full_L1.yaml --model qwen3.5-0.8b
+#     sbatch $X --gres=gpu:2 --mem=96G scripts/bench.sbatch configs/tokens/full_L1.yaml --model qwen3.5-2b  (4b: --mem=128G)
+#     sbatch $X --gres=gpu:A6000:3 --mem=128G scripts/bench.sbatch configs/tokens/full_L1.yaml --model qwen3.5-9b
+
+run_name: tokens_full
+
+output_dir: results
+
+seeds: [0, 1]
+
+models:
+  - name: qwen3.5-0.8b
+    model_id: Qwen/Qwen3.5-0.8B
+    max_new_tokens: 100
+  - name: qwen3.5-2b
+    model_id: Qwen/Qwen3.5-2B
+    max_new_tokens: 100
+    device_map: auto
+  - name: qwen3.5-4b
+    model_id: Qwen/Qwen3.5-4B
+    max_new_tokens: 100
+    device_map: auto
+  - name: qwen3.5-9b
+    model_id: Qwen/Qwen3.5-9B
+    max_new_tokens: 100
+    device_map: auto
+  - name: qwen3.5-27b
+    model_id: Qwen/Qwen3.5-27B
+    max_new_tokens: 100
+    device_map: auto
+    max_memory: {0: 4GiB, 1: 11GiB, 2: 11GiB, 3: 11GiB, 4: 11GiB, 5: 11GiB}   # 6 x A6000; 166 GB total at 244k tokens
+                                                                             # (2 x H100 OOM, job 13498037), ~30 GB a card when spread
+
+tasks:
+  - {task: afc_recognition, prompts: [original], datasets: [tokens], foil_types: [novel],
+     single_foil: true, token_pools: [clean], item_lengths: [1], n_images: [1, 5, 25, 100, 250, 1000, 2500, 10000, 27000, 60000, 122000], n_trials: 50}
+  - {task: serial_order, prompts: [original], datasets: [tokens], counterbalance: true,
+     token_pools: [clean], item_lengths: [1], n_images: [2, 5, 25, 100, 250, 1000, 2500, 10000, 27000, 60000, 122000], n_trials: 50}

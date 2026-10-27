@@ -1,17 +1,18 @@
 """Cued recall of token items: the control for afc_recognition's answer step (tokens dataset only).
 
 Study N token items as in recognition, then the answer turn is prefilled with the first half of one studied item and
-the model's log-probabilities for the rest are read off. The 2B fails recognition at n=1 (says "1" on ~95% of trials)
+the model's log-probabilities for the rest are read off (Qwen35Evaluator.score_tail). The 2B fails recognition at n=1 (says "1" on ~95% of trials)
 although the studied item is shown verbatim; this separates "the item is not held" from "the item is held but the
 1/2 judgment fails". Scored by likelihood, not generation, so there is nothing to parse:
 
   accuracy           the true tail is more likely than an unstudied tail (summed log-prob); chance 0.5
   first_token_top1   the model's top next token after the cue is the true one; chance ~1 / pool size
   exact_recall       the top token is the true one at every tail position, i.e. greedy decoding would reproduce it
+
+`baseline: true` cues an unstudied item, so accuracy is what the language prior alone gives: ~0.5 for random tokens,
+higher for the natural pools, where the true tail is the grammatical continuation of the cue. Memory is the lift over it.
 """
 import random
-
-import torch
 
 from bench.tasks.afc_recognition_eval import token_variants
 from tokens import stimuli as token_stimuli
@@ -24,16 +25,19 @@ TEST_PROMPT = "Here is the start of one item from the study sequence. Continue i
 def expand_conditions(task_cfg):
     if task_cfg.get("datasets") != [token_stimuli.DATASET]:
         raise ValueError(f"{NAME} supports only datasets: [{token_stimuli.DATASET}]")
+    if any(length < 2 for length in task_cfg.get("item_lengths", [])):
+        raise ValueError(f"{NAME} cues with half an item; item_lengths must be >= 2")
     return [
-        {"dataset": token_stimuli.DATASET, "n_images": n_images, "n_trials": task_cfg.get("n_trials", 10), **stimulus}
+        {"dataset": token_stimuli.DATASET, "n_images": n_images, "n_trials": task_cfg.get("n_trials", 10),
+         **({"baseline": True} if task_cfg.get("baseline") else {}), **stimulus}
         for n_images in task_cfg["n_images"]
         for stimulus in token_variants(task_cfg)
     ]
 
 
 def max_n_images(condition):
-    # The unstudied item that supplies the foil tail takes one item's worth of tokens.
-    return token_stimuli.max_items(condition["token_pool"], condition["item_length"]) - 1
+    # The unstudied item that supplies the foil tail takes one item's worth of tokens; a baseline's cued item another.
+    return token_stimuli.max_items(condition["token_pool"], condition["item_length"]) - 1 - bool(condition.get("baseline"))
 
 
 def min_n_images(condition):
@@ -50,23 +54,6 @@ def build_messages(evaluator, trial):
     ]
 
 
-def score_tail(evaluator, prompt, cue, tail):
-    """Per-token log-prob of `tail` after prompt + cue, and whether each was the model's top token."""
-    extra = torch.tensor([list(cue) + list(tail)], device=prompt["input_ids"].device)
-    input_ids = torch.cat([prompt["input_ids"], extra], dim=1)
-    inputs = {"input_ids": input_ids, "attention_mask": torch.ones_like(input_ids),
-              "mm_token_type_ids": torch.zeros_like(input_ids)}
-    with torch.no_grad():
-        # Positions -len(tail)-1 .. -2 predict the tail tokens; keep only those logits.
-        logits = evaluator.model(**inputs, logits_to_keep=len(tail) + 1).logits[0, :-1].float()
-    logprobs = torch.log_softmax(logits, dim=-1)
-    target = torch.tensor(tail, device=logprobs.device)
-    return {
-        "logprobs": logprobs.gather(1, target[:, None])[:, 0].tolist(),
-        "top1": (logprobs.argmax(dim=-1) == target).tolist(),
-    }
-
-
 def run(evaluator, condition, seed):
     if evaluator.thinking:
         raise ValueError(f"{NAME} does not support thinking: a trace would sit between the cue and the tail")
@@ -75,11 +62,12 @@ def run(evaluator, condition, seed):
 
     trials = []
     for i in range(condition["n_trials"]):
-        trial = token_stimuli.recall_trials(pool, condition["n_images"], condition["item_length"])
+        trial = token_stimuli.recall_trials(pool, condition["n_images"], condition["item_length"],
+                                            baseline=condition.get("baseline", False))
         # Generation prompt only (ends after the empty think block); the cue is appended as raw IDs.
         prompt = evaluator._prepare_inputs(build_messages(evaluator, trial))
-        true = score_tail(evaluator, prompt, trial["cue"], trial["target_tail"])
-        foil = score_tail(evaluator, prompt, trial["cue"], trial["foil_tail"])
+        true = evaluator.score_tail(prompt, trial["cue"], trial["target_tail"])
+        foil = evaluator.score_tail(prompt, trial["cue"], trial["foil_tail"])
         correct = sum(true["logprobs"]) > sum(foil["logprobs"])
         trials.append({
             "trial": i,
