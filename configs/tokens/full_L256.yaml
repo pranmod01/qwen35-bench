@@ -41,6 +41,8 @@ models:
     model_id: Qwen/Qwen3.5-27B
     max_new_tokens: 100
     device_map: auto
+    max_memory: {0: 4GiB, 1: 11GiB, 2: 11GiB, 3: 11GiB, 4: 11GiB, 5: 11GiB}   # 6 x A6000; 166 GB total at 244k tokens
+                                                                             # (2 x H100 OOM, job 13498037), ~30 GB a card when spread
 
 tasks:
   - {task: afc_recognition, prompts: [original], datasets: [tokens], foil_types: [novel],

@@ -1,0 +1,56 @@
+# 27B ImageNet preflight at full context, n=3,500, on four 96 GB RTX PRO 6000s (2026-10-26). The one node that could
+# hold it: ins046 (ins047 kills jobs at launch). ImageNet's ~231k tokens sit just under the R6000 crash point near 238k
+# (LIMITATIONS.md), so this is a long shot run beside the capped grid. --overwrite replaces the failed H100 cells.
+# The 27B cannot take its full-context cells on this cluster (2026-10-26): at 230k+ tokens one card needs more
+# than 47 GB whatever the weight split (6 x A6000, job 13544274), and two H100s fill at 164-171 GB (jobs 13498037,
+# 13562807). The same model runs 130k-token prompts on two 48 GB cards at 70 GB total, so the per-card demand grows
+# steeply above that. These configs stop the 27B at ~165k tokens; the other models' grids are unchanged.
+#
+#     sbatch --partition=burst --nodelist=ins046 --time=4:00:00 --gres=gpu:R6000:4 --mem=192G \
+#            --export=ALL,PYTORCH_ALLOC_CONF=expandable_segments:True scripts/bench.sbatch configs/imagenet_preflight_27b_r6000.yaml --overwrite
+
+run_name: imagenet_preflight
+output_dir: results
+seeds:
+- 0
+models:
+- name: qwen3.5-27b-img256
+  model_id: Qwen/Qwen3.5-27B
+  max_new_tokens: 100
+  device_map: auto
+  max_memory:
+    0: 8GiB
+    1: 20GiB
+    2: 20GiB
+    3: 20GiB
+  max_image_size: 256
+tasks:
+- task: afc_recognition
+  prompts:
+  - original
+  datasets:
+  - imagenet
+  foil_types:
+  - novel
+  single_foil: true
+  n_images:
+  - 3500
+  n_trials: 1
+- task: serial_order
+  prompts:
+  - original
+  counterbalance: true
+  datasets:
+  - imagenet
+  n_images:
+  - 3500
+  n_trials: 1
+- task: paired_associates
+  prompts:
+  - sandwich
+  datasets:
+  - imagenet
+  wordpool: extended
+  n_images:
+  - 3500
+  n_trials: 1

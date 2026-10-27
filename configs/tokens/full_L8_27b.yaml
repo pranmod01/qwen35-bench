@@ -1,0 +1,84 @@
+# 27B token full run, L=8, capped grid (2026-10-26). Same run_name `tokens_full` and cells as configs/tokens/full_L8.yaml
+# up to the cap, so the plots pool it with the other sizes and the 27B curve simply stops earlier.
+# The 27B cannot take its full-context cells on this cluster (2026-10-26): at 230k+ tokens one card needs more
+# than 47 GB whatever the weight split (6 x A6000, job 13544274), and two H100s fill at 164-171 GB (jobs 13498037,
+# 13562807). The same model runs 130k-token prompts on two 48 GB cards at 70 GB total, so the per-card demand grows
+# steeply above that. These configs stop the 27B at ~165k tokens; the other models' grids are unchanged.
+#
+#     sbatch --partition=burst --exclude=ins037,ins047,ins058,ins082,ins091,ins092 --time=48:00:00 --gres=gpu:2 --mem=128G \
+#            --export=ALL,PYTORCH_ALLOC_CONF=expandable_segments:True scripts/bench.sbatch configs/tokens/full_L8_27b.yaml
+
+run_name: tokens_full
+output_dir: results
+seeds:
+- 0
+- 1
+models:
+- name: qwen3.5-27b
+  model_id: Qwen/Qwen3.5-27B
+  max_new_tokens: 100
+  device_map: auto
+tasks:
+- task: afc_recognition
+  prompts:
+  - original
+  datasets:
+  - tokens
+  foil_types:
+  - novel
+  single_foil: true
+  token_pools:
+  - clean
+  item_lengths:
+  - 8
+  n_images:
+  - 1
+  - 5
+  - 25
+  - 100
+  - 250
+  - 1000
+  - 2500
+  - 10000
+  n_trials: 50
+- task: afc_recognition
+  prompts:
+  - original
+  datasets:
+  - tokens
+  foil_types:
+  - recombined
+  single_foil: true
+  token_pools:
+  - clean
+  item_lengths:
+  - 8
+  n_images:
+  - 5
+  - 25
+  - 100
+  - 250
+  - 1000
+  - 2500
+  - 10000
+  n_trials: 50
+- task: serial_order
+  prompts:
+  - original
+  datasets:
+  - tokens
+  counterbalance: true
+  token_pools:
+  - clean
+  item_lengths:
+  - 8
+  n_images:
+  - 2
+  - 5
+  - 25
+  - 100
+  - 250
+  - 1000
+  - 2500
+  - 10000
+  n_trials: 50

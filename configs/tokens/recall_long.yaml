@@ -32,6 +32,11 @@ models:
     model_id: Qwen/Qwen3.5-9B
     max_new_tokens: 100
     device_map: auto
+  - name: qwen3.5-27b
+    model_id: Qwen/Qwen3.5-27B
+    max_new_tokens: 100
+    device_map: auto        # hardware from the 27B token preflight on 2 x H100 (added 2026-10-16)
+    max_memory: {0: 4GiB, 1: 11GiB, 2: 11GiB, 3: 11GiB, 4: 11GiB, 5: 11GiB}   # 6 x A6000, as the token full runs
 
 tasks:
   - {task: token_recall, datasets: [tokens], token_pools: [clean], item_lengths: [8], n_images: [10000, 27000], n_trials: 50}

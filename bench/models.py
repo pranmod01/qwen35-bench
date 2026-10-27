@@ -55,7 +55,8 @@ class Qwen35Evaluator(BaseEvaluator):
     """Local inference for the Qwen3.5 family (natively image-text-to-text)."""
 
     def __init__(self, model_id, max_image_size=512, max_new_tokens=100,
-                 dtype=torch.bfloat16, layer_variant=None, name=None, device_map="cuda", thinking=None):
+                 dtype=torch.bfloat16, layer_variant=None, name=None, device_map="cuda", max_memory=None,
+                 thinking=None):
         super().__init__(model_id)
         self.max_image_size = max_image_size
         self.max_new_tokens = max_new_tokens
@@ -68,6 +69,11 @@ class Qwen35Evaluator(BaseEvaluator):
         # accelerate shard across the visible GPUs, for weights that do not fit one card: the 27B is
         # ~56 GB, so it needs two 48 GB A6000s (the 96 GB R6000 nodes are usually unavailable).
         self.device_map = device_map
+        # Per-card weight budget for device_map "auto", e.g. {0: "24GiB", 1: "56GiB"}. accelerate fills card 0
+        # first, and the activations of a 244k-token prompt land on top of whatever weights a card holds, so
+        # the 27B ran out of memory on card 0 of 2 x H100 (ImageNet, 115 GB total) and 6 x A6000 (tokens)
+        # while the other cards had room. Capping card 0 moves layers, and their activations, off it.
+        self.max_memory = max_memory
         self.converted_layers = 0
         self._load_model()
 
@@ -90,6 +96,7 @@ class Qwen35Evaluator(BaseEvaluator):
 
         self.model = AutoModelForImageTextToText.from_pretrained(
             self.model_id, config=config, dtype=self.dtype, device_map=self.device_map,
+            **({"max_memory": self.max_memory} if self.max_memory else {}),
         )
         self.model.eval()
         self.processor = AutoProcessor.from_pretrained(self.model_id)
@@ -279,6 +286,24 @@ class Qwen35Evaluator(BaseEvaluator):
         top_tokens = [[tokenizer.decode([int(i)]), round(float(p), 4)] for p, i in zip(top.values, top.indices)]
         return {"choice": chosen, "probs": norm, "choice_mass": total, "top_tokens": top_tokens, "prefill": prefill}
 
+    def score_tail(self, prompt, cue, tail):
+        """Per-token log-prob of `tail` after `prompt` (prepared inputs) + `cue`, and whether each token
+        was the model's top prediction. Cued recall scores a studied item's second half this way; the
+        recognition `copy` prompt scores each whole option with an empty cue."""
+        extra = torch.tensor([list(cue) + list(tail)], device=prompt["input_ids"].device)
+        input_ids = torch.cat([prompt["input_ids"], extra], dim=1)
+        inputs = {"input_ids": input_ids, "attention_mask": torch.ones_like(input_ids),
+                  "mm_token_type_ids": torch.zeros_like(input_ids)}
+        with torch.no_grad():
+            # Positions -len(tail)-1 .. -2 predict the tail tokens; keep only those logits.
+            logits = self.model(**inputs, logits_to_keep=len(tail) + 1).logits[0, :-1].float()
+        logprobs = torch.log_softmax(logits, dim=-1)
+        target = torch.tensor(tail, device=logprobs.device)
+        return {
+            "logprobs": logprobs.gather(1, target[:, None])[:, 0].tolist(),
+            "top1": (logprobs.argmax(dim=-1) == target).tolist(),
+        }
+
     def _call_api(self, messages, thought=None):
         inputs = self._prepare_inputs(messages, thought=thought)
 
@@ -304,5 +329,6 @@ def build_evaluator(model_cfg):
         layer_variant=model_cfg.get("layer_variant"),
         name=model_cfg["name"],
         device_map=model_cfg.get("device_map", "cuda"),
+        max_memory=model_cfg.get("max_memory"),
         thinking=model_cfg.get("thinking"),
     )

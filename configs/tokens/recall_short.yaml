@@ -25,6 +25,11 @@ models:
   - name: qwen3.5-9b
     model_id: Qwen/Qwen3.5-9B
     max_new_tokens: 100
+  - name: qwen3.5-27b
+    model_id: Qwen/Qwen3.5-27B
+    max_new_tokens: 100
+    device_map: auto        # 55 GB of weights: two cards even for the short cells (added 2026-10-16)
+    max_memory: {0: 20GiB, 1: 40GiB}   # 2 cards; cells here stay under ~33k tokens
 
 tasks:
   - {task: token_recall, datasets: [tokens], token_pools: [clean], item_lengths: [8], n_images: [1, 5, 25, 100, 250, 1000, 2500], n_trials: 50}
