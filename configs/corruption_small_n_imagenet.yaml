@@ -1,0 +1,52 @@
+# Image corruption sweep, part 3: the smallest lists (2026-10-29). The parts 1 and 2 grids start at n=5, as the
+# token preflight's did; the clean final runs start at n=1 (recognition, PAM) and n=2 (serial order), so this
+# adds those cells for every corruption and severity already run, with the same run_name, so the curves start
+# where the clean ones do. The n=1 cell matters most for the incoherent types (patch_shuffle, phase_scramble,
+# noise_image): it separates "cannot match one such image to itself" from "cannot hold many of them".
+#
+# 150 cells a model at well under a second a trial: minutes of GPU time, so any burst card for every model.
+#
+#     X="--partition=burst --exclude=ins046,ins047,ins058,ins082,ins091,ins092 --time=03:00:00 --gres=gpu:1"
+#     for m in 0.8b 2b 4b 9b; do sbatch $X --job-name=corr_small_$m scripts/bench.sbatch configs/corruption_small_n_imagenet.yaml --model qwen3.5-$m-img256; done
+
+run_name: imagenet_corruption
+
+output_dir: results
+
+seeds: [0, 1]
+
+models:
+  - name: qwen3.5-0.8b-img256
+    model_id: Qwen/Qwen3.5-0.8B
+    max_image_size: 256
+    max_new_tokens: 100
+  - name: qwen3.5-2b-img256
+    model_id: Qwen/Qwen3.5-2B
+    max_image_size: 256
+    max_new_tokens: 100
+  - name: qwen3.5-4b-img256
+    model_id: Qwen/Qwen3.5-4B
+    max_image_size: 256
+    max_new_tokens: 100
+  - name: qwen3.5-9b-img256
+    model_id: Qwen/Qwen3.5-9B
+    max_image_size: 256
+    max_new_tokens: 100
+
+tasks:
+  # Part 1 grid (Gaussian, severities 1-5), all three tasks.
+  - {task: afc_recognition, prompts: [original], datasets: [imagenet], foil_types: [novel], single_foil: true,
+     corruptions: [gaussian_noise], severities: [1, 2, 3, 4, 5], n_images: [1], n_trials: 50}
+  - {task: serial_order, prompts: [original], datasets: [imagenet], counterbalance: true,
+     corruptions: [gaussian_noise], severities: [1, 2, 3, 4, 5], n_images: [2], n_trials: 50}
+  - {task: paired_associates, prompts: [sandwich], datasets: [imagenet], wordpool: extended,
+     corruptions: [gaussian_noise], severities: [1, 2, 3, 4, 5], n_images: [1], n_trials: 50}
+  # Part 2 grid (the other types, severities 1, 3, 5), recognition and serial order.
+  - {task: afc_recognition, prompts: [original], datasets: [imagenet], foil_types: [novel], single_foil: true,
+     corruptions: [shot_noise, impulse_noise, defocus_blur, contrast, brightness, pixelate, jpeg_compression,
+                   patch_shuffle, phase_scramble, noise_image],
+     severities: [1, 3, 5], n_images: [1], n_trials: 50}
+  - {task: serial_order, prompts: [original], datasets: [imagenet], counterbalance: true,
+     corruptions: [shot_noise, impulse_noise, defocus_blur, contrast, brightness, pixelate, jpeg_compression,
+                   patch_shuffle, phase_scramble, noise_image],
+     severities: [1, 3, 5], n_images: [2], n_trials: 50}
