@@ -3,9 +3,13 @@
 # The 27B cannot take its full-context cells on this cluster (2026-10-26): at 230k+ tokens one card needs more
 # than 47 GB whatever the weight split (6 x A6000, job 13544274), and two H100s fill at 164-171 GB (jobs 13498037,
 # 13562807). The same model runs 130k-token prompts on two 48 GB cards at 70 GB total, so the per-card demand grows
-# steeply above that. These configs stop the 27B at ~165k tokens; the other models' grids are unchanged.
+# steeply above that. These configs stop the 27B at ~130k tokens; the other models' grids are unchanged.
+# Hardware (2026-10-29): three A6000s (`--gres=gpu:A6000:3`) with a per-card weight cap. Two 48 GB cards were not
+# enough even at this cap: the L40S pair exposes 44 GB a card and card 0 filled at 75-94 GB total (jobs 13679576,
+# 13679579), while the 130k-token thinking runs had fit at 78 GB only because accelerate's split happened to fall
+# right. Three cards at ~31 GB each leave room for the per-card peak; the 9B's three-card jobs placed within two days.
 #
-#     sbatch --partition=burst --exclude=ins037,ins047,ins058,ins082,ins091,ins092 --time=48:00:00 --gres=gpu:2 --mem=128G \
+#     sbatch --partition=burst --exclude=ins037,ins047,ins058,ins082,ins091,ins092 --time=48:00:00 --gres=gpu:A6000:3 --mem=128G \
 #            --export=ALL,PYTORCH_ALLOC_CONF=expandable_segments:True scripts/bench.sbatch configs/tokens/full_L256_27b.yaml
 
 run_name: tokens_full
@@ -18,6 +22,7 @@ models:
   model_id: Qwen/Qwen3.5-27B
   max_new_tokens: 100
   device_map: auto
+  max_memory: {0: 8GiB, 1: 24GiB, 2: 24GiB}
 tasks:
 - task: afc_recognition
   prompts:
