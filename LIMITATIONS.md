@@ -209,6 +209,16 @@ serial-order n=5 cells are flagged and still score 0.88–0.96); `BIAS` question
 anything. Accuracy itself is always raw — no trials are dropped or reweighted — and `--simple` prints
 accuracy alone.
 
+*`LOW_MASS` in the final runs (decided 2026-10-29: footnoted, not rescored).* 36 of the 286 cells in
+`results/recognition_single_foil` and `results/serial_order_final` carry the flag (100 trials each, two seeds
+pooled). They are the 0.8B (23 cells) and 2B (10) on every dataset, plus the 4B's six n=5 cells; the 9B and 27B
+never flag. The 4B's flagged cells score 0.92–0.99, so for it the flag marks a position-answer habit at n=5 and
+not a wrong reading. For the 0.8B and 2B the flag reaches n=25–1,854 on THINGS-256 and ImageNet (low-mass
+fraction up to 0.62), where the cells are at or near chance anyway: a choice read off the tail of the
+distribution in a cell that is at chance does not change the conclusion that the model cannot do the task. The
+numbers are left as scored. A prompt that holds the mass on the two digits would need its own A/B against the
+current prompt before it could replace it.
+
 The free-text reply is still generated and stored (`free_response`, `free_parsed`) so format compliance stays
 reportable, but it no longer affects any score.
 
@@ -338,6 +348,16 @@ from the original in ways that bear on the result above:
 The wrapper now also has `probe_types`: `direct_ab` (A -> B) and `direct_bc` (B -> C, image -> word for
 `word`) alongside `inference`, on the same episode and chain, which builds the direct control into the
 task. `configs/assoc_inf_ab.yaml` (2B/4B, three layouts, gate fixed in its header) is set up but not run.
+
+**Update 2026-10-29.** The A/B has since run (2B–27B, on RunPod, 2026-10-11..20; `results/assoc_inf_ab`,
+figures `plots/ported/assoc_inf_ab_{image,word}.png` and `assoc_inf_by_model.png`): the 27B passes the gate
+(direct 97–100%, inference 66–71% from 5 chains); the 9B reaches 87% on direct B-C at 25 chains but its
+inference stays at chance; the 2B/4B do not pass. A second question, whether the small models fail because the
+forced choice is read before they finish reasoning, was tested with `scoring: reason_then_choose`
+(`bench/reasoned.py`, `configs/assoc_inf_reasoned.yaml`, `results/assoc_inf_reasoned`, figure
+`assoc_inf_reasoned.png`): the model replies freely for up to 512 tokens and the choice is read with that reply
+in context. It changes little; only the 4B's direct A-B (54 → 62%) moves reliably. The full write-up of these
+runs is still to do.
 ## Prompt wording changes the results
 
 Tested side by side on all three models, both scored by forced choice (`configs/archive/prompt_ab.yaml`, 50 episodes

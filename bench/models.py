@@ -322,7 +322,14 @@ class Qwen35Evaluator(BaseEvaluator):
 
 
 def build_evaluator(model_cfg):
-    return Qwen35Evaluator(
+    scoring = model_cfg.get("scoring", "standard")
+    if scoring == "reason_then_choose":
+        from bench.reasoned import ReasonThenChooseEvaluator as cls  # subclasses Qwen35Evaluator, so not a top-level import
+    elif scoring == "standard":
+        cls = Qwen35Evaluator
+    else:
+        raise ValueError(f"unknown scoring {scoring!r}; expected 'standard' or 'reason_then_choose'")
+    return cls(
         model_id=model_cfg["model_id"],
         max_image_size=model_cfg.get("max_image_size", 512),
         max_new_tokens=model_cfg.get("max_new_tokens", 100),

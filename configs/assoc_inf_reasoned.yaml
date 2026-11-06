@@ -1,0 +1,44 @@
+# Does the 2B/4B associative-inference result change when the model may finish its reasoning?
+#
+# Same cells as configs/assoc_inf_ab.yaml at the gate sizes (2 and 5 chains), same seed, so every trial here sees
+# exactly the episode and probe its assoc_inf_ab twin saw and the two compare trial for trial. One change:
+# `scoring: reason_then_choose` (bench/reasoned.py). The model first replies freely, up to 512 tokens instead of
+# 100, and the forced choice is then read with that reply in context ("<reply>\n\nAnswer: "). The prompt is
+# unchanged.
+#
+# Why: in assoc_inf_ab about half the replies were reasoning cut off at 100 tokens, while the forced choice was
+# read with no reasoning in context. Is the gate failure the models, or the answer being read before they had
+# decided?
+#
+# Already run on RunPod 2026-10-20 (runpod/run_bench_ext.py, the same code before it was ported into bench/):
+# the 72 cells are in results/assoc_inf_reasoned and plotted by bench.plot_ported (assoc_inf_reasoned.png).
+# Reading: little changes; only the 4B's direct A-B 54 -> 62% is reliable. Rerun with
+#     python run_bench.py configs/assoc_inf_reasoned.yaml
+# (the runner skips cells whose files exist; --overwrite to regenerate).
+
+run_name: assoc_inf_reasoned
+
+output_dir: results
+
+seeds: [0]
+
+models:
+  - name: qwen3.5-2b
+    model_id: Qwen/Qwen3.5-2B
+    max_image_size: 512
+    max_new_tokens: 512
+    scoring: reason_then_choose
+  - name: qwen3.5-4b
+    model_id: Qwen/Qwen3.5-4B
+    max_image_size: 512
+    max_new_tokens: 512
+    scoring: reason_then_choose
+
+tasks:
+  - task: associative_inference
+    datasets: [Brady2008]
+    pair_types: [image, word]
+    probe_types: [inference, direct_ab, direct_bc]
+    n_chains: [2, 5]
+    prompts: [original, cue_turn, labeled]
+    n_trials: 50

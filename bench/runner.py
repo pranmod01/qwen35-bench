@@ -8,6 +8,7 @@ from pathlib import Path
 import torch
 
 from bench.config import expand_runs, provenance
+from bench import reasoned
 from bench.models import build_evaluator
 from bench.registry import get_adapter
 
@@ -61,7 +62,9 @@ def run_all(cfg, overwrite=False, dry_run=False):
             for _dev in range(torch.cuda.device_count()):
                 torch.cuda.reset_peak_memory_stats(_dev)
             try:
+                reasoned.reset(evaluator)
                 result = get_adapter(run.task).run(evaluator, run.condition, run.seed)
+                reasoned.attach(evaluator, result)
                 error = None
             except Exception:
                 result, error = {}, traceback.format_exc()

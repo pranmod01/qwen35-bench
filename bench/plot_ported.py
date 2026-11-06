@@ -8,9 +8,10 @@ Usage: python -m bench.plot_ported [--mst-color results/qwen35_0.8b ...] [--asso
   mst_ldi.png                   lure discrimination index, p(similar | lure) - p(similar | foil), chance 0
   color_named_accuracy.png      named color recall, chance 1/6
   color_continuous_error.png    mean absolute circular error in degrees; 90 is uniform guessing. Every trial is
-                                rescored here from raw_response with the current parse_degrees, because the
-                                0.8B-4B cells were scored with the first parser (open item 59) and the 9B/27B with
-                                the corrected one; parse failures are left out of the mean and counted on stderr
+                                rescored here from raw_response with the current parse_degrees (the stored 0.8B-4B
+                                cells were rescored in place the same way on 2026-10-29 by
+                                scripts/rescore_color_continuous.py, so this is now a no-op safeguard); parse
+                                failures are left out of the mean and counted on stderr
   assoc_inf_ab_{image,word}.png the A/B grid: layout x model panels, one line per probe, x = chains studied
   assoc_inf_by_model.png        one panel per probe, one line per model size, pooled over the three layouts and
                                 both pair types (300 trials a point) -- the size trend the per-cell grid hides
