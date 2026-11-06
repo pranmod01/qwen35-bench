@@ -53,8 +53,9 @@ def budget_fraction(run_dir):
             continue
         c, m = d["run"]["condition"], d["metrics"]
         key = (d["run"]["model"]["name"], d["run"]["task"], c.get("foil_type"), c["item_length"], c["n_images"])
-        hit[key] += m.get("thinking_frac_budget", 0) * m["n_trials"]
-        n[key] += m["n_trials"]
+        # Serial order reports its trial count as "total", so weight by the condition's n_trials.
+        hit[key] += m.get("thinking_frac_budget", 0) * c["n_trials"]
+        n[key] += c["n_trials"]
     return {k: hit[k] / n[k] for k in n}
 
 
@@ -91,7 +92,8 @@ def task_figure(task, out_dir):
             else:
                 missing = sorted((grid or set()) - have)
                 print(f"partial: {model} {task} L={L}: {len(have)}/{len(grid) if grid else '?'} sizes, missing {missing}")
-                ax.text(0.5, 0.5, f"thinking cells pending\n({len(have)}/{len(grid) if grid else '?'} sizes)",
+                # Below the chance line, which sits at mid-height.
+                ax.text(0.5, 0.25, f"thinking cells pending\n({len(have)}/{len(grid) if grid else '?'} sizes)",
                         transform=ax.transAxes, ha="center", va="center", color="gray", fontsize=10)
             if sizes:
                 plot_chance(ax, chance, sizes)
