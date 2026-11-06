@@ -5,7 +5,7 @@ One block per image: rows are the corruptions in src/corruption.py, columns the 
 1-5. The noise is drawn exactly as a run draws it (per image, seed 0), so the sheet shows the stimuli
 a model would see.
 
-    python scripts/corruption_contact_sheet.py [--out plots/corruption_contact_sheet.png] [--n 3] [--cell 128]
+    python scripts/corruption_contact_sheet.py [--out plots/corruption/corruption_contact_sheet.png] [--n 3] [--cell 128]
 """
 import argparse
 import sys
@@ -24,7 +24,7 @@ HEADER_H = 18
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    parser.add_argument("--out", default="plots/corruption_contact_sheet.png")
+    parser.add_argument("--out", default="plots/corruption/corruption_contact_sheet.png")
     parser.add_argument("--n", type=int, default=3, help="images, spread evenly through concepts.json")
     parser.add_argument("--cell", type=int, default=128)
     parser.add_argument("--seed", type=int, default=0)

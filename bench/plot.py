@@ -4,7 +4,7 @@
 Mirrors the layout of vision-memory's src/plot_error_bars.py (log-x study length, accuracy %,
 Wilson 95% CIs, legend below the axes) so the two repos' figures can sit side by side.
 
-Usage: python -m bench.plot results/qwen35_0.8b results/qwen35_2b ... [--out plots]
+Usage: python -m bench.plot results/qwen35_0.8b results/qwen35_2b ... [--out plots/baseline]
 Pass extra-seed and A/B run dirs too (results/qwen35_9b_pam_seeds, results/pam_layout_ab): cells pool
 across dirs, and the A/B gets its own figure.
 """
@@ -168,7 +168,7 @@ def make_plot(rows, task, dataset, title, out_dir):
 
     apply_axes(ax, sizes, max_x)
     finish(ax, fig, f"{title} ({DATASET_LABELS[dataset]})\nAccuracy vs Sequence Length",
-           Path(out_dir) / f"errorbars_{task}_{dataset}.png")
+           Path(out_dir) / f"{task}_{dataset}.png")
 
 
 def make_hit_plot(rows, dataset, metric, title, out_dir):
@@ -183,7 +183,7 @@ def make_hit_plot(rows, dataset, metric, title, out_dir):
     apply_axes(ax, sizes, max(sizes))
     ax.set_ylabel("Hit rate (%)")
     finish(ax, fig, f"{title} ({DATASET_LABELS[dataset]})\nHit Rate vs Sequence Length",
-           Path(out_dir) / f"errorbars_serial_order_{metric}_{dataset}.png")
+           Path(out_dir) / f"serial_order_{metric}_{dataset}.png")
 
 
 def make_layout_plot(rows, dataset, out_dir):
@@ -199,13 +199,13 @@ def make_layout_plot(rows, dataset, out_dir):
     sizes = [r["n_images"] for r in rows]
     apply_axes(ax, sizes, max(sizes))
     finish(ax, fig, f"PAM layout A/B ({DATASET_LABELS[dataset]})\nAccuracy vs Sequence Length",
-           Path(out_dir) / f"errorbars_pam_layout_ab_{dataset}.png")
+           Path(out_dir) / f"pam_layout_ab_{dataset}.png")
 
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("run_dirs", nargs="+")
-    parser.add_argument("--out", default="plots")
+    parser.add_argument("--out", default="plots/baseline")
     parser.add_argument("--hit-splits", action="store_true",
                         help="also write the serial-order hit1/hit2 figures (off by default)")
     args = parser.parse_args()
