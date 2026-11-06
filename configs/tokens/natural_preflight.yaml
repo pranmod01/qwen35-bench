@@ -9,9 +9,11 @@
 #
 # Short cells (n x (L + 1) <= ~33k prompt tokens), so 0.8B-9B fit one 48 GB card. Needs the span caches
 # (memory_datasets/wikitext103/spans_L{8,64}.*; see tokens/corpus.py) before the runner's size check.
+# 116 cells x 2 seeds per model; from results/tokens_full per-cell times: 0.8B ~3 h, 2B ~4 h, 4B ~9 h, 9B ~13 h.
 #
-#     X="--partition=burst --exclude=ins046,ins047,ins058,ins082,ins091,ins092 --time=12:00:00 --gres=gpu:1"
-#     sbatch $X --job-name=nat_<model> scripts/bench.sbatch configs/tokens/natural_preflight.yaml --model qwen3.5-<model>
+#     X="--partition=burst --exclude=ins046,ins047,ins058,ins082,ins091,ins092 --gres=gpu:1"
+#     sbatch $X --time=12:00:00 --job-name=nat_<model> scripts/bench.sbatch configs/tokens/natural_preflight.yaml --model qwen3.5-<model>   (0.8b, 2b)
+#     sbatch $X --time=24:00:00 --job-name=nat_<model> scripts/bench.sbatch configs/tokens/natural_preflight.yaml --model qwen3.5-<model>   (4b, 9b)
 
 run_name: tokens_natural
 

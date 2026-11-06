@@ -386,7 +386,7 @@ def test_natural_pools(ev):
         docs = list(corpus.read_paragraphs(tmp / "train.txt"))
         assert len(docs) == 12 * 6 + 4 and max(d for d, _ in docs) == 12
         for L in (4, 8):
-            meta = corpus.build_cache(tok, L, corpus=tmp / "train.txt", cache_dir=tmp / "cache", target=40)
+            meta = corpus.build_cache(tok, L, corpus=tmp / "train.txt", cache_dir=tmp / "cache", target=40, minimum=10)
             assert meta["n_spans"] == 40 and meta["item_length"] == L and meta["n_documents"] == 13
         # The target is a cap: a smaller corpus gives what it has, down to the minimum.
         meta = corpus.build_cache(tok, 4, corpus=tmp / "train.txt", cache_dir=tmp / "cache", target=1000, minimum=10)
@@ -396,7 +396,7 @@ def test_natural_pools(ev):
             raise AssertionError("a corpus below the minimum should be refused")
         except ValueError:
             pass
-        meta = corpus.build_cache(tok, 4, corpus=tmp / "train.txt", cache_dir=tmp / "cache", target=40)
+        corpus.build_cache(tok, 4, corpus=tmp / "train.txt", cache_dir=tmp / "cache", target=40, minimum=10)
         natural = corpus.SpanPool("natural", tok, cache_dir=tmp / "cache")
         scrambled = corpus.SpanPool("scrambled", tok, cache_dir=tmp / "cache")
         spans = natural.spans(8)

@@ -7,8 +7,12 @@
 # the 4B 64% and the 9B 31% at n=500, and the 0.8B looped at n=5. Beyond that the cell measures the budget.
 # Grid points are the off grid's up to 500, so every on cell has an off cell to compare with.
 #
-# Cost: a looping cell is 50 x 12,288 generated tokens, ~3-5 h; serial order traces twice per trial (the swapped
-# order gets its own trace). One job per model and task, resubmitted on timeout: the runner skips finished cells.
+# Cost, from configs/tokens/thinking_preflight.yaml (jobs 13669854-56, one trial at n=500): a trial whose trace
+# hits the budget takes 330-680 s for recognition and PAM, 670-1,080 s for serial order (the swapped order gets
+# its own trace), so a 50-trial cell at the top of the grid is 5-9 h (serial order 10-15 h) per seed. At L64 and
+# L256, n=500 hit the budget on every trace for all three sizes: those cells measure the budget, not memory.
+# One job per model and task, resubmitted on timeout: the runner skips finished cells.
+# GPU peak summed over cards at n=500 with a 12k trace: 2B 11.5 GB, 4B 22.5, 9B 33; one card for all.
 #
 #     X="--partition=burst --exclude=ins037,ins046,ins047,ins058,ins082,ins091,ins092 --time=48:00:00"
 #     for M in 2b 4b 9b; do for T in afc_recognition serial_order; do
