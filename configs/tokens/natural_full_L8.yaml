@@ -1,0 +1,57 @@
+# Natural-text token items, full run, L=8 (2026-11-04; one config per L so a model fits 48 h, as the clean run). Extends configs/tokens/natural_preflight.yaml to the clean-pool grids
+# of configs/tokens/full_L8.yaml and full_L64.yaml (L8 to 27,000 items, L64 to 3,750; ~244k of the 262k context at the
+# top). Same run_name as the preflight, so its 232 cells per model are reused and only the new n land.
+#
+# Preflight readings (results/tokens_natural, 2026-10-29) that shaped this grid:
+#   - novel-foil recognition: 9B at ceiling in both pools (L8 to 2,500, L64 to 500); 2B/4B find natural spans easier
+#     than scrambled at L8 (natural 0.84-0.93 vs scrambled 0.63-0.80 at n>=100); 0.8B at chance from n=5 in both pools.
+#   - recombined foils: memory is the lift over the `baseline: true` cell (language prior alone). At L8 the 4B/9B
+#     natural lift is +0.24/+0.44 at n=5 falling to +0.11/+0.13 at 2,500; scrambled lift is smaller (+0.18 -> +0.04 for
+#     the 9B). At L64 no model lifts over its baseline (the 9B is below it: 0.70 vs 0.80 at n=5, 0.50 vs 0.68 at 500).
+#   - serial order: the two pools track each other; 4B/9B above chance to ~250-1,000 at L8, 0.8B/2B at chance past 25.
+#   - token_recall is at ceiling (1.00) for every model, pool and n, as in the clean probe to 27,000
+#     (results/tokens_recall_probe); its baselines (natural 0.85-0.98, scrambled 0.46-0.80) are the measure of the prior
+#     and are already stored. Dropped here.
+# Baseline cells are added at the new large n only (prompt length may shift the prior); the preflight's cover 5/250/2,500 (L8)
+# and 5/250/500 (L64).
+#
+# Cost from the clean full run (results/tokens_full, same n grid, one pool): 0.8B 4-5 h, 2B 7-9 h, 4B 14-17 h, 9B 21-27 h
+# per (model, L); two pools double it, less the preflight cells. The 9B jobs may outrun 48 h: chain a second copy with
+# --dependency=afterany (note 85). Peaks as the clean run: 0.8B 21 GB, 2B 43, 4B 81, 9B 127 (summed over cards).
+#
+#     X="--partition=burst --exclude=ins037,ins046,ins047,ins058,ins082,ins091,ins092 --time=48:00:00 --export=ALL,PYTORCH_ALLOC_CONF=expandable_segments:True"
+#     sbatch $X --gres=gpu:A6000:1 --job-name=natf_0.8b_L8 scripts/bench.sbatch configs/tokens/natural_full_L8.yaml --model qwen3.5-0.8b
+#     sbatch $X --gres=gpu:2 --mem=96G --job-name=natf_2b_L8 scripts/bench.sbatch configs/tokens/natural_full_L8.yaml --model qwen3.5-2b
+#     sbatch $X --gres=gpu:2 --mem=128G --job-name=natf_4b_L8 scripts/bench.sbatch configs/tokens/natural_full_L8.yaml --model qwen3.5-4b
+#     sbatch $X --gres=gpu:A6000:3 --mem=128G --job-name=natf_9b_L8 scripts/bench.sbatch configs/tokens/natural_full_L8.yaml --model qwen3.5-9b
+#     (9b: submit the same line again with --dependency=afterany:<first id>)
+
+run_name: tokens_natural
+
+output_dir: results
+
+seeds: [0, 1]
+
+models:
+  - name: qwen3.5-0.8b
+    model_id: Qwen/Qwen3.5-0.8B
+    max_new_tokens: 100
+  - name: qwen3.5-2b
+    model_id: Qwen/Qwen3.5-2B
+    max_new_tokens: 100
+  - name: qwen3.5-4b
+    model_id: Qwen/Qwen3.5-4B
+    max_new_tokens: 100
+  - name: qwen3.5-9b
+    model_id: Qwen/Qwen3.5-9B
+    max_new_tokens: 100
+
+tasks:
+  - {task: afc_recognition, prompts: [original], datasets: [tokens], foil_types: [novel], single_foil: true,
+     token_pools: [natural, scrambled], item_lengths: [8], n_images: [1, 5, 25, 100, 250, 1000, 2500, 10000, 27000], n_trials: 50}
+  - {task: afc_recognition, prompts: [original], datasets: [tokens], foil_types: [recombined], single_foil: true,
+     token_pools: [natural, scrambled], item_lengths: [8], n_images: [5, 25, 100, 250, 1000, 2500, 10000, 27000], n_trials: 50}
+  - {task: afc_recognition, prompts: [original], datasets: [tokens], foil_types: [recombined], single_foil: true, baseline: true,
+     token_pools: [natural, scrambled], item_lengths: [8], n_images: [5, 250, 2500, 10000, 27000], n_trials: 50}
+  - {task: serial_order, prompts: [original], datasets: [tokens], counterbalance: true,
+     token_pools: [natural, scrambled], item_lengths: [8], n_images: [2, 5, 25, 100, 250, 1000, 2500, 10000, 27000], n_trials: 50}
