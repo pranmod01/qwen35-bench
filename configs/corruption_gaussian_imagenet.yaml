@@ -16,7 +16,7 @@
 #
 #     X="--partition=burst --exclude=ins046,ins047,ins058,ins082,ins091,ins092 --time=48:00:00 --export=ALL,PYTORCH_ALLOC_CONF=expandable_segments:True"
 #     sbatch $X --gres=gpu:1 scripts/bench.sbatch configs/corruption_gaussian_imagenet.yaml --model qwen3.5-0.8b-img256   (and 2b)
-#     sbatch $X --gres=gpu:h100:1 --mem=96G scripts/bench.sbatch configs/corruption_gaussian_imagenet.yaml --model qwen3.5-4b-img256   (and 9b)
+#     sbatch $X --gres=gpu:2 --mem=96G scripts/bench.sbatch configs/corruption_gaussian_imagenet.yaml --model qwen3.5-4b-img256   (and 9b; was gpu:h100:1 until 2026-11-02)
 
 run_name: imagenet_corruption
 
@@ -37,10 +37,12 @@ models:
     model_id: Qwen/Qwen3.5-4B
     max_image_size: 256
     max_new_tokens: 100
+    device_map: auto   # 2 x 48 GB cards (2026-11-02): H100s were unreachable for a week; n=2,500 peaks 43/56 GB
   - name: qwen3.5-9b-img256
     model_id: Qwen/Qwen3.5-9B
     max_image_size: 256
     max_new_tokens: 100
+    device_map: auto   # 2 x 48 GB cards (2026-11-02): H100s were unreachable for a week; n=2,500 peaks 43/56 GB
 
 tasks:
   - {task: afc_recognition, prompts: [original], datasets: [imagenet], foil_types: [novel], single_foil: true,
