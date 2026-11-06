@@ -9,7 +9,12 @@
 # 13679579), while the 130k-token thinking runs had fit at 78 GB only because accelerate's split happened to fall
 # right. Three cards at ~31 GB each leave room for the per-card peak; the 9B's three-card jobs placed within two days.
 #
-#     sbatch --partition=burst --exclude=ins037,ins047,ins058,ins082,ins091,ins092 --time=48:00:00 --gres=gpu:A6000:3 --mem=128G \
+# Hardware (2026-11-04): moved to four RTX PRO 6000s on ins046 (`--nodelist=ins046 --gres=gpu:R6000:4`). The three-A6000
+# chain never placed in six days (burst QOS), while the n=3,500 ImageNet preflight on ins046 (job 13668822) ran clean at
+# 265-293 GB total with this split (configs/imagenet_preflight_27b_r6000.yaml).
+# Token grids stay capped (L1 <= 60k, L8 <= 10k, L64 <= 2k, L256 <= 500 items, ~165k tokens): the R6000 crashed near 238k tokens.
+#
+#     sbatch --partition=burst --nodelist=ins046 --time=48:00:00 --gres=gpu:R6000:4 --mem=192G \
 #            --export=ALL,PYTORCH_ALLOC_CONF=expandable_segments:True scripts/bench.sbatch configs/tokens/recall_27b.yaml
 
 run_name: tokens_recall_probe
@@ -22,7 +27,7 @@ models:
   model_id: Qwen/Qwen3.5-27B
   max_new_tokens: 100
   device_map: auto
-  max_memory: {0: 8GiB, 1: 24GiB, 2: 24GiB}
+  max_memory: {0: 8GiB, 1: 20GiB, 2: 20GiB, 3: 20GiB}   # card 0 also carries the vision encoder and hidden states
 tasks:
 - task: token_recall
   datasets:

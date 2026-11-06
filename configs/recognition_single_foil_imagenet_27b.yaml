@@ -1,4 +1,4 @@
-# 27B ImageNet run, capped at n=2,000 (2026-10-26). Same run_name and cells as configs/recognition_single_foil_imagenet.yaml up to
+# 27B ImageNet run, full grid to n=3,500 (2026-11-04; was capped at n=2,000 from 2026-10-26). Same run_name and cells as configs/recognition_single_foil_imagenet.yaml up to
 # the cap, so the plots pool it with the other sizes.
 # The 27B cannot take its full-context cells on this cluster (2026-10-26): at 230k+ tokens one card needs more
 # than 47 GB whatever the weight split (6 x A6000, job 13544274), and two H100s fill at 164-171 GB (jobs 13498037,
@@ -9,7 +9,12 @@
 # 13679579), while the 130k-token thinking runs had fit at 78 GB only because accelerate's split happened to fall
 # right. Three cards at ~31 GB each leave room for the per-card peak; the 9B's three-card jobs placed within two days.
 #
-#     sbatch --partition=burst --exclude=ins037,ins047,ins058,ins082,ins091,ins092 --time=48:00:00 --gres=gpu:A6000:3 --mem=128G \
+# Hardware (2026-11-04): moved to four RTX PRO 6000s on ins046 (`--nodelist=ins046 --gres=gpu:R6000:4`). The three-A6000
+# chain never placed in six days (burst QOS), while the n=3,500 ImageNet preflight on ins046 (job 13668822) ran clean at
+# 265-293 GB total with this split (configs/imagenet_preflight_27b_r6000.yaml).
+# ImageNet grid restored to n=3,500 (same cells as the other models) because that size passed on ins046.
+#
+#     sbatch --partition=burst --nodelist=ins046 --time=48:00:00 --gres=gpu:R6000:4 --mem=192G \
 #            --export=ALL,PYTORCH_ALLOC_CONF=expandable_segments:True scripts/bench.sbatch configs/recognition_single_foil_imagenet_27b.yaml
 
 run_name: recognition_single_foil
@@ -22,7 +27,7 @@ models:
   model_id: Qwen/Qwen3.5-27B
   max_new_tokens: 100
   device_map: auto
-  max_memory: {0: 6GiB, 1: 25GiB, 2: 25GiB}   # card 0 also carries the vision encoder and hidden states
+  max_memory: {0: 8GiB, 1: 20GiB, 2: 20GiB, 3: 20GiB}   # card 0 also carries the vision encoder and hidden states
   max_image_size: 256
 tasks:
 - task: afc_recognition
@@ -43,4 +48,7 @@ tasks:
   - 1000
   - 1500
   - 2000
+  - 2500
+  - 3000
+  - 3500
   n_trials: 50
