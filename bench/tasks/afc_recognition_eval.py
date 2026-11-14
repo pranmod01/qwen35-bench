@@ -13,6 +13,10 @@ Image datasets take `corruptions`/`severities` (src/corruption.py): ImageNet-C s
 corruptions of the same stimuli, the image counterpart of the token pools, adding `corruption` and `severity`
 to the condition.
 
+`test_positions` (single_foil, novel foils) pins the tested item to fractions of the study list instead of a
+random place, adding `test_position` to the condition; every trial stores the item's 1-based study position in
+`metadata.test_position` either way.
+
 The `copy` prompt (tokens only) replaces the digit with the item itself: the model is asked to reply with the
 studied option, and each option is scored by its summed log-probability as the answer (score_copy). The cued
 recall probe shows the 0.8B/2B hold the items at ~90% while answering "1" on ~95% of n=1 trials, so this asks
@@ -99,7 +103,30 @@ def expand_conditions(task_cfg):
                             **({"baseline": True} if baseline else {}),
                             **stimulus,
                         })
-    return conditions
+    return [{**c, **position} for c in conditions for position in position_variants(task_cfg)]
+
+
+def position_variants(task_cfg):
+    """`test_positions`: where in the study list the tested item sits, as fractions of the list (0 first, 1 last).
+
+    Absent unless set, so results with a random position keep their filenames.
+    """
+    fractions = task_cfg.get("test_positions")
+    if not fractions:
+        return [{}]
+    if not task_cfg.get("single_foil") or task_cfg["foil_types"] != ["novel"] or task_cfg.get("baseline"):
+        raise ValueError("`test_positions` needs `single_foil: true` and foil_types: [novel]")
+    if any(not 0 <= f <= 1 for f in fractions):
+        raise ValueError(f"`test_positions` are fractions of the study list in [0, 1], got {fractions}")
+    return [{"test_position": f} for f in fractions]
+
+
+def position_index(condition):
+    """The 1-based study position a condition pins the tested item to, or None for a random one."""
+    fraction = condition.get("test_position")
+    if fraction is None:
+        return None
+    return 1 + round(fraction * (condition["n_images"] - 1))
 
 
 def stimulus_variants(task_cfg, dataset):
@@ -268,17 +295,21 @@ def run(evaluator, condition, seed):
     if tokens:
         pool = token_stimuli.build_pool(evaluator.processor.tokenizer, condition["token_pool"])
 
+    test_position = position_index(condition)
+
     trials = []
     for i in range(condition["n_trials"]):
         if tokens:
             trial_data = token_stimuli.recognition_trials(pool, n_images, condition["item_length"],
-                                                          condition["foil_type"], baseline=condition.get("baseline", False))
+                                                          condition["foil_type"], baseline=condition.get("baseline", False),
+                                                          test_position=test_position)
         else:
             task = AFCRecognitionTask(
                 dataset_name=condition["dataset"],
                 n_images=n_images,
                 foil_type=condition["foil_type"],
                 single_foil=condition.get("single_foil", False),
+                test_position=test_position,
             )
             trial_data = corruption.apply(task.get_trials(), condition, seed)
         # Without single_foil, test_phase[0] is always the first studied item (test_phase follows study

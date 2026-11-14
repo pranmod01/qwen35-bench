@@ -92,8 +92,10 @@ def sample_items(pool_ids, n_items, item_length):
     return [TokenItem(tuple(ids[k * item_length:(k + 1) * item_length])) for k in range(n_items)]
 
 
-def recognition_trials(pool_ids, n_items, item_length, foil_type, baseline=False):
+def recognition_trials(pool_ids, n_items, item_length, foil_type, baseline=False, test_position=None):
     """One 2-AFC test (studied item vs foil) on a studied item at a random position.
+
+    test_position: novel only; pins the tested item to this 1-based study position instead.
 
     novel:      the foil is a fresh item, sharing no token with the study list.
     recombined: the foil is the first half of studied item A joined to the second half of studied item B,
@@ -103,6 +105,10 @@ def recognition_trials(pool_ids, n_items, item_length, foil_type, baseline=False
                 choice measures the preference for an intact item over a seamed one with no memory to draw on.
                 (A novel baseline would be two unstudied intact items, 50% by construction.)
     """
+    if test_position is not None and (baseline or foil_type != "novel"):
+        raise ValueError("test_position is defined for novel foils only")
+    if test_position is not None and not 1 <= test_position <= n_items:
+        raise ValueError(f"test_position {test_position} is outside the study list (1..{n_items})")
     if baseline:
         if foil_type != "recombined":
             raise ValueError("baseline trials are defined for recombined foils only")
@@ -118,6 +124,12 @@ def recognition_trials(pool_ids, n_items, item_length, foil_type, baseline=False
         items = sample_items(pool_ids, n_items + 1, item_length)
         study, foil = items[:n_items], items[n_items]
         tested = random.randrange(n_items)
+        if test_position is not None:
+            # Swap rather than redraw, so the random stream (and with it the tested item, its foil and the
+            # rest of the list) is the same for every position under one seed: only the place changes.
+            k = test_position - 1
+            study[tested], study[k] = study[k], study[tested]
+            tested = k
         sources = {}
     elif foil_type == "recombined":
         if n_items < 3:

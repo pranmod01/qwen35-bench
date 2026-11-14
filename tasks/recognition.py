@@ -156,7 +156,8 @@ class ContinuousRecognitionTask(RecognitionTaskBase):
 
 class AFCRecognitionTask(RecognitionTaskBase):
     def __init__(self, dataset_name="Brady2008", n_images=20, foil_type="all", image_dir=None,
-                 source="local", repo_id="chrisiyer/vision-memory-tasks", single_foil=False):
+                 source="local", repo_id="chrisiyer/vision-memory-tasks", single_foil=False,
+                 test_position=None):
         super().__init__(
             dataset_name=dataset_name,
             n_images=n_images,
@@ -171,6 +172,12 @@ class AFCRecognitionTask(RecognitionTaskBase):
         if single_foil and foil_type != "novel":
             raise ValueError("single_foil is only defined for novel foils")
         self.single_foil = single_foil
+        # 1-based study position to pin the one tested item to; None leaves it where the shuffle put it.
+        if test_position is not None and not single_foil:
+            raise ValueError("test_position needs single_foil (one tested item per episode)")
+        if test_position is not None and not 1 <= test_position <= n_images:
+            raise ValueError(f"test_position {test_position} is outside the study list (1..{n_images})")
+        self.test_position = test_position
 
         if image_dir:
             self.dataset = self._load_recognition_dataset()
@@ -342,11 +349,17 @@ class AFCRecognitionTask(RecognitionTaskBase):
     def get_trials(self):
         pairs = self._get_pairs(self.foil_type, self.n_images)
         random.shuffle(pairs)
+        if self.test_position is not None:
+            # Swap after the shuffle, so the random stream (and with it the tested image, its foil and the
+            # rest of the list) is the same for every position under one seed: only the place changes.
+            tested = next(i for i, pair in enumerate(pairs) if pair["foil"] is not None)
+            k = self.test_position - 1
+            pairs[tested], pairs[k] = pairs[k], pairs[tested]
 
         study_sequence = [pair["original"] for pair in pairs]
 
         test_phase = []
-        for pair in pairs:
+        for position, pair in enumerate(pairs, 1):
             if pair["foil"] is None:  # single_foil: studied, never tested
                 continue
             correct_img = pair["original"]
@@ -364,6 +377,7 @@ class AFCRecognitionTask(RecognitionTaskBase):
                     # The prompt lives in bench/tasks/afc_recognition_eval.py (it must follow the images).
                     "target": target,
                     "type": pair["type"],
+                    "metadata": {"test_position": position},  # 1-based study position, as the token trials
                 }
             )
 

@@ -1,0 +1,50 @@
+# Preflight for configs/recognition_position.yaml (2026-11-11): two trials at the largest list of each modality
+# with the tested item first and last, to check the pinned-position path end to end on a GPU (the stored
+# `metadata.test_position` should read 1 and n) and the peak memory. Results are not part of the final set.
+#
+#     X="--partition=burst --exclude=ins037,ins047,ins058,ins081,ins082,ins091,ins092 --time=02:00:00 --export=ALL,PYTORCH_ALLOC_CONF=expandable_segments:True"
+#     sbatch $X --gres=gpu:1 scripts/bench.sbatch configs/recognition_position_preflight.yaml --model qwen3.5-2b   (also 4b)
+#     sbatch $X --gres=gpu:2 --mem=96G scripts/bench.sbatch configs/recognition_position_preflight.yaml --model qwen3.5-9b
+
+run_name: recognition_position_preflight
+
+output_dir: results
+
+seeds: [0]
+
+models:
+  - name: qwen3.5-2b
+    model_id: Qwen/Qwen3.5-2B
+    max_image_size: 512
+    max_new_tokens: 100
+    device_map: auto
+  - name: qwen3.5-4b
+    model_id: Qwen/Qwen3.5-4B
+    max_image_size: 512
+    max_new_tokens: 100
+    device_map: auto
+  - name: qwen3.5-9b
+    model_id: Qwen/Qwen3.5-9B
+    max_image_size: 512
+    max_new_tokens: 100
+    device_map: auto
+
+tasks:
+  - task: afc_recognition
+    prompts: [original]
+    datasets: [Brady2008]
+    foil_types: [novel]
+    single_foil: true
+    test_positions: [0, 1]
+    n_images: [1500]
+    n_trials: 2
+  - task: afc_recognition
+    prompts: [original]
+    datasets: [tokens]
+    foil_types: [novel]
+    single_foil: true
+    token_pools: [clean]
+    item_lengths: [8]
+    test_positions: [0, 1]
+    n_images: [10000]
+    n_trials: 2

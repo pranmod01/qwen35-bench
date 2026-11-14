@@ -1,0 +1,64 @@
+# Recognition by study position (2026-11-11, user request): the tested item pinned to five places in the list
+# (`test_positions`, fractions of the list: 0 first, 1 last), to see how recognition depends on where the item was
+# studied. The random-position runs (recognition_single_foil, tokens_full) have ~20 trials per fifth of the list
+# per cell, too few to read a position curve at one list size; bench.plot_position pools them over sizes instead.
+#
+# Under one seed every position gets the same episode: same tested item, same foil, same other items; only the
+# tested item's place changes (it swaps with whatever sat there). 50 trials x 2 seeds per cell, as the other runs.
+#
+# Models: 2B, 4B, 9B. The 0.8B is at chance on recognition and the 27B at ceiling on these sizes.
+# Sizes are picked so each model has a cell between ceiling and chance (random-position accuracy, 100 trials):
+#     Brady      n=250 / 1,000 / 1,500 :  2B 0.76 / 0.65 / 0.59   4B 0.98 / 0.78 / 0.67   9B 1.00 / 0.97 / 0.90
+#     tokens L8  n=250 / 2,500 / 10,000:  2B 0.89 / 0.86 / 0.73   4B 0.76 / 0.61 / 0.52   9B 1.00 / 1.00 / 0.90
+# Brady stops at 1,500: the 9B peaks at 41 GB there and at 48 GB at 2,000, where its accuracy is about the same (0.87).
+#
+# Peaks from those runs: 2B 24 GB (Brady 1,500), 4B 36 GB (tokens 10,000), 9B 59 GB (tokens 10,000, two cards).
+# Time, from their elapsed_s: about 8 h (2B), 18 h (4B), 14 h (9B).
+# Preflight: configs/recognition_position_preflight.yaml. Figures: python -m bench.plot_position
+#
+#     X="--partition=burst --exclude=ins037,ins047,ins058,ins081,ins082,ins091,ins092 --time=48:00:00 --export=ALL,PYTORCH_ALLOC_CONF=expandable_segments:True"
+#     sbatch $X --gres=gpu:1 scripts/bench.sbatch configs/recognition_position.yaml --model qwen3.5-2b   (also 4b)
+#     sbatch $X --gres=gpu:2 --mem=96G scripts/bench.sbatch configs/recognition_position.yaml --model qwen3.5-9b
+
+run_name: recognition_position
+
+output_dir: results
+
+seeds: [0, 1]
+
+models:
+  - name: qwen3.5-2b
+    model_id: Qwen/Qwen3.5-2B
+    max_image_size: 512
+    max_new_tokens: 100
+    device_map: auto
+  - name: qwen3.5-4b
+    model_id: Qwen/Qwen3.5-4B
+    max_image_size: 512
+    max_new_tokens: 100
+    device_map: auto
+  - name: qwen3.5-9b
+    model_id: Qwen/Qwen3.5-9B
+    max_image_size: 512
+    max_new_tokens: 100
+    device_map: auto
+
+tasks:
+  - task: afc_recognition
+    prompts: [original]
+    datasets: [Brady2008]
+    foil_types: [novel]
+    single_foil: true
+    test_positions: [0, 0.25, 0.5, 0.75, 1]
+    n_images: [250, 1000, 1500]
+    n_trials: 50
+  - task: afc_recognition
+    prompts: [original]
+    datasets: [tokens]
+    foil_types: [novel]
+    single_foil: true
+    token_pools: [clean]
+    item_lengths: [8]
+    test_positions: [0, 0.25, 0.5, 0.75, 1]
+    n_images: [250, 2500, 10000]
+    n_trials: 50
