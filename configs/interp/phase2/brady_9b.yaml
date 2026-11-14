@@ -1,0 +1,21 @@
+# Phase 2 replication on the 9B (INTERP_PLAN.md, section 7): the 4B's easy-slice sweep, same cells, on Brady images.
+# The benchmark has the 9B at or near ceiling at these sizes (section 5). 50 trials and one seed, as for the 4B.
+#
+#     sbatch --job-name=interp_p2_9b --time=08:00:00 scripts/interp.sbatch interp.phase2_3.run_patch configs/interp/phase2/brady_9b.yaml
+
+run_name: phase2_brady_9b
+output_dir: results/interp
+seeds: [0]
+
+model:
+  name: qwen3.5-9b
+  model_id: Qwen/Qwen3.5-9B
+  device_map: cuda
+
+tasks:
+  - {task: afc_recognition, dataset: Brady2008, n_images: [5, 25], n_trials: 50}
+  - {task: serial_order, dataset: Brady2008, n_images: [2, 5], n_trials: 50}
+  - {task: paired_associates, dataset: Brady2008, n_images: [5, 25], n_trials: 50}
+
+surfaces: [all, all_M, all_conv, all_KV, M_by_layer, KV_by_layer, heads_by_layer, residual_at_probe]
+directions: [clean_to_corrupt, corrupt_to_clean]

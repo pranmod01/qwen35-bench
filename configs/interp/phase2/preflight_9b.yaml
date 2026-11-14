@@ -1,0 +1,24 @@
+# Preflight for the 9B Phase 2 replication: one trial per task at the larger size, both modalities, every surface
+# and both directions, to confirm the sweep runs on the 9B and to read its time and peak memory per trial.
+#
+#     sbatch --job-name=interp_p2_9b_pre --time=01:00:00 scripts/interp.sbatch interp.phase2_3.run_patch configs/interp/phase2/preflight_9b.yaml
+
+run_name: phase2_9b_preflight
+output_dir: results/interp
+seeds: [0]
+
+model:
+  name: qwen3.5-9b
+  model_id: Qwen/Qwen3.5-9B
+  device_map: cuda
+
+tasks:
+  - {task: afc_recognition, dataset: Brady2008, n_images: [25], n_trials: 1}
+  - {task: serial_order, dataset: Brady2008, n_images: [5], n_trials: 1}
+  - {task: paired_associates, dataset: Brady2008, n_images: [25], n_trials: 1}
+  - {task: afc_recognition, dataset: tokens, n_images: [25], n_trials: 1, item_length: 8, token_pool: clean}
+  - {task: serial_order, dataset: tokens, n_images: [5], n_trials: 1, item_length: 8, token_pool: clean}
+  - {task: paired_associates, dataset: tokens, n_images: [25], n_trials: 1, item_length: 8, token_pool: clean}
+
+surfaces: [all, all_M, all_conv, all_KV, M_by_layer, KV_by_layer, heads_by_layer, residual_at_probe]
+directions: [clean_to_corrupt, corrupt_to_clean]

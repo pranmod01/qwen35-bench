@@ -1,0 +1,21 @@
+# Phase 3: the sweep through the decay zone (INTERP_PLAN.md, section 7), 4B on Brady, task afc_recognition.
+# Sizes span the 4B's decay zone for each task (INTERP_PLAN.md, section 5). The largest recognition cell
+# (2,000 images, ~132k tokens) is last so an out-of-memory there loses only that cell. Same surfaces and trial
+# count as Phase 2.
+#
+#     sbatch --job-name=interp_p3_afc_recognition --time=12:00:00 scripts/interp.sbatch interp.phase2_3.run_patch configs/interp/phase3/brady_4b_afc_recognition.yaml
+
+run_name: phase3_brady_4b
+output_dir: results/interp
+seeds: [0]
+
+model:
+  name: qwen3.5-4b
+  model_id: Qwen/Qwen3.5-4B
+  device_map: cuda
+
+tasks:
+  - {task: afc_recognition, dataset: Brady2008, n_images: [100, 250, 500, 1000, 1500, 2000], n_trials: 50}
+
+surfaces: [all, all_M, all_conv, all_KV, M_by_layer, KV_by_layer, heads_by_layer, residual_at_probe]
+directions: [clean_to_corrupt, corrupt_to_clean]
