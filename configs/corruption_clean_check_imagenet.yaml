@@ -1,0 +1,24 @@
+# Clean-reference check for the corruption sweep (2026-11-16). The Gaussian figures show the clean ImageNet
+# recognition curve (results/recognition_single_foil, run 2026-10-24 at commit a4fec33a, dirty tree) *below*
+# every mild corruption for the 4B/9B at n >= 1,000 (9B n=1,000: clean 0.79 vs 0.82-0.98 at severity 1 for
+# all types but noise_image), while serial order and PAM agree between the two runs. Code, config, env
+# (transformers 5.17.0, torch 2.10.0) and GPU (H100) are the same on paper. This reruns the clean cell at
+# n=1,000 through today's pipeline (corruption.apply is a no-op without `corruptions`) to see whether the
+# old clean cells reproduce (0.66 / 0.79) or come out at the corrupted runs' level (~0.80 / ~0.93).
+run_name: corruption_clean_check
+output_dir: results
+seeds: [0, 1]
+
+models:
+  - name: qwen3.5-4b-img256
+    model_id: Qwen/Qwen3.5-4B
+    max_image_size: 256
+    max_new_tokens: 100
+  - name: qwen3.5-9b-img256
+    model_id: Qwen/Qwen3.5-9B
+    max_image_size: 256
+    max_new_tokens: 100
+
+tasks:
+  - {task: afc_recognition, prompts: [original], datasets: [imagenet], foil_types: [novel], single_foil: true,
+     n_images: [1000], n_trials: 50}
