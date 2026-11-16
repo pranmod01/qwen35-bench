@@ -115,7 +115,7 @@ the cache. Per trial:
 | `M` by layer | one DeltaNet layer's state | cache edit |
 | K/V by layer | one full-attention layer's keys and values | cache edit |
 | attention heads | one head's output at one layer, probe positions | pre-hook on `o_proj` input |
-| residual at probe | decoder layer output at the answer position | forward hook, probe run |
+| residual at probe | decoder layer output at every probe position (question, options, answer prefill) | forward hook, probe run |
 | residual at study span | decoder layer output over the manipulated item | forward hook, prefix re-run |
 
 Patching M "by head" is also possible (one 128 x 128 slice), and is the natural follow-up when a layer lights up.
@@ -328,14 +328,25 @@ label and the tokenizer can merge across that boundary differently for the two w
 both prompts and keeps the first candidate word that aligns (0 misalignments in 150 pairs), and the runner
 retries cells whose file holds an error.
 
+**Result, 9B replication (2026-11-14, jobs 13909054 and 13909055, `results/interp/phase2_{brady,tokens}_9b/`):**
+the same picture. The 9B has the 4B's depth (32 layers, attention at 3, 7, …, 31) and head counts (16 query / 4
+key-value, 32 DeltaNet heads); it is wider (hidden 4096 vs 2560, MLP 12288 vs 9216), so layers and heads compare
+one to one. All-K/V recovers 0.93–1.01 and all-M 0.00–0.06 in every cell (0.12 on token recognition n=5, gap ±1.3).
+Peak K/V layers match the 4B: L11 for recognition and serial order (L7 with L3 and L11 for token recognition), L27
+for paired associates; the answer is settled in the residual by the same layers (L11–15, L27). Single-layer peaks are
+mostly a little lower on the 9B (Brady recognition n=25 L11 0.26 vs 0.38, Brady serial order n=5 0.47 vs 0.61), so it
+spreads the readout over more layers; token serial order is the exception (L11 0.71 vs 0.52).
+
 **Phase 2 verdict:** gate A passed on both modalities. Open: whether the same picture holds into the decay
 zone (Phase 3), where the notebooks may start to matter or the K/V readout may fail.
 
 **Phase 3: the sweep (bulk).** Same configs, n extended over the benchmark's own grids (Brady recognition 1 … 2399, serial order
 2 … 2400, PAM 1 … 1637; tokens 1 … 27,000 where one card allows), so patching cells line up with accuracy cells. Order: recognition, then serial order, then paired
-associates. For each task and n: which surface recovers, which layers, which heads, and how recovery changes as
-accuracy decays. Add the state trajectory and the residual-at-study-span map at two or three n. Add the
-retrieval-head detector on the full-attention layers: attention mass from the answer position onto the target's
+associates. For each task and n: which surface recovers, which layers, and how recovery changes as accuracy decays. The
+per-head sweep (`heads_by_layer`) is left out of the Phase 3 configs for now (decided 2026-11-14): in Phase 2 it
+only refined the layer picture and was most of the run time (128 extra probe runs per direction per trial). It
+is added back for the cells where the layer results are worth localising further. Add the state trajectory and the residual-at-study-span map at two or three n. Later, for those
+cells, the retrieval-head detector on the full-attention layers: attention mass from the answer position onto the target's
 slot versus the rest, per head (eager attention to read the weights), confirmed by swapping those heads'
 outputs. Validate every localisation with a second surface. Aim for a dissociation across tasks (for example,
 K/V restores recognition but not serial order, `M` the reverse). 9B replication on the cells where the 4B shows

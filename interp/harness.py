@@ -101,9 +101,12 @@ class Harness:
         return self.model(**inputs, position_ids=prompt.position_ids, logits_to_keep=1).logits[0, -1].float()
 
     @torch.no_grad()
-    def run_prefix(self, prompt):
-        """Run the prefix and return its cache: the model's entire memory of the study list."""
-        out = self.model(**self.part(prompt, "prefix"), use_cache=True, logits_to_keep=1)
+    def run_prefix(self, prompt, hooks=()):
+        """Run the prefix and return its cache: the model's entire memory of the study list.
+
+        hooks capture or override activations at prefix positions (the study-span surface)."""
+        with self.hooked(hooks):
+            out = self.model(**self.part(prompt, "prefix"), use_cache=True, logits_to_keep=1)
         return out.past_key_values
 
     @torch.no_grad()
@@ -131,6 +134,10 @@ class Harness:
 
     def residual_module(self, layer):
         return self.layers[layer]
+
+    def embeds_module(self):
+        """Layer 0, whose input (hidden_states, positional) is the token embeddings with image features merged in."""
+        return self.layers[0]
 
     def heads_module(self, layer):
         if self.layer_types[layer] != FULL:
@@ -216,7 +223,7 @@ def run_patched(harness, prompt, base, patches, hooks=()):
 # ---- hook surfaces: capture and override at probe positions -------------------------------------------------
 
 class Capture:
-    """Record a module's output (residual stream: decoder layer) or input (heads: o_proj) during a probe run."""
+    """Record a module's output (residual stream: decoder layer) or input (heads: o_proj; embeds: layer 0) during a run."""
 
     def __init__(self, surface, layer):
         self.surface, self.layer, self.value = surface, layer, None
@@ -226,17 +233,19 @@ class Capture:
             def hook(module, args, output):
                 self.value = (output[0] if isinstance(output, tuple) else output).detach().clone()
             return harness.residual_module(self.layer).register_forward_hook(hook)
-        if self.surface == "heads":
+        if self.surface in ("heads", "embeds"):
             def pre_hook(module, args):
                 self.value = args[0].detach().clone()
-            return harness.heads_module(self.layer).register_forward_pre_hook(pre_hook)
+            module = harness.heads_module(self.layer) if self.surface == "heads" else harness.embeds_module()
+            return module.register_forward_pre_hook(pre_hook)
         raise ValueError(self.surface)
 
 
 class Override:
-    """Replace a slice of a module's output (residual) or input (heads) at probe positions with recorded values.
+    """Replace a slice of a module's output (residual) or input (heads, embeds) with recorded values.
 
-    positions: list of probe-relative token indices (negative counts from the end), or None for all.
+    positions: token indices into the run the hook is attached to (probe-relative in a probe run, prefix positions
+    in a prefix run; negative counts from the end), or None for all.
     heads: list of head indices for the heads surface, or None for all.
     """
 
@@ -268,4 +277,8 @@ class Override:
             def pre_hook(module, args):
                 return (self._apply(args[0]), *args[1:])
             return harness.heads_module(self.layer).register_forward_pre_hook(pre_hook)
+        if self.surface == "embeds":
+            def pre_hook(module, args):
+                return (self._apply(args[0]), *args[1:])
+            return harness.embeds_module().register_forward_pre_hook(pre_hook)
         raise ValueError(self.surface)

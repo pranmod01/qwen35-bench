@@ -1,0 +1,24 @@
+# Residual at the study span (INTERP_PLAN.md, section 3), on Phase 2's easy-slice cells: the 9B on Brady images, same tasks,
+# sizes, 50 trials and seed as phase2_brady_9b, so the pairs are the same trials. Each layer's output over the
+# manipulated item (and, separately, over every prefix position after it) is overwritten while the prefix re-runs,
+# then the probe is run as is, with the DeltaNet states reset and with the keys/values reset. residual_at_probe is
+# re-run alongside so the two residual curves in study_span.png come from one run.
+#
+#     sbatch --job-name=interp_ss_9b --time=TBD scripts/interp.sbatch interp.phase2_3.run_patch configs/interp/phase2/studyspan_brady_9b.yaml
+
+run_name: studyspan_brady_9b
+output_dir: results/interp
+seeds: [0]
+
+model:
+  name: qwen3.5-9b
+  model_id: Qwen/Qwen3.5-9B
+  device_map: cuda
+
+tasks:
+  - {task: afc_recognition, dataset: Brady2008, n_images: [5, 25], n_trials: 50}
+  - {task: serial_order, dataset: Brady2008, n_images: [2, 5], n_trials: 50}
+  - {task: paired_associates, dataset: Brady2008, n_images: [5, 25], n_trials: 50}
+
+surfaces: [residual_at_probe, residual_at_study_span]
+directions: [clean_to_corrupt, corrupt_to_clean]

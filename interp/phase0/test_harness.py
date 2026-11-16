@@ -10,6 +10,9 @@ Each check prints PASS/FAIL with the numbers it saw; the exit code is the number
  5 all-swap ceiling: every M, conv and K/V from clean turns the corrupted answer into the clean one
  6 residual override at the last layer reproduces clean logits; a head override runs and changes the logits
  7 a backward pass through the DeltaNet kernel yields finite gradients at a middle layer's residual
+ 9 study span: the positions whose input embeddings differ are one contiguous run (the recognition item), and
+   re-running the corrupted prefix with those embeddings overwritten by the clean ones reproduces the clean probe
+   (check 8 is nnsight, in test_nnsight.py)
 Also printed, as a preview of Phase 2: clean vs corrupted logit difference and the recovery from all-M / all-KV.
 """
 import argparse
@@ -22,6 +25,7 @@ from transformers.cache_utils import LinearAttentionCacheLayerMixin
 from bench.models import build_evaluator
 from interp import pairs
 from interp.harness import Capture, CachePatch, Harness, Override, fork_cache, run_patched
+from interp.phase2_3.run_patch import contiguous_runs, study_spans
 
 LD_TOL = 0.5         # logit-difference tolerance between split and single-pass runs: absolute, or ...
 LD_REL_TOL = 0.05    # ... this fraction of the clean-to-corrupted gap, whichever is larger (bf16 chunk-boundary noise)
@@ -134,6 +138,20 @@ def run_checks(h, pair, report, tag):
     report.check(f"6 hook surfaces [{tag}]", res_ok and head_changed,
                  f"last-layer residual override max |diff| to clean {float((over - split_c).abs().max()):.2e}; "
                  f"heads 0-1 at layer {fl} override changed logits by {float((hover - split_x).abs().max()):.3f}")
+
+    # 9: study-span embedding patch
+    emb_c, emb_x = Capture("embeds", 0), Capture("embeds", 0)
+    h.run_prefix(clean, hooks=[emb_c])
+    h.run_prefix(corrupt, hooks=[emb_x])
+    spans = study_spans(emb_c.value, emb_x.value, clean.split)
+    repatched = h.run_prefix(corrupt, hooks=[Override("embeds", 0, emb_c.value, positions=spans["item"])])
+    span_logits = h.run_probe(corrupt, repatched)
+    span_diff = float((span_logits - split_c).abs().max())
+    runs = contiguous_runs(spans["item"])
+    report.check(f"9 study-span embedding patch == clean [{tag}]", runs == 1 and span_diff < EXACT_TOL,
+                 f"item span {len(spans['item'])} tokens from {spans['item'][0]} in {runs} run(s), {len(spans['after'])} after; "
+                 f"max |diff| to clean probe {span_diff:.2e}")
+    del repatched
 
     # 7: backward through the kernel (single pass, small prompt)
     try:

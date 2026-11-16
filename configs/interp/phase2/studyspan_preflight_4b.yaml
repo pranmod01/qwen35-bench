@@ -1,0 +1,24 @@
+# Preflight for the study-span runs: one trial per task at the larger size, both modalities, both directions, to
+# check the item/emb unit recovers 1, the item spans have the expected shape, and to read time and memory per trial.
+#
+#     sbatch --job-name=interp_ss_pre --time=01:00:00 scripts/interp.sbatch interp.phase2_3.run_patch configs/interp/phase2/studyspan_preflight_4b.yaml
+
+run_name: studyspan_preflight_4b
+output_dir: results/interp
+seeds: [0]
+
+model:
+  name: qwen3.5-4b
+  model_id: Qwen/Qwen3.5-4B
+  device_map: cuda
+
+tasks:
+  - {task: afc_recognition, dataset: Brady2008, n_images: [25], n_trials: 1}
+  - {task: serial_order, dataset: Brady2008, n_images: [5], n_trials: 1}
+  - {task: paired_associates, dataset: Brady2008, n_images: [25], n_trials: 1}
+  - {task: afc_recognition, dataset: tokens, n_images: [25], n_trials: 1, item_length: 8, token_pool: clean}
+  - {task: serial_order, dataset: tokens, n_images: [5], n_trials: 1, item_length: 8, token_pool: clean}
+  - {task: paired_associates, dataset: tokens, n_images: [25], n_trials: 1, item_length: 8, token_pool: clean}
+
+surfaces: [residual_at_probe, residual_at_study_span]
+directions: [clean_to_corrupt, corrupt_to_clean]

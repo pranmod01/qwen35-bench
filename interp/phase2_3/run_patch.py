@@ -12,8 +12,17 @@ direction then copies pieces of the source run into a fork of the base run befor
   corrupt_to_clean   base = clean cache, source = corrupted   ("is this piece necessary to keep the clean answer")
 Surfaces: all (M + conv + K/V, the ceiling), all_M, all_conv, all_KV, M_by_layer, KV_by_layer,
 heads_by_layer (o_proj input at every probe position, one head at a time), residual_at_probe (decoder layer
-output at every probe position, one layer at a time).
+output at every probe position, one layer at a time), residual_at_study_span (below).
 Recovery for a patch = (LD_patched - LD_base) / (LD_source - LD_base).
+
+residual_at_study_span re-runs the base prefix with one decoder layer's output overwritten by the source's over a
+span of prefix positions, then runs the probe from the resulting cache. Spans: "item", the positions whose input
+embeddings differ between the two prompts (the manipulated item; both swapped slots for serial order, both copies
+of the word for PAM), and "after", every prefix position after the last of those. "item/emb" overwrites the
+item's input embeddings instead, which makes the re-run the source run, so its recovery should be 1 (a check).
+Each unit is probed three ways: as is, with every DeltaNet state (M and conv) reset to the unpatched base
+run's ("/reset_M"), and with every full-attention layer's keys/values reset ("/reset_KV"), to say which channel
+carries a study-time patch to the answer.
 """
 import argparse
 import json
@@ -30,7 +39,8 @@ from bench.models import build_evaluator
 from interp import pairs
 from interp.harness import CachePatch, Capture, Harness, Override, run_patched
 
-SURFACES = ("all", "all_M", "all_conv", "all_KV", "M_by_layer", "KV_by_layer", "heads_by_layer", "residual_at_probe")
+SURFACES = ("all", "all_M", "all_conv", "all_KV", "M_by_layer", "KV_by_layer", "heads_by_layer", "residual_at_probe",
+            "residual_at_study_span")
 DIRECTIONS = {"clean_to_corrupt": ("corrupt", "clean"), "corrupt_to_clean": ("clean", "corrupt")}
 
 
@@ -120,11 +130,51 @@ def capture_source(h, prompt, cache, need_residual, need_heads):
     return out
 
 
+def study_spans(emb_a, emb_b, prefix_len):
+    """Prefix positions whose input embeddings differ (the manipulated item or items), and every prefix position after."""
+    item = (emb_a != emb_b).any(-1)[0].nonzero().flatten().tolist()
+    if not item:
+        raise ValueError("clean and corrupted prefixes have identical input embeddings")
+    return {"item": item, "after": list(range(item[-1] + 1, prefix_len))}
+
+
+def contiguous_runs(positions):
+    return 1 + sum(b != a + 1 for a, b in zip(positions, positions[1:]))
+
+
+def prefix_captures(h):
+    return [Capture("embeds", 0)] + [Capture("residual", i) for i in range(len(h.layers))]
+
+
+def study_span_patches(h, prompt, base_cache, source_caps, spans):
+    """{unit: probe logits} for the study-span surface: the base prefix re-run with each override, probed three ways."""
+    embeds, residual = source_caps[0].value, {c.layer: c.value for c in source_caps[1:]}
+    units = [("item/emb", Override("embeds", 0, embeds, positions=spans["item"]))]
+    for span, positions in spans.items():
+        if positions:
+            units += [(f"{span}/L{i}", Override("residual", i, residual[i], positions=positions)) for i in range(len(h.layers))]
+    resets = {"": [],
+              "/reset_M": [CachePatch("M", h.linear_layers, base_cache), CachePatch("conv", h.linear_layers, base_cache)],
+              "/reset_KV": [CachePatch("KV", h.full_layers, base_cache)]}
+    out = {}
+    for unit, hook in units:
+        patched_cache = h.run_prefix(prompt, hooks=[hook])
+        for suffix, patches in resets.items():
+            out[unit + suffix] = run_patched(h, prompt, patched_cache, patches)
+        del patched_cache
+    return out
+
+
 def run_trial(h, pair, cfg):
     prompts = {"clean": h.prepare(pair.clean, prefill=pair.prefill), "corrupt": h.prepare(pair.corrupt, prefill=pair.prefill)}
     if prompts["clean"].length != prompts["corrupt"].length or prompts["clean"].split != prompts["corrupt"].split:
         raise ValueError("clean and corrupted prompts are not aligned")
-    caches = {k: h.run_prefix(p) for k, p in prompts.items()}
+    study_span = "residual_at_study_span" in cfg["surfaces"]
+    # The study-span surface needs every layer's output over the prefix of both runs; record it on the prefix runs
+    # that make the caches, rather than running each prefix twice.
+    prefix_caps = {k: prefix_captures(h) if study_span else [] for k in prompts}
+    caches = {k: h.run_prefix(p, hooks=prefix_caps[k]) for k, p in prompts.items()}
+    spans = study_spans(prefix_caps["clean"][0].value, prefix_caps["corrupt"][0].value, prompts["clean"].split) if study_span else None
     ld = {k: h.logit_diff(h.run_probe(prompts[k], caches[k]), pair.answer, pair.counterfactual) for k in prompts}
     need_residual = "residual_at_probe" in cfg["surfaces"]
     need_heads = "heads_by_layer" in cfg["surfaces"]
@@ -136,16 +186,22 @@ def run_trial(h, pair, cfg):
         patched[direction] = {}
         for surface in cfg["surfaces"]:
             patched[direction][surface] = {}
+            if surface == "residual_at_study_span":
+                logits = study_span_patches(h, prompts[base], caches[base], prefix_caps[source], spans)
+                patched[direction][surface] = {u: h.logit_diff(x, pair.answer, pair.counterfactual) for u, x in logits.items()}
+                continue
             for unit, cache_patches, hooks in patch_units(h, surface, caches[source], captures):
                 # Hook surfaces inject the source's probe-position activations into the base run; cache surfaces
                 # edit a fork of the base cache. The probe prompt is the same tokens either way.
                 logits = run_patched(h, prompts[base], caches[base], cache_patches, hooks=hooks)
                 patched[direction][surface][unit] = h.logit_diff(logits, pair.answer, pair.counterfactual)
         del captures
-    del caches
+    del caches, prefix_caps
     return {
         "answer": pair.answer, "counterfactual": pair.counterfactual, "slot": pair.slot, "meta": pair.meta,
         "prompt_tokens": prompts["clean"].length, "probe_tokens": prompts["clean"].length - prompts["clean"].split,
+        **({"span": {"item_tokens": len(spans["item"]), "item_runs": contiguous_runs(spans["item"]),
+                     "item_start": spans["item"][0], "after_tokens": len(spans["after"])}} if spans else {}),
         "ld_clean": ld["clean"], "ld_corrupt": ld["corrupt"], "patched": patched,
     }
 
@@ -215,6 +271,7 @@ def main():
             print(f"  FAILED:\n{error}", flush=True)
             torch.cuda.empty_cache()
         result = {"run": {"model": cfg["model"], "task": task, "condition": cond, "seed": seed}, "config": cfg,
+                  "layers": {"linear": h.linear_layers, "full": h.full_layers},
                   "provenance": prov, "elapsed_s": round(time.time() - t0, 1),
                   "peak_gpu_gb": round(torch.cuda.max_memory_allocated() / 1e9, 2), "error": error,
                   "trials": trials, "metrics": summarize(trials, cfg) if trials and not error else {}}
