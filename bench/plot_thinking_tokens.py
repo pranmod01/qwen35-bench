@@ -8,7 +8,8 @@ were force-closed on half or more of the trials gets a hollow marker: the answer
 not a finished one. A model's on-curve is drawn only once every cell of its (task, L) grid in the config has landed
 (as bench.plot_corruption), so a half-finished job does not draw a curve that will change; partial grids are listed.
 
-Usage: python3 -m bench.plot_thinking_tokens [--out plots/thinking]   (system python3)
+Usage: python3 -m bench.plot_thinking_tokens [--out plots/thinking] [--lengths 8 64]   (system python3)
+`--lengths` keeps only those rows and adds `_L8_L64` to the file name, so the full figure stays.
 """
 import argparse
 import json
@@ -59,7 +60,7 @@ def budget_fraction(run_dir):
     return {k: hit[k] / n[k] for k in n}
 
 
-def task_figure(task, out_dir):
+def task_figure(task, out_dir, keep_lengths=None):
     off_dir, on_dir, stem, filt, chance = RUNS[task]
     on_all = select(load_cells(on_dir), task=task, **filt)
     if not on_all:
@@ -67,9 +68,10 @@ def task_figure(task, out_dir):
         return
     off_all = select(load_cells(off_dir), task=task, token_pool="clean", **filt)
     budget = budget_fraction(on_dir)
-    lengths = [L for L in LENGTHS if select(on_all, item_length=L)]
+    lengths = [L for L in LENGTHS if select(on_all, item_length=L) and (not keep_lengths or L in keep_lengths)]
+    suffix = "".join(f"_L{L}" for L in keep_lengths) if keep_lengths else ""
     models = [m for m in MODELS if any(r["model"] == m[0] for r in on_all)]
-    fig, axes = panel_grid(models, width=4.2, rows=len(lengths))
+    fig, axes = panel_grid(models, width=5.6, rows=len(lengths))
     for i, L in enumerate(lengths):
         grid = config_grid(stem, L, task, filt)
         for j, (model, label, *_) in enumerate(models):
@@ -104,17 +106,18 @@ def task_figure(task, out_dir):
             ax.set_title(label if i == 0 else "")
             if i < len(lengths) - 1:
                 ax.set_xlabel("")
-    finish_grid(fig, axes, f"{TITLES[task]}, token items: thinking off vs on", out_dir / f"thinking_vs_off_tokens_{task}.png")
+    finish_grid(fig, axes, f"{TITLES[task]}, token items: thinking off vs on", out_dir / f"thinking_vs_off_tokens_{task}{suffix}.png")
 
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--out", default="plots/thinking")
+    parser.add_argument("--lengths", type=int, nargs="+", choices=LENGTHS, help="item lengths to draw (default: all)")
     args = parser.parse_args()
     out_dir = Path(args.out)
     out_dir.mkdir(parents=True, exist_ok=True)
     for task in RUNS:
-        task_figure(task, out_dir)
+        task_figure(task, out_dir, keep_lengths=args.lengths)
 
 
 if __name__ == "__main__":

@@ -86,7 +86,7 @@ def by_model(cells, point):
 
 
 def model_figure(points_by_model, title, ylabel, chance, chance_label, ylim, out_path):
-    fig, ax = plt.subplots(figsize=(8, 6.5))
+    fig, ax = plt.subplots(figsize=(10, 6.5))
     for model, label, color, marker in MODELS:
         if points_by_model.get(model):
             series(ax, points_by_model[model], color, marker, "-", label)
@@ -180,7 +180,7 @@ def assoc_figure(cells, pair_type, out_path):
     order = [m for m, *_ in MODELS]
     models = sorted({base_model(c[0]) for c in cells}, key=order.index)
     prompts = [p for p in PROMPT_LABELS if any(c[1]["prompt"] == p for c in cells)]
-    fig, axes = plt.subplots(len(prompts), len(models), figsize=(4.2 * len(models), 5.2 * len(prompts)),
+    fig, axes = plt.subplots(len(prompts), len(models), figsize=(5.6 * len(models), 5.2 * len(prompts)),
                              sharex=True, sharey=True, squeeze=False)
     label_of = dict((m, l) for m, l, *_ in MODELS)
     for i, prompt in enumerate(prompts):
@@ -205,7 +205,7 @@ def assoc_figure(cells, pair_type, out_path):
 def assoc_by_model_figure(cells, out_path):
     """One panel per probe, one line per model size, pooled over layouts and pair types."""
     probes = [p for p in PROBE_TITLES if any(c[1]["probe"] == p for c in cells)]
-    fig, axes = plt.subplots(1, len(probes), figsize=(4.2 * len(probes), 5.2), sharey=True, squeeze=False)
+    fig, axes = plt.subplots(1, len(probes), figsize=(5.6 * len(probes), 5.2), sharey=True, squeeze=False)
     for ax, probe in zip(axes[0], probes):
         for model, label, color, marker in MODELS:
             pts = pooled(cells, model=model, probe=probe)
@@ -228,7 +228,7 @@ def assoc_reasoned_figure(standard, reasoned, out_path):
     models = sorted({base_model(c[0]) for c in reasoned}, key=order.index)
     probes = [p for p in PROBE_TITLES if any(c[1]["probe"] == p for c in reasoned)]
     label_of = dict((m, l) for m, l, *_ in MODELS)
-    fig, axes = plt.subplots(len(models), len(probes), figsize=(4.2 * len(probes), 5.2 * len(models)),
+    fig, axes = plt.subplots(len(models), len(probes), figsize=(5.6 * len(probes), 5.2 * len(models)),
                              sharex=True, sharey=True, squeeze=False)
     for i, model in enumerate(models):
         for j, probe in enumerate(probes):

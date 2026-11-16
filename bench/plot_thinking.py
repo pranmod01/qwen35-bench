@@ -58,7 +58,7 @@ def make_figure(off_rows, on_rows, task, dataset, title, out_dir):
     sizes = sorted({r["n_images"] for r in on_rows})
     off_rows = [r for r in off_rows if r["n_images"] in sizes]
 
-    fig, axes = plt.subplots(1, len(models), figsize=(4.2 * len(models), 5.2), squeeze=False)
+    fig, axes = plt.subplots(1, len(models), figsize=(5.6 * len(models), 5.2), squeeze=False)
     for col, model in enumerate(models):
         top = axes[0, col]
         for key, label, color, marker, linestyle in CONDITIONS:

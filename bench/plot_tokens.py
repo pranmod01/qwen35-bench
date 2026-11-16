@@ -128,7 +128,7 @@ def by_length_figure(rows, title, out_path, metric="accuracy", ylabel="Accuracy 
     if not lengths:
         print(f"no results for {out_path.name}, skipped")
         return
-    fig, axes = panel_grid(lengths, width=4.2)
+    fig, axes = panel_grid(lengths, width=5.6)
     for ax, L in zip(axes, lengths):
         sel = select(rows, item_length=L)
         for model, label, color, marker in MODELS:
@@ -168,7 +168,7 @@ def token_figures(out_dir):
     answer_format_figure(full, recall, out_dir)
 
 
-def panel_grid(columns, width=4.6, rows=1):
+def panel_grid(columns, width=6.0, rows=1):
     fig, axes = plt.subplots(rows, len(columns), figsize=(width * len(columns), 5.2 * rows), sharey=True,
                              squeeze=False)
     return fig, (axes[0] if rows == 1 else axes.ravel())
@@ -203,7 +203,7 @@ def recall_vs_recognition(full, recall, out_dir):
     # L=1 has no recall probe (the cue would be half of one token), so it gets no row here.
     lengths = [L for L in ITEM_LENGTHS if L >= 2 and (select(recall, item_length=L) or select(rec_all, item_length=L))]
     models = [m for m in MODELS if any(r["model"] == m[0] for r in recall + rec_all)]
-    fig, axes = panel_grid(models, width=4.2, rows=len(lengths))
+    fig, axes = panel_grid(models, width=5.6, rows=len(lengths))
     for i, L in enumerate(lengths):
         for j, (model, label, *_) in enumerate(models):
             ax = axes[i * len(models) + j]
@@ -229,7 +229,7 @@ def recall_vs_recognition(full, recall, out_dir):
 
 def ab_labeled_figure(out_dir):
     rows = load_cells(AB_LABELED)
-    fig, ax = plt.subplots(figsize=(8, 6.5))
+    fig, ax = plt.subplots(figsize=(10, 6.5))
     for model, label, color, marker in MODELS:
         for prompt, desc, linestyle in [("original", "bare options", "-"), ("labeled", '"Item 1:" / "Item 2:"', "--")]:
             cells = select(rows, model=model, prompt=prompt)
@@ -252,7 +252,7 @@ def answer_format_figure(full, recall, out_dir):
     L = 8
     digit = select(full, task="afc_recognition", foil_type="novel", prompt="original", item_length=L)
     models = [m for m in MODELS if any(r["model"] == m[0] for r in copy)]
-    fig, axes = panel_grid(models, width=4.2)
+    fig, axes = panel_grid(models, width=5.6)
     for ax, (model, label, *_) in zip(axes, models):
         series = [(select(digit, model=model), "#eb6834", "o", "-", "Digit: which option, answer 1/2"),
                   (select(copy, model=model, item_length=L), "#2a9d4f", "^", "-", "Copy: the studied option, by likelihood"),
@@ -283,7 +283,7 @@ def matched_figures(out_dir):
             image_rows = select(images, task=task, dataset=dataset, **spec["image_filter"])
             # Every model with image results gets a column, so the figure keeps its shape as token runs land.
             models = [m for m, *_ in MODELS if any(base_model(r["model"]) == m for r in image_rows + token_rows)]
-            fig, axes = panel_grid(models, width=4.2)
+            fig, axes = panel_grid(models, width=5.6)
             for ax, model in zip(axes, models):
                 conditions = [
                     ([r for r in image_rows if base_model(r["model"]) == model],

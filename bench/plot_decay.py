@@ -105,7 +105,7 @@ def fit(task, points):
 
 def plot_curves(cells, out):
     mods = [m for m in MODALITIES if any(k[1] == m[0] for k in cells)]
-    fig, axes = plt.subplots(len(TASKS), len(mods), figsize=(3.6 * len(mods), 2.9 * len(TASKS)), squeeze=False, sharey="row")
+    fig, axes = plt.subplots(len(TASKS), len(mods), figsize=(5.0 * len(mods), 2.9 * len(TASKS)), squeeze=False, sharey="row")
     for i, (task, _, title) in enumerate(TASKS):
         for j, (mod, mod_label) in enumerate(mods):
             ax = axes[i][j]

@@ -12,6 +12,9 @@ Two sources:
    2026-11-11 did not store it; it is recovered by replaying the seeded shuffle (replayed_positions), and a cell
    is used only if the replay reproduces its stored answer key.
    -> position_curves.png, position_table.csv (per list size, so nothing is lost to the pooling)
+   -> position_by_length_<task>.png: the same bins with the list sizes split into three tiers (short, mid,
+      long; sizes in order, near-equal thirds), one figure per task, so a position effect that only appears on
+      long lists is not averaged away
 
 2. results/recognition_position (configs/recognition_position_*.yaml), where `test_positions` pins the tested item
    to fixed fractions of the list, the same item and foil at every position under one seed.
@@ -176,7 +179,7 @@ def legend(fig, axes):
 def plot_random(cells, out):
     mods = [m for m in MODALITIES if any(k[1] == m[0] for k in cells)]
     centers = [(b + 0.5) / N_BINS for b in range(N_BINS)]
-    fig, axes = plt.subplots(len(TASKS), len(mods), figsize=(3.6 * len(mods), 2.9 * len(TASKS)), squeeze=False, sharey="row")
+    fig, axes = plt.subplots(len(TASKS), len(mods), figsize=(5.0 * len(mods), 2.9 * len(TASKS)), squeeze=False, sharey="row")
     for i, (task, _, title) in enumerate(TASKS):
         for j, (mod, mod_label) in enumerate(mods):
             ax = axes[i][j]
@@ -208,7 +211,7 @@ def plot_pinned(cells, out):
     mods = [m for m in MODALITIES if any(k[0] == m[0] for k in cells)]
     sizes = {mod: sorted({k[2] for k in cells if k[0] == mod}) for mod, _ in mods}
     ncols = max(len(s) for s in sizes.values())
-    fig, axes = plt.subplots(len(mods), ncols, figsize=(3.6 * ncols, 2.9 * len(mods)), squeeze=False, sharey=True)
+    fig, axes = plt.subplots(len(mods), ncols, figsize=(5.0 * ncols, 2.9 * len(mods)), squeeze=False, sharey=True)
     for i, (mod, mod_label) in enumerate(mods):
         for j in range(ncols):
             ax = axes[i][j]
@@ -232,6 +235,59 @@ def plot_pinned(cells, out):
     plt.close(fig)
 
 
+def size_tiers(sizes, n_tiers=3):
+    """Sorted list sizes split in order into near-equal thirds, the first tiers taking any remainder."""
+    sizes = sorted(sizes)
+    base, extra = divmod(len(sizes), n_tiers)
+    tiers, start = [], 0
+    for k in range(n_tiers):
+        stop = start + base + (1 if k < extra else 0)
+        if stop > start:
+            tiers.append(sizes[start:stop])
+        start = stop
+    return tiers
+
+
+def plot_by_length(cells, out):
+    """One figure per task: position bins as position_curves, with the list sizes split into three tiers."""
+    centers = [(b + 0.5) / N_BINS for b in range(N_BINS)]
+    for task, _, title in TASKS:
+        mods = [m for m in MODALITIES if any(k[0] == task and k[1] == m[0] for k in cells)]
+        if not mods:
+            continue
+        tiers = {mod: size_tiers({k[3] for k in cells if k[0] == task and k[1] == mod}) for mod, _ in mods}
+        nrows = max(len(t) for t in tiers.values())
+        fig, axes = plt.subplots(nrows, len(mods), figsize=(5.0 * len(mods), 2.9 * nrows), squeeze=False, sharey=True)
+        for j, (mod, mod_label) in enumerate(mods):
+            for i in range(nrows):
+                ax = axes[i][j]
+                if i >= len(tiers[mod]):
+                    ax.set_visible(False)
+                    continue
+                sizes = tiers[mod][i]
+                for k, (model, label, color, marker) in enumerate(MODELS):
+                    pooled = [[0, 0] for _ in range(N_BINS)]
+                    for (t, m, mdl, n), bins in cells.items():
+                        if (t, m, mdl) == (task, mod, model) and n in sizes:
+                            for b in range(N_BINS):
+                                pooled[b][0] += bins[b][0]
+                                pooled[b][1] += bins[b][1]
+                    draw(ax, centers, pooled, k, color, marker, label)
+                style(ax, None if task == "paired_associates" else 0.5)
+                span = f"n = {sizes[0]:,}" if len(sizes) == 1 else f"n = {sizes[0]:,}–{sizes[-1]:,}"
+                ax.set_title(f"{mod_label}, {span}", fontsize=10)
+                if j == 0:
+                    ax.set_ylabel(f"{title}\naccuracy", fontsize=9)
+                if i == nrows - 1 or i == len(tiers[mod]) - 1:
+                    ax.set_xlabel("position in study list (first → last)", fontsize=9)
+        legend(fig, axes)
+        fig.suptitle(f"{title} accuracy by position of the tested item, split by list size (short lists top, long lists bottom)"
+                     + (" (serial order: the earlier of the two items)" if task == "serial_order" else ""), fontsize=10)
+        fig.tight_layout(rect=(0, 0.04, 1, 0.97))
+        fig.savefig(out / f"position_by_length_{task}.png", dpi=160)
+        plt.close(fig)
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--out", default="plots/position")
@@ -245,7 +301,8 @@ def main():
     write_csv(out / "position_table.csv", ["task", "modality", "model", "n", "bin", "correct", "trials"],
               [(*key, b + 1, c, t) for key, bins in sorted(cells.items()) for b, (c, t) in enumerate(bins)])
     plot_random(cells, out)
-    print(f"random-position runs: {len(cells)} cells -> {out}/position_curves.png, position_table.csv")
+    plot_by_length(cells, out)
+    print(f"random-position runs: {len(cells)} cells -> {out}/position_curves.png, position_by_length_<task>.png, position_table.csv")
 
     pinned = load_pinned(args.pinned)
     if pinned:

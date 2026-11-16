@@ -55,7 +55,7 @@ def task_figure(rows, task, filt, name, title, out_dir):
         return
     lengths = [L for L in ITEM_LENGTHS if select(studied, item_length=L)]
     models = [m for m in MODELS if any(r["model"] == m[0] for r in studied)]
-    fig, axes = panel_grid(models, width=4.2, rows=len(lengths))
+    fig, axes = panel_grid(models, width=5.6, rows=len(lengths))
     for i, L in enumerate(lengths):
         for j, (model, label, *_) in enumerate(models):
             ax = axes[i * len(models) + j]

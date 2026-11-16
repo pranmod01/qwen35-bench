@@ -92,7 +92,7 @@ def gaussian_figure(task, clean, corrupted, out_dir):
         print(f"  gaussian {task}: no complete model grid yet")
         return
     sizes = [SMALLEST[task]] + GAUSSIAN_SIZES
-    fig, axes = plt.subplots(1, len(ready), figsize=(6.5 * len(ready), 6), squeeze=False, sharey=True)
+    fig, axes = plt.subplots(1, len(ready), figsize=(8.0 * len(ready), 6), squeeze=False, sharey=True)
     for ax, name in zip(axes[0], ready):
         label, *_ = style(base_model(name))
         clean_cells = [r for r in select(clean, model=name) if r["n_images"] in sizes]
@@ -139,7 +139,7 @@ def types_figure(task, clean, corrupted, n, out_dir):
         return
     ncol = 5
     nrow = -(-len(TYPES) // ncol)
-    fig, axes = plt.subplots(nrow, ncol, figsize=(4.2 * ncol, 4.4 * nrow), squeeze=False, sharey=True)
+    fig, axes = plt.subplots(nrow, ncol, figsize=(5.6 * ncol, 4.4 * nrow), squeeze=False, sharey=True)
     for ax, ctype in zip(axes.flat, TYPES):
         for name in ready:
             label, color, marker = style(base_model(name))

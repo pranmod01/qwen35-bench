@@ -150,7 +150,7 @@ def finish(ax, fig, title, out_path):
 
 
 def make_plot(rows, task, dataset, title, out_dir):
-    fig, ax = plt.subplots(figsize=(8, 6.5))
+    fig, ax = plt.subplots(figsize=(10, 6.5))
 
     for model, label, color, marker in MODELS:
         cells = [r for r in rows if base_model(r["model"]) == model]
@@ -172,7 +172,7 @@ def make_plot(rows, task, dataset, title, out_dir):
 
 
 def make_hit_plot(rows, dataset, metric, title, out_dir):
-    fig, ax = plt.subplots(figsize=(8, 6.5))
+    fig, ax = plt.subplots(figsize=(10, 6.5))
     for model, label, color, marker in MODELS:
         cells = [r for r in rows if base_model(r["model"]) == model]
         if cells:
@@ -187,7 +187,7 @@ def make_hit_plot(rows, dataset, metric, title, out_dir):
 
 
 def make_layout_plot(rows, dataset, out_dir):
-    fig, ax = plt.subplots(figsize=(8, 6.5))
+    fig, ax = plt.subplots(figsize=(10, 6.5))
     style = {m: (label, color, marker) for m, label, color, marker in MODELS}
     for model in LAYOUT_MODELS:
         label, color, marker = style[model]
