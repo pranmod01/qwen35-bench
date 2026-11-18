@@ -1,0 +1,2802 @@
+{
+  "run": {
+    "model": {
+      "name": "qwen3.5-2b",
+      "model_id": "Qwen/Qwen3.5-2B",
+      "max_image_size": 512,
+      "max_new_tokens": 512,
+      "scoring": "reason_then_choose"
+    },
+    "task": "associative_inference",
+    "condition": {
+      "dataset": "Brady2008",
+      "pair_type": "word",
+      "probe": "inference",
+      "n_chains": 2,
+      "n_images": 6,
+      "prompt": "original",
+      "n_trials": 50
+    },
+    "seed": 0
+  },
+  "config": {
+    "run_name": "assoc_inf_reasoned",
+    "output_dir": "results",
+    "seeds": [
+      0
+    ],
+    "models": [
+      {
+        "name": "qwen3.5-2b",
+        "model_id": "Qwen/Qwen3.5-2B",
+        "max_image_size": 512,
+        "max_new_tokens": 512,
+        "scoring": "reason_then_choose"
+      },
+      {
+        "name": "qwen3.5-4b",
+        "model_id": "Qwen/Qwen3.5-4B",
+        "max_image_size": 512,
+        "max_new_tokens": 512,
+        "scoring": "reason_then_choose"
+      }
+    ],
+    "tasks": [
+      {
+        "task": "associative_inference",
+        "datasets": [
+          "Brady2008"
+        ],
+        "pair_types": [
+          "image",
+          "word"
+        ],
+        "probe_types": [
+          "inference",
+          "direct_ab",
+          "direct_bc"
+        ],
+        "n_chains": [
+          2,
+          5
+        ],
+        "prompts": [
+          "original",
+          "cue_turn",
+          "labeled"
+        ],
+        "n_trials": 50
+      }
+    ]
+  },
+  "provenance": {
+    "config_hash": "8b8bbf756a2e",
+    "gpu": "NVIDIA H200",
+    "git_commit": null,
+    "git_dirty": false,
+    "torch": "2.10.0+cu128",
+    "transformers": "5.17.0"
+  },
+  "elapsed_s": 16.2,
+  "peak_gpu_gb": 4.57,
+  "error": null,
+  "trials": [
+    {
+      "trial": 0,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.9796676463850554,
+        "2": 0.020332353614944617
+      },
+      "choice_mass": 0.9983574133366346,
+      "top_tokens": [
+        [
+          "1",
+          0.9781
+        ],
+        [
+          "2",
+          0.0203
+        ],
+        [
+          "<|im_end|>",
+          0.0005
+        ],
+        [
+          "0",
+          0.0005
+        ],
+        [
+          "3",
+          0.0002
+        ]
+      ],
+      "free_response": "1",
+      "metadata": {
+        "chain_index": 0,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/Aceramichous2.jpg",
+          "name": "Aceramichous2.jpg",
+          "role": "A",
+          "chain_index": 0
+        },
+        "correct_option": {
+          "role": "C",
+          "chain_index": 0
+        },
+        "foil_option": {
+          "role": "C",
+          "chain_index": 1
+        }
+      },
+      "reasoning_tokens": 2,
+      "reasoning_finished": true,
+      "stated_answer": "1"
+    },
+    {
+      "trial": 1,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.9890130567394706,
+        "2": 0.010986943260529387
+      },
+      "choice_mass": 0.9982340214774013,
+      "top_tokens": [
+        [
+          "1",
+          0.9873
+        ],
+        [
+          "2",
+          0.011
+        ],
+        [
+          "<|im_end|>",
+          0.0006
+        ],
+        [
+          "0",
+          0.0004
+        ],
+        [
+          " ",
+          0.0002
+        ]
+      ],
+      "free_response": "1",
+      "metadata": {
+        "chain_index": 0,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/zip-a.jpg",
+          "name": "zip-a.jpg",
+          "role": "A",
+          "chain_index": 0
+        },
+        "correct_option": {
+          "role": "C",
+          "chain_index": 0
+        },
+        "foil_option": {
+          "role": "C",
+          "chain_index": 1
+        }
+      },
+      "reasoning_tokens": 2,
+      "reasoning_finished": true,
+      "stated_answer": "1"
+    },
+    {
+      "trial": 2,
+      "target": 1,
+      "reported": 2,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.006692850889325766,
+        "2": 0.9933071491106742
+      },
+      "choice_mass": 0.9981315494515002,
+      "top_tokens": [
+        [
+          "2",
+          0.9915
+        ],
+        [
+          "1",
+          0.0067
+        ],
+        [
+          "<|im_end|>",
+          0.001
+        ],
+        [
+          "0",
+          0.0002
+        ],
+        [
+          "3",
+          0.0001
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 1,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/26421583.thl.jpg",
+          "name": "26421583.thl.jpg",
+          "role": "A",
+          "chain_index": 1
+        },
+        "correct_option": {
+          "role": "C",
+          "chain_index": 1
+        },
+        "foil_option": {
+          "role": "C",
+          "chain_index": 0
+        }
+      },
+      "reasoning_tokens": 2,
+      "reasoning_finished": true,
+      "stated_answer": "2"
+    },
+    {
+      "trial": 3,
+      "target": 2,
+      "reported": 1,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.9940889311598886,
+        "2": 0.00591106884011137
+      },
+      "choice_mass": 0.9988732659257948,
+      "top_tokens": [
+        [
+          "1",
+          0.993
+        ],
+        [
+          "2",
+          0.0059
+        ],
+        [
+          "<|im_end|>",
+          0.0004
+        ],
+        [
+          "0",
+          0.0004
+        ],
+        [
+          "3",
+          0.0001
+        ]
+      ],
+      "free_response": "1",
+      "metadata": {
+        "chain_index": 1,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/Arake4.jpg",
+          "name": "Arake4.jpg",
+          "role": "A",
+          "chain_index": 1
+        },
+        "correct_option": {
+          "role": "C",
+          "chain_index": 1
+        },
+        "foil_option": {
+          "role": "C",
+          "chain_index": 0
+        }
+      },
+      "reasoning_tokens": 2,
+      "reasoning_finished": true,
+      "stated_answer": "1"
+    },
+    {
+      "trial": 4,
+      "target": 1,
+      "reported": 2,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.008577485862260962,
+        "2": 0.9914225141377391
+      },
+      "choice_mass": 0.998504526913166,
+      "top_tokens": [
+        [
+          "2",
+          0.9899
+        ],
+        [
+          "1",
+          0.0086
+        ],
+        [
+          "<|im_end|>",
+          0.0005
+        ],
+        [
+          "0",
+          0.0002
+        ],
+        [
+          "3",
+          0.0002
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 1,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/Apeanut3.jpg",
+          "name": "Apeanut3.jpg",
+          "role": "A",
+          "chain_index": 1
+        },
+        "correct_option": {
+          "role": "C",
+          "chain_index": 1
+        },
+        "foil_option": {
+          "role": "C",
+          "chain_index": 0
+        }
+      },
+      "reasoning_tokens": 2,
+      "reasoning_finished": true,
+      "stated_answer": "2"
+    },
+    {
+      "trial": 5,
+      "target": 2,
+      "reported": 2,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.005911068709207387,
+        "2": 0.9940889312907926
+      },
+      "choice_mass": 0.9971581366844475,
+      "top_tokens": [
+        [
+          "2",
+          0.9913
+        ],
+        [
+          "1",
+          0.0059
+        ],
+        [
+          "<|im_end|>",
+          0.0019
+        ],
+        [
+          "3",
+          0.0002
+        ],
+        [
+          "0",
+          0.0002
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 1,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/26455774.thl.jpg",
+          "name": "26455774.thl.jpg",
+          "role": "A",
+          "chain_index": 1
+        },
+        "correct_option": {
+          "role": "C",
+          "chain_index": 1
+        },
+        "foil_option": {
+          "role": "C",
+          "chain_index": 0
+        }
+      },
+      "reasoning_tokens": 2,
+      "reasoning_finished": true,
+      "stated_answer": "2"
+    },
+    {
+      "trial": 6,
+      "target": 2,
+      "reported": 2,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.0052201257762779585,
+        "2": 0.994779874223722
+      },
+      "choice_mass": 0.998392905574292,
+      "top_tokens": [
+        [
+          "2",
+          0.9932
+        ],
+        [
+          "1",
+          0.0052
+        ],
+        [
+          "<|im_end|>",
+          0.0009
+        ],
+        [
+          "0",
+          0.0002
+        ],
+        [
+          "3",
+          0.0001
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 1,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/Abridge9.jpg",
+          "name": "Abridge9.jpg",
+          "role": "A",
+          "chain_index": 1
+        },
+        "correct_option": {
+          "role": "C",
+          "chain_index": 1
+        },
+        "foil_option": {
+          "role": "C",
+          "chain_index": 0
+        }
+      },
+      "reasoning_tokens": 2,
+      "reasoning_finished": true,
+      "stated_answer": "2"
+    },
+    {
+      "trial": 7,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.9840936092358038,
+        "2": 0.015906390764196213
+      },
+      "choice_mass": 0.9989701583981514,
+      "top_tokens": [
+        [
+          "1",
+          0.9831
+        ],
+        [
+          "2",
+          0.0159
+        ],
+        [
+          "<|im_end|>",
+          0.0005
+        ],
+        [
+          "0",
+          0.0002
+        ],
+        [
+          "3",
+          0.0001
+        ]
+      ],
+      "free_response": "1",
+      "metadata": {
+        "chain_index": 1,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/ACOLUMN5.jpg",
+          "name": "ACOLUMN5.jpg",
+          "role": "A",
+          "chain_index": 1
+        },
+        "correct_option": {
+          "role": "C",
+          "chain_index": 1
+        },
+        "foil_option": {
+          "role": "C",
+          "chain_index": 0
+        }
+      },
+      "reasoning_tokens": 2,
+      "reasoning_finished": true,
+      "stated_answer": "1"
+    },
+    {
+      "trial": 8,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.9875683491357273,
+        "2": 0.012431650864272642
+      },
+      "choice_mass": 0.9986019674688578,
+      "top_tokens": [
+        [
+          "1",
+          0.9862
+        ],
+        [
+          "2",
+          0.0124
+        ],
+        [
+          "0",
+          0.0005
+        ],
+        [
+          "<|im_end|>",
+          0.0004
+        ],
+        [
+          "3",
+          0.0001
+        ]
+      ],
+      "free_response": "1",
+      "metadata": {
+        "chain_index": 0,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/ABORKEHOR.jpg",
+          "name": "ABORKEHOR.jpg",
+          "role": "A",
+          "chain_index": 0
+        },
+        "correct_option": {
+          "role": "C",
+          "chain_index": 0
+        },
+        "foil_option": {
+          "role": "C",
+          "chain_index": 1
+        }
+      },
+      "reasoning_tokens": 2,
+      "reasoning_finished": true,
+      "stated_answer": "1"
+    },
+    {
+      "trial": 9,
+      "target": 2,
+      "reported": 1,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.9986749775929009,
+        "2": 0.0013250224070990705
+      },
+      "choice_mass": 0.9992073515895754,
+      "top_tokens": [
+        [
+          "1",
+          0.9979
+        ],
+        [
+          "2",
+          0.0013
+        ],
+        [
+          "<|im_end|>",
+          0.0005
+        ],
+        [
+          "0",
+          0.0001
+        ],
+        [
+          " ",
+          0.0
+        ]
+      ],
+      "free_response": "Based on the visual analysis of the cue image:\n\n- The cue image is a green serving tray featuring a painting of a rooster.\n- The word **MANAGER** is associated with the rooster image indirectly because a rooster is a common symbol for a manager or boss.\n- The word **SWAMP** is not associated with the rooster image.\n\nTherefore, the word indirectly associated with the cue image is MANAGER.\n\n1",
+      "metadata": {
+        "chain_index": 1,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/APICTURE.jpg",
+          "name": "APICTURE.jpg",
+          "role": "A",
+          "chain_index": 1
+        },
+        "correct_option": {
+          "role": "C",
+          "chain_index": 1
+        },
+        "foil_option": {
+          "role": "C",
+          "chain_index": 0
+        }
+      },
+      "reasoning_tokens": 93,
+      "reasoning_finished": true,
+      "stated_answer": null
+    },
+    {
+      "trial": 10,
+      "target": 2,
+      "reported": 2,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.007577241070022363,
+        "2": 0.9924227589299777
+      },
+      "choice_mass": 0.9983451147563756,
+      "top_tokens": [
+        [
+          "2",
+          0.9908
+        ],
+        [
+          "1",
+          0.0076
+        ],
+        [
+          "<|im_end|>",
+          0.0005
+        ],
+        [
+          "3",
+          0.0003
+        ],
+        [
+          "0",
+          0.0003
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 1,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/schoolbus.jpg",
+          "name": "schoolbus.jpg",
+          "role": "A",
+          "chain_index": 1
+        },
+        "correct_option": {
+          "role": "C",
+          "chain_index": 1
+        },
+        "foil_option": {
+          "role": "C",
+          "chain_index": 0
+        }
+      },
+      "reasoning_tokens": 2,
+      "reasoning_finished": true,
+      "stated_answer": "2"
+    },
+    {
+      "trial": 11,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.9796676471092227,
+        "2": 0.020332352890777262
+      },
+      "choice_mass": 0.9981874208897352,
+      "top_tokens": [
+        [
+          "1",
+          0.9779
+        ],
+        [
+          "2",
+          0.0203
+        ],
+        [
+          "0",
+          0.0007
+        ],
+        [
+          "<|im_end|>",
+          0.0005
+        ],
+        [
+          "3",
+          0.0001
+        ]
+      ],
+      "free_response": "1",
+      "metadata": {
+        "chain_index": 0,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/Lanyard.jpg",
+          "name": "Lanyard.jpg",
+          "role": "A",
+          "chain_index": 0
+        },
+        "correct_option": {
+          "role": "C",
+          "chain_index": 0
+        },
+        "foil_option": {
+          "role": "C",
+          "chain_index": 1
+        }
+      },
+      "reasoning_tokens": 2,
+      "reasoning_finished": true,
+      "stated_answer": "1"
+    },
+    {
+      "trial": 12,
+      "target": 2,
+      "reported": 2,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.006692851023848135,
+        "2": 0.9933071489761519
+      },
+      "choice_mass": 0.9986089593730867,
+      "top_tokens": [
+        [
+          "2",
+          0.9919
+        ],
+        [
+          "1",
+          0.0067
+        ],
+        [
+          "<|im_end|>",
+          0.0005
+        ],
+        [
+          "0",
+          0.0003
+        ],
+        [
+          "3",
+          0.0002
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 1,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/AEASEL22.jpg",
+          "name": "AEASEL22.jpg",
+          "role": "A",
+          "chain_index": 1
+        },
+        "correct_option": {
+          "role": "C",
+          "chain_index": 1
+        },
+        "foil_option": {
+          "role": "C",
+          "chain_index": 0
+        }
+      },
+      "reasoning_tokens": 2,
+      "reasoning_finished": true,
+      "stated_answer": "2"
+    },
+    {
+      "trial": 13,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.9840936075457624,
+        "2": 0.015906392454237653
+      },
+      "choice_mass": 0.9986874889582396,
+      "top_tokens": [
+        [
+          "1",
+          0.9828
+        ],
+        [
+          "2",
+          0.0159
+        ],
+        [
+          "0",
+          0.0006
+        ],
+        [
+          "<|im_end|>",
+          0.0003
+        ],
+        [
+          "3",
+          0.0001
+        ]
+      ],
+      "free_response": "1",
+      "metadata": {
+        "chain_index": 0,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/ABROWNBAG.jpg",
+          "name": "ABROWNBAG.jpg",
+          "role": "A",
+          "chain_index": 0
+        },
+        "correct_option": {
+          "role": "C",
+          "chain_index": 0
+        },
+        "foil_option": {
+          "role": "C",
+          "chain_index": 1
+        }
+      },
+      "reasoning_tokens": 2,
+      "reasoning_finished": true,
+      "stated_answer": "1"
+    },
+    {
+      "trial": 14,
+      "target": 2,
+      "reported": 2,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.010986943351498222,
+        "2": 0.9890130566485018
+      },
+      "choice_mass": 0.9982878398150206,
+      "top_tokens": [
+        [
+          "2",
+          0.9873
+        ],
+        [
+          "1",
+          0.011
+        ],
+        [
+          "<|im_end|>",
+          0.0007
+        ],
+        [
+          "0",
+          0.0003
+        ],
+        [
+          "3",
+          0.0002
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 0,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/Aperfumebottl.jpg",
+          "name": "Aperfumebottl.jpg",
+          "role": "A",
+          "chain_index": 0
+        },
+        "correct_option": {
+          "role": "C",
+          "chain_index": 0
+        },
+        "foil_option": {
+          "role": "C",
+          "chain_index": 1
+        }
+      },
+      "reasoning_tokens": 2,
+      "reasoning_finished": true,
+      "stated_answer": "2"
+    },
+    {
+      "trial": 15,
+      "target": 2,
+      "reported": 1,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.9820137897085733,
+        "2": 0.017986210291426663
+      },
+      "choice_mass": 0.9987346958369017,
+      "top_tokens": [
+        [
+          "1",
+          0.9808
+        ],
+        [
+          "2",
+          0.018
+        ],
+        [
+          "<|im_end|>",
+          0.0004
+        ],
+        [
+          "0",
+          0.0003
+        ],
+        [
+          "<think>",
+          0.0001
+        ]
+      ],
+      "free_response": "1",
+      "metadata": {
+        "chain_index": 0,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/AGLASSBAL.jpg",
+          "name": "AGLASSBAL.jpg",
+          "role": "A",
+          "chain_index": 0
+        },
+        "correct_option": {
+          "role": "C",
+          "chain_index": 0
+        },
+        "foil_option": {
+          "role": "C",
+          "chain_index": 1
+        }
+      },
+      "reasoning_tokens": 2,
+      "reasoning_finished": true,
+      "stated_answer": "1"
+    },
+    {
+      "trial": 16,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.9399133533900499,
+        "2": 0.0600866466099501
+      },
+      "choice_mass": 0.9981623366475105,
+      "top_tokens": [
+        [
+          "1",
+          0.9382
+        ],
+        [
+          "2",
+          0.06
+        ],
+        [
+          "<|im_end|>",
+          0.0007
+        ],
+        [
+          "0",
+          0.0005
+        ],
+        [
+          "3",
+          0.0001
+        ]
+      ],
+      "free_response": "1",
+      "metadata": {
+        "chain_index": 1,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/26427867.thl.jpg",
+          "name": "26427867.thl.jpg",
+          "role": "A",
+          "chain_index": 1
+        },
+        "correct_option": {
+          "role": "C",
+          "chain_index": 1
+        },
+        "foil_option": {
+          "role": "C",
+          "chain_index": 0
+        }
+      },
+      "reasoning_tokens": 2,
+      "reasoning_finished": true,
+      "stated_answer": "1"
+    },
+    {
+      "trial": 17,
+      "target": 2,
+      "reported": 2,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.007577241055185696,
+        "2": 0.9924227589448144
+      },
+      "choice_mass": 0.9983741235919297,
+      "top_tokens": [
+        [
+          "2",
+          0.9908
+        ],
+        [
+          "1",
+          0.0076
+        ],
+        [
+          "<|im_end|>",
+          0.0008
+        ],
+        [
+          "3",
+          0.0002
+        ],
+        [
+          "0",
+          0.0002
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 0,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/Afoodproces22.jpg",
+          "name": "Afoodproces22.jpg",
+          "role": "A",
+          "chain_index": 0
+        },
+        "correct_option": {
+          "role": "C",
+          "chain_index": 0
+        },
+        "foil_option": {
+          "role": "C",
+          "chain_index": 1
+        }
+      },
+      "reasoning_tokens": 2,
+      "reasoning_finished": true,
+      "stated_answer": "2"
+    },
+    {
+      "trial": 18,
+      "target": 1,
+      "reported": 2,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.012431650968185555,
+        "2": 0.9875683490318145
+      },
+      "choice_mass": 0.9986007604748011,
+      "top_tokens": [
+        [
+          "2",
+          0.9862
+        ],
+        [
+          "1",
+          0.0124
+        ],
+        [
+          "<|im_end|>",
+          0.0006
+        ],
+        [
+          "0",
+          0.0002
+        ],
+        [
+          "3",
+          0.0002
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 1,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/gameboy.jpg",
+          "name": "gameboy.jpg",
+          "role": "A",
+          "chain_index": 1
+        },
+        "correct_option": {
+          "role": "C",
+          "chain_index": 1
+        },
+        "foil_option": {
+          "role": "C",
+          "chain_index": 0
+        }
+      },
+      "reasoning_tokens": 2,
+      "reasoning_finished": true,
+      "stated_answer": "2"
+    },
+    {
+      "trial": 19,
+      "target": 2,
+      "reported": 1,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.9796676460723787,
+        "2": 0.020332353927621304
+      },
+      "choice_mass": 0.9984016455709934,
+      "top_tokens": [
+        [
+          "1",
+          0.9781
+        ],
+        [
+          "2",
+          0.0203
+        ],
+        [
+          "<|im_end|>",
+          0.0007
+        ],
+        [
+          "0",
+          0.0004
+        ],
+        [
+          "3",
+          0.0002
+        ]
+      ],
+      "free_response": "1",
+      "metadata": {
+        "chain_index": 1,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/M15589.jpg",
+          "name": "M15589.jpg",
+          "role": "A",
+          "chain_index": 1
+        },
+        "correct_option": {
+          "role": "C",
+          "chain_index": 1
+        },
+        "foil_option": {
+          "role": "C",
+          "chain_index": 0
+        }
+      },
+      "reasoning_tokens": 2,
+      "reasoning_finished": true,
+      "stated_answer": "1"
+    },
+    {
+      "trial": 20,
+      "target": 2,
+      "reported": 1,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.9840936081649091,
+        "2": 0.015906391835090874
+      },
+      "choice_mass": 0.998078839853406,
+      "top_tokens": [
+        [
+          "1",
+          0.9822
+        ],
+        [
+          "2",
+          0.0159
+        ],
+        [
+          "<|im_end|>",
+          0.0008
+        ],
+        [
+          "0",
+          0.0005
+        ],
+        [
+          "3",
+          0.0002
+        ]
+      ],
+      "free_response": "1",
+      "metadata": {
+        "chain_index": 1,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/greenbeans.jpg",
+          "name": "greenbeans.jpg",
+          "role": "A",
+          "chain_index": 1
+        },
+        "correct_option": {
+          "role": "C",
+          "chain_index": 1
+        },
+        "foil_option": {
+          "role": "C",
+          "chain_index": 0
+        }
+      },
+      "reasoning_tokens": 2,
+      "reasoning_finished": true,
+      "stated_answer": "1"
+    },
+    {
+      "trial": 21,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.974042642696271,
+        "2": 0.025957357303728997
+      },
+      "choice_mass": 0.9983758255839348,
+      "top_tokens": [
+        [
+          "1",
+          0.9725
+        ],
+        [
+          "2",
+          0.0259
+        ],
+        [
+          "<|im_end|>",
+          0.0007
+        ],
+        [
+          "0",
+          0.0003
+        ],
+        [
+          "3",
+          0.0002
+        ]
+      ],
+      "free_response": "1",
+      "metadata": {
+        "chain_index": 0,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/Astroboscope5.jpg",
+          "name": "Astroboscope5.jpg",
+          "role": "A",
+          "chain_index": 0
+        },
+        "correct_option": {
+          "role": "C",
+          "chain_index": 0
+        },
+        "foil_option": {
+          "role": "C",
+          "chain_index": 1
+        }
+      },
+      "reasoning_tokens": 2,
+      "reasoning_finished": true,
+      "stated_answer": "1"
+    },
+    {
+      "trial": 22,
+      "target": 2,
+      "reported": 1,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.9740426420961651,
+        "2": 0.02595735790383488
+      },
+      "choice_mass": 0.9985264223068953,
+      "top_tokens": [
+        [
+          "1",
+          0.9726
+        ],
+        [
+          "2",
+          0.0259
+        ],
+        [
+          "<|im_end|>",
+          0.0006
+        ],
+        [
+          "0",
+          0.0004
+        ],
+        [
+          "3",
+          0.0001
+        ]
+      ],
+      "free_response": "1",
+      "metadata": {
+        "chain_index": 0,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/AHALLOWE3.jpg",
+          "name": "AHALLOWE3.jpg",
+          "role": "A",
+          "chain_index": 0
+        },
+        "correct_option": {
+          "role": "C",
+          "chain_index": 0
+        },
+        "foil_option": {
+          "role": "C",
+          "chain_index": 1
+        }
+      },
+      "reasoning_tokens": 2,
+      "reasoning_finished": true,
+      "stated_answer": "1"
+    },
+    {
+      "trial": 23,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.9770226295417301,
+        "2": 0.022977370458269836
+      },
+      "choice_mass": 0.9978840723633766,
+      "top_tokens": [
+        [
+          "1",
+          0.975
+        ],
+        [
+          "2",
+          0.0229
+        ],
+        [
+          "0",
+          0.001
+        ],
+        [
+          "<|im_end|>",
+          0.0005
+        ],
+        [
+          "3",
+          0.0002
+        ]
+      ],
+      "free_response": "1",
+      "metadata": {
+        "chain_index": 0,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/ACRICKET2.jpg",
+          "name": "ACRICKET2.jpg",
+          "role": "A",
+          "chain_index": 0
+        },
+        "correct_option": {
+          "role": "C",
+          "chain_index": 0
+        },
+        "foil_option": {
+          "role": "C",
+          "chain_index": 1
+        }
+      },
+      "reasoning_tokens": 2,
+      "reasoning_finished": true,
+      "stated_answer": "1"
+    },
+    {
+      "trial": 24,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.9706877685759763,
+        "2": 0.02931223142402369
+      },
+      "choice_mass": 0.9989427756518126,
+      "top_tokens": [
+        [
+          "1",
+          0.9697
+        ],
+        [
+          "2",
+          0.0293
+        ],
+        [
+          "<|im_end|>",
+          0.0004
+        ],
+        [
+          "0",
+          0.0003
+        ],
+        [
+          "3",
+          0.0001
+        ]
+      ],
+      "free_response": "1",
+      "metadata": {
+        "chain_index": 1,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/8249141.thl.jpg",
+          "name": "8249141.thl.jpg",
+          "role": "A",
+          "chain_index": 1
+        },
+        "correct_option": {
+          "role": "C",
+          "chain_index": 1
+        },
+        "foil_option": {
+          "role": "C",
+          "chain_index": 0
+        }
+      },
+      "reasoning_tokens": 2,
+      "reasoning_finished": true,
+      "stated_answer": "1"
+    },
+    {
+      "trial": 25,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.9820137888223145,
+        "2": 0.017986211177685514
+      },
+      "choice_mass": 0.9984206538647413,
+      "top_tokens": [
+        [
+          "1",
+          0.9805
+        ],
+        [
+          "2",
+          0.018
+        ],
+        [
+          "<|im_end|>",
+          0.0007
+        ],
+        [
+          "0",
+          0.0004
+        ],
+        [
+          " ",
+          0.0001
+        ]
+      ],
+      "free_response": "1",
+      "metadata": {
+        "chain_index": 1,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/gymbars.jpg",
+          "name": "gymbars.jpg",
+          "role": "A",
+          "chain_index": 1
+        },
+        "correct_option": {
+          "role": "C",
+          "chain_index": 1
+        },
+        "foil_option": {
+          "role": "C",
+          "chain_index": 0
+        }
+      },
+      "reasoning_tokens": 2,
+      "reasoning_finished": true,
+      "stated_answer": "1"
+    },
+    {
+      "trial": 26,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.9840936086114337,
+        "2": 0.015906391388566362
+      },
+      "choice_mass": 0.9987229201942682,
+      "top_tokens": [
+        [
+          "1",
+          0.9828
+        ],
+        [
+          "2",
+          0.0159
+        ],
+        [
+          "<|im_end|>",
+          0.0004
+        ],
+        [
+          "0",
+          0.0004
+        ],
+        [
+          "3",
+          0.0001
+        ]
+      ],
+      "free_response": "1",
+      "metadata": {
+        "chain_index": 0,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/Ahumidifier.jpg",
+          "name": "Ahumidifier.jpg",
+          "role": "A",
+          "chain_index": 0
+        },
+        "correct_option": {
+          "role": "C",
+          "chain_index": 0
+        },
+        "foil_option": {
+          "role": "C",
+          "chain_index": 1
+        }
+      },
+      "reasoning_tokens": 2,
+      "reasoning_finished": true,
+      "stated_answer": "1"
+    },
+    {
+      "trial": 27,
+      "target": 1,
+      "reported": 2,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.012431650564333976,
+        "2": 0.9875683494356661
+      },
+      "choice_mass": 0.9986161505803466,
+      "top_tokens": [
+        [
+          "2",
+          0.9862
+        ],
+        [
+          "1",
+          0.0124
+        ],
+        [
+          "<|im_end|>",
+          0.0006
+        ],
+        [
+          "3",
+          0.0002
+        ],
+        [
+          "0",
+          0.0002
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 1,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/Ascale60.jpg",
+          "name": "Ascale60.jpg",
+          "role": "A",
+          "chain_index": 1
+        },
+        "correct_option": {
+          "role": "C",
+          "chain_index": 1
+        },
+        "foil_option": {
+          "role": "C",
+          "chain_index": 0
+        }
+      },
+      "reasoning_tokens": 2,
+      "reasoning_finished": true,
+      "stated_answer": "2"
+    },
+    {
+      "trial": 28,
+      "target": 2,
+      "reported": 2,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.012431651709823799,
+        "2": 0.9875683482901761
+      },
+      "choice_mass": 0.9983268100768328,
+      "top_tokens": [
+        [
+          "2",
+          0.9859
+        ],
+        [
+          "1",
+          0.0124
+        ],
+        [
+          "<|im_end|>",
+          0.0006
+        ],
+        [
+          "0",
+          0.0004
+        ],
+        [
+          "3",
+          0.0002
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 0,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/AAIRPORTC.jpg",
+          "name": "AAIRPORTC.jpg",
+          "role": "A",
+          "chain_index": 0
+        },
+        "correct_option": {
+          "role": "C",
+          "chain_index": 0
+        },
+        "foil_option": {
+          "role": "C",
+          "chain_index": 1
+        }
+      },
+      "reasoning_tokens": 2,
+      "reasoning_finished": true,
+      "stated_answer": "2"
+    },
+    {
+      "trial": 29,
+      "target": 2,
+      "reported": 1,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.9859363736318879,
+        "2": 0.014063626368112111
+      },
+      "choice_mass": 0.9983640611171722,
+      "top_tokens": [
+        [
+          "1",
+          0.9843
+        ],
+        [
+          "2",
+          0.014
+        ],
+        [
+          "<|im_end|>",
+          0.0005
+        ],
+        [
+          "0",
+          0.0005
+        ],
+        [
+          "3",
+          0.0001
+        ]
+      ],
+      "free_response": "1",
+      "metadata": {
+        "chain_index": 1,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/Acastingladl2.jpg",
+          "name": "Acastingladl2.jpg",
+          "role": "A",
+          "chain_index": 1
+        },
+        "correct_option": {
+          "role": "C",
+          "chain_index": 1
+        },
+        "foil_option": {
+          "role": "C",
+          "chain_index": 0
+        }
+      },
+      "reasoning_tokens": 2,
+      "reasoning_finished": true,
+      "stated_answer": "1"
+    },
+    {
+      "trial": 30,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.9770226306038287,
+        "2": 0.02297736939617137
+      },
+      "choice_mass": 0.998515609651804,
+      "top_tokens": [
+        [
+          "1",
+          0.9756
+        ],
+        [
+          "2",
+          0.0229
+        ],
+        [
+          "<|im_end|>",
+          0.0005
+        ],
+        [
+          "0",
+          0.0004
+        ],
+        [
+          "3",
+          0.0001
+        ]
+      ],
+      "free_response": "1",
+      "metadata": {
+        "chain_index": 1,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/ATROWEL2.jpg",
+          "name": "ATROWEL2.jpg",
+          "role": "A",
+          "chain_index": 1
+        },
+        "correct_option": {
+          "role": "C",
+          "chain_index": 1
+        },
+        "foil_option": {
+          "role": "C",
+          "chain_index": 0
+        }
+      },
+      "reasoning_tokens": 2,
+      "reasoning_finished": true,
+      "stated_answer": "1"
+    },
+    {
+      "trial": 31,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.974042643009769,
+        "2": 0.02595735699023109
+      },
+      "choice_mass": 0.9989593010395765,
+      "top_tokens": [
+        [
+          "1",
+          0.973
+        ],
+        [
+          "2",
+          0.0259
+        ],
+        [
+          "<|im_end|>",
+          0.0003
+        ],
+        [
+          "0",
+          0.0003
+        ],
+        [
+          "3",
+          0.0001
+        ]
+      ],
+      "free_response": "1",
+      "metadata": {
+        "chain_index": 1,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/ATOILBAG2.jpg",
+          "name": "ATOILBAG2.jpg",
+          "role": "A",
+          "chain_index": 1
+        },
+        "correct_option": {
+          "role": "C",
+          "chain_index": 1
+        },
+        "foil_option": {
+          "role": "C",
+          "chain_index": 0
+        }
+      },
+      "reasoning_tokens": 2,
+      "reasoning_finished": true,
+      "stated_answer": "1"
+    },
+    {
+      "trial": 32,
+      "target": 2,
+      "reported": 1,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.9840936094408262,
+        "2": 0.015906390559173752
+      },
+      "choice_mass": 0.9989178273826838,
+      "top_tokens": [
+        [
+          "1",
+          0.983
+        ],
+        [
+          "2",
+          0.0159
+        ],
+        [
+          "<|im_end|>",
+          0.0005
+        ],
+        [
+          "0",
+          0.0002
+        ],
+        [
+          "3",
+          0.0001
+        ]
+      ],
+      "free_response": "1",
+      "metadata": {
+        "chain_index": 0,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/ACAMLENSE.jpg",
+          "name": "ACAMLENSE.jpg",
+          "role": "A",
+          "chain_index": 0
+        },
+        "correct_option": {
+          "role": "C",
+          "chain_index": 0
+        },
+        "foil_option": {
+          "role": "C",
+          "chain_index": 1
+        }
+      },
+      "reasoning_tokens": 2,
+      "reasoning_finished": true,
+      "stated_answer": "1"
+    },
+    {
+      "trial": 33,
+      "target": 1,
+      "reported": 2,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.0046095725723632585,
+        "2": 0.9953904274276367
+      },
+      "choice_mass": 0.9974302686750889,
+      "top_tokens": [
+        [
+          "2",
+          0.9928
+        ],
+        [
+          "1",
+          0.0046
+        ],
+        [
+          "<|im_end|>",
+          0.0013
+        ],
+        [
+          "0",
+          0.0003
+        ],
+        [
+          "3",
+          0.0002
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 0,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/Amixer29.jpg",
+          "name": "Amixer29.jpg",
+          "role": "A",
+          "chain_index": 0
+        },
+        "correct_option": {
+          "role": "C",
+          "chain_index": 0
+        },
+        "foil_option": {
+          "role": "C",
+          "chain_index": 1
+        }
+      },
+      "reasoning_tokens": 2,
+      "reasoning_finished": true,
+      "stated_answer": "2"
+    },
+    {
+      "trial": 34,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.9875683495542101,
+        "2": 0.01243165044578982
+      },
+      "choice_mass": 0.9980012541636825,
+      "top_tokens": [
+        [
+          "1",
+          0.9856
+        ],
+        [
+          "2",
+          0.0124
+        ],
+        [
+          "0",
+          0.0007
+        ],
+        [
+          "<|im_end|>",
+          0.0006
+        ],
+        [
+          " ",
+          0.0002
+        ]
+      ],
+      "free_response": "1",
+      "metadata": {
+        "chain_index": 0,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/26425112.thl.jpg",
+          "name": "26425112.thl.jpg",
+          "role": "A",
+          "chain_index": 0
+        },
+        "correct_option": {
+          "role": "C",
+          "chain_index": 0
+        },
+        "foil_option": {
+          "role": "C",
+          "chain_index": 1
+        }
+      },
+      "reasoning_tokens": 2,
+      "reasoning_finished": true,
+      "stated_answer": "1"
+    },
+    {
+      "trial": 35,
+      "target": 2,
+      "reported": 1,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.9706877684838745,
+        "2": 0.029312231516125498
+      },
+      "choice_mass": 0.9988991171121597,
+      "top_tokens": [
+        [
+          "1",
+          0.9696
+        ],
+        [
+          "2",
+          0.0293
+        ],
+        [
+          "0",
+          0.0004
+        ],
+        [
+          "<|im_end|>",
+          0.0003
+        ],
+        [
+          "3",
+          0.0001
+        ]
+      ],
+      "free_response": "1",
+      "metadata": {
+        "chain_index": 0,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/Aspeakers4.jpg",
+          "name": "Aspeakers4.jpg",
+          "role": "A",
+          "chain_index": 0
+        },
+        "correct_option": {
+          "role": "C",
+          "chain_index": 0
+        },
+        "foil_option": {
+          "role": "C",
+          "chain_index": 1
+        }
+      },
+      "reasoning_tokens": 2,
+      "reasoning_finished": true,
+      "stated_answer": "1"
+    },
+    {
+      "trial": 36,
+      "target": 2,
+      "reported": 1,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.9796676475334551,
+        "2": 0.020332352466544905
+      },
+      "choice_mass": 0.9983101990073919,
+      "top_tokens": [
+        [
+          "1",
+          0.978
+        ],
+        [
+          "2",
+          0.0203
+        ],
+        [
+          "<|im_end|>",
+          0.0007
+        ],
+        [
+          "0",
+          0.0005
+        ],
+        [
+          "3",
+          0.0001
+        ]
+      ],
+      "free_response": "1",
+      "metadata": {
+        "chain_index": 0,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/22883664.thl.jpg",
+          "name": "22883664.thl.jpg",
+          "role": "A",
+          "chain_index": 0
+        },
+        "correct_option": {
+          "role": "C",
+          "chain_index": 0
+        },
+        "foil_option": {
+          "role": "C",
+          "chain_index": 1
+        }
+      },
+      "reasoning_tokens": 2,
+      "reasoning_finished": true,
+      "stated_answer": "1"
+    },
+    {
+      "trial": 37,
+      "target": 2,
+      "reported": 1,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.9626731123769151,
+        "2": 0.03732688762308494
+      },
+      "choice_mass": 0.9983440786600113,
+      "top_tokens": [
+        [
+          "1",
+          0.9611
+        ],
+        [
+          "2",
+          0.0373
+        ],
+        [
+          "0",
+          0.0007
+        ],
+        [
+          "<|im_end|>",
+          0.0004
+        ],
+        [
+          "3",
+          0.0001
+        ]
+      ],
+      "free_response": "1",
+      "metadata": {
+        "chain_index": 0,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/ACATCAGE.jpg",
+          "name": "ACATCAGE.jpg",
+          "role": "A",
+          "chain_index": 0
+        },
+        "correct_option": {
+          "role": "C",
+          "chain_index": 0
+        },
+        "foil_option": {
+          "role": "C",
+          "chain_index": 1
+        }
+      },
+      "reasoning_tokens": 2,
+      "reasoning_finished": true,
+      "stated_answer": "1"
+    },
+    {
+      "trial": 38,
+      "target": 2,
+      "reported": 1,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.9940889313584861,
+        "2": 0.005911068641513936
+      },
+      "choice_mass": 0.9990252619609237,
+      "top_tokens": [
+        [
+          "1",
+          0.9931
+        ],
+        [
+          "2",
+          0.0059
+        ],
+        [
+          "0",
+          0.0003
+        ],
+        [
+          "<|im_end|>",
+          0.0003
+        ],
+        [
+          "3",
+          0.0001
+        ]
+      ],
+      "free_response": "1",
+      "metadata": {
+        "chain_index": 0,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/26375611.thl.jpg",
+          "name": "26375611.thl.jpg",
+          "role": "A",
+          "chain_index": 0
+        },
+        "correct_option": {
+          "role": "C",
+          "chain_index": 0
+        },
+        "foil_option": {
+          "role": "C",
+          "chain_index": 1
+        }
+      },
+      "reasoning_tokens": 2,
+      "reasoning_finished": true,
+      "stated_answer": "1"
+    },
+    {
+      "trial": 39,
+      "target": 2,
+      "reported": 1,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.9740426436482365,
+        "2": 0.025957356351763522
+      },
+      "choice_mass": 0.9982085227966309,
+      "top_tokens": [
+        [
+          "1",
+          0.9723
+        ],
+        [
+          "2",
+          0.0259
+        ],
+        [
+          "<|im_end|>",
+          0.0006
+        ],
+        [
+          "0",
+          0.0006
+        ],
+        [
+          "3",
+          0.0001
+        ]
+      ],
+      "free_response": "1",
+      "metadata": {
+        "chain_index": 1,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/ABLAKBEN2.jpg",
+          "name": "ABLAKBEN2.jpg",
+          "role": "A",
+          "chain_index": 1
+        },
+        "correct_option": {
+          "role": "C",
+          "chain_index": 1
+        },
+        "foil_option": {
+          "role": "C",
+          "chain_index": 0
+        }
+      },
+      "reasoning_tokens": 2,
+      "reasoning_finished": true,
+      "stated_answer": "1"
+    },
+    {
+      "trial": 40,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.9890130571478619,
+        "2": 0.010986942852138101
+      },
+      "choice_mass": 0.9982051532715559,
+      "top_tokens": [
+        [
+          "1",
+          0.9872
+        ],
+        [
+          "2",
+          0.011
+        ],
+        [
+          "0",
+          0.0006
+        ],
+        [
+          "<|im_end|>",
+          0.0005
+        ],
+        [
+          "3",
+          0.0001
+        ]
+      ],
+      "free_response": "1",
+      "metadata": {
+        "chain_index": 0,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/gumballmachine.jpg",
+          "name": "gumballmachine.jpg",
+          "role": "A",
+          "chain_index": 0
+        },
+        "correct_option": {
+          "role": "C",
+          "chain_index": 0
+        },
+        "foil_option": {
+          "role": "C",
+          "chain_index": 1
+        }
+      },
+      "reasoning_tokens": 2,
+      "reasoning_finished": true,
+      "stated_answer": "1"
+    },
+    {
+      "trial": 41,
+      "target": 1,
+      "reported": 2,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.015906391483524896,
+        "2": 0.9840936085164751
+      },
+      "choice_mass": 0.9986137766391039,
+      "top_tokens": [
+        [
+          "2",
+          0.9827
+        ],
+        [
+          "1",
+          0.0159
+        ],
+        [
+          "<|im_end|>",
+          0.0006
+        ],
+        [
+          "0",
+          0.0002
+        ],
+        [
+          "3",
+          0.0002
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 1,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/22824840.thl.jpg",
+          "name": "22824840.thl.jpg",
+          "role": "A",
+          "chain_index": 1
+        },
+        "correct_option": {
+          "role": "C",
+          "chain_index": 1
+        },
+        "foil_option": {
+          "role": "C",
+          "chain_index": 0
+        }
+      },
+      "reasoning_tokens": 2,
+      "reasoning_finished": true,
+      "stated_answer": "2"
+    },
+    {
+      "trial": 42,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.9859363729473529,
+        "2": 0.014063627052647059
+      },
+      "choice_mass": 0.998723465949297,
+      "top_tokens": [
+        [
+          "1",
+          0.9847
+        ],
+        [
+          "2",
+          0.014
+        ],
+        [
+          "<|im_end|>",
+          0.0005
+        ],
+        [
+          "0",
+          0.0004
+        ],
+        [
+          "3",
+          0.0001
+        ]
+      ],
+      "free_response": "1",
+      "metadata": {
+        "chain_index": 0,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/Afuse11.jpg",
+          "name": "Afuse11.jpg",
+          "role": "A",
+          "chain_index": 0
+        },
+        "correct_option": {
+          "role": "C",
+          "chain_index": 0
+        },
+        "foil_option": {
+          "role": "C",
+          "chain_index": 1
+        }
+      },
+      "reasoning_tokens": 2,
+      "reasoning_finished": true,
+      "stated_answer": "1"
+    },
+    {
+      "trial": 43,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.9796676468116253,
+        "2": 0.020332353188374667
+      },
+      "choice_mass": 0.9985684119164944,
+      "top_tokens": [
+        [
+          "1",
+          0.9783
+        ],
+        [
+          "2",
+          0.0203
+        ],
+        [
+          "<|im_end|>",
+          0.0007
+        ],
+        [
+          "0",
+          0.0003
+        ],
+        [
+          "3",
+          0.0001
+        ]
+      ],
+      "free_response": "1",
+      "metadata": {
+        "chain_index": 1,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/Aangel37.jpg",
+          "name": "Aangel37.jpg",
+          "role": "A",
+          "chain_index": 1
+        },
+        "correct_option": {
+          "role": "C",
+          "chain_index": 1
+        },
+        "foil_option": {
+          "role": "C",
+          "chain_index": 0
+        }
+      },
+      "reasoning_tokens": 2,
+      "reasoning_finished": true,
+      "stated_answer": "1"
+    },
+    {
+      "trial": 44,
+      "target": 2,
+      "reported": 1,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.9796676478012989,
+        "2": 0.020332352198701057
+      },
+      "choice_mass": 0.9984831716865301,
+      "top_tokens": [
+        [
+          "1",
+          0.9782
+        ],
+        [
+          "2",
+          0.0203
+        ],
+        [
+          "<|im_end|>",
+          0.0008
+        ],
+        [
+          "0",
+          0.0004
+        ],
+        [
+          "3",
+          0.0001
+        ]
+      ],
+      "free_response": "1",
+      "metadata": {
+        "chain_index": 0,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/26439297.thl.jpg",
+          "name": "26439297.thl.jpg",
+          "role": "A",
+          "chain_index": 0
+        },
+        "correct_option": {
+          "role": "C",
+          "chain_index": 0
+        },
+        "foil_option": {
+          "role": "C",
+          "chain_index": 1
+        }
+      },
+      "reasoning_tokens": 2,
+      "reasoning_finished": true,
+      "stated_answer": "1"
+    },
+    {
+      "trial": 45,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.966914021402421,
+        "2": 0.03308597859757901
+      },
+      "choice_mass": 0.9986317828297615,
+      "top_tokens": [
+        [
+          "1",
+          0.9656
+        ],
+        [
+          "2",
+          0.033
+        ],
+        [
+          "<|im_end|>",
+          0.0008
+        ],
+        [
+          "0",
+          0.0002
+        ],
+        [
+          "3",
+          0.0001
+        ]
+      ],
+      "free_response": "1",
+      "metadata": {
+        "chain_index": 1,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/panteneshampoing.jpg",
+          "name": "panteneshampoing.jpg",
+          "role": "A",
+          "chain_index": 1
+        },
+        "correct_option": {
+          "role": "C",
+          "chain_index": 1
+        },
+        "foil_option": {
+          "role": "C",
+          "chain_index": 0
+        }
+      },
+      "reasoning_tokens": 2,
+      "reasoning_finished": true,
+      "stated_answer": "1"
+    },
+    {
+      "trial": 46,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.9933071493545675,
+        "2": 0.00669285064543244
+      },
+      "choice_mass": 0.9989004693925381,
+      "top_tokens": [
+        [
+          "1",
+          0.9922
+        ],
+        [
+          "2",
+          0.0067
+        ],
+        [
+          "<|im_end|>",
+          0.0004
+        ],
+        [
+          "0",
+          0.0003
+        ],
+        [
+          "3",
+          0.0001
+        ]
+      ],
+      "free_response": "1",
+      "metadata": {
+        "chain_index": 0,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/Abellows4.jpg",
+          "name": "Abellows4.jpg",
+          "role": "A",
+          "chain_index": 0
+        },
+        "correct_option": {
+          "role": "C",
+          "chain_index": 0
+        },
+        "foil_option": {
+          "role": "C",
+          "chain_index": 1
+        }
+      },
+      "reasoning_tokens": 2,
+      "reasoning_finished": true,
+      "stated_answer": "1"
+    },
+    {
+      "trial": 47,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.997527376695224,
+        "2": 0.0024726233047760397
+      },
+      "choice_mass": 0.9992699294816703,
+      "top_tokens": [
+        [
+          "1",
+          0.9968
+        ],
+        [
+          "2",
+          0.0025
+        ],
+        [
+          "<|im_end|>",
+          0.0003
+        ],
+        [
+          "0",
+          0.0002
+        ],
+        [
+          " ",
+          0.0
+        ]
+      ],
+      "free_response": "Based on the analysis of the provided images and word pairs:\n\n- The cue image is a blue, industrial-style spotlight or floodlight.\n- The word **BARN** is associated with the image of reindeer antlers. This is a direct association, as reindeer are often found in barns.\n- The word **CONVICT** is associated with the image of a galloping horse. This is a direct association, as a convict is a person who has been sentenced to prison, and the image of a horse is a common symbol for the American prison system.\n\nThe question asks which word is *indirectly* associated with the cue image (the spotlight).\n- The association between the spotlight and the word **BARN** is indirect. A spotlight is a tool used to illuminate a space, such as a barn, for activities like farming or inspection.\n- The association between the spotlight and the word **CONVICT** is not present in the provided information.\n\nTherefore, the word indirectly associated with the cue image is BARN.\n\n1",
+      "metadata": {
+        "chain_index": 1,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/ASECCAME3.jpg",
+          "name": "ASECCAME3.jpg",
+          "role": "A",
+          "chain_index": 1
+        },
+        "correct_option": {
+          "role": "C",
+          "chain_index": 1
+        },
+        "foil_option": {
+          "role": "C",
+          "chain_index": 0
+        }
+      },
+      "reasoning_tokens": 221,
+      "reasoning_finished": true,
+      "stated_answer": null
+    },
+    {
+      "trial": 48,
+      "target": 2,
+      "reported": 1,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.9525741294098111,
+        "2": 0.047425870590188914
+      },
+      "choice_mass": 0.9982783310115337,
+      "top_tokens": [
+        [
+          "1",
+          0.9509
+        ],
+        [
+          "2",
+          0.0473
+        ],
+        [
+          "0",
+          0.0008
+        ],
+        [
+          "<|im_end|>",
+          0.0005
+        ],
+        [
+          "3",
+          0.0001
+        ]
+      ],
+      "free_response": "1",
+      "metadata": {
+        "chain_index": 0,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/AAMBULAN7.jpg",
+          "name": "AAMBULAN7.jpg",
+          "role": "A",
+          "chain_index": 0
+        },
+        "correct_option": {
+          "role": "C",
+          "chain_index": 0
+        },
+        "foil_option": {
+          "role": "C",
+          "chain_index": 1
+        }
+      },
+      "reasoning_tokens": 2,
+      "reasoning_finished": true,
+      "stated_answer": "1"
+    },
+    {
+      "trial": 49,
+      "target": 2,
+      "reported": 1,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.982013788908704,
+        "2": 0.017986211091295952
+      },
+      "choice_mass": 0.9984527621418238,
+      "top_tokens": [
+        [
+          "1",
+          0.9805
+        ],
+        [
+          "2",
+          0.018
+        ],
+        [
+          "<|im_end|>",
+          0.0006
+        ],
+        [
+          "0",
+          0.0004
+        ],
+        [
+          "3",
+          0.0001
+        ]
+      ],
+      "free_response": "1",
+      "metadata": {
+        "chain_index": 1,
+        "cue_item": {
+          "path": "memory_datasets/Brady2008Objects/ABACKSPAC.jpg",
+          "name": "ABACKSPAC.jpg",
+          "role": "A",
+          "chain_index": 1
+        },
+        "correct_option": {
+          "role": "C",
+          "chain_index": 1
+        },
+        "foil_option": {
+          "role": "C",
+          "chain_index": 0
+        }
+      },
+      "reasoning_tokens": 2,
+      "reasoning_finished": true,
+      "stated_answer": "1"
+    }
+  ],
+  "metrics": {
+    "accuracy": 0.56,
+    "n_correct": 28,
+    "total": 50,
+    "free_text_bare_digit": 0.96,
+    "mean_p_chosen": 0.9828771495533627,
+    "mean_choice_mass": 0.9984763781819492,
+    "frac_low_mass": 0.0,
+    "mean_reasoning_tokens": 8.2,
+    "frac_reasoning_cut_off": 0.0,
+    "frac_stated_answer": 0.96,
+    "stated_forced_agreement": 1.0,
+    "response_distribution": {
+      "1": 37,
+      "2": 13
+    }
+  }
+}

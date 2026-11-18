@@ -1,0 +1,2152 @@
+{
+  "run": {
+    "model": {
+      "name": "qwen3.5-2b",
+      "model_id": "Qwen/Qwen3.5-2B",
+      "max_image_size": 512,
+      "max_new_tokens": 512,
+      "scoring": "reason_then_choose"
+    },
+    "task": "associative_inference",
+    "condition": {
+      "dataset": "Brady2008",
+      "pair_type": "word",
+      "probe": "direct_ab",
+      "n_chains": 2,
+      "n_images": 6,
+      "prompt": "original",
+      "n_trials": 50
+    },
+    "seed": 0
+  },
+  "config": {
+    "run_name": "assoc_inf_reasoned",
+    "output_dir": "results",
+    "seeds": [
+      0
+    ],
+    "models": [
+      {
+        "name": "qwen3.5-2b",
+        "model_id": "Qwen/Qwen3.5-2B",
+        "max_image_size": 512,
+        "max_new_tokens": 512,
+        "scoring": "reason_then_choose"
+      },
+      {
+        "name": "qwen3.5-4b",
+        "model_id": "Qwen/Qwen3.5-4B",
+        "max_image_size": 512,
+        "max_new_tokens": 512,
+        "scoring": "reason_then_choose"
+      }
+    ],
+    "tasks": [
+      {
+        "task": "associative_inference",
+        "datasets": [
+          "Brady2008"
+        ],
+        "pair_types": [
+          "image",
+          "word"
+        ],
+        "probe_types": [
+          "inference",
+          "direct_ab",
+          "direct_bc"
+        ],
+        "n_chains": [
+          2,
+          5
+        ],
+        "prompts": [
+          "original",
+          "cue_turn",
+          "labeled"
+        ],
+        "n_trials": 50
+      }
+    ]
+  },
+  "provenance": {
+    "config_hash": "8b8bbf756a2e",
+    "gpu": "NVIDIA H200",
+    "git_commit": null,
+    "git_dirty": false,
+    "torch": "2.10.0+cu128",
+    "transformers": "5.17.0"
+  },
+  "elapsed_s": 193.5,
+  "peak_gpu_gb": 4.62,
+  "error": null,
+  "trials": [
+    {
+      "trial": 0,
+      "target": 2,
+      "reported": 1,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.9241418188464601,
+        "2": 0.07585818115353989
+      },
+      "choice_mass": 0.9940138831734657,
+      "top_tokens": [
+        [
+          "1",
+          0.9186
+        ],
+        [
+          "2",
+          0.0754
+        ],
+        [
+          "3",
+          0.002
+        ],
+        [
+          "<|im_end|>",
+          0.002
+        ],
+        [
+          "4",
+          0.0005
+        ]
+      ],
+      "free_response": "1",
+      "metadata": {
+        "chain_index": 0,
+        "foil_chain_index": 1
+      },
+      "reasoning_tokens": 2,
+      "reasoning_finished": true,
+      "stated_answer": "1"
+    },
+    {
+      "trial": 1,
+      "target": 2,
+      "reported": 1,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.9902915235049289,
+        "2": 0.009708476495071111
+      },
+      "choice_mass": 0.9989548306912184,
+      "top_tokens": [
+        [
+          "1",
+          0.9893
+        ],
+        [
+          "2",
+          0.0097
+        ],
+        [
+          "<|im_end|>",
+          0.0005
+        ],
+        [
+          "0",
+          0.0002
+        ],
+        [
+          "3",
+          0.0001
+        ]
+      ],
+      "free_response": "Based on the analysis of the provided image pairs, here is the logical deduction:\n\n1.  **Analyze the Cues:**\n    - The first image (labeled as image 1) is a black floppy disk.\n    - The second image (labeled as image 2) is a black compact powder compact with a mirror and a brush.\n\n2.  **Analyze the Word Pairs:**\n    - The first word pair is **DECK**. A \"deck\" is a term often used to describe a collection of items, such as a deck of cards or a deck of floppy disks.\n    - The second word pair is **PERMIT**. A \"permit\" is a document that allows someone to do something, such as enter a restricted area or use a specific service.\n\n3.  **Find the Hidden Connection:**\n    - The connection between the first word pair (\"DECK\") and the first image (floppy disk) is that a floppy disk is a type of **DECK** of data.\n    - The connection between the second word pair (\"PERMIT\") and the second image (compact powder compact) is that a compact powder compact is a type of **PERMIT** for applying makeup.\n\n4.  **Match the Cues to the Pairs:**\n    - The cue image (floppy disk) corresponds to the first word pair (\"DECK\").\n    - The cue image (compact powder compact) corresponds to the second word pair (\"PERMIT\").\n\nTherefore, the image that was paired with the cue image (the floppy disk) is the one that corresponds to the \"DECK\" pair.\n\n1",
+      "metadata": {
+        "chain_index": 0,
+        "foil_chain_index": 1
+      },
+      "reasoning_tokens": 344,
+      "reasoning_finished": true,
+      "stated_answer": null
+    },
+    {
+      "trial": 2,
+      "target": 1,
+      "reported": 2,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.015906391516059833,
+        "2": 0.9840936084839401
+      },
+      "choice_mass": 0.9974151346832514,
+      "top_tokens": [
+        [
+          "2",
+          0.9815
+        ],
+        [
+          "1",
+          0.0159
+        ],
+        [
+          "3",
+          0.001
+        ],
+        [
+          "<|im_end|>",
+          0.0008
+        ],
+        [
+          "4",
+          0.0003
+        ]
+      ],
+      "free_response": "Based on the analysis of the provided image pairs, here is the logical deduction:\n\n1.  **Analyze the Pairs:**\n    -   The first pair consists of a **sunflower** and a **green monster pumpkin**.\n    -   The second pair consists of a **film reel** and a **blue roller skate**.\n\n2.  **Identify the Hidden Connection:**\n    -   The first pair (sunflower and monster pumpkin) is a classic example of a **joke pair**. The sunflower is often used as a metaphor for a person who is \"green\" (unlucky) or a \"monster\" (bad luck).\n    -   The second pair (film reel and roller skate) is a **pun**. A film reel is a part of a movie, and a roller skate is a type of footwear. The pun is that a roller skate is a \"movie\" (a movie is a roller skate).\n\n3.  **Connect the Cues:**\n    -   The cue image is the **film reel**.\n    -   The question asks which of the two images was paired with the cue image.\n    -   The film reel is part of the second pair, which is the **film reel and roller skate** pair.\n\nTherefore, the image paired with the cue image is the roller skate.\n\n2",
+      "metadata": {
+        "chain_index": 1,
+        "foil_chain_index": 0
+      },
+      "reasoning_tokens": 281,
+      "reasoning_finished": true,
+      "stated_answer": null
+    },
+    {
+      "trial": 3,
+      "target": 2,
+      "reported": 2,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.0035936026755499038,
+        "2": 0.9964063973244501
+      },
+      "choice_mass": 0.9983396856114268,
+      "top_tokens": [
+        [
+          "2",
+          0.9948
+        ],
+        [
+          "1",
+          0.0036
+        ],
+        [
+          "<|im_end|>",
+          0.0013
+        ],
+        [
+          "3",
+          0.0001
+        ],
+        [
+          "0",
+          0.0001
+        ]
+      ],
+      "free_response": "Based on the analysis of the provided image pairs, here is the logical deduction:\n\n1.  **Analyze the \"AB pair\" (Image 1 and Image 2):**\n    -   **Image 1** shows a wooden tree stand with green beads.\n    -   **Image 2** shows a sensor probe with a black cable.\n    -   There is no obvious, direct connection between these two items.\n\n2.  **Analyze the \"BC pair\" (Image 3 and Image 4):**\n    -   **Image 3** shows a wooden squeegee.\n    -   **Image 4** shows a stuffed dog.\n    -   There is no obvious, direct connection between these two items.\n\n3.  **Analyze the \"Word pair\" (WASHER and PORPOISE):**\n    -   **WASHER** is a type of cleaning tool.\n    -   **PORPOISE** is an animal known for its ability to swim.\n    -   The connection here is that a **porpoise** is a type of **washer** (or more accurately, a type of **wash**). This is a semantic connection.\n\n4.  **Connect the findings:**\n    -   The \"AB pair\" (Image 1 and Image 2) and the \"BC pair\" (Image 3 and Image 4) are presented as a sequence.\n    -   The \"Word pair\" (WASHER and PORPOISE) is presented as a separate, distinct pair.\n    -   The question asks to identify which of the two images (1 or 2) was paired with the cue image (Image 3).\n    -   Since the cue image (Image 3) is part of the \"BC pair\", and the \"BC pair\" is presented alongside the \"AB pair\", the question is asking to identify the partner of the \"BC pair\" within the context of the \"AB pair\".\n    -   The \"AB pair\" consists of Image 1 and Image 2.\n    -   Therefore, the image paired with the cue image (Image 3) is Image 2.\n\n2",
+      "metadata": {
+        "chain_index": 1,
+        "foil_chain_index": 0
+      },
+      "reasoning_tokens": 461,
+      "reasoning_finished": true,
+      "stated_answer": "2"
+    },
+    {
+      "trial": 4,
+      "target": 2,
+      "reported": 1,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.9933071491234854,
+        "2": 0.00669285087651465
+      },
+      "choice_mass": 0.9992497060447931,
+      "top_tokens": [
+        [
+          "1",
+          0.9926
+        ],
+        [
+          "2",
+          0.0067
+        ],
+        [
+          "<|im_end|>",
+          0.0003
+        ],
+        [
+          "0",
+          0.0001
+        ],
+        [
+          "3",
+          0.0001
+        ]
+      ],
+      "free_response": "Based on the analysis of the provided image pairs, here is the logical deduction:\n\n1.  **Analyze the \"AB pair\":**\n    -   The first image is a **pumpkin**.\n    -   The second image is a **glass goblet**.\n    -   The connection is that the pumpkin is a **vegetable** and the goblet is a **drinkware**.\n\n2.  **Analyze the \"BC pair\":**\n    -   The first image is a **wooden basket**.\n    -   The second image is a **wooden basket**.\n    -   The connection is that they are the **same object**.\n\n3.  **Analyze the \"Word: FIELD\" and \"Word: TROUSERS\":**\n    -   The word \"FIELD\" is a place where you can find **vegetables** (like pumpkins).\n    -   The word \"TROUSERS\" is a type of **garment** (like the goblet).\n\n4.  **Connect the \"Word\" pairs to the images:**\n    -   The \"AB pair\" (pumpkin and goblet) represents the relationship between a **vegetable** and a **drinkware**.\n    -   The \"BC pair\" (basket and basket) represents the relationship between two **garments** (or objects).\n    -   The \"Word\" pairs (FIELD and TROUSERS) represent the relationship between a **place** and a **garment**.\n\n5.  **Find the matching image pair:**\n    -   We need a pair that shows a **place** and a **garment**.\n    -   The **wooden basket** is a place (or container) and the **glass goblet** is a garment.\n    -   Therefore, the image of the **pumpkin** (which is a vegetable) is paired with the image of the **glass goblet** (which is a garment).\n\nThe image of the pumpkin is paired with the image of the glass goblet.\n\n1",
+      "metadata": {
+        "chain_index": 1,
+        "foil_chain_index": 0
+      },
+      "reasoning_tokens": 435,
+      "reasoning_finished": true,
+      "stated_answer": null
+    },
+    {
+      "trial": 5,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.9975273767085291,
+        "2": 0.0024726232914709643
+      },
+      "choice_mass": 0.9986203014850616,
+      "top_tokens": [
+        [
+          "1",
+          0.9962
+        ],
+        [
+          "2",
+          0.0025
+        ],
+        [
+          "<|im_end|>",
+          0.0007
+        ],
+        [
+          "3",
+          0.0003
+        ],
+        [
+          "0",
+          0.0001
+        ]
+      ],
+      "free_response": "Based on the analysis of the provided image pairs, here is the logical deduction:\n\n1.  **Analyze the Pairs:**\n    -   The first pair consists of a yellow bowl containing crayons.\n    -   The second pair consists of a light green, U-shaped neck pillow.\n    -   The third pair consists of a vintage television set.\n    -   The fourth pair consists of a green artichoke.\n\n2.  **Identify the Hidden Connection:**\n    -   The first image (yellow bowl) and the third image (television) are both associated with the concept of **entertainment** or **media**.\n    -   The second image (neck pillow) and the fourth image (artichoke) are both associated with **food** or **snacks**.\n\n3.  **Apply the Connection to the Cue:**\n    -   The cue image is the television set.\n    -   Following the established pattern, the image paired with the television must be the one that represents entertainment.\n    -   The only image that fits this category is the yellow bowl with crayons.\n\nTherefore, the image paired with the cue image is the first one.\n\n1",
+      "metadata": {
+        "chain_index": 1,
+        "foil_chain_index": 0
+      },
+      "reasoning_tokens": 251,
+      "reasoning_finished": true,
+      "stated_answer": null
+    },
+    {
+      "trial": 6,
+      "target": 2,
+      "reported": 1,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.9959298621444573,
+        "2": 0.004070137855542692
+      },
+      "choice_mass": 0.9995485995896161,
+      "top_tokens": [
+        [
+          "1",
+          0.9955
+        ],
+        [
+          "2",
+          0.0041
+        ],
+        [
+          "<|im_end|>",
+          0.0003
+        ],
+        [
+          "0",
+          0.0001
+        ],
+        [
+          "3",
+          0.0
+        ]
+      ],
+      "free_response": "Based on the analysis of the provided image pairs, here is the logical deduction:\n\n- **Pair (AB):** The first image is a toy robot, and the second image is a cinnamon roll. The connection is that both are items that can be used as a toy.\n- **Pair (BC):** The first image is a toy robot, and the second image is a cinnamon roll. The connection is that both are items that can be used as a snack.\n\nThe cue image is the Tower Bridge. We need to find which of the two images (the robot or the cinnamon roll) was paired with it.\n\n- The Tower Bridge is a famous landmark in London.\n- The toy robot is a toy.\n- The cinnamon roll is a food item.\n\nThe most logical connection between a landmark and a toy is that the landmark is a toy. Therefore, the Tower Bridge was paired with the toy robot.\n\nThe image that was paired with the cue image is the one showing the robot.\n\n1",
+      "metadata": {
+        "chain_index": 1,
+        "foil_chain_index": 0
+      },
+      "reasoning_tokens": 207,
+      "reasoning_finished": true,
+      "stated_answer": null
+    },
+    {
+      "trial": 7,
+      "target": 1,
+      "reported": 2,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.0017007225958065783,
+        "2": 0.9982992774041934
+      },
+      "choice_mass": 0.996295194607228,
+      "top_tokens": [
+        [
+          "2",
+          0.9946
+        ],
+        [
+          "<|im_end|>",
+          0.0025
+        ],
+        [
+          "1",
+          0.0017
+        ],
+        [
+          "3",
+          0.0004
+        ],
+        [
+          "4",
+          0.0002
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 1,
+        "foil_chain_index": 0
+      },
+      "reasoning_tokens": 2,
+      "reasoning_finished": true,
+      "stated_answer": "2"
+    },
+    {
+      "trial": 8,
+      "target": 2,
+      "reported": 2,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.01590639142295397,
+        "2": 0.9840936085770461
+      },
+      "choice_mass": 0.9984047561883926,
+      "top_tokens": [
+        [
+          "2",
+          0.9825
+        ],
+        [
+          "1",
+          0.0159
+        ],
+        [
+          "<|im_end|>",
+          0.0012
+        ],
+        [
+          "0",
+          0.0002
+        ],
+        [
+          "3",
+          0.0001
+        ]
+      ],
+      "free_response": "Based on the analysis of the provided image pairs, here is the logical deduction:\n\n1.  **Analyze the Pairs:**\n    -   The first image is a brass horn with a black, possibly leather, mouthpiece.\n    -   The second image is a blue, marbled snare drum.\n    -   The third image is a camel.\n    -   The fourth image is a white plastic bag containing goldfish.\n\n2.  **Identify the Connections:**\n    -   The first image (horn) and the second image (drum) are paired. This is a common musical instrument pair.\n    -   The third image (camel) and the fourth image (bag of goldfish) are paired. This is a common animal and its container pair.\n\n3.  **Evaluate the Cues:**\n    -   The cue image is the first image: the brass horn.\n    -   The question asks which of the two images (the drum or the bag) was paired with the cue image.\n\n4.  **Conclusion:**\n    -   The cue image (horn) is paired with the second image (drum).\n    -   Therefore, the correct answer is the second image.\n\n2",
+      "metadata": {
+        "chain_index": 0,
+        "foil_chain_index": 1
+      },
+      "reasoning_tokens": 260,
+      "reasoning_finished": true,
+      "stated_answer": null
+    },
+    {
+      "trial": 9,
+      "target": 2,
+      "reported": 1,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.9840936083009167,
+        "2": 0.015906391699083217
+      },
+      "choice_mass": 0.9048008108511567,
+      "top_tokens": [
+        [
+          "1",
+          0.8904
+        ],
+        [
+          "3",
+          0.0938
+        ],
+        [
+          "2",
+          0.0144
+        ],
+        [
+          "<|im_end|>",
+          0.0007
+        ],
+        [
+          "4",
+          0.0002
+        ]
+      ],
+      "free_response": "Based on the analysis of the provided image pairs, here is the logical deduction:\n\n- **Image 1** is a black comb.\n- **Image 2** is a wooden box filled with various types of candy.\n- **Image 3** is a green tray with a rooster painted on it.\n- **Image 4** is a dune buggy.\n- **Image 5** is the same candy box as Image 2.\n\nThe task is to find the pair for the cue image, which is **Image 3 (the green tray with the rooster)**.\n\n- The pair for the rooster tray is the rooster tray itself, which is **Image 3**.\n- The pair for the candy box is the candy box itself, which is **Image 5**.\n\nSince the question asks to choose between the first image below (Image 1) and the second image below (Image 2), and neither of them is the correct pair for the rooster tray, we must look for the other pair. The correct pair for the rooster tray is the rooster tray (Image 3), and the correct pair for the candy box is the candy box (Image 5).\n\nTherefore, the image that was paired with the cue image (the rooster tray) is the rooster tray itself.\n\n1",
+      "metadata": {
+        "chain_index": 1,
+        "foil_chain_index": 0
+      },
+      "reasoning_tokens": 279,
+      "reasoning_finished": true,
+      "stated_answer": null
+    },
+    {
+      "trial": 10,
+      "target": 1,
+      "reported": 2,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.004070137775276852,
+        "2": 0.9959298622247231
+      },
+      "choice_mass": 0.9945864626206458,
+      "top_tokens": [
+        [
+          "2",
+          0.9905
+        ],
+        [
+          "1",
+          0.004
+        ],
+        [
+          "<|im_end|>",
+          0.0032
+        ],
+        [
+          "3",
+          0.001
+        ],
+        [
+          "4",
+          0.0004
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 1,
+        "foil_chain_index": 0
+      },
+      "reasoning_tokens": 2,
+      "reasoning_finished": true,
+      "stated_answer": "2"
+    },
+    {
+      "trial": 11,
+      "target": 2,
+      "reported": 2,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.02297737110638472,
+        "2": 0.9770226288936152
+      },
+      "choice_mass": 0.9993188828229904,
+      "top_tokens": [
+        [
+          "2",
+          0.9764
+        ],
+        [
+          "1",
+          0.023
+        ],
+        [
+          "<|im_end|>",
+          0.0005
+        ],
+        [
+          "0",
+          0.0001
+        ],
+        [
+          "3",
+          0.0
+        ]
+      ],
+      "free_response": "Based on the analysis of the provided image pairs, here is the logical deduction:\n\n- **Image 1** is a black lanyard with a red tip.\n- **Image 2** is a wooden mallet.\n- **Image 3** is a golden saxophone.\n- **Image 4** is a beige electronic component.\n\nThe pairs are:\n- (AB pair): Image 1 (lanyard) and Image 2 (mallet)\n- (BC pair): Image 3 (saxophone) and Image 4 (component)\n\nThe question asks to identify the image paired with the cue image (Image 1). According to the established pairs, Image 1 is paired with Image 2.\n\nTherefore, the correct image is the second one.",
+      "metadata": {
+        "chain_index": 0,
+        "foil_chain_index": 1
+      },
+      "reasoning_tokens": 166,
+      "reasoning_finished": true,
+      "stated_answer": null
+    },
+    {
+      "trial": 12,
+      "target": 2,
+      "reported": 2,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.002472623267555512,
+        "2": 0.9975273767324445
+      },
+      "choice_mass": 0.9958241286221892,
+      "top_tokens": [
+        [
+          "2",
+          0.9934
+        ],
+        [
+          "<|im_end|>",
+          0.0028
+        ],
+        [
+          "1",
+          0.0025
+        ],
+        [
+          "3",
+          0.0005
+        ],
+        [
+          "4",
+          0.0002
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 1,
+        "foil_chain_index": 0
+      },
+      "reasoning_tokens": 2,
+      "reasoning_finished": true,
+      "stated_answer": "2"
+    },
+    {
+      "trial": 13,
+      "target": 2,
+      "reported": 2,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.0035936026932726064,
+        "2": 0.9964063973067274
+      },
+      "choice_mass": 0.9989058184437454,
+      "top_tokens": [
+        [
+          "2",
+          0.9953
+        ],
+        [
+          "1",
+          0.0036
+        ],
+        [
+          "<|im_end|>",
+          0.0007
+        ],
+        [
+          "0",
+          0.0001
+        ],
+        [
+          " ",
+          0.0001
+        ]
+      ],
+      "free_response": "Based on the analysis of the provided image pairs, here is the logical deduction:\n\n1.  **Analyze the first pair (AB):**\n    -   The first image is a brown paper bag.\n    -   The second image is a black floppy disk.\n    -   The connection between these two items is that they are both **packaging materials** used for storing and transporting goods.\n\n2.  **Analyze the second pair (BC):**\n    -   The first image is a wooden honey dipper.\n    -   The second image is a black floppy disk.\n    -   The connection between these two items is that they are both **objects that are often found in a cellar** (a storage room).\n\n3.  **Identify the hidden connection:**\n    -   The question asks to find the image paired with the cue image (the brown paper bag).\n    -   The brown paper bag is a type of **packaging**.\n    -   The black floppy disk is a type of **packaging** (specifically, a data storage medium).\n    -   Therefore, the image paired with the brown paper bag is the one that is also a form of packaging.\n\n4.  **Conclusion:**\n    -   The image that is a form of packaging is the black floppy disk.\n    -   This corresponds to the second image in the sequence.\n\n2",
+      "metadata": {
+        "chain_index": 0,
+        "foil_chain_index": 1
+      },
+      "reasoning_tokens": 293,
+      "reasoning_finished": true,
+      "stated_answer": null
+    },
+    {
+      "trial": 14,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.9465966646262708,
+        "2": 0.05340333537372918
+      },
+      "choice_mass": 0.9956523776054382,
+      "top_tokens": [
+        [
+          "1",
+          0.9425
+        ],
+        [
+          "2",
+          0.0532
+        ],
+        [
+          "<|im_end|>",
+          0.0021
+        ],
+        [
+          "3",
+          0.0008
+        ],
+        [
+          "0",
+          0.0005
+        ]
+      ],
+      "free_response": "1",
+      "metadata": {
+        "chain_index": 0,
+        "foil_chain_index": 1
+      },
+      "reasoning_tokens": 2,
+      "reasoning_finished": true,
+      "stated_answer": "1"
+    },
+    {
+      "trial": 15,
+      "target": 1,
+      "reported": 2,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.000804085915220159,
+        "2": 0.9991959140847798
+      },
+      "choice_mass": 0.9984140949673019,
+      "top_tokens": [
+        [
+          "2",
+          0.9976
+        ],
+        [
+          "1",
+          0.0008
+        ],
+        [
+          "<|im_end|>",
+          0.0007
+        ],
+        [
+          "4",
+          0.0005
+        ],
+        [
+          "0",
+          0.0001
+        ]
+      ],
+      "free_response": "Based on the analysis of the provided image pairs, here is the logical deduction:\n\n1.  **Analyze the Pairs:**\n    -   The first image is a **gold-colored crystal ball** on a stand.\n    -   The second image is a **brown, textured drawstring bag**.\n    -   The third image is a **white wedding cake**.\n    -   The fourth image is a **wooden, brass-encased battery**.\n\n2.  **Identify the Hidden Connection:**\n    -   The first image (crystal ball) and the fourth image (battery) are both associated with the concept of **energy** or **power**. A crystal ball is often used for divination, which is based on the belief that it can reveal hidden energy or information. A battery is a device that stores and releases electrical energy.\n    -   The second image (bag) and the third image (cake) are both associated with **celebrations** or **weddings**. A drawstring bag is commonly used to hold gifts for a wedding, and a wedding cake is a central part of a wedding celebration.\n\n3.  **Match the Cue Image:**\n    -   The cue image is the **gold-colored crystal ball**.\n    -   Following the pattern established in step 2, the image paired with it must be the one associated with **energy/power**.\n    -   The image that fits this description is the **wooden, brass-encased battery**.\n\nTherefore, the image paired with the cue image is the fourth one.\n\n4.  **Select the Correct Option:**\n    -   The options are:\n        -   1: The brown drawstring bag\n        -   2: The wooden battery\n    -   The correct option is 2.",
+      "metadata": {
+        "chain_index": 0,
+        "foil_chain_index": 1
+      },
+      "reasoning_tokens": 377,
+      "reasoning_finished": true,
+      "stated_answer": null
+    },
+    {
+      "trial": 16,
+      "target": 2,
+      "reported": 2,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.004070137540910627,
+        "2": 0.9959298624590893
+      },
+      "choice_mass": 0.9985622405074537,
+      "top_tokens": [
+        [
+          "2",
+          0.9945
+        ],
+        [
+          "1",
+          0.0041
+        ],
+        [
+          "<|im_end|>",
+          0.0009
+        ],
+        [
+          "3",
+          0.0002
+        ],
+        [
+          "0",
+          0.0002
+        ]
+      ],
+      "free_response": "Based on the analysis of the provided image pairs, here is the logical deduction:\n\n- **Image 1** is a **WHEEL**.\n- **Image 2** is a **CHAMPAGNE** bottle.\n\nThe question asks to identify which of the two images was paired with the cue image (the wheel).\n\n- The first image in the sequence is the wheel.\n- The second image in the sequence is the champagne bottle.\n\nTherefore, the image that was paired with the wheel is the second one.\n\n2",
+      "metadata": {
+        "chain_index": 1,
+        "foil_chain_index": 0
+      },
+      "reasoning_tokens": 111,
+      "reasoning_finished": true,
+      "stated_answer": null
+    },
+    {
+      "trial": 17,
+      "target": 2,
+      "reported": 2,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.0203323527162481,
+        "2": 0.9796676472837519
+      },
+      "choice_mass": 0.998257327824831,
+      "top_tokens": [
+        [
+          "2",
+          0.978
+        ],
+        [
+          "1",
+          0.0203
+        ],
+        [
+          "<|im_end|>",
+          0.001
+        ],
+        [
+          "4",
+          0.0004
+        ],
+        [
+          "3",
+          0.0001
+        ]
+      ],
+      "free_response": "Based on the analysis of the provided pairs, here is the logical deduction:\n\n1.  **Analyze the pairs:**\n    -   The first image is a metal strainer.\n    -   The second image is a green hammock.\n    -   The third image is a football player.\n    -   The fourth image is a green hammock.\n\n2.  **Identify the hidden connections:**\n    -   The first image (strainer) and the fourth image (hammock) are paired.\n    -   The second image (hammock) and the third image (football player) are paired.\n\n3.  **Apply the logic to the cue image:**\n    -   The cue image is the first image, the metal strainer.\n    -   According to the established pattern, the strainer is paired with the hammock.\n    -   Therefore, the correct image to pair with the strainer is the second image, which is the green hammock.\n\nThe image that was paired with the cue image is the second one.",
+      "metadata": {
+        "chain_index": 0,
+        "foil_chain_index": 1
+      },
+      "reasoning_tokens": 224,
+      "reasoning_finished": true,
+      "stated_answer": null
+    },
+    {
+      "trial": 18,
+      "target": 2,
+      "reported": 2,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.005220125780030609,
+        "2": 0.9947798742199694
+      },
+      "choice_mass": 0.9980503576807678,
+      "top_tokens": [
+        [
+          "2",
+          0.9928
+        ],
+        [
+          "1",
+          0.0052
+        ],
+        [
+          "<|im_end|>",
+          0.0013
+        ],
+        [
+          "3",
+          0.0002
+        ],
+        [
+          "0",
+          0.0001
+        ]
+      ],
+      "free_response": "Based on the analysis of the provided image pairs, here is the logical deduction:\n\n1.  **Analyze the Pairs:**\n    -   **Pair (AB):** The first image is a bottle of Pantene hair product. The second image is a red Nintendo Game Boy. The connection is that both are items of consumer electronics.\n    -   **Pair (BC):** The first image is a red Nintendo Game Boy. The second image is a pair of cotton swabs (Q-tips). The connection is that both are items of consumer electronics.\n\n2.  **Analyze the Cue Image:**\n    -   The cue image is the red Nintendo Game Boy.\n\n3.  **Determine the Matching Pair:**\n    -   The question asks which of the two images (the red Game Boy or the cotton swabs) was paired with the cue image.\n    -   Since the cue image is the red Game Boy, it is the first item in the (BC) pair.\n    -   Therefore, the second image in the (BC) pair, the cotton swabs, is the one that was paired with it.\n\n4.  **Identify the Image Number:**\n    -   The first image in the (BC) pair is the red Game Boy.\n    -   The second image in the (BC) pair is the cotton swabs.\n    -   The question asks for the number of the image that was paired with the cue. This corresponds to the second image in the (BC) pair.\n\n2",
+      "metadata": {
+        "chain_index": 1,
+        "foil_chain_index": 0
+      },
+      "reasoning_tokens": 321,
+      "reasoning_finished": true,
+      "stated_answer": null
+    },
+    {
+      "trial": 19,
+      "target": 1,
+      "reported": 2,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.0035936025153187902,
+        "2": 0.9964063974846812
+      },
+      "choice_mass": 0.9951236036140472,
+      "top_tokens": [
+        [
+          "2",
+          0.9915
+        ],
+        [
+          "1",
+          0.0036
+        ],
+        [
+          "<|im_end|>",
+          0.0032
+        ],
+        [
+          "3",
+          0.0007
+        ],
+        [
+          "0",
+          0.0003
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 1,
+        "foil_chain_index": 0
+      },
+      "reasoning_tokens": 2,
+      "reasoning_finished": true,
+      "stated_answer": "2"
+    },
+    {
+      "trial": 20,
+      "target": 1,
+      "reported": 2,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.11920291723683529,
+        "2": 0.8807970827631647
+      },
+      "choice_mass": 0.9911731705069542,
+      "top_tokens": [
+        [
+          "2",
+          0.873
+        ],
+        [
+          "1",
+          0.1182
+        ],
+        [
+          "<|im_end|>",
+          0.0046
+        ],
+        [
+          "3",
+          0.0028
+        ],
+        [
+          "0",
+          0.0004
+        ]
+      ],
+      "free_response": "Based on the analysis of the provided image pairs, here is the logical deduction:\n\n1.  **Analyze the Pairs:**\n    -   The first pair consists of a wooden toy swing and a wooden toy swing.\n    -   The second pair consists of a green bean and a green bean.\n    -   The third pair consists of a pair of binoculars and a pair of binoculars.\n\n2.  **Identify the Pattern:**\n    -   The pattern is a simple repetition of the same object.\n    -   The first image in each pair is identical to the second image in that pair.\n\n3.  **Apply the Pattern to the Cue:**\n    -   The cue image is the green bean.\n    -   We need to find the image that is identical to the green bean.\n    -   Looking at the options provided:\n        -   Image 1 is a pair of binoculars.\n        -   Image 2 is a wooden swing.\n    -   Neither of these options is a green bean.\n\n4.  **Re-evaluate the Question:**\n    -   The question asks \"Which of these two images was paired with the cue image?\". This implies one of the options *should* be the correct answer.\n    -   Let's reconsider the pairs. Perhaps the \"AB pair\" and \"BC pair\" are not just simple repetitions but have a more complex relationship.\n    -   Let's look at the \"Word: JOINT\" and \"Word: BADGE\" clues.\n        -   \"JOINT\" is a synonym for \"BADGE\" in the context of a watch or a piece of jewelry.\n        -   This suggests a relationship of synonymy or association.\n    -   Let's re-examine the image pairs with this new perspective.\n        -   The first pair (swing, swing) could represent a \"joint\" or connection.\n        -   The second pair (bean, bean) could represent a \"badge\" or a mark.\n        -   The third pair (binoculars, binoculars) could represent a \"joint\" or connection.\n    -   However, the most direct and obvious pattern is the simple repetition. The cue is a bean, and the only bean in the list is the second image.\n\nLet's assume the question is straightforward and there is a typo in the options or my interpretation. The only image that is",
+      "metadata": {
+        "chain_index": 1,
+        "foil_chain_index": 0
+      },
+      "reasoning_tokens": 512,
+      "reasoning_finished": false,
+      "stated_answer": null
+    },
+    {
+      "trial": 21,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.9324533058348039,
+        "2": 0.06754669416519604
+      },
+      "choice_mass": 0.9966285079717636,
+      "top_tokens": [
+        [
+          "1",
+          0.9293
+        ],
+        [
+          "2",
+          0.0673
+        ],
+        [
+          "<|im_end|>",
+          0.0018
+        ],
+        [
+          "3",
+          0.0006
+        ],
+        [
+          "0",
+          0.0002
+        ]
+      ],
+      "free_response": "1",
+      "metadata": {
+        "chain_index": 0,
+        "foil_chain_index": 1
+      },
+      "reasoning_tokens": 2,
+      "reasoning_finished": true,
+      "stated_answer": "1"
+    },
+    {
+      "trial": 22,
+      "target": 2,
+      "reported": 1,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.9525741265422973,
+        "2": 0.04742587345770263
+      },
+      "choice_mass": 0.9954573921859264,
+      "top_tokens": [
+        [
+          "1",
+          0.9482
+        ],
+        [
+          "2",
+          0.0472
+        ],
+        [
+          "<|im_end|>",
+          0.0018
+        ],
+        [
+          "3",
+          0.0013
+        ],
+        [
+          "0",
+          0.0005
+        ]
+      ],
+      "free_response": "1",
+      "metadata": {
+        "chain_index": 0,
+        "foil_chain_index": 1
+      },
+      "reasoning_tokens": 2,
+      "reasoning_finished": true,
+      "stated_answer": "1"
+    },
+    {
+      "trial": 23,
+      "target": 1,
+      "reported": 2,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.004609572536767988,
+        "2": 0.995390427463232
+      },
+      "choice_mass": 0.9943406656384468,
+      "top_tokens": [
+        [
+          "2",
+          0.9898
+        ],
+        [
+          "1",
+          0.0046
+        ],
+        [
+          "<|im_end|>",
+          0.004
+        ],
+        [
+          "3",
+          0.0005
+        ],
+        [
+          "0",
+          0.0003
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 0,
+        "foil_chain_index": 1
+      },
+      "reasoning_tokens": 2,
+      "reasoning_finished": true,
+      "stated_answer": "2"
+    },
+    {
+      "trial": 24,
+      "target": 1,
+      "reported": 2,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.017986211115514336,
+        "2": 0.9820137888844856
+      },
+      "choice_mass": 0.9979095906019211,
+      "top_tokens": [
+        [
+          "2",
+          0.98
+        ],
+        [
+          "1",
+          0.0179
+        ],
+        [
+          "<|im_end|>",
+          0.0009
+        ],
+        [
+          "4",
+          0.0006
+        ],
+        [
+          "3",
+          0.0004
+        ]
+      ],
+      "free_response": "Based on the analysis of the provided image pairs, here is the logical deduction:\n\n- The first image is a beige four-drawer filing cabinet.\n- The second image is a yellow tennis ball with a rope attached.\n- The third image is a black and yellow staple gun.\n- The fourth image is a yellow tennis ball with a rope attached.\n\nThe pairs are:\n- (AB pair): Filing cabinet and tennis ball.\n- (BC pair): Staple gun and tennis ball.\n\nThe question asks to identify which of the two images (the staple gun or the tennis ball) was paired with the cue image (the staple gun).\n\nThe cue image is the staple gun. The image paired with it is the tennis ball.\n\nTherefore, the correct image is the second one.",
+      "metadata": {
+        "chain_index": 1,
+        "foil_chain_index": 0
+      },
+      "reasoning_tokens": 166,
+      "reasoning_finished": true,
+      "stated_answer": null
+    },
+    {
+      "trial": 25,
+      "target": 2,
+      "reported": 1,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.9579122715560023,
+        "2": 0.04208772844399764
+      },
+      "choice_mass": 0.994929775595665,
+      "top_tokens": [
+        [
+          "1",
+          0.9531
+        ],
+        [
+          "2",
+          0.0419
+        ],
+        [
+          "<|im_end|>",
+          0.0034
+        ],
+        [
+          "3",
+          0.0005
+        ],
+        [
+          "0",
+          0.0002
+        ]
+      ],
+      "free_response": "1",
+      "metadata": {
+        "chain_index": 1,
+        "foil_chain_index": 0
+      },
+      "reasoning_tokens": 2,
+      "reasoning_finished": true,
+      "stated_answer": "1"
+    },
+    {
+      "trial": 26,
+      "target": 1,
+      "reported": 2,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.0035936027347233004,
+        "2": 0.9964063972652767
+      },
+      "choice_mass": 0.999238116433844,
+      "top_tokens": [
+        [
+          "2",
+          0.9956
+        ],
+        [
+          "1",
+          0.0036
+        ],
+        [
+          "<|im_end|>",
+          0.0004
+        ],
+        [
+          "3",
+          0.0001
+        ],
+        [
+          "0",
+          0.0001
+        ]
+      ],
+      "free_response": "Based on the analysis of the provided image pairs, here is the logical deduction:\n\n1.  **Analyze the Pairs:**\n    -   **Pair (AB):** The first image is a perforated metal cylinder with a handle and a spout. The second image is a woven wicker basket on a wooden stand.\n    -   **Pair (BC):** The first image is a perforated metal cylinder with a handle and a spout. The second image is a yellow bag of what appears to be flour or sugar.\n\n2.  **Identify the Common Element:**\n    -   The cue image is the first image from the (AB) pair: the perforated metal cylinder.\n    -   We need to find which of the two images (the wicker basket or the yellow bag) is also paired with this cylinder.\n    -   Looking at the (BC) pair, the first image is the same perforated metal cylinder. The second image is the yellow bag.\n    -   Therefore, the perforated metal cylinder is paired with the yellow bag.\n\n3.  **Conclusion:**\n    -   The image that was paired with the cue image is the yellow bag.\n    -   The yellow bag corresponds to the second image in the sequence.\n\n2",
+      "metadata": {
+        "chain_index": 0,
+        "foil_chain_index": 1
+      },
+      "reasoning_tokens": 267,
+      "reasoning_finished": true,
+      "stated_answer": null
+    },
+    {
+      "trial": 27,
+      "target": 1,
+      "reported": 2,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.0013250223767352918,
+        "2": 0.9986749776232647
+      },
+      "choice_mass": 0.9989835972664878,
+      "top_tokens": [
+        [
+          "2",
+          0.9977
+        ],
+        [
+          "1",
+          0.0013
+        ],
+        [
+          "<|im_end|>",
+          0.0005
+        ],
+        [
+          "3",
+          0.0002
+        ],
+        [
+          "0",
+          0.0001
+        ]
+      ],
+      "free_response": "Based on the analysis of the provided image pairs, here is the logical deduction:\n\n- The first image is a **scales** with two red bowls.\n- The second image is a **playground** with a swing and a ladder.\n- The third image is a **lollipop** with the word \"Turkey\" written on it.\n\nThe question asks to identify which of the two images (the playground or the lollipop) was paired with the cue image (the scales).\n\n- The pair (AB) consists of the scales and the lollipop.\n- The pair (BC) consists of the scales and the playground.\n\nSince the cue image is the scales, it is part of the pair (BC). Therefore, the image that was paired with it is the playground.\n\n2",
+      "metadata": {
+        "chain_index": 1,
+        "foil_chain_index": 0
+      },
+      "reasoning_tokens": 166,
+      "reasoning_finished": true,
+      "stated_answer": null
+    },
+    {
+      "trial": 28,
+      "target": 1,
+      "reported": 2,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.004609572362477223,
+        "2": 0.9953904276375227
+      },
+      "choice_mass": 0.996814695186913,
+      "top_tokens": [
+        [
+          "2",
+          0.9922
+        ],
+        [
+          "1",
+          0.0046
+        ],
+        [
+          "<|im_end|>",
+          0.0015
+        ],
+        [
+          "3",
+          0.0007
+        ],
+        [
+          "4",
+          0.0003
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 0,
+        "foil_chain_index": 1
+      },
+      "reasoning_tokens": 2,
+      "reasoning_finished": true,
+      "stated_answer": "2"
+    },
+    {
+      "trial": 29,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.9324533018303882,
+        "2": 0.06754669816961177
+      },
+      "choice_mass": 0.9953675791621208,
+      "top_tokens": [
+        [
+          "1",
+          0.9281
+        ],
+        [
+          "2",
+          0.0672
+        ],
+        [
+          "<|im_end|>",
+          0.0026
+        ],
+        [
+          "3",
+          0.001
+        ],
+        [
+          "0",
+          0.0003
+        ]
+      ],
+      "free_response": "1",
+      "metadata": {
+        "chain_index": 1,
+        "foil_chain_index": 0
+      },
+      "reasoning_tokens": 2,
+      "reasoning_finished": true,
+      "stated_answer": "1"
+    },
+    {
+      "trial": 30,
+      "target": 2,
+      "reported": 1,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.9989677690109086,
+        "2": 0.0010322309890914542
+      },
+      "choice_mass": 0.9990363284014165,
+      "top_tokens": [
+        [
+          "1",
+          0.998
+        ],
+        [
+          "2",
+          0.001
+        ],
+        [
+          "<|im_end|>",
+          0.0007
+        ],
+        [
+          "0",
+          0.0001
+        ],
+        [
+          "<think>",
+          0.0001
+        ]
+      ],
+      "free_response": "Based on the analysis of the provided image pairs, here is the logical deduction:\n\n1.  **Analyze the pairs:**\n    -   The first pair consists of a white wall-mounted electrical outlet with two sockets and a red \"Do Not Touch\" symbol.\n    -   The second pair consists of a small American flag.\n    -   The third pair consists of a small hand trowel with a yellow handle.\n    -   The fourth pair consists of a white wedding dress.\n\n2.  **Identify the hidden connection:**\n    -   The first image (outlet) and the second image (flag) are not directly related.\n    -   The third image (trowel) and the fourth image (dress) are not directly related.\n    -   However, the first image (outlet) and the third image (trowel) are both associated with the concept of **gardening**. An electrical outlet provides power, and a trowel is a tool used for gardening.\n    -   The second image (flag) and the fourth image (dress) are not related to gardening.\n\n3.  **Determine the pairing for the cue image:**\n    -   The cue image is the **trowel** (the third image in the sequence).\n    -   Based on the connection identified above, the trowel is paired with the electrical outlet.\n    -   Therefore, the image that was paired with the cue image is the first one shown.\n\nThe image paired with the cue image is the first one.",
+      "metadata": {
+        "chain_index": 1,
+        "foil_chain_index": 0
+      },
+      "reasoning_tokens": 327,
+      "reasoning_finished": true,
+      "stated_answer": null
+    },
+    {
+      "trial": 31,
+      "target": 1,
+      "reported": 2,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.005911068363572589,
+        "2": 0.9940889316364274
+      },
+      "choice_mass": 0.9945069262757897,
+      "top_tokens": [
+        [
+          "2",
+          0.9886
+        ],
+        [
+          "1",
+          0.0059
+        ],
+        [
+          "<|im_end|>",
+          0.0036
+        ],
+        [
+          "3",
+          0.0008
+        ],
+        [
+          "4",
+          0.0003
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 1,
+        "foil_chain_index": 0
+      },
+      "reasoning_tokens": 2,
+      "reasoning_finished": true,
+      "stated_answer": "2"
+    },
+    {
+      "trial": 32,
+      "target": 2,
+      "reported": 2,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.0052201259172524874,
+        "2": 0.9947798740827475
+      },
+      "choice_mass": 0.9984290958382189,
+      "top_tokens": [
+        [
+          "2",
+          0.9932
+        ],
+        [
+          "1",
+          0.0052
+        ],
+        [
+          "<|im_end|>",
+          0.0005
+        ],
+        [
+          "3",
+          0.0004
+        ],
+        [
+          "4",
+          0.0003
+        ]
+      ],
+      "free_response": "Based on the analysis of the provided image pairs, here is the logical deduction:\n\n- **Image 1** is a close-up of a camera lens.\n- **Image 2** is a pink, plush toy that resembles a dragon or a small creature.\n- **Image 3** is a checkbook.\n- **Image 4** is a baby's bassinet.\n\nThe task is to find the pair that is hidden within the sequence.\n\n- The first pair is (AB pair), which corresponds to the camera lens (Image 1) and the pink plush toy (Image 2).\n- The second pair is (BC pair), which corresponds to the checkbook (Image 3) and the bassinet (Image 4).\n\nThe question asks to identify which of the two images (the bassinet or the plush toy) was paired with the cue image (the camera lens).\n\nThe camera lens (Image 1) is paired with the pink plush toy (Image 2).\n\nTherefore, the image paired with the cue image is the pink plush toy.\n\n2",
+      "metadata": {
+        "chain_index": 0,
+        "foil_chain_index": 1
+      },
+      "reasoning_tokens": 227,
+      "reasoning_finished": true,
+      "stated_answer": null
+    },
+    {
+      "trial": 33,
+      "target": 2,
+      "reported": 1,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.9940889313210249,
+        "2": 0.005911068678975068
+      },
+      "choice_mass": 0.9992702547460794,
+      "top_tokens": [
+        [
+          "1",
+          0.9934
+        ],
+        [
+          "2",
+          0.0059
+        ],
+        [
+          "<|im_end|>",
+          0.0004
+        ],
+        [
+          "0",
+          0.0001
+        ],
+        [
+          "3",
+          0.0
+        ]
+      ],
+      "free_response": "Based on the analysis of the provided image pairs, here is the logical deduction:\n\n1.  **Analyze the \"AB pair\":** The first image is a piece of kitchen equipment (a blender or food processor). The second image is a blue dinosaur toy. There is no obvious functional or semantic connection between them.\n\n2.  **Analyze the \"BC pair\":** The third image is a potted plant. The fourth image is the same blue dinosaur toy. This pair is identical to the \"AB pair\" in terms of content, suggesting they are separate examples from a larger set.\n\n3.  **Analyze the \"Word: TYPIST\" pair:** The word \"TYPIST\" refers to a person who types on a typewriter. The fifth image is a potted plant. The sixth image is the blue dinosaur toy.\n\n4.  **Identify the hidden connection:** The key to solving this puzzle lies in the word \"TYPIST\". A typewriter is a machine that produces text. The word \"text\" is the core concept.\n    - The first image (the blender) is a machine that produces a physical output, which is often considered \"text\" in a culinary context (e.g., a recipe).\n    - The second image (the dinosaur) is a toy, which is a form of \"text\" or a representation of something.\n    - The third image (the plant) is a living thing, which can be seen as a form of \"text\" or a natural document.\n    - The fourth image (the dinosaur) is the same as the second image.\n    - The fifth image (the plant) is the same as the third image.\n    - The sixth image (the dinosaur) is the same as the fourth image.\n\nThe hidden connection is that all the images represent different forms of \"text\" or information: a machine producing text, a toy, a plant, and the dinosaur itself.\n\nTherefore, the image paired with the cue image (the blender) is the one that represents a machine producing text, which is the first image in the sequence.\n\n1",
+      "metadata": {
+        "chain_index": 0,
+        "foil_chain_index": 1
+      },
+      "reasoning_tokens": 442,
+      "reasoning_finished": true,
+      "stated_answer": null
+    },
+    {
+      "trial": 34,
+      "target": 2,
+      "reported": 2,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.000911051203591688,
+        "2": 0.9990889487964083
+      },
+      "choice_mass": 0.9911883603199385,
+      "top_tokens": [
+        [
+          "2",
+          0.9903
+        ],
+        [
+          "3",
+          0.0076
+        ],
+        [
+          "1",
+          0.0009
+        ],
+        [
+          "<|im_end|>",
+          0.0008
+        ],
+        [
+          "0",
+          0.0002
+        ]
+      ],
+      "free_response": "Based on the analysis of the provided image pairs, here is the logical deduction:\n\n- **Image 1** is a brown wooden rack with green accents.\n- **Image 2** is a jar of \"Old Fashioned Peanut Butter\".\n- **Image 3** is a wicker basket.\n- **Image 4** is a red toolbox.\n- **Image 5** is the same jar of \"Old Fashioned Peanut Butter\" as Image 2.\n\nThe task is to find the hidden connection between the cue image (Image 1) and one of the other images.\n\n- The word \"SHRUB\" is given as a clue. A shrub is a type of small, woody plant.\n- The object in Image 1 is a wooden rack.\n- The object in Image 3 is a wicker basket.\n\nThe connection is that both the wooden rack (Image 1) and the wicker basket (Image 3) are made from natural, plant-based materials. They are both plant-based containers or structures.\n\nTherefore, the image paired with the cue image is Image 3.\n\n2",
+      "metadata": {
+        "chain_index": 0,
+        "foil_chain_index": 1
+      },
+      "reasoning_tokens": 239,
+      "reasoning_finished": true,
+      "stated_answer": null
+    },
+    {
+      "trial": 35,
+      "target": 2,
+      "reported": 2,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.0017007224906573086,
+        "2": 0.9982992775093427
+      },
+      "choice_mass": 0.9991939299507067,
+      "top_tokens": [
+        [
+          "2",
+          0.9975
+        ],
+        [
+          "1",
+          0.0017
+        ],
+        [
+          "<|im_end|>",
+          0.0006
+        ],
+        [
+          "0",
+          0.0001
+        ],
+        [
+          "3",
+          0.0001
+        ]
+      ],
+      "free_response": "Based on the analysis of the provided image pairs, here is the logical deduction:\n\n1.  **Analyze the \"AB pair\" (Images 1 and 2):**\n    -   **Image 1:** Shows a pair of white speakers.\n    -   **Image 2:** Shows a tool with a wooden handle and metal prongs.\n    -   **Connection:** The tool in Image 2 is a specialized tool used to adjust the tension on the strings of a guitar. The speakers in Image 1 are musical instruments. Therefore, the connection is between a musical instrument (speakers) and a tool for adjusting musical instruments (guitar strings).\n\n2.  **Analyze the \"BC pair\" (Images 3 and 4):**\n    -   **Image 3:** Shows a red canoe with a life jacket and other gear.\n    -   **Image 4:** Shows the same tool with a wooden handle and metal prongs as in Image 2.\n    -   **Connection:** The tool in Image 4 is the same as in Image 2. The connection is between a canoe (a vessel) and a tool for adjusting musical instruments.\n\n3.  **Evaluate the \"Word: COMMITTEE\" pair:**\n    -   The word \"COMMITTEE\" is a group of people.\n    -   The word \"TRIGGER\" is a device that causes a reaction.\n    -   There is no direct or obvious connection between these two words.\n\n4.  **Evaluate the \"Word: TRIGGER\" pair:**\n    -   The word \"TRIGGER\" is a device that causes a reaction.\n    -   The word \"COMMITTEE\" is a group of people.\n    -   There is no direct or obvious connection between these two words.\n\n**Conclusion:**\nThe question asks to identify which of the two images (1 or 2) was paired with the cue image (the speakers). Based on the analysis, the speakers (Image 1) are paired with the tool for adjusting guitar strings (Image 2).\n\nThe correct digit is 2.",
+      "metadata": {
+        "chain_index": 0,
+        "foil_chain_index": 1
+      },
+      "reasoning_tokens": 443,
+      "reasoning_finished": true,
+      "stated_answer": "2"
+    },
+    {
+      "trial": 36,
+      "target": 2,
+      "reported": 2,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.010986942723371217,
+        "2": 0.9890130572766288
+      },
+      "choice_mass": 0.9988060733303428,
+      "top_tokens": [
+        [
+          "2",
+          0.9878
+        ],
+        [
+          "1",
+          0.011
+        ],
+        [
+          "<|im_end|>",
+          0.0005
+        ],
+        [
+          "0",
+          0.0003
+        ],
+        [
+          "3",
+          0.0002
+        ]
+      ],
+      "free_response": "Based on the analysis of the provided image pairs, here is the logical deduction:\n\n- **Image 1** is a close-up of a piece of jewelry, specifically a hoop earring with an iridescent finish.\n- **Image 2** is a bottle of Tilex Mold & Mildew cleaner.\n- **Image 3** is a pile of split peas.\n- **Image 4** is a parachute.\n\nThe question asks to identify the pair for the cue image (Image 1). The pairs are:\n- (AB pair): Image 1 and Image 2.\n- (BC pair): Image 3 and Image 4.\n\nSince the cue image is Image 1, it belongs to the first pair. Therefore, the correct image is Image 2.\n\n2",
+      "metadata": {
+        "chain_index": 0,
+        "foil_chain_index": 1
+      },
+      "reasoning_tokens": 168,
+      "reasoning_finished": true,
+      "stated_answer": "2"
+    },
+    {
+      "trial": 37,
+      "target": 1,
+      "reported": 2,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.0229773699181989,
+        "2": 0.9770226300818011
+      },
+      "choice_mass": 0.7984815649688244,
+      "top_tokens": [
+        [
+          "2",
+          0.7801
+        ],
+        [
+          "3",
+          0.1972
+        ],
+        [
+          "1",
+          0.0183
+        ],
+        [
+          "4",
+          0.0022
+        ],
+        [
+          "0",
+          0.0006
+        ]
+      ],
+      "free_response": "Based on the analysis of the provided image pairs, here is the logical deduction:\n\n1.  **Analyze the Pairs:**\n    -   The first pair consists of a blue pet carrier and a planet with rings (Saturn).\n    -   The second pair consists of a wooden staircase and a decorative tray.\n    -   The third pair consists of a planet with rings and a decorative tray.\n\n2.  **Identify the Hidden Connection:**\n    -   The connection between the first pair (pet carrier and Saturn) is that both are items used for transporting or viewing something from a distance.\n    -   The connection between the second pair (staircase and tray) is that both are objects that can be used to serve food or drinks.\n    -   The connection between the third pair (planet with rings and tray) is that both are items that can be used to serve food or drinks.\n\n3.  **Evaluate the Options:**\n    -   The cue image is the pet carrier.\n    -   The first option is the planet with rings.\n    -   The second option is the tray.\n\n4.  **Determine the Match:**\n    -   The pet carrier is used for transporting food or drinks.\n    -   The tray is used for serving food or drinks.\n    -   Therefore, the pet carrier is paired with the tray.\n\nThe image that was paired with the cue image is the tray.",
+      "metadata": {
+        "chain_index": 0,
+        "foil_chain_index": 1
+      },
+      "reasoning_tokens": 304,
+      "reasoning_finished": true,
+      "stated_answer": null
+    },
+    {
+      "trial": 38,
+      "target": 2,
+      "reported": 2,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.007577240964022138,
+        "2": 0.9924227590359779
+      },
+      "choice_mass": 0.9992702146992087,
+      "top_tokens": [
+        [
+          "2",
+          0.9917
+        ],
+        [
+          "1",
+          0.0076
+        ],
+        [
+          "<|im_end|>",
+          0.0003
+        ],
+        [
+          "0",
+          0.0001
+        ],
+        [
+          "3",
+          0.0001
+        ]
+      ],
+      "free_response": "Based on the analysis of the provided image pairs, here is the logical deduction:\n\n- **Image 1** is a silver foot pedal with two numbered buttons, labeled \"1\" and \"2\".\n- **Image 2** is a white triangular ruler with a yellow highlighter inside it.\n\nThe question asks to identify the pair for the cue image (Image 1).\n\n- The first image in the sequence is the foot pedal.\n- The second image in the sequence is the ruler.\n\nTherefore, the pair for the foot pedal is the ruler.\n\n2",
+      "metadata": {
+        "chain_index": 0,
+        "foil_chain_index": 1
+      },
+      "reasoning_tokens": 119,
+      "reasoning_finished": true,
+      "stated_answer": null
+    },
+    {
+      "trial": 39,
+      "target": 2,
+      "reported": 1,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.9975273768868813,
+        "2": 0.0024726231131186535
+      },
+      "choice_mass": 0.9992305524647236,
+      "top_tokens": [
+        [
+          "1",
+          0.9968
+        ],
+        [
+          "2",
+          0.0025
+        ],
+        [
+          "<|im_end|>",
+          0.0006
+        ],
+        [
+          "0",
+          0.0001
+        ],
+        [
+          "3",
+          0.0
+        ]
+      ],
+      "free_response": "Based on the analysis of the provided images and pairs:\n\n- The cue image is the black, ornate bench.\n- The first image (labeled as 1) is the black heater.\n- The second image (labeled as 2) is the white video doorbell.\n\nThe hidden connection is that the cue image (the bench) and the first image (the heater) are both made of black metal. The second image (the video doorbell) is white. Therefore, the cue image was paired with the first image.\n\n1",
+      "metadata": {
+        "chain_index": 1,
+        "foil_chain_index": 0
+      },
+      "reasoning_tokens": 115,
+      "reasoning_finished": true,
+      "stated_answer": null
+    },
+    {
+      "trial": 40,
+      "target": 1,
+      "reported": 2,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.005911068762929579,
+        "2": 0.9940889312370704
+      },
+      "choice_mass": 0.9949014573357999,
+      "top_tokens": [
+        [
+          "2",
+          0.989
+        ],
+        [
+          "1",
+          0.0059
+        ],
+        [
+          "<|im_end|>",
+          0.0031
+        ],
+        [
+          "3",
+          0.0007
+        ],
+        [
+          "0",
+          0.0003
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 0,
+        "foil_chain_index": 1
+      },
+      "reasoning_tokens": 2,
+      "reasoning_finished": true,
+      "stated_answer": "2"
+    },
+    {
+      "trial": 41,
+      "target": 1,
+      "reported": 2,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.060086646507171375,
+        "2": 0.9399133534928287
+      },
+      "choice_mass": 0.962840411812067,
+      "top_tokens": [
+        [
+          "2",
+          0.905
+        ],
+        [
+          "1",
+          0.0579
+        ],
+        [
+          "4",
+          0.0241
+        ],
+        [
+          "3",
+          0.0101
+        ],
+        [
+          "<|im_end|>",
+          0.0012
+        ]
+      ],
+      "free_response": "Based on the analysis of the provided pairs, here is the logical deduction:\n\n1.  **Analyze the Pairs:**\n    -   The first pair consists of a wooden toy walker and a bicycle crank.\n    -   The second pair consists of a grenade and a corkscrew.\n\n2.  **Identify the Hidden Connection:**\n    -   The connection between the first pair (walker and crank) is that both are items used to move a person.\n    -   The connection between the second pair (grenade and corkscrew) is that both are items used to move a person.\n\n3.  **Apply the Connection to the Cue:**\n    -   The cue image is the grenade.\n    -   Following the established pattern, the item paired with the grenade must be another object used to move a person.\n    -   The corkscrew is the only item from the list that fits this description.\n\nTherefore, the corkscrew is the correct pair.\n\n2",
+      "metadata": {
+        "chain_index": 1,
+        "foil_chain_index": 0
+      },
+      "reasoning_tokens": 210,
+      "reasoning_finished": true,
+      "stated_answer": null
+    },
+    {
+      "trial": 42,
+      "target": 1,
+      "reported": 2,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.01590639102275099,
+        "2": 0.984093608977249
+      },
+      "choice_mass": 0.9989889953285456,
+      "top_tokens": [
+        [
+          "2",
+          0.9831
+        ],
+        [
+          "1",
+          0.0159
+        ],
+        [
+          "<|im_end|>",
+          0.0005
+        ],
+        [
+          "3",
+          0.0002
+        ],
+        [
+          "0",
+          0.0001
+        ]
+      ],
+      "free_response": "Based on the analysis of the provided image pairs and the hidden connections:\n\n- The first image is a **fire hose**.\n- The second image is a **wetsuit**.\n- The third image is a **toaster**.\n- The fourth image is a **wetsuit**.\n\nThe connection between the first and second images is that a fire hose is used to put out a fire, which is what a wetsuit is designed for. Therefore, the wetsuit is the item paired with the fire hose.\n\nThe correct image is the second one.",
+      "metadata": {
+        "chain_index": 0,
+        "foil_chain_index": 1
+      },
+      "reasoning_tokens": 118,
+      "reasoning_finished": true,
+      "stated_answer": null
+    },
+    {
+      "trial": 43,
+      "target": 1,
+      "reported": 2,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.002182716351535791,
+        "2": 0.9978172836484642
+      },
+      "choice_mass": 0.9951221512164921,
+      "top_tokens": [
+        [
+          "2",
+          0.993
+        ],
+        [
+          "<|im_end|>",
+          0.0036
+        ],
+        [
+          "1",
+          0.0022
+        ],
+        [
+          "3",
+          0.0005
+        ],
+        [
+          "4",
+          0.0002
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 1,
+        "foil_chain_index": 0
+      },
+      "reasoning_tokens": 2,
+      "reasoning_finished": true,
+      "stated_answer": "2"
+    },
+    {
+      "trial": 44,
+      "target": 1,
+      "reported": 2,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.0046095723098555745,
+        "2": 0.9953904276901444
+      },
+      "choice_mass": 0.9981862618587911,
+      "top_tokens": [
+        [
+          "2",
+          0.9936
+        ],
+        [
+          "1",
+          0.0046
+        ],
+        [
+          "<|im_end|>",
+          0.0009
+        ],
+        [
+          "3",
+          0.0003
+        ],
+        [
+          "4",
+          0.0002
+        ]
+      ],
+      "free_response": "Based on the analysis of the provided image pairs, here is the logical deduction:\n\n- The first image is a pair of pink, plush dice hanging from a string.\n- The second image is a plastic figurine of a lion.\n- The third image is a headlamp.\n- The fourth image is a large elephant.\n\nThe task is to find the pair that is connected to the first image (the dice).\n\n- The lion figurine (second image) and the elephant (fourth image) are both animals.\n- The headlamp (third image) is an object.\n- The dice (first image) are also objects.\n\nTherefore, the pair that is most likely connected to the dice is the pair of animals.\n\n2",
+      "metadata": {
+        "chain_index": 0,
+        "foil_chain_index": 1
+      },
+      "reasoning_tokens": 156,
+      "reasoning_finished": true,
+      "stated_answer": null
+    },
+    {
+      "trial": 45,
+      "target": 2,
+      "reported": 2,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.005911068672196229,
+        "2": 0.9940889313278037
+      },
+      "choice_mass": 0.9986756406724453,
+      "top_tokens": [
+        [
+          "2",
+          0.9928
+        ],
+        [
+          "1",
+          0.0059
+        ],
+        [
+          "<|im_end|>",
+          0.0006
+        ],
+        [
+          "3",
+          0.0002
+        ],
+        [
+          "4",
+          0.0002
+        ]
+      ],
+      "free_response": "Based on the analysis of the provided image pairs, here is the logical deduction:\n\n- **Image 1** is a bottle of Pantene hair product.\n- **Image 2** is a doll walker.\n- **Image 3** is a headlamp.\n- **Image 4** is the same doll walker as Image 2.\n\nThe question asks to identify the image paired with the cue image (Image 1).\n\n- The first pair is (AB pair), which is (Pantene bottle, doll walker).\n- The second pair is (BC pair), which is (headlamp, doll walker).\n\nSince the cue image is the Pantene bottle, it is part of the first pair. Therefore, the image paired with it is the doll walker.\n\n2",
+      "metadata": {
+        "chain_index": 1,
+        "foil_chain_index": 0
+      },
+      "reasoning_tokens": 165,
+      "reasoning_finished": true,
+      "stated_answer": null
+    },
+    {
+      "trial": 46,
+      "target": 1,
+      "reported": 2,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.014063626899268804,
+        "2": 0.9859363731007312
+      },
+      "choice_mass": 0.9990440579131246,
+      "top_tokens": [
+        [
+          "2",
+          0.985
+        ],
+        [
+          "1",
+          0.0141
+        ],
+        [
+          "<|im_end|>",
+          0.0006
+        ],
+        [
+          "0",
+          0.0001
+        ],
+        [
+          "3",
+          0.0
+        ]
+      ],
+      "free_response": "Based on the analysis of the provided image pairs, here is the logical deduction:\n\n1.  **Analyze the Pairs:**\n    -   The first image is a decorative, ornate seat, likely from a historical chair or throne.\n    -   The second image is a black otoscope, a medical instrument used to examine the ear.\n    -   The third image is a roll of white paper, which could be a receipt or a roll of tape.\n    -   The fourth image is a statue of a kneeling figure in armor.\n\n2.  **Identify the Hidden Connection:**\n    -   The first image (the seat) and the second image (the otoscope) are paired. The connection is that the seat is a type of chair, and the otoscope is a tool used to examine the ear, which is the part of the body the seat is designed for.\n    -   The third image (the paper roll) and the fourth image (the statue) are paired. The connection is that the statue is a figure of a person, and the paper roll is a common item found in a shop or office where a person might work.\n\n3.  **Evaluate the Question:**\n    -   The question asks to identify which of the two images (the otoscope or the statue) was paired with the cue image (the seat).\n    -   Based on the established connection, the seat (image 1) is paired with the otoscope (image 2).\n\nTherefore, the correct image is the second one.\n\n2",
+      "metadata": {
+        "chain_index": 0,
+        "foil_chain_index": 1
+      },
+      "reasoning_tokens": 325,
+      "reasoning_finished": true,
+      "stated_answer": null
+    },
+    {
+      "trial": 47,
+      "target": 2,
+      "reported": 2,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.004070137751973045,
+        "2": 0.9959298622480269
+      },
+      "choice_mass": 0.9981751423329115,
+      "top_tokens": [
+        [
+          "2",
+          0.9941
+        ],
+        [
+          "1",
+          0.0041
+        ],
+        [
+          "<|im_end|>",
+          0.0009
+        ],
+        [
+          "3",
+          0.0003
+        ],
+        [
+          "0",
+          0.0003
+        ]
+      ],
+      "free_response": "Based on the analysis of the provided images and pairs:\n\n- The cue image is the blue, industrial-style light fixture.\n- The first image in the sequence is the pommel horse.\n- The second image is the reindeer antler headband.\n- The third image is the horse pin.\n\nThe pairs are:\n- (AB pair): Pommel horse and Reindeer antler headband.\n- (BC pair): Reindeer antler headband and Horse pin.\n\nThe question asks which of the two images (the pommel horse or the reindeer antler headband) was paired with the cue image (the light fixture). However, the light fixture is not part of any of the pairs shown. The pairs only connect the pommel horse, the reindeer headband, and the horse pin.\n\nSince the light fixture is not in any pair, it cannot be the answer. The only item from the list that is part of a pair is the reindeer antler headband.\n\n2",
+      "metadata": {
+        "chain_index": 1,
+        "foil_chain_index": 0
+      },
+      "reasoning_tokens": 213,
+      "reasoning_finished": true,
+      "stated_answer": null
+    },
+    {
+      "trial": 48,
+      "target": 2,
+      "reported": 1,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.9399133497798046,
+        "2": 0.060086650220195395
+      },
+      "choice_mass": 0.9944982193410397,
+      "top_tokens": [
+        [
+          "1",
+          0.9347
+        ],
+        [
+          "2",
+          0.0598
+        ],
+        [
+          "<|im_end|>",
+          0.0018
+        ],
+        [
+          "3",
+          0.0014
+        ],
+        [
+          "4",
+          0.0009
+        ]
+      ],
+      "free_response": "1",
+      "metadata": {
+        "chain_index": 0,
+        "foil_chain_index": 1
+      },
+      "reasoning_tokens": 2,
+      "reasoning_finished": true,
+      "stated_answer": "1"
+    },
+    {
+      "trial": 49,
+      "target": 2,
+      "reported": 2,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.14804720030099022,
+        "2": 0.8519527996990098
+      },
+      "choice_mass": 0.10199953429400921,
+      "top_tokens": [
+        [
+          "4",
+          0.8245
+        ],
+        [
+          "2",
+          0.0869
+        ],
+        [
+          "3",
+          0.0677
+        ],
+        [
+          "1",
+          0.0151
+        ],
+        [
+          "5",
+          0.003
+        ]
+      ],
+      "free_response": "Based on the analysis of the provided image pairs, here is the logical deduction:\n\n1.  **Analyze the Pairs:**\n    -   The first pair consists of a man in a vampire costume (Image 1) and a black cable with connectors (Image 2).\n    -   The second pair consists of a backspace key on a keyboard (Image 3) and a pair of black shoulder pads (Image 4).\n\n2.  **Identify the Hidden Connection:**\n    -   The key insight is to look for a common element or a shared concept that links the items within each pair.\n    -   The vampire costume in the first pair is a costume.\n    -   The shoulder pads in the second pair are also a type of costume or protective gear worn for a specific purpose.\n    -   Therefore, the hidden connection is that both items in each pair are **costumes**.\n\n3.  **Apply the Connection to the Cue:**\n    -   The cue image is the \"Backspace\" key.\n    -   We need to find an image that is also a type of costume.\n    -   Comparing the remaining options:\n        -   The cable (Image 2) is not a costume.\n        -   The shoulder pads (Image 4) are a type of costume.\n\n---\nThe image that was paired with the cue image is the one showing the shoulder pads.",
+      "metadata": {
+        "chain_index": 1,
+        "foil_chain_index": 0
+      },
+      "reasoning_tokens": 300,
+      "reasoning_finished": true,
+      "stated_answer": null
+    }
+  ],
+  "metrics": {
+    "accuracy": 0.4,
+    "n_correct": 20,
+    "total": 50,
+    "free_text_bare_digit": 0.32,
+    "mean_p_chosen": 0.9793227487994837,
+    "mean_choice_mass": 0.9727805292257108,
+    "frac_low_mass": 0.04,
+    "mean_reasoning_tokens": 180.48,
+    "frac_reasoning_cut_off": 0.02,
+    "frac_stated_answer": 0.38,
+    "stated_forced_agreement": 1.0,
+    "response_distribution": {
+      "2": 35,
+      "1": 15
+    }
+  }
+}

@@ -1,0 +1,2152 @@
+{
+  "run": {
+    "model": {
+      "name": "qwen3.5-4b",
+      "model_id": "Qwen/Qwen3.5-4B",
+      "max_image_size": 512,
+      "max_new_tokens": 512,
+      "scoring": "reason_then_choose"
+    },
+    "task": "associative_inference",
+    "condition": {
+      "dataset": "Brady2008",
+      "pair_type": "word",
+      "probe": "direct_ab",
+      "n_chains": 2,
+      "n_images": 6,
+      "prompt": "labeled",
+      "n_trials": 50
+    },
+    "seed": 0
+  },
+  "config": {
+    "run_name": "assoc_inf_reasoned",
+    "output_dir": "results",
+    "seeds": [
+      0
+    ],
+    "models": [
+      {
+        "name": "qwen3.5-2b",
+        "model_id": "Qwen/Qwen3.5-2B",
+        "max_image_size": 512,
+        "max_new_tokens": 512,
+        "scoring": "reason_then_choose"
+      },
+      {
+        "name": "qwen3.5-4b",
+        "model_id": "Qwen/Qwen3.5-4B",
+        "max_image_size": 512,
+        "max_new_tokens": 512,
+        "scoring": "reason_then_choose"
+      }
+    ],
+    "tasks": [
+      {
+        "task": "associative_inference",
+        "datasets": [
+          "Brady2008"
+        ],
+        "pair_types": [
+          "image",
+          "word"
+        ],
+        "probe_types": [
+          "inference",
+          "direct_ab",
+          "direct_bc"
+        ],
+        "n_chains": [
+          2,
+          5
+        ],
+        "prompts": [
+          "original",
+          "cue_turn",
+          "labeled"
+        ],
+        "n_trials": 50
+      }
+    ]
+  },
+  "provenance": {
+    "config_hash": "8b8bbf756a2e",
+    "gpu": "NVIDIA H200",
+    "git_commit": null,
+    "git_dirty": false,
+    "torch": "2.10.0+cu128",
+    "transformers": "5.17.0"
+  },
+  "elapsed_s": 71.3,
+  "peak_gpu_gb": 9.37,
+  "error": null,
+  "trials": [
+    {
+      "trial": 0,
+      "target": 2,
+      "reported": 1,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.7772998487556998,
+        "2": 0.22270015124430023
+      },
+      "choice_mass": 0.9911887049674988,
+      "top_tokens": [
+        [
+          "1",
+          0.7705
+        ],
+        [
+          "2",
+          0.2207
+        ],
+        [
+          "<|im_end|>",
+          0.0025
+        ],
+        [
+          " ",
+          0.0012
+        ],
+        [
+          "3",
+          0.0012
+        ]
+      ],
+      "free_response": "1",
+      "metadata": {
+        "chain_index": 0,
+        "foil_chain_index": 1
+      },
+      "reasoning_tokens": 2,
+      "reasoning_finished": true,
+      "stated_answer": "1"
+    },
+    {
+      "trial": 1,
+      "target": 2,
+      "reported": 2,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.005911068692966275,
+        "2": 0.9940889313070337
+      },
+      "choice_mass": 0.99575857212767,
+      "top_tokens": [
+        [
+          "2",
+          0.9899
+        ],
+        [
+          "1",
+          0.0059
+        ],
+        [
+          "<|im_end|>",
+          0.0032
+        ],
+        [
+          "3",
+          0.0003
+        ],
+        [
+          "4",
+          0.0002
+        ]
+      ],
+      "free_response": "To solve this, we need to understand the connections established in the initial pairs.\n\n- The first pair is (A, B), where A is the floppy disk and B is the compact makeup case.\n- The second pair is (B, C), where B is the compact makeup case and C is the pressure gauge.\n- The word \"DECK\" is associated with the (B, C) pair. This creates a link: DECK -> (B, C).\n- The word \"PERMIT\" is associated with the (A, B) pair. This creates a link: PERMIT -> (A, B).\n\nThe cue image is the floppy disk, which is item A.\n\nWe are looking for the image that was paired with the cue image (A). According to the first pair, the item paired with A is B.\n\nImage 2 is the compact makeup case, which is item B.\n\nTherefore, Image 2 was paired with the cue image.\n\n2",
+      "metadata": {
+        "chain_index": 0,
+        "foil_chain_index": 1
+      },
+      "reasoning_tokens": 206,
+      "reasoning_finished": true,
+      "stated_answer": null
+    },
+    {
+      "trial": 2,
+      "target": 1,
+      "reported": 2,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.0010322310950451258,
+        "2": 0.9989677689049549
+      },
+      "choice_mass": 0.998915325384587,
+      "top_tokens": [
+        [
+          "2",
+          0.9979
+        ],
+        [
+          "1",
+          0.001
+        ],
+        [
+          "<|im_end|>",
+          0.0009
+        ],
+        [
+          " ",
+          0.0001
+        ],
+        [
+          "3",
+          0.0
+        ]
+      ],
+      "free_response": "To determine the correct answer, we need to trace the connections provided in the prompt.\n\n- The prompt establishes a connection between the word \"CABIN\" and the image of the rollerblades. This is labeled as the (BC pair).\n- The cue image is the film reel.\n- We need to find which image (1 or 2) is connected to the film reel.\n- Looking at the initial pairs, the film reel is paired with the pumpkin. This is labeled as the (AB pair).\n- Therefore, the film reel (cue image) is connected to the pumpkin (Image 2).\n\nThe image paired with the cue image is Image 2.",
+      "metadata": {
+        "chain_index": 1,
+        "foil_chain_index": 0
+      },
+      "reasoning_tokens": 142,
+      "reasoning_finished": true,
+      "stated_answer": null
+    },
+    {
+      "trial": 3,
+      "target": 2,
+      "reported": 1,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.8670357500466443,
+        "2": 0.13296424995335562
+      },
+      "choice_mass": 0.99400994181633,
+      "top_tokens": [
+        [
+          "1",
+          0.8618
+        ],
+        [
+          "2",
+          0.1322
+        ],
+        [
+          "<|im_end|>",
+          0.0024
+        ],
+        [
+          " ",
+          0.0009
+        ],
+        [
+          "3",
+          0.0007
+        ]
+      ],
+      "free_response": "1",
+      "metadata": {
+        "chain_index": 1,
+        "foil_chain_index": 0
+      },
+      "reasoning_tokens": 2,
+      "reasoning_finished": true,
+      "stated_answer": "1"
+    },
+    {
+      "trial": 4,
+      "target": 2,
+      "reported": 2,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.022977370940008596,
+        "2": 0.9770226290599914
+      },
+      "choice_mass": 0.9929837938398123,
+      "top_tokens": [
+        [
+          "2",
+          0.9702
+        ],
+        [
+          "1",
+          0.0228
+        ],
+        [
+          "<|im_end|>",
+          0.0035
+        ],
+        [
+          "3",
+          0.0013
+        ],
+        [
+          "4",
+          0.0007
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 1,
+        "foil_chain_index": 0
+      },
+      "reasoning_tokens": 2,
+      "reasoning_finished": true,
+      "stated_answer": "2"
+    },
+    {
+      "trial": 5,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.8670357602780241,
+        "2": 0.13296423972197588
+      },
+      "choice_mass": 0.9944022595882416,
+      "top_tokens": [
+        [
+          "1",
+          0.8622
+        ],
+        [
+          "2",
+          0.1322
+        ],
+        [
+          "<|im_end|>",
+          0.0024
+        ],
+        [
+          "3",
+          0.0007
+        ],
+        [
+          " ",
+          0.0006
+        ]
+      ],
+      "free_response": "1",
+      "metadata": {
+        "chain_index": 1,
+        "foil_chain_index": 0
+      },
+      "reasoning_tokens": 2,
+      "reasoning_finished": true,
+      "stated_answer": "1"
+    },
+    {
+      "trial": 6,
+      "target": 2,
+      "reported": 1,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.8807970757288076,
+        "2": 0.11920292427119242
+      },
+      "choice_mass": 0.9898284152150154,
+      "top_tokens": [
+        [
+          "1",
+          0.8718
+        ],
+        [
+          "2",
+          0.118
+        ],
+        [
+          "<|im_end|>",
+          0.0036
+        ],
+        [
+          " (",
+          0.0019
+        ],
+        [
+          "3",
+          0.0016
+        ]
+      ],
+      "free_response": "1",
+      "metadata": {
+        "chain_index": 1,
+        "foil_chain_index": 0
+      },
+      "reasoning_tokens": 2,
+      "reasoning_finished": true,
+      "stated_answer": "1"
+    },
+    {
+      "trial": 7,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.9241418212566522,
+        "2": 0.07585817874334776
+      },
+      "choice_mass": 0.986186295747757,
+      "top_tokens": [
+        [
+          "1",
+          0.9114
+        ],
+        [
+          "2",
+          0.0748
+        ],
+        [
+          "<|im_end|>",
+          0.0042
+        ],
+        [
+          " (",
+          0.0037
+        ],
+        [
+          " ",
+          0.0024
+        ]
+      ],
+      "free_response": "1",
+      "metadata": {
+        "chain_index": 1,
+        "foil_chain_index": 0
+      },
+      "reasoning_tokens": 2,
+      "reasoning_finished": true,
+      "stated_answer": "1"
+    },
+    {
+      "trial": 8,
+      "target": 2,
+      "reported": 1,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.9994472213878334,
+        "2": 0.0005527786121666727
+      },
+      "choice_mass": 0.9983416024479084,
+      "top_tokens": [
+        [
+          "1",
+          0.9978
+        ],
+        [
+          "<|im_end|>",
+          0.0015
+        ],
+        [
+          "2",
+          0.0006
+        ],
+        [
+          "0",
+          0.0
+        ],
+        [
+          " ",
+          0.0
+        ]
+      ],
+      "free_response": "To solve this, we need to find the hidden connection between the cue image and the options.\n\n- **Cue Image:** A brass bugle with a black, crumpled object at the end of its mouthpiece.\n- **Image 1:** A plastic bag containing water and two goldfish.\n- **Image 2:** A blue, marbled drum.\n\nThe connection is based on the word \"FRIEND\".\n\n- The word \"FRIEND\" can be associated with the bugle. A bugle is a musical instrument used to signal, and in a metaphorical sense, it can be a \"friend\" that brings joy or a call to action.\n- The word \"FRIEND\" can also be associated with the goldfish. Goldfish are often kept as pets and are considered friends to their owners.\n\nThe bugle (cue image) and the goldfish (Image 1) are both things that can be considered \"friends\". The drum (Image 2) does not have a clear connection to the word \"FRIEND\".\n\nTherefore, the image paired with the cue image is Image 1.\n\n1",
+      "metadata": {
+        "chain_index": 0,
+        "foil_chain_index": 1
+      },
+      "reasoning_tokens": 236,
+      "reasoning_finished": true,
+      "stated_answer": "1"
+    },
+    {
+      "trial": 9,
+      "target": 2,
+      "reported": 2,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.060086649200037257,
+        "2": 0.9399133507999627
+      },
+      "choice_mass": 0.9865158498287201,
+      "top_tokens": [
+        [
+          "2",
+          0.9272
+        ],
+        [
+          "1",
+          0.0593
+        ],
+        [
+          "<|im_end|>",
+          0.008
+        ],
+        [
+          "0",
+          0.0012
+        ],
+        [
+          "3",
+          0.0012
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 1,
+        "foil_chain_index": 0
+      },
+      "reasoning_tokens": 2,
+      "reasoning_finished": true,
+      "stated_answer": "2"
+    },
+    {
+      "trial": 10,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.9991959140882083,
+        "2": 0.0008040859117917583
+      },
+      "choice_mass": 0.9988890490494668,
+      "top_tokens": [
+        [
+          "1",
+          0.9981
+        ],
+        [
+          "<|im_end|>",
+          0.0009
+        ],
+        [
+          "2",
+          0.0008
+        ],
+        [
+          "0",
+          0.0001
+        ],
+        [
+          "3",
+          0.0
+        ]
+      ],
+      "free_response": "To determine the correct answer, we must trace the connections established in the initial sequence.\n\n- The sequence begins with an image of a monkey (let's call it Image A) and an image of a patterned squash (Image B).\n- The first connection is explicitly given as an \"(AB pair)\", linking the monkey and the squash.\n- The next connection is a \"(BC pair)\", which links the squash (Image B) to a duster (Image C).\n- The word \"BASEBALL\" is associated with the (BC pair), meaning it connects the squash and the duster.\n- The final piece of information is the word \"WASP\". In this type of puzzle, a new word is often associated with the next item in the chain. Following the pattern, \"WASP\" is linked to the duster (Image C).\n- The cue image is a school bus. We need to find which of the two options (Image 1: duster or Image 2: squash) was paired with the school bus.\n- By reviewing the initial pairs, we can see that the school bus was paired with the duster (Image C) in the first set of images provided.\n\nTherefore, the image paired with the cue image is the duster.\n\n1",
+      "metadata": {
+        "chain_index": 1,
+        "foil_chain_index": 0
+      },
+      "reasoning_tokens": 265,
+      "reasoning_finished": true,
+      "stated_answer": null
+    },
+    {
+      "trial": 11,
+      "target": 2,
+      "reported": 1,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.8670357603988368,
+        "2": 0.13296423960116316
+      },
+      "choice_mass": 0.9947168380022049,
+      "top_tokens": [
+        [
+          "1",
+          0.8625
+        ],
+        [
+          "2",
+          0.1323
+        ],
+        [
+          "<|im_end|>",
+          0.0021
+        ],
+        [
+          " ",
+          0.0007
+        ],
+        [
+          "0",
+          0.0006
+        ]
+      ],
+      "free_response": "1",
+      "metadata": {
+        "chain_index": 0,
+        "foil_chain_index": 1
+      },
+      "reasoning_tokens": 2,
+      "reasoning_finished": true,
+      "stated_answer": "1"
+    },
+    {
+      "trial": 12,
+      "target": 2,
+      "reported": 1,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.999933947856732,
+        "2": 6.60521432679978e-05
+      },
+      "choice_mass": 0.9993036627420224,
+      "top_tokens": [
+        [
+          "1",
+          0.9992
+        ],
+        [
+          "<|im_end|>",
+          0.0006
+        ],
+        [
+          "2",
+          0.0001
+        ],
+        [
+          "0",
+          0.0
+        ],
+        [
+          "3",
+          0.0
+        ]
+      ],
+      "free_response": "To solve this, we need to find the hidden connection between the cue image and the options.\n\n- The cue image is a black A-frame easel.\n- The word associated with the previous pair (BC) is \"CHAPEL\".\n- The connection between the word \"CHAPEL\" and the images in the (BC) pair is that a chapel is a type of building, and an easel is a type of stand or support. Both are structures.\n- Now let's look at the options:\n    - Image 1 is a child.\n    - Image 2 is a stuffed animal.\n- There is no direct connection between the word \"CHAPEL\" and either Image 1 or Image 2. We must look for a connection between the *images* themselves.\n- The connection is based on the concept of \"support\" or \"structure\".\n    - The easel (cue image) is a stand that supports a canvas.\n    - The child in Image 1 is standing on their feet, which support their body.\n    - The stuffed animal in Image 2 is a soft object with no structural support.\n- Therefore, the child in Image 1 shares the concept of being a \"support\" (standing on feet) with the easel.\n\nThe image paired with the cue image is Image 1.",
+      "metadata": {
+        "chain_index": 1,
+        "foil_chain_index": 0
+      },
+      "reasoning_tokens": 283,
+      "reasoning_finished": true,
+      "stated_answer": null
+    },
+    {
+      "trial": 13,
+      "target": 2,
+      "reported": 2,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.06008664687237741,
+        "2": 0.9399133531276226
+      },
+      "choice_mass": 0.9876335375010967,
+      "top_tokens": [
+        [
+          "2",
+          0.9283
+        ],
+        [
+          "1",
+          0.0593
+        ],
+        [
+          "<|im_end|>",
+          0.008
+        ],
+        [
+          "0",
+          0.0016
+        ],
+        [
+          "3",
+          0.001
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 0,
+        "foil_chain_index": 1
+      },
+      "reasoning_tokens": 2,
+      "reasoning_finished": true,
+      "stated_answer": "2"
+    },
+    {
+      "trial": 14,
+      "target": 1,
+      "reported": 2,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.05340333253134781,
+        "2": 0.9465966674686522
+      },
+      "choice_mass": 0.9924996644258499,
+      "top_tokens": [
+        [
+          "2",
+          0.9395
+        ],
+        [
+          "1",
+          0.053
+        ],
+        [
+          "<|im_end|>",
+          0.0056
+        ],
+        [
+          "3",
+          0.0006
+        ],
+        [
+          "0",
+          0.0005
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 0,
+        "foil_chain_index": 1
+      },
+      "reasoning_tokens": 2,
+      "reasoning_finished": true,
+      "stated_answer": "2"
+    },
+    {
+      "trial": 15,
+      "target": 1,
+      "reported": 2,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.0534033335471202,
+        "2": 0.9465966664528798
+      },
+      "choice_mass": 0.9927747696638107,
+      "top_tokens": [
+        [
+          "2",
+          0.9398
+        ],
+        [
+          "1",
+          0.053
+        ],
+        [
+          "<|im_end|>",
+          0.0044
+        ],
+        [
+          "3",
+          0.0007
+        ],
+        [
+          "0",
+          0.0007
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 0,
+        "foil_chain_index": 1
+      },
+      "reasoning_tokens": 2,
+      "reasoning_finished": true,
+      "stated_answer": "2"
+    },
+    {
+      "trial": 16,
+      "target": 2,
+      "reported": 2,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.06008664986122294,
+        "2": 0.9399133501387771
+      },
+      "choice_mass": 0.9921446330845356,
+      "top_tokens": [
+        [
+          "2",
+          0.9325
+        ],
+        [
+          "1",
+          0.0596
+        ],
+        [
+          "<|im_end|>",
+          0.0043
+        ],
+        [
+          "3",
+          0.0012
+        ],
+        [
+          "0",
+          0.0007
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 1,
+        "foil_chain_index": 0
+      },
+      "reasoning_tokens": 2,
+      "reasoning_finished": true,
+      "stated_answer": "2"
+    },
+    {
+      "trial": 17,
+      "target": 2,
+      "reported": 1,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.9241418182021113,
+        "2": 0.07585818179788878
+      },
+      "choice_mass": 0.9933062195777893,
+      "top_tokens": [
+        [
+          "1",
+          0.918
+        ],
+        [
+          "2",
+          0.0754
+        ],
+        [
+          "<|im_end|>",
+          0.002
+        ],
+        [
+          " ",
+          0.0012
+        ],
+        [
+          " (",
+          0.0011
+        ]
+      ],
+      "free_response": "1",
+      "metadata": {
+        "chain_index": 0,
+        "foil_chain_index": 1
+      },
+      "reasoning_tokens": 2,
+      "reasoning_finished": true,
+      "stated_answer": "1"
+    },
+    {
+      "trial": 18,
+      "target": 2,
+      "reported": 1,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.7772998611782235,
+        "2": 0.22270013882177658
+      },
+      "choice_mass": 0.9948936402797699,
+      "top_tokens": [
+        [
+          "1",
+          0.7733
+        ],
+        [
+          "2",
+          0.2216
+        ],
+        [
+          "3",
+          0.001
+        ],
+        [
+          "<|im_end|>",
+          0.0008
+        ],
+        [
+          " ",
+          0.0008
+        ]
+      ],
+      "free_response": "1",
+      "metadata": {
+        "chain_index": 1,
+        "foil_chain_index": 0
+      },
+      "reasoning_tokens": 2,
+      "reasoning_finished": true,
+      "stated_answer": "1"
+    },
+    {
+      "trial": 19,
+      "target": 1,
+      "reported": 2,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.06754669491372536,
+        "2": 0.9324533050862747
+      },
+      "choice_mass": 0.9919949024915695,
+      "top_tokens": [
+        [
+          "2",
+          0.925
+        ],
+        [
+          "1",
+          0.067
+        ],
+        [
+          "<|im_end|>",
+          0.0029
+        ],
+        [
+          "0",
+          0.0018
+        ],
+        [
+          "3",
+          0.0014
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 1,
+        "foil_chain_index": 0
+      },
+      "reasoning_tokens": 2,
+      "reasoning_finished": true,
+      "stated_answer": "2"
+    },
+    {
+      "trial": 20,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.8519528041008229,
+        "2": 0.14804719589917714
+      },
+      "choice_mass": 0.9903490245342255,
+      "top_tokens": [
+        [
+          "1",
+          0.8437
+        ],
+        [
+          "2",
+          0.1466
+        ],
+        [
+          " (",
+          0.0021
+        ],
+        [
+          "<|im_end|>",
+          0.0018
+        ],
+        [
+          " ",
+          0.0014
+        ]
+      ],
+      "free_response": "1",
+      "metadata": {
+        "chain_index": 1,
+        "foil_chain_index": 0
+      },
+      "reasoning_tokens": 2,
+      "reasoning_finished": true,
+      "stated_answer": "1"
+    },
+    {
+      "trial": 21,
+      "target": 1,
+      "reported": 2,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.09534946369456467,
+        "2": 0.9046505363054353
+      },
+      "choice_mass": 0.9907421320676804,
+      "top_tokens": [
+        [
+          "2",
+          0.8963
+        ],
+        [
+          "1",
+          0.0945
+        ],
+        [
+          "<|im_end|>",
+          0.0042
+        ],
+        [
+          "3",
+          0.0013
+        ],
+        [
+          "0",
+          0.001
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 0,
+        "foil_chain_index": 1
+      },
+      "reasoning_tokens": 2,
+      "reasoning_finished": true,
+      "stated_answer": "2"
+    },
+    {
+      "trial": 22,
+      "target": 2,
+      "reported": 1,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.893309399376376,
+        "2": 0.10669060062362398
+      },
+      "choice_mass": 0.9805165156722069,
+      "top_tokens": [
+        [
+          "1",
+          0.8759
+        ],
+        [
+          "2",
+          0.1046
+        ],
+        [
+          " (",
+          0.0067
+        ],
+        [
+          "<|im_end|>",
+          0.0046
+        ],
+        [
+          " ",
+          0.0032
+        ]
+      ],
+      "free_response": "1",
+      "metadata": {
+        "chain_index": 0,
+        "foil_chain_index": 1
+      },
+      "reasoning_tokens": 2,
+      "reasoning_finished": true,
+      "stated_answer": "1"
+    },
+    {
+      "trial": 23,
+      "target": 1,
+      "reported": 2,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.08509904169314524,
+        "2": 0.9149009583068548
+      },
+      "choice_mass": 0.9873561933636665,
+      "top_tokens": [
+        [
+          "2",
+          0.9033
+        ],
+        [
+          "1",
+          0.084
+        ],
+        [
+          "<|im_end|>",
+          0.0078
+        ],
+        [
+          "3",
+          0.0014
+        ],
+        [
+          "0",
+          0.0012
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 0,
+        "foil_chain_index": 1
+      },
+      "reasoning_tokens": 2,
+      "reasoning_finished": true,
+      "stated_answer": "2"
+    },
+    {
+      "trial": 24,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.946596665496395,
+        "2": 0.05340333450360505
+      },
+      "choice_mass": 0.994644396007061,
+      "top_tokens": [
+        [
+          "1",
+          0.9415
+        ],
+        [
+          "2",
+          0.0531
+        ],
+        [
+          "<|im_end|>",
+          0.0021
+        ],
+        [
+          " (",
+          0.0007
+        ],
+        [
+          " ",
+          0.0006
+        ]
+      ],
+      "free_response": "1",
+      "metadata": {
+        "chain_index": 1,
+        "foil_chain_index": 0
+      },
+      "reasoning_tokens": 2,
+      "reasoning_finished": true,
+      "stated_answer": "1"
+    },
+    {
+      "trial": 25,
+      "target": 2,
+      "reported": 2,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.04742587227269336,
+        "2": 0.9525741277273067
+      },
+      "choice_mass": 0.9921306781470776,
+      "top_tokens": [
+        [
+          "2",
+          0.9451
+        ],
+        [
+          "1",
+          0.0471
+        ],
+        [
+          "<|im_end|>",
+          0.0034
+        ],
+        [
+          "3",
+          0.0021
+        ],
+        [
+          "0",
+          0.0011
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 1,
+        "foil_chain_index": 0
+      },
+      "reasoning_tokens": 2,
+      "reasoning_finished": true,
+      "stated_answer": "2"
+    },
+    {
+      "trial": 26,
+      "target": 1,
+      "reported": 2,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.0758581836243662,
+        "2": 0.9241418163756338
+      },
+      "choice_mass": 0.9889592975378036,
+      "top_tokens": [
+        [
+          "2",
+          0.9139
+        ],
+        [
+          "1",
+          0.075
+        ],
+        [
+          "<|im_end|>",
+          0.007
+        ],
+        [
+          "3",
+          0.0014
+        ],
+        [
+          "0",
+          0.0009
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 0,
+        "foil_chain_index": 1
+      },
+      "reasoning_tokens": 2,
+      "reasoning_finished": true,
+      "stated_answer": "2"
+    },
+    {
+      "trial": 27,
+      "target": 1,
+      "reported": 2,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.07585817755421981,
+        "2": 0.9241418224457801
+      },
+      "choice_mass": 0.9892916455864906,
+      "top_tokens": [
+        [
+          "2",
+          0.9142
+        ],
+        [
+          "1",
+          0.075
+        ],
+        [
+          "<|im_end|>",
+          0.0062
+        ],
+        [
+          "0",
+          0.0013
+        ],
+        [
+          "3",
+          0.0011
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 1,
+        "foil_chain_index": 0
+      },
+      "reasoning_tokens": 2,
+      "reasoning_finished": true,
+      "stated_answer": "2"
+    },
+    {
+      "trial": 28,
+      "target": 1,
+      "reported": 2,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.010986943095593277,
+        "2": 0.9890130569044068
+      },
+      "choice_mass": 0.994016912765801,
+      "top_tokens": [
+        [
+          "2",
+          0.9831
+        ],
+        [
+          "1",
+          0.0109
+        ],
+        [
+          "<|im_end|>",
+          0.0046
+        ],
+        [
+          "3",
+          0.0004
+        ],
+        [
+          "4",
+          0.0003
+        ]
+      ],
+      "free_response": "To solve this, we need to understand the connections established in the initial sequence.\n\n- The first image is a small green tractor pulling a blue trailer.\n- The second image is a football helmet.\n- The third image is a package of string cheese.\n- The fourth image is a disco ball.\n\nThe connections are:\n- Image 1 (tractor) is paired with Image 2 (helmet).\n- Image 2 (helmet) is paired with Image 3 (string cheese).\n- Image 3 (string cheese) is paired with Image 4 (disco ball).\n\nThe cue image is the tractor, which is Image 1.\n\nAccording to the first connection, Image 1 (tractor) is paired with Image 2 (helmet).\n\nTherefore, the image paired with the cue image is Image 2.\n\n2",
+      "metadata": {
+        "chain_index": 0,
+        "foil_chain_index": 1
+      },
+      "reasoning_tokens": 180,
+      "reasoning_finished": true,
+      "stated_answer": "2"
+    },
+    {
+      "trial": 29,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.7981867793574092,
+        "2": 0.20181322064259072
+      },
+      "choice_mass": 0.991538867354393,
+      "top_tokens": [
+        [
+          "1",
+          0.7914
+        ],
+        [
+          "2",
+          0.2001
+        ],
+        [
+          " (",
+          0.002
+        ],
+        [
+          "<|im_end|>",
+          0.0015
+        ],
+        [
+          " ",
+          0.0014
+        ]
+      ],
+      "free_response": "1",
+      "metadata": {
+        "chain_index": 1,
+        "foil_chain_index": 0
+      },
+      "reasoning_tokens": 2,
+      "reasoning_finished": true,
+      "stated_answer": "1"
+    },
+    {
+      "trial": 30,
+      "target": 2,
+      "reported": 1,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.9525741292214243,
+        "2": 0.047425870778575775
+      },
+      "choice_mass": 0.9954362399876118,
+      "top_tokens": [
+        [
+          "1",
+          0.9482
+        ],
+        [
+          "2",
+          0.0472
+        ],
+        [
+          "<|im_end|>",
+          0.001
+        ],
+        [
+          " (",
+          0.0008
+        ],
+        [
+          "3",
+          0.0007
+        ]
+      ],
+      "free_response": "1",
+      "metadata": {
+        "chain_index": 1,
+        "foil_chain_index": 0
+      },
+      "reasoning_tokens": 2,
+      "reasoning_finished": true,
+      "stated_answer": "1"
+    },
+    {
+      "trial": 31,
+      "target": 1,
+      "reported": 2,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.08509904580747221,
+        "2": 0.9149009541925278
+      },
+      "choice_mass": 0.9917556270956993,
+      "top_tokens": [
+        [
+          "2",
+          0.9074
+        ],
+        [
+          "1",
+          0.0844
+        ],
+        [
+          "<|im_end|>",
+          0.0048
+        ],
+        [
+          "0",
+          0.0011
+        ],
+        [
+          "3",
+          0.001
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 1,
+        "foil_chain_index": 0
+      },
+      "reasoning_tokens": 2,
+      "reasoning_finished": true,
+      "stated_answer": "2"
+    },
+    {
+      "trial": 32,
+      "target": 2,
+      "reported": 2,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.11920292204779162,
+        "2": 0.8807970779522084
+      },
+      "choice_mass": 0.9879053309559822,
+      "top_tokens": [
+        [
+          "2",
+          0.8701
+        ],
+        [
+          "1",
+          0.1178
+        ],
+        [
+          "<|im_end|>",
+          0.0075
+        ],
+        [
+          "3",
+          0.0016
+        ],
+        [
+          "0",
+          0.0012
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 0,
+        "foil_chain_index": 1
+      },
+      "reasoning_tokens": 2,
+      "reasoning_finished": true,
+      "stated_answer": "2"
+    },
+    {
+      "trial": 33,
+      "target": 2,
+      "reported": 2,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.07585817818371186,
+        "2": 0.9241418218162881
+      },
+      "choice_mass": 0.9914062544703484,
+      "top_tokens": [
+        [
+          "2",
+          0.9162
+        ],
+        [
+          "1",
+          0.0752
+        ],
+        [
+          "<|im_end|>",
+          0.0048
+        ],
+        [
+          "3",
+          0.0014
+        ],
+        [
+          "0",
+          0.0007
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 0,
+        "foil_chain_index": 1
+      },
+      "reasoning_tokens": 2,
+      "reasoning_finished": true,
+      "stated_answer": "2"
+    },
+    {
+      "trial": 34,
+      "target": 2,
+      "reported": 1,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.8807970740188525,
+        "2": 0.11920292598114743
+      },
+      "choice_mass": 0.9922892823815346,
+      "top_tokens": [
+        [
+          "1",
+          0.874
+        ],
+        [
+          "2",
+          0.1183
+        ],
+        [
+          "<|im_end|>",
+          0.0028
+        ],
+        [
+          " ",
+          0.0014
+        ],
+        [
+          " (",
+          0.0012
+        ]
+      ],
+      "free_response": "1",
+      "metadata": {
+        "chain_index": 0,
+        "foil_chain_index": 1
+      },
+      "reasoning_tokens": 2,
+      "reasoning_finished": true,
+      "stated_answer": "1"
+    },
+    {
+      "trial": 35,
+      "target": 2,
+      "reported": 2,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.09534946125541222,
+        "2": 0.9046505387445878
+      },
+      "choice_mass": 0.9909772798418999,
+      "top_tokens": [
+        [
+          "2",
+          0.8965
+        ],
+        [
+          "1",
+          0.0945
+        ],
+        [
+          "<|im_end|>",
+          0.0053
+        ],
+        [
+          "3",
+          0.0011
+        ],
+        [
+          "0",
+          0.001
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 0,
+        "foil_chain_index": 1
+      },
+      "reasoning_tokens": 2,
+      "reasoning_finished": true,
+      "stated_answer": "2"
+    },
+    {
+      "trial": 36,
+      "target": 2,
+      "reported": 1,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.8807970817331106,
+        "2": 0.11920291826688947
+      },
+      "choice_mass": 0.9931987076997757,
+      "top_tokens": [
+        [
+          "1",
+          0.8748
+        ],
+        [
+          "2",
+          0.1184
+        ],
+        [
+          "<|im_end|>",
+          0.0032
+        ],
+        [
+          " (",
+          0.0011
+        ],
+        [
+          " ",
+          0.0008
+        ]
+      ],
+      "free_response": "1",
+      "metadata": {
+        "chain_index": 0,
+        "foil_chain_index": 1
+      },
+      "reasoning_tokens": 2,
+      "reasoning_finished": true,
+      "stated_answer": "1"
+    },
+    {
+      "trial": 37,
+      "target": 1,
+      "reported": 2,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.060086649005294646,
+        "2": 0.9399133509947053
+      },
+      "choice_mass": 0.9899024665355682,
+      "top_tokens": [
+        [
+          "2",
+          0.9304
+        ],
+        [
+          "1",
+          0.0595
+        ],
+        [
+          "<|im_end|>",
+          0.0063
+        ],
+        [
+          "3",
+          0.0014
+        ],
+        [
+          "0",
+          0.0008
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 0,
+        "foil_chain_index": 1
+      },
+      "reasoning_tokens": 2,
+      "reasoning_finished": true,
+      "stated_answer": "2"
+    },
+    {
+      "trial": 38,
+      "target": 2,
+      "reported": 1,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.8354835472171778,
+        "2": 0.16451645278282223
+      },
+      "choice_mass": 0.9903158247470856,
+      "top_tokens": [
+        [
+          "1",
+          0.8274
+        ],
+        [
+          "2",
+          0.1629
+        ],
+        [
+          "<|im_end|>",
+          0.0043
+        ],
+        [
+          " (",
+          0.0014
+        ],
+        [
+          " ",
+          0.0008
+        ]
+      ],
+      "free_response": "1",
+      "metadata": {
+        "chain_index": 0,
+        "foil_chain_index": 1
+      },
+      "reasoning_tokens": 2,
+      "reasoning_finished": true,
+      "stated_answer": "1"
+    },
+    {
+      "trial": 39,
+      "target": 2,
+      "reported": 2,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.060086646526299914,
+        "2": 0.9399133534737001
+      },
+      "choice_mass": 0.9894380755722523,
+      "top_tokens": [
+        [
+          "2",
+          0.93
+        ],
+        [
+          "1",
+          0.0595
+        ],
+        [
+          "<|im_end|>",
+          0.0043
+        ],
+        [
+          "3",
+          0.0023
+        ],
+        [
+          "4",
+          0.0012
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 1,
+        "foil_chain_index": 0
+      },
+      "reasoning_tokens": 2,
+      "reasoning_finished": true,
+      "stated_answer": "2"
+    },
+    {
+      "trial": 40,
+      "target": 1,
+      "reported": 2,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.0031726830845936163,
+        "2": 0.9968273169154064
+      },
+      "choice_mass": 0.9985248607117683,
+      "top_tokens": [
+        [
+          "2",
+          0.9954
+        ],
+        [
+          "1",
+          0.0032
+        ],
+        [
+          "<|im_end|>",
+          0.001
+        ],
+        [
+          " ",
+          0.0002
+        ],
+        [
+          "0",
+          0.0002
+        ]
+      ],
+      "free_response": "To solve this, we need to trace the connections between the items based on the provided pairs.\n\n- The cue image is the red gumball machine.\n- From the first set of pairs, we know that the gumball machine is paired with the word \"HONEY\".\n- The second set of pairs shows that the word \"HONEY\" is connected to the yellow tea set.\n- This establishes a chain: Gumball Machine -> HONEY -> Tea Set.\n- Therefore, the gumball machine (cue image) is indirectly connected to the tea set (Image 2).\n\nImage 2",
+      "metadata": {
+        "chain_index": 0,
+        "foil_chain_index": 1
+      },
+      "reasoning_tokens": 129,
+      "reasoning_finished": true,
+      "stated_answer": null
+    },
+    {
+      "trial": 41,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.8670357591077914,
+        "2": 0.1329642408922086
+      },
+      "choice_mass": 0.9909306913614273,
+      "top_tokens": [
+        [
+          "1",
+          0.8592
+        ],
+        [
+          "2",
+          0.1318
+        ],
+        [
+          "<|im_end|>",
+          0.0035
+        ],
+        [
+          " (",
+          0.0014
+        ],
+        [
+          "3",
+          0.0007
+        ]
+      ],
+      "free_response": "1",
+      "metadata": {
+        "chain_index": 1,
+        "foil_chain_index": 0
+      },
+      "reasoning_tokens": 2,
+      "reasoning_finished": true,
+      "stated_answer": "1"
+    },
+    {
+      "trial": 42,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.9989677690391512,
+        "2": 0.0010322309608487604
+      },
+      "choice_mass": 0.9986681280424818,
+      "top_tokens": [
+        [
+          "1",
+          0.9976
+        ],
+        [
+          "<|im_end|>",
+          0.0012
+        ],
+        [
+          "2",
+          0.001
+        ],
+        [
+          " ",
+          0.0001
+        ],
+        [
+          "0",
+          0.0
+        ]
+      ],
+      "free_response": "To determine the correct answer, we need to trace the connections established in the initial sequence.\n\n- The sequence begins with an image of a film canister (let's call this Image A).\n- This is followed by an image of a wetsuit (Image B).\n- The connection between the film canister and the wetsuit is the word \"BARRACUDA\".\n- The next pair connects the wetsuit (Image B) to a toaster (Image C) with the word \"FILM\".\n- The cue image provided is the film canister (Image A).\n- We are looking for the item that was paired with the film canister.\n- According to the sequence, the item paired with the film canister is the wetsuit.\n\nThe wetsuit corresponds to Image 1.\n\nTherefore, the correct answer is:\n1",
+      "metadata": {
+        "chain_index": 0,
+        "foil_chain_index": 1
+      },
+      "reasoning_tokens": 182,
+      "reasoning_finished": true,
+      "stated_answer": "1"
+    },
+    {
+      "trial": 43,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.9525741277647601,
+        "2": 0.047425872235239884
+      },
+      "choice_mass": 0.9821025468409061,
+      "top_tokens": [
+        [
+          "1",
+          0.9355
+        ],
+        [
+          "2",
+          0.0466
+        ],
+        [
+          " (",
+          0.0049
+        ],
+        [
+          " The",
+          0.002
+        ],
+        [
+          "3",
+          0.002
+        ]
+      ],
+      "free_response": "1",
+      "metadata": {
+        "chain_index": 1,
+        "foil_chain_index": 0
+      },
+      "reasoning_tokens": 2,
+      "reasoning_finished": true,
+      "stated_answer": "1"
+    },
+    {
+      "trial": 44,
+      "target": 1,
+      "reported": 1,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.8807970767285973,
+        "2": 0.11920292327140265
+      },
+      "choice_mass": 0.9910946786403656,
+      "top_tokens": [
+        [
+          "1",
+          0.873
+        ],
+        [
+          "2",
+          0.1181
+        ],
+        [
+          "<|im_end|>",
+          0.0028
+        ],
+        [
+          " (",
+          0.0025
+        ],
+        [
+          " ",
+          0.0008
+        ]
+      ],
+      "free_response": "1",
+      "metadata": {
+        "chain_index": 0,
+        "foil_chain_index": 1
+      },
+      "reasoning_tokens": 2,
+      "reasoning_finished": true,
+      "stated_answer": "1"
+    },
+    {
+      "trial": 45,
+      "target": 2,
+      "reported": 2,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.07585818074918778,
+        "2": 0.9241418192508122
+      },
+      "choice_mass": 0.9845541939139366,
+      "top_tokens": [
+        [
+          "2",
+          0.9099
+        ],
+        [
+          "1",
+          0.0747
+        ],
+        [
+          "<|im_end|>",
+          0.0101
+        ],
+        [
+          "3",
+          0.0018
+        ],
+        [
+          "0",
+          0.0009
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 1,
+        "foil_chain_index": 0
+      },
+      "reasoning_tokens": 2,
+      "reasoning_finished": true,
+      "stated_answer": "2"
+    },
+    {
+      "trial": 46,
+      "target": 1,
+      "reported": 2,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.06754669178022923,
+        "2": 0.9324533082197708
+      },
+      "choice_mass": 0.9892271235585213,
+      "top_tokens": [
+        [
+          "2",
+          0.9224
+        ],
+        [
+          "1",
+          0.0668
+        ],
+        [
+          "<|im_end|>",
+          0.0062
+        ],
+        [
+          "0",
+          0.0012
+        ],
+        [
+          "3",
+          0.0011
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 0,
+        "foil_chain_index": 1
+      },
+      "reasoning_tokens": 2,
+      "reasoning_finished": true,
+      "stated_answer": "2"
+    },
+    {
+      "trial": 47,
+      "target": 2,
+      "reported": 2,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.06754668979866182,
+        "2": 0.9324533102013381
+      },
+      "choice_mass": 0.9859985932707787,
+      "top_tokens": [
+        [
+          "2",
+          0.9194
+        ],
+        [
+          "1",
+          0.0666
+        ],
+        [
+          "<|im_end|>",
+          0.0062
+        ],
+        [
+          "3",
+          0.0026
+        ],
+        [
+          "0",
+          0.002
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 1,
+        "foil_chain_index": 0
+      },
+      "reasoning_tokens": 2,
+      "reasoning_finished": true,
+      "stated_answer": "2"
+    },
+    {
+      "trial": 48,
+      "target": 2,
+      "reported": 2,
+      "correct": 1,
+      "choice_probs": {
+        "1": 0.11920292002257293,
+        "2": 0.8807970799774271
+      },
+      "choice_mass": 0.9933302626013756,
+      "top_tokens": [
+        [
+          "2",
+          0.8749
+        ],
+        [
+          "1",
+          0.1184
+        ],
+        [
+          "<|im_end|>",
+          0.0036
+        ],
+        [
+          "0",
+          0.001
+        ],
+        [
+          "3",
+          0.0007
+        ]
+      ],
+      "free_response": "2",
+      "metadata": {
+        "chain_index": 0,
+        "foil_chain_index": 1
+      },
+      "reasoning_tokens": 2,
+      "reasoning_finished": true,
+      "stated_answer": "2"
+    },
+    {
+      "trial": 49,
+      "target": 2,
+      "reported": 1,
+      "correct": 0,
+      "choice_probs": {
+        "1": 0.893309407246861,
+        "2": 0.10669059275313894
+      },
+      "choice_mass": 0.9925601482391357,
+      "top_tokens": [
+        [
+          "1",
+          0.8867
+        ],
+        [
+          "2",
+          0.1059
+        ],
+        [
+          "<|im_end|>",
+          0.0025
+        ],
+        [
+          " (",
+          0.0011
+        ],
+        [
+          "3",
+          0.0011
+        ]
+      ],
+      "free_response": "1",
+      "metadata": {
+        "chain_index": 1,
+        "foil_chain_index": 0
+      },
+      "reasoning_tokens": 2,
+      "reasoning_finished": true,
+      "stated_answer": "1"
+    }
+  ],
+  "metrics": {
+    "accuracy": 0.46,
+    "n_correct": 23,
+    "total": 50,
+    "free_text_bare_digit": 0.84,
+    "mean_p_chosen": 0.9182324934347368,
+    "mean_choice_mass": 0.9917089931457304,
+    "frac_low_mass": 0.0,
+    "mean_reasoning_tokens": 34.14,
+    "frac_reasoning_cut_off": 0.0,
+    "frac_stated_answer": 0.9,
+    "stated_forced_agreement": 1.0,
+    "response_distribution": {
+      "2": 26,
+      "1": 24
+    }
+  }
+}
